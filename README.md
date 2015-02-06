@@ -61,3 +61,4 @@ $ grunt
 ```
 
 The application should run on port 3000, so in your browser just go to [http://localhost:3000](http://localhost:3000)
+
