@@ -15,5 +15,10 @@ angular.module('core').config(['$stateProvider', '$urlRouterProvider',
 			url: '/cats/new',
 			templateUrl: 'modules/core/views/create-cat.client.view.html'
 		});
+        $stateProvider.state('viewCat', {
+            url: '/cats/:catId',
+            templateUrl: 'modules/core/views/view-cat.client.view.html'
+        });
 	}
 ]);
+

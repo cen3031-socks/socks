@@ -1,5 +1,5 @@
-<section class="cat-grid" data-ng-controller="HomeController" ng-int="init()">
-	<div ng-repeat="cat in cats" class="cat-grid-item">
+<section class="cat-grid" data-ng-controller="HomeController">
+	<a ng-repeat="cat in cats" class="cat-grid-item" href="#!/cats/{{cat._id}}">
 		<img ng-src="{{cat.imageUrl}}" />
 		<span class="details">
 			<span class="name">{{cat.name}}</span>
@@ -7,7 +7,7 @@
 				{{cat.breed}}
 			</span>
 		</span>
-	</div>
+	</a>
 	<a class="cat-grid-item new-cat" href="#!/cats/new" ng-show="authentication.user">
 		<span class="details">
 			<span class="name">New Cat...</span>
