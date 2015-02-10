@@ -36,7 +36,7 @@ $ npm install -g grunt-cli
 ```
 
 ## Downloading
-Clone this GitHub repository
+Clone this GitHub repository:
 
 ```bash
 $ git clone https://github.com/cen3031-socks/socks.git socks
