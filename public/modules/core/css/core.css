@@ -21,3 +21,10 @@ body.ng-cloak
 {
 	display: block;
 }
+div.dataRow{
+	min-height: 100px;
+	height: auto;
+	display: block;
+	border-bottom-style: double;
+}
+
