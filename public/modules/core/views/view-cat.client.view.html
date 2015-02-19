@@ -1,70 +1,67 @@
 <section data-ng-controller="CatViewController">
-    <div class="page-header">
+    <style>
+        .cat-profile-image-container { padding:1em; }
+        .cat-profile-image { width:100%; height:auto; }
+        .page-header h1 { display: inline-block; }
+        .page-header span { font-size:1.2em; }
+        .profile-attribute { font-weight:bold; }
+    </style>
+    <div class="col-md-4 cat-profile-image-container">
+        <img ng-src="{{cat.imageUrl}}" class="cat-profile-image" />
+    </div>
+    <div class="page-header col-md-8">
         <h1>{{cat.name}}</h1>
     </div>
-
-    <div class="row">
-        <h5  class="col-md-6">Sex</h5>
-        <span class="col-md-6">{{convertSex(cat.sex)}}</span>
+    <div class="row col-md-8">
+        <span class="col-md-3 profile-attribute">Sex</span>
+        <span class="col-md-9">{{convertSex(cat.sex)}}</span>
     </div>
-    <div class="row">
-        <h5  class="col-md-6">Date of Birth</h5>
-        <span class="col-md-6">{{cat.dateOfBirth.toString()}}</span>
+    <div class="row col-md-8">
+        <span class="col-md-3 profile-attribute">Date of Birth</span>
+        <span class="col-md-9">{{cat.dateOfBirth | date}}</span>
     </div>
-
-    <div class="row">
-        <h5  class="col-md-6">Color</h5>
-        <span class="col-md-6">{{cat.color}}</span>
+    <div class="row col-md-8">
+        <span class="col-md-3 profile-attribute">Color</span>
+        <span class="col-md-9">{{cat.color}}</span>
     </div>
-
-    <div class="row">
-        <h5  class="col-md-6">Breed</h5>
-        <span class="col-md-6">{{cat.breed}}</span>
+    <div class="row col-md-8">
+        <span class="col-md-3 profile-attribute">Breed</span>
+        <span class="col-md-9">{{cat.breed}}</span>
     </div>
-
-    <div class="row">
-        <h5  class="col-md-6">Current Location</h5>
-        <span class="col-md-6">{{cat.location}}</span>
+    <div class="row col-md-8">
+        <span class="col-md-3 profile-attribute">Current Location</span>
+        <span class="col-md-9">{{cat.location}}</span>
     </div>
-
-    <div class="row">
-        <h5  class="col-md-6">Temperament</h5>
-        <span class="col-md-6">{{cat.temperament}}</span>
+    <div class="row col-md-8">
+        <span class="col-md-3 profile-attribute">Temperament</span>
+        <span class="col-md-9">{{cat.temperament}}</span>
     </div>
-
-    <div class="row">
-        <h5  class="col-md-6">Owner</h5>
-        <span class="col-md-6">{{cat.owner}}</span>
+    <div class="row col-md-8">
+        <span class="col-md-3 profile-attribute">Owner</span>
+        <span class="col-md-9">{{cat.owner}}</span>
     </div>
-
-    <div class="row">
-        <h5  class="col-md-6">Date of Arrival</h5>
-        <span class="col-md-6">{{cat.dateOfArrival}}</span>
+    <div class="row col-md-8">
+        <span class="col-md-3 profile-attribute">Date of Arrival</span>
+        <span class="col-md-9">{{cat.dateOfArrival}}</span>
     </div>
-
-    <div class="row">
-        <h5  class="col-md-6">Vet</h5>
-        <span class="col-md-6">{{cat.vet}}</span>
+    <div class="row col-md-8">
+        <span class="col-md-3 profile-attribute">Vet</span>
+        <span class="col-md-9">{{cat.vet}}</span>
     </div>
-
-    <div class="row">
-        <h5  class="col-md-6">Origin Address</h5>
-        <span class="col-md-6">{{cat.origin.address}}</span>
+    <div class="row col-md-8">
+        <span class="col-md-3 profile-attribute">Origin Address</span>
+        <span class="col-md-9">{{cat.origin.address}}</span>
     </div>
-
-    <div class="row">
-        <h5  class="col-md-6">Origin Person</h5>
-        <span class="col-md-6">{{cat.origin.person}}</span>
+    <div class="row col-md-8">
+        <span class="col-md-3 profile-attribute">Origin Person</span>
+        <span class="col-md-9">{{cat.origin.person}}</span>
     </div>
-
-    <div class="row">
-        <h5  class="col-md-6">Description</h5>
-        <span class="col-md-6">{{cat.description}}</span>
+    <div class="row col-md-8">
+        <span class="col-md-3 profile-attribute">Description</span>
+        <span class="col-md-9">{{cat.description}}</span>
     </div>
-
-    <div class="row">
-        <h5  class="col-md-6">Notes</h5>
-        <span class="col-md-6">{{cat.notes}}</span>
+    <div class="row col-md-8">
+        <span class="col-md-3 profile-attribute">Notes</span>
+        <span class="col-md-9">{{cat.notes}}</span>
     </div>
-
 </section>

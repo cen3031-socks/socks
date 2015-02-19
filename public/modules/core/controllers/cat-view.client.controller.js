@@ -6,16 +6,16 @@ angular.module('core').controller('CatViewController', ['$scope', '$stateParams'
             $scope.cat = Cats.get({catId: $stateParams.catId});
 
             $scope.convertSex = function(sexNumber) {
-                if (sexNumber == 0) {
+                if (sexNumber === 0) {
                     return "Unknown";
                 }
-                else if (sexNumber == 1) {
+                else if (sexNumber === 1) {
                     return "Male";
                 }
-                else if (sexNumber == 2) {
+                else if (sexNumber === 2) {
                     return "Female";
                 }
-                else if (sexNumber == 9) {
+                else if (sexNumber === 9) {
                     return "N/A";
                 }
             }

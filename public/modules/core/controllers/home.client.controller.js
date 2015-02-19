@@ -21,7 +21,7 @@ angular.module('core').controller('HomeController', ['$scope', '$location', 'Aut
 			$scope.cats = Cats.query();
 
 			$scope.create = function() {
-				var article = new Cats({
+				var cat = new Cats({
 					dateOfBirth: this.dob,
 					name: this.name,	
 					sex: this.sex,
@@ -39,7 +39,7 @@ angular.module('core').controller('HomeController', ['$scope', '$location', 'Aut
 					owner: this.owner,
 					notes: [this.notes]
 				});
-				article.$save(function(response) {
+				cat.$save(function(response) {
 					$location.path('cats/' + response._id);
 					 this.dob = undefined;
 					 this.name = undefined;
