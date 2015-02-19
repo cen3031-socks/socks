@@ -62,5 +62,7 @@ angular.module('volunteers').controller('VolunteersController', ['$scope', '$sta
 				volunteerId: $stateParams.volunteerId
 			});
 		};
+        $scope.date = new Date();
 	}
+
 ]);
