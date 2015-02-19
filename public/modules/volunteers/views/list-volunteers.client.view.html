@@ -1,3 +1,34 @@
+<div class="volunteer-bg">
+<section data-ng-controller="VolunteersController" data-ng-init="find()">
+
+    <div class="page-header text-center">
+        <h1>Welcome!</h1>
+    </div>
+    <div class="alert alert-info text-center">
+        If you are here to volunteer, please enter your full name below.
+    </div>
+
+    <div class = "form-group input-group input-group-lg">
+        <span class="input-group-addon">
+            <i class = "text-muted glyphicon glyphicon-user"></i>
+            </span>
+        <input type="text" id="volunteer-name" name="username" class="form-control" data-ng-model="volunteer-name" placeholder="Full Name">
+    </div>
+    <div class="form-group text-center">
+    <a href="/#!/volunteers/create"><button type="button" class="btn btn-primary">Sign In</button></a>
+        <a href="/#!/volunteers/create"><button type="button" class="btn btn-primary">Sign Out</button></a>
+    </div>
+</section>
+
+</div>
+
+
+
+
+
+
+<!--
+
 <section data-ng-controller="VolunteersController" data-ng-init="find()">
     <div class="page-header">
         <h1>Volunteers</h1>
@@ -17,3 +48,6 @@
     	No Volunteers yet, why don't you <a href="/#!/volunteers/create">create one</a>?
     </div>
 </section>
+
+-->
+
