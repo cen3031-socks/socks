@@ -13,17 +13,22 @@ var DonationSchema = new Schema({
 	name: {
 		type: String,
 		default: '',
-		required: 'Please fill Donation name',
+		required: 'Please fill in the name of the donor.',
 		trim: true
 	},
-	created: {
+
+    created: {
 		type: Date,
 		default: Date.now
 	},
-	user: {
-		type: Schema.ObjectId,
-		ref: 'User'
-	}
+
+    dollarAmount: Number,
+
+    paymentType: {
+        type: String,
+        default: '',
+        trim: true
+    }
 });
 
 mongoose.model('Donation', DonationSchema);
