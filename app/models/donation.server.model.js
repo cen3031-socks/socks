@@ -22,7 +22,11 @@ var DonationSchema = new Schema({
 		default: Date.now
 	},
 
-    dollarAmount: Number,
+    dollarAmount: {
+        type: Number,
+        default: 0.0,
+        trim: true
+    },
 
     paymentType: {
         type: String,
