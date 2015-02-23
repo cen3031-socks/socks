@@ -1,0 +1,97 @@
+<section data-ng-controller="ContactsController as contactsCtrl">
+    <div class="page-header">
+        <h1>Contacts</h1>
+    </div>
+    <div class="row">
+        <div class="col-xs-12 col-sm-8">
+            <div class="input-group input-group-lg">
+                <input type="text" class="form-control" ng-model="searchText" placeholder="Search...">
+                 <span class="input-group-btn">
+                     <button class="btn btn-default" type="button">Go!</button>
+                 </span>
+            </div><!-- /input-group -->
+        </div>
+        <div class="col-xs-12 col-sm-4 text-center">
+            <a href="/#!/contacts/create">
+                <button type="button" class="btn btn-success text-center" href="/#!/contacts/create">
+
+                    <i class="glyphicon glyphicon-user"></i> <br>
+                    New Contact
+                </button>
+            </a>
+        </div>
+    </div>
+    </br>
+    </br>
+
+    <div class="table-responsive">
+        <table class="table table-bordered">
+            <thread>
+                <tr>
+                    <th style="width: 10%">First Name</th>
+                    <th style="width: 10%">Last Name</th>
+                    <th style="width: 15%">Phone</th>
+                    <th style="width: 20%">Email</th>
+                    <th style="width: 30%">Location</th>
+
+                    <th style="width: 15%">Creation Date</th>
+                    <!--<th class="numeric">Open</th>-->
+                </tr>
+            </thread>
+            <tbody>
+            <tr data-ng-repeat="contact in contactsCtrl.contacts | filter:searchText"
+                ng-click="contactsCtrl.modalUpdate('lg', contact)">
+
+                <td>{{contact.firstName}}</td>
+                <td>{{contact.surname}}</td>
+                <td>{{contact.phone}}</td>
+                <td>{{contact.email}}</td>
+                <td>{{contact.channel}},{{contact.country}}</td>
+
+                <td>
+                    <span data-ng-bind="contact.created | date:'medium'" ></span>
+                </td>
+                <!--<td class="numeric">$1.39</td>-->
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+
+    <!--Below comments are for a list group set-up as opposed to a table set-up-->
+    <!--<div class="list-group">-->
+        <!--<div class = "col-xs-12 " data-ng-repeat="contact in contactsCtrl.contacts | filter:searchText">-->
+            <!--<a ng-click="contactsCtrl.modalUpdate('lg', contact)" class="list-group-item">-->
+
+                <!--<div class="row">-->
+                    <!--<div class="col-xs-10 col-xs-offset-1">-->
+                        <!--<div class="col-xs-6 col-md-2">-->
+                            <!--{{contact.firstName}} {{contact.surname}}-->
+                        <!--</div>-->
+                        <!--<div class="col-xs-6 col-md-2">-->
+                            <!--Phone:-->
+                            <!--<small class="list-group-item-text text-muted" data-ng-hide="!contacts.phone">-->
+                                <!--{{contact.phone}}-->
+                            <!--</small>-->
+                        <!--</div>-->
+                        <!--<div class="col-xs-6 col-md-2">-->
+                            <!--Email:-->
+                            <!--<small class="list-group-item-text text-muted">-->
+                                <!--{{contact.email}}-->
+                            <!--</small>-->
+                        <!--</div>-->
+                        <!--<div class="col-xs-6 col-md-2">-->
+                            <!--<small class="list-group-item-text text-muted">-->
+                                <!--<span data-ng-bind="contact.created | date:'medium'" ></span>-->
+                            <!--</small>-->
+                        <!--</div>-->
+                    <!--</div>-->
+                <!--</div>-->
+
+            <!--</a>-->
+        <!--</div>-->
+    <!--</div>-->
+    <div class="alert alert-warning text-center" data-ng-hide="!contacts.$resolved || contacts.length">
+    	No Contacts yet, why don't you <a href="/#!/contacts/create">create one</a>?
+    </div>
+</section>

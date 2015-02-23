@@ -5,10 +5,30 @@
     <div class="col-md-12">
         <form class="form-horizontal" data-ng-submit="create()" novalidate>
             <fieldset>
-                <div class="form-group">
+               <div class="form-group">
                     <label class="control-label" for="name">Name</label>
                     <div class="controls">
                         <input type="text" data-ng-model="name" id="name" class="form-control" placeholder="Name" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label" for="dollarAmount">Dollar Amount</label>
+                    <div class="controls">
+                        <input type="text" data-ng-model="dollarAmount" id="dollarAmount" class="form-control" placeholder="$0.00" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label" for="paymentType">Payment Type</label>
+                    <div class="controls">
+                        <!--<input type="text" data-ng-model="name" id="name" class="form-control" placeholder="Name" required>-->
+                        <select data-ng-model="paymentType" id="paymentType" class="form-control" placeholder="CASH MONAY" required>
+                            <option value="" disabled selected>Select Payment Type</option>
+                            <option value="cash">Cash</option>
+                            <option value="credit">Credit</option>
+                            <option value="check">Check</option>
+                            <option value="rupees">Rupees</option>
+                            <option value="food">Food</option>
+                            </select>
                     </div>
                 </div>
                 <div class="form-group">

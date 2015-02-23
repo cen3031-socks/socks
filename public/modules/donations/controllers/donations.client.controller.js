@@ -9,7 +9,9 @@ angular.module('donations').controller('DonationsController', ['$scope', '$state
 		$scope.create = function() {
 			// Create new Donation object
 			var donation = new Donations ({
-				name: this.name
+				name: this.name,
+                dollarAmount: this.dollarAmount,
+                donationType: this.donationType
 			});
 
 			// Redirect after save
@@ -18,6 +20,8 @@ angular.module('donations').controller('DonationsController', ['$scope', '$state
 
 				// Clear form fields
 				$scope.name = '';
+                $scope.dollarAmount = '';
+                $scope.donationType = '';
 			}, function(errorResponse) {
 				$scope.error = errorResponse.data.message;
 			});
