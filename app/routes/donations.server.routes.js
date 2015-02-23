@@ -7,12 +7,12 @@ module.exports = function(app) {
 	// Donations Routes
 	app.route('/donations')
 		.get(donations.list)
-		.post(users.requiresLogin, donations.create);
+		.post(donations.create);
 
 	app.route('/donations/:donationId')
 		.get(donations.read)
-		.put(users.requiresLogin, donations.hasAuthorization, donations.update)
-		.delete(users.requiresLogin, donations.hasAuthorization, donations.delete);
+		.put(donations.update)
+		.delete(donations.delete);
 
 	// Finish by binding the Donation middleware
 	app.param('donationId', donations.donationByID);
