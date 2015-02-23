@@ -14,7 +14,7 @@ var validateLocalStrategyProperty = function(property) {
 	return ((this.provider !== 'local' && !this.updated) || property.length);
 };
 
-/**
+/*
  * A Validation function for local strategy password
  */
 var validateLocalStrategyPassword = function(password) {
