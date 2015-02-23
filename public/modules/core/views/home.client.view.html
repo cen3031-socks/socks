@@ -1,57 +1,16 @@
-<section data-ng-controller="HomeController">
-	<div class= "col-md-2 col-xs-12 ">
-		<ul class="nav nav-tabs nav-stacked">
-			<li role="presentation" class="active"><a href="#">Home</a></li>
-			<li role="presentation"><a href="#">Create</a></li>
-			<li role="presentation"><a href="#">Contacts</a></li>
-			<li role="presentation"><a href="#">Stats</a></li>
-		</ul>
-	</div>
-
-	<div class="col-md-10 col-xs-12">
-		<div class = "dataRow" min-height = "400">
-			<!-- Cats list? -->
-
-			<!-- To be added ng-repeat="item in list" -->
-			<div class ="col-md-4 col-xs-6" >
-				<!-- list of cats -->
-
-				<!-- ng-src="file path to the specific boxes picture" -->
-				<!-- set default picture for item as a blank -->
-				<img src="" alt="Box in outline?" class="img-responsive"></img>
-			</div>
-			
-			<!-- Extra -->
-			<div class ="col-md-4 col-xs-6">
-				<!-- list of cats -->
-				<img src="" alt="Box in outline?" class="img-responsive"></img>
-			</div>
-			<div class ="col-md-4 col-xs-6">
-				<!-- list of cats -->
-				<img src="" alt="Box in outline?" class="img-responsive"></img>
-			</div>
-			<!-- end Extra -->
-
-			<!-- the previous statements will be cleaned up when I find out What I am representing -->
-
-			<div class = "col-md-4 col-xs-6">
-				<img src="" alt="Plus button" class="img-responsive"></img>
-			</div>
-		</div>
-		
-
-		<div class = "dataRow">adopted</div>
-		<div class = "dataRow" min-height = "400">
-			<!-- Cats list? -->
-
-			<!-- To be added ng-repeat="Cats in list" -->
-			<div class ="col-md-4 col-xs-6" >
-				<!-- list of cats -->
-
-				<!-- ng-src="file path to the specific cats picture" -->
-				<!-- set default picture for cats as a blank -->
-				<img src="" alt="Lst of Cats" class="img-responsive"></img>
-			</div>
-	</div>
-
+<section class="cat-grid" data-ng-controller="HomeController">
+	<a ng-repeat="cat in cats" class="cat-grid-item" href="#!/cats/{{cat._id}}">
+		<img ng-src="{{cat.imageUrl}}" />
+		<span class="details">
+			<span class="name">{{cat.name}}</span>
+			<span class="breed">
+				{{cat.breed}}
+			</span>
+		</span>
+	</a>
+	<a class="cat-grid-item new-cat" href="#!/cats/new" ng-show="authentication.user">
+		<span class="details">
+			<span class="name">New Cat...</span>
+		</span>
+	</a>
 </section>
