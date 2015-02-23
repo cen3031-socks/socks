@@ -1,0 +1,120 @@
+<section data-ng-controller="contactsCreateController as contactCtrl">
+    <div class="page-header">
+        <h1>New Contact</h1>
+    </div>
+    <div class="col-md-12">
+        <form name="createcontactForm">
+            <!--<form class="" data-ng-submit="contactCtrl.create()" novalidate>-->
+            <fieldset>
+                <div class="row">
+                    <div class="form-group">
+                        <div data-ng-show="error" class="text-center text-danger">
+                            <div class="alert alert-danger" role="alert"></div>
+                            <strong data-ng-bind="error"></strong>
+                        </div>
+                    </div>
+                </div>
+                <!--<div class="col-sm-6 text-center">-->
+                <!--&lt;!&ndash;<i class="glyphicon glyphicon-user cust-profile"  ng-class="{'text-primary': volunteer, 'text-danger': !volunteer}"></i>&ndash;&gt;-->
+                <!--</div>-->
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label class="control-label" for="firstName">First Name</label>
+                            <div class="controls">
+                                <input type="text" data-ng-model="firstName" id="firstName" class="form-control" required>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label class="control-label" for="surname">Last Name</label>
+                            <div class="controls">
+                                <input type="text" data-ng-model="surname" id="surname" class="form-control" required>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label class="control-label" for="address">Address</label>
+                            <div class="controls">
+                                <input type="text" data-ng-model="address" id="address" class="form-control">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label class="control-label" for="city">City</label>
+                            <div class="controls">
+                                <input type="text" data-ng-model="city" id="city" class="form-control">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label class="control-label" for="state">State</label>
+                            <div class="controls">
+                                <input type="text" data-ng-model="state" id="state" class="form-control">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label class="control-label" for="zipCode">Zip Code</label>
+                            <div class="controls">
+                                <input type="text" data-ng-model="zipCode" id="zipCode" class="form-control">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <!--<div class="form-group">-->
+                        <!--<label class="control-label" for="volunteer">Volunteer</label>-->
+                        <!--<div class="controls">-->
+                        <!--<input type="checkbox" data-ng-model="volunteer" id="volunteer" class="form-control checkbox-left" required>-->
+                        <!--</div>-->
+                        <!--</div>-->
+                        <div class="form-group">
+                            <label class="control-label" for="phone">Phone</label>
+                            <div class="controls">
+                                <input type="text" data-ng-model="phone" id="phone" class="form-control">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label class="control-label" for="email">Email</label>
+                            <div class="controls">
+                                <input type="text" data-ng-model="email" id="email" class="form-control">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <button class="btn btn-success btn-lg" ng-click="create(); ok()" ng-disabled="createContactForm.$invalid">Save</button>
+                        <!--<div class="form-group">-->
+                        <!--<button type="submit" class="btn btn-lg btn-success">Save & Close</button>-->
+                        <!--</div>-->
+                    </div>
+                    <!--</div>-->
+            </fieldset>
+        </form>
+    </div>
+</section>
+
+<!--<div class="footer">-->
+<!--<button class="btn btn-success btn-lg" ng-click="contactCtrl.create(); ok()" ng-disabled="createcontactForm.$invalid">Save</button>-->
+<!--&lt;!&ndash;<button class="btn btn-warning btn-lg" ng-click="cancel()">Cancel</button>&ndash;&gt;-->
+<!--</div>-->
+
+
+
+
+
+<!--</form>-->
+<!--</div>-->
+<!--</section>-->

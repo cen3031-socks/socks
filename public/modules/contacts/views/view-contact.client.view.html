@@ -1,0 +1,75 @@
+<div class="list-group" data-ng-controller="contactsViewController as contactViewCtrl"
+     data-ng-controller="contactsController as contactsCtrl"
+     ng-init="findOne()">
+    <fieldset>
+        <!--<div class="col-sm-6 text-center">-->
+        <!--&lt;!&ndash;<i class="glyphicon glyphicon-user cust-profile"  ng-class="{'text-primary': volunteer, 'text-danger': !volunteer}"></i>&ndash;&gt;-->
+        <!--</div>-->
+
+        <h1>{{contact.firstName}} {{contact.surname}}</h1>
+        </br>
+        <div class="col-sm-3">
+            <h4><b>Phone Number:</b></h4>
+        </div>
+        <div class="col-sm-9">
+            <h4>{{contact.phone}}</h4>
+        </div>
+        <div class="col-sm-3">
+            <h4><b>Email:</b></h4>
+        </div>
+        <div class="col-sm-9">
+            <h4>{{contact.email}}</h4>
+        </div>
+        <div class="col-sm-3">
+            <h4><b>Address:</b></h4>
+        </div>
+        <div class="col-sm-9">
+            <h4>{{contact.address}}</h4>
+        </div>
+        <div class="col-sm-3">
+            <h4><b>City:</b></h4>
+        </div>
+        <div class="col-sm-9">
+            <h4>{{contact.city}}</h4>
+        </div>
+        <div class="col-sm-3">
+            <h4><b>State:</b></h4>
+        </div>
+        <div class="col-sm-9">
+            <h4>{{contact.state}}</h4>
+        </div>
+        <div class="col-sm-3">
+            <h4><b>Zip Code:</b></h4>
+        </div>
+        <div class="col-sm-9">
+            <h4>{{contact.zipCode}}</h4>
+        </div>
+
+    </fieldset>
+
+
+    <!--<div class = "col-xs-12">-->
+    <!--<a ng-click="contactsCtrl.modalUpdate('lg', contact)" class="list-group-item">-->
+    <!--&lt;!&ndash;<h4 class="cust-list text-center">&ndash;&gt;-->
+    <!--&lt;!&ndash;<i class="glyphicon glyphicon-user"></i>&ndash;&gt;-->
+    <!--&lt;!&ndash;</h4>&ndash;&gt;-->
+    <!--<div class="row">-->
+    <!--<div class="col-xs-10 col-xs-offset-1 text-center">-->
+    <!--{{contact.firstName}} {{contact.surname}} </h4>-->
+    <!--<small class="list-group-item-text text-muted">-->
+    <!--<span data-ng-bind="contact.created | date:'medium'"></span>-->
+    <!--</small>-->
+    <!--</div>-->
+    <!--</div>-->
+
+    <!--</a>-->
+    <!--</div>-->
+</div>
+
+<!--<h4> {{contact.firstName}} {{contact.surname}} </h4>-->
+
+
+
+<!--<div class="alert alert-warning text-center" data-ng-hide="!contacts.$resolved || contacts.length">-->
+<!--No contacts yet, why don't you <a href="/#!/contacts/create">create one</a>?-->
+<!--</div>-->
