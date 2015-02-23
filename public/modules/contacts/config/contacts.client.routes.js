@@ -11,15 +11,15 @@ angular.module('contacts').config(['$stateProvider',
 		}).
 		state('createContact', {
 			url: '/contacts/create',
-			templateUrl: 'modules/contacts/views/create-contact.client.view.html'
+			templateUrl: 'modules/contacts/views/create-contacts.client.view.html'
 		}).
 		state('viewContact', {
 			url: '/contacts/:contactId',
-			templateUrl: 'modules/contacts/views/view-contact.client.view.html'
+			templateUrl: 'modules/contacts/views/view-contacts.client.view.html'
 		}).
 		state('editContact', {
 			url: '/contacts/:contactId/edit',
-			templateUrl: 'modules/contacts/views/edit-contact.client.view.html'
+			templateUrl: 'modules/contacts/views/edit-contacts.client.view.html'
 		});
 	}
 ]);

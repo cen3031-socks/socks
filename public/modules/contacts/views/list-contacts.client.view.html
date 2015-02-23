@@ -1,4 +1,4 @@
-<section data-ng-controller="contactsController as contactsCtrl">
+<section data-ng-controller="ContactsController as contactsCtrl">
     <div class="page-header">
         <h1>Contacts</h1>
     </div>
@@ -46,7 +46,7 @@
                 <td>{{contact.surname}}</td>
                 <td>{{contact.phone}}</td>
                 <td>{{contact.email}}</td>
-                <td>{{contact.city}},{{contact.state}}</td>
+                <td>{{contact.channel}},{{contact.country}}</td>
 
                 <td>
                     <span data-ng-bind="contact.created | date:'medium'" ></span>
@@ -60,38 +60,38 @@
 
     <!--Below comments are for a list group set-up as opposed to a table set-up-->
     <!--<div class="list-group">-->
-    <!--<div class = "col-xs-12 " data-ng-repeat="contact in contactsCtrl.contacts | filter:searchText">-->
-    <!--<a ng-click="contactsCtrl.modalUpdate('lg', contact)" class="list-group-item">-->
+        <!--<div class = "col-xs-12 " data-ng-repeat="contact in contactsCtrl.contacts | filter:searchText">-->
+            <!--<a ng-click="contactsCtrl.modalUpdate('lg', contact)" class="list-group-item">-->
 
-    <!--<div class="row">-->
-    <!--<div class="col-xs-10 col-xs-offset-1">-->
-    <!--<div class="col-xs-6 col-md-2">-->
-    <!--{{contact.firstName}} {{contact.surname}}-->
-    <!--</div>-->
-    <!--<div class="col-xs-6 col-md-2">-->
-    <!--Phone:-->
-    <!--<small class="list-group-item-text text-muted" data-ng-hide="!contacts.phone">-->
-    <!--{{contact.phone}}-->
-    <!--</small>-->
-    <!--</div>-->
-    <!--<div class="col-xs-6 col-md-2">-->
-    <!--Email:-->
-    <!--<small class="list-group-item-text text-muted">-->
-    <!--{{contact.email}}-->
-    <!--</small>-->
-    <!--</div>-->
-    <!--<div class="col-xs-6 col-md-2">-->
-    <!--<small class="list-group-item-text text-muted">-->
-    <!--<span data-ng-bind="contact.created | date:'medium'" ></span>-->
-    <!--</small>-->
-    <!--</div>-->
-    <!--</div>-->
-    <!--</div>-->
+                <!--<div class="row">-->
+                    <!--<div class="col-xs-10 col-xs-offset-1">-->
+                        <!--<div class="col-xs-6 col-md-2">-->
+                            <!--{{contact.firstName}} {{contact.surname}}-->
+                        <!--</div>-->
+                        <!--<div class="col-xs-6 col-md-2">-->
+                            <!--Phone:-->
+                            <!--<small class="list-group-item-text text-muted" data-ng-hide="!contacts.phone">-->
+                                <!--{{contact.phone}}-->
+                            <!--</small>-->
+                        <!--</div>-->
+                        <!--<div class="col-xs-6 col-md-2">-->
+                            <!--Email:-->
+                            <!--<small class="list-group-item-text text-muted">-->
+                                <!--{{contact.email}}-->
+                            <!--</small>-->
+                        <!--</div>-->
+                        <!--<div class="col-xs-6 col-md-2">-->
+                            <!--<small class="list-group-item-text text-muted">-->
+                                <!--<span data-ng-bind="contact.created | date:'medium'" ></span>-->
+                            <!--</small>-->
+                        <!--</div>-->
+                    <!--</div>-->
+                <!--</div>-->
 
-    <!--</a>-->
-    <!--</div>-->
+            <!--</a>-->
+        <!--</div>-->
     <!--</div>-->
     <div class="alert alert-warning text-center" data-ng-hide="!contacts.$resolved || contacts.length">
-        No Contacts yet, why don't you <a href="/#!/contacts/create">create one</a>?
+    	No Contacts yet, why don't you <a href="/#!/contacts/create">create one</a>?
     </div>
 </section>

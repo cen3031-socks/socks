@@ -7,12 +7,12 @@ module.exports = function(app) {
     // Contacts Routes
     app.route('/contacts')
         .get(contacts.list)
-        .post(users.requiresLogin, contacts.create);
+        .post(contacts.create);
 
     app.route('/contacts/:contactId')
         .get(contacts.read)
-        .put(users.requiresLogin, contacts.hasAuthorization, contacts.update)
-        .delete(users.requiresLogin, contacts.hasAuthorization, contacts.delete);
+        .put(contacts.update)
+        .delete(contacts.delete);
 
     // Finish by binding the Contact middleware
     app.param('contactId', contacts.contactByID);
