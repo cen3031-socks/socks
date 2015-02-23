@@ -11,6 +11,14 @@ angular.module('core').config(['$stateProvider', '$urlRouterProvider',
 		state('home', {
 			url: '/',
 			templateUrl: 'modules/core/views/home.client.view.html'
+		})
+		 .state('create', {
+		      url: '/create',
+		      templateUrl: 'modules/core/views/create.client.view.html'
+		})
+		 .state('addemployee', {
+		      url: '/addemployee',
+		      templateUrl: 'modules/core/views/addemployee.client.view.html'
 		});
 	}
 ]);
