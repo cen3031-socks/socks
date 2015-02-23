@@ -175,6 +175,10 @@ angular.module('core').config(['$stateProvider', '$urlRouterProvider',
 			url: '/',
 			templateUrl: 'modules/core/views/home.client.view.html'
 		});
+		.state('create', {
+		      url: '/create',
+		      templateUrl: 'modules/core/views/create.client.view.html',
+		});
 	}
 ]);
 'use strict';
@@ -204,6 +208,17 @@ angular.module('core').controller('HomeController', ['$scope', 'Authentication',
 		$scope.authentication = Authentication;
 	}
 ]);
+
+
+'use strict';
+
+angular.module('core').controller('CreateController', ['$scope', 'Authentication',
+	function($scope, Authentication) {
+		// This provides Authentication context.
+	
+	}	$scope.authentication = Authentication;
+]);
+
 'use strict';
 
 //Menu service used for managing  menus
