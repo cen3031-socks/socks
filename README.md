@@ -54,16 +54,6 @@ This command does a few things:
 * If you're running in a development environment, it will then also install development dependencies needed for testing and running the application.
 * Finally, when the install process is over, npm will initiate a bower install command to install all the front-end modules needed for the application.
 
-Before you can run the app, you need to start a MongoDB process. To do this, you must
-create a data directory somewhere on your disk. Then, run `mongod` with that data path
-like so:
-
-```bash
-$ mongod --dbpath /path/to/data/folder
-```
-
-Leave it running in one window and then continue with the other steps in a new window.
-
 After the install process is over, you'll be able to run it using Grunt. Just run grunt default task:
 
 ```bash
@@ -71,5 +61,3 @@ $ grunt
 ```
 
 The application should run on port 3000, so in your browser just go to [http://localhost:3000](http://localhost:3000)
-
-
