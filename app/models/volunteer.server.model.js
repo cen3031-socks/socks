@@ -21,17 +21,16 @@ var VolunteerSchema = new Schema({
 		default: Date.now
 	},
     signedIn: {
-        type: Boolean,
-        default: false
-    }
-    minutedVolunteeredInWeek: {
+        type: Boolean
+    },
+    minutesVolunteeredInWeek: {
         type: Number,
-        default: 0
-    }
+        default: '0'
+    },
     minutesVolunteeredEver: {
         type: Number,
-        default: 0
-    }
+        default: '0'
+    },
 	user: {
 		type: Schema.ObjectId,
 		ref: 'User'

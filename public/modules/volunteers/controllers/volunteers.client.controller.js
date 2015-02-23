@@ -9,7 +9,12 @@ angular.module('volunteers').controller('VolunteersController', ['$scope', '$sta
 		$scope.create = function() {
 			// Create new Volunteer object
 			var volunteer = new Volunteers ({
-				name: this.name
+				name: this.name,
+                created: this.created,
+                signedIn: this.signedIn,
+                minutesVolunteeredInWee: this.minutesVolunteeredInWeek,
+                minutesVolunteeredEver: this.minutesVolunteeredEver
+
 			});
 
 			// Redirect after save
