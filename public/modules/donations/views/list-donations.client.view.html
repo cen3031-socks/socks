@@ -1,4 +1,28 @@
 <section data-ng-controller="DonationsController" data-ng-init="find()">
+    <style type="text/css">
+        .myButton {
+            background-color: black;
+            border-radius:20px;
+            border:1px solid black;
+            display:inline-block;
+            cursor:pointer;
+            color: #D4D4D4;
+            font-family:arial;
+            font-size:17px;
+            padding:16px 31px;
+            text-decoration:none;
+            text-shadow:0px 1px 0px #2f6627;
+        }
+        .myButton:hover {
+            color:#ffffff;
+            text-decoration: none;
+        }
+        .myButton:active {
+            position:relative;
+            top:1px;
+        }
+
+    </style>
     <div class="page-header">
         <h1>Donations</h1>
     </div>
@@ -13,7 +37,7 @@
 			<h4 class="list-group-item-heading" data-ng-bind="donation.name"></h4>
         </a>
     </div>
-    <a href="/#!/donations/create" class="btn btn-default" >Create Donation</a>
+    <a href="/#!/donations/create" class="myButton" >Create Donation</a>
     <div class="alert alert-warning text-center" data-ng-hide="!donations.$resolved || donations.length">
     	No Donations yet, why don't you <a href="/#!/donations/create">create one</a>?
     </div>
