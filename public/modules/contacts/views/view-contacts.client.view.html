@@ -2,7 +2,7 @@
      ng-init="findOne()">
     <fieldset>
         <!--<div class="col-sm-6 text-center">-->
-        <!--&lt;!&ndash;<i class="glyphicon glyphicon-user cust-profile"  ng-class="{'text-primary': referred, 'text-danger': !referred}"></i>&ndash;&gt;-->
+        <!--&lt;!&ndash;<i class="glyphicon glyphicon-user cust-profile"  ng-class="{'text-primary': is_volunteer, 'text-danger': !is_volunteer}"></i>&ndash;&gt;-->
         <!--</div>-->
 
         <h1>{{contact.firstName}} {{contact.surname}}</h1>
@@ -23,25 +23,25 @@
             <h4><b>Address:</b></h4>
         </div>
         <div class="col-sm-9">
-            <h4>{{contact.suburb}}</h4>
+            <h4>{{contact.address}}</h4>
         </div>
         <div class="col-sm-3">
             <h4><b>City:</b></h4>
         </div>
         <div class="col-sm-9">
-            <h4>{{contact.channel}}</h4>
+            <h4>{{contact.city}}</h4>
         </div>
         <div class="col-sm-3">
             <h4><b>State:</b></h4>
         </div>
         <div class="col-sm-9">
-            <h4>{{contact.country}}</h4>
+            <h4>{{contact.state}}</h4>
         </div>
         <div class="col-sm-3">
             <h4><b>Zip Code:</b></h4>
         </div>
         <div class="col-sm-9">
-            <h4>{{contact.industry}}</h4>
+            <h4>{{contact.zipCode}}</h4>
         </div>
 
     </fieldset>

@@ -62,13 +62,13 @@ contactsApp.controller('ContactsCreateController', ['$scope', 'Contacts', '$loca
             var contact = new Contacts ({
                 firstName: this.firstName,
                 surname: this.surname,
-                suburb: this.suburb,
-                country: this.country,
-                industry: this.industry,
+                address: this.address,
+                state: this.state,
+                zipCode: this.zipCode,
                 email: this.email,
                 phone: this.phone,
-                referred: this.referred,
-                channel: this.channel
+                is_volunteer: this.is_volunteer,
+                city: this.city
             });
 
             // Redirect after save
@@ -78,13 +78,13 @@ contactsApp.controller('ContactsCreateController', ['$scope', 'Contacts', '$loca
                 // Clear form fields
                 $scope.firstName = '';
                 $scope.surName = '';
-                $scope.suburb = '';
-                $scope.country = '';
-                $scope.industry = '';
+                $scope.address = '';
+                $scope.state = '';
+                $scope.zipCode = '';
                 $scope.email = '';
                 $scope.phone = '';
-                $scope.referred = '';
-                $scope.channel = '';
+                $scope.is_volunteer = '';
+                $scope.city = '';
             }, function(errorResponse) {
                 $scope.error = errorResponse.data.message;
                 console.log(errorResponse);
@@ -140,13 +140,13 @@ contactsApp.directive('contactList', [function() {
 		//	var contact = new Contacts ({
          //       firstName: this.firstName,
 		//		surName: this.surName,
-         //       suburb: this.suburb,
-         //       country: this.country,
-         //       industry: this.industry,
+         //       address: this.address,
+         //       state: this.state,
+         //       zipCode: this.zipCode,
          //       email: this.email,
          //       phone: this.phone,
-         //       referred: this.referred,
-         //       channel: this.channel
+         //       is_volunteer: this.is_volunteer,
+         //       city: this.city
 		//	});
         //
 		//	// Redirect after save
@@ -156,13 +156,13 @@ contactsApp.directive('contactList', [function() {
 		//		// Clear form fields
          //       $scope.firstName = '';
          //       $scope.surName = '';
-         //       $scope.suburb = '';
-         //       $scope.country = '';
-         //       $scope.industry = '';
+         //       $scope.address = '';
+         //       $scope.state = '';
+         //       $scope.zipCode = '';
          //       $scope.email = '';
          //       $scope.phone = '';
-         //       $scope.referred = '';
-         //       $scope.channel = '';
+         //       $scope.is_volunteer = '';
+         //       $scope.city = '';
          //   }, function(errorResponse) {
 		//		$scope.error = errorResponse.data.message;
 		//	});
