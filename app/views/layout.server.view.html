@@ -47,46 +47,8 @@
 <body class="ng-cloak">
 	<header data-ng-include="'/modules/core/views/header.client.view.html'" class="navbar navbar-fixed-top navbar-inverse"></header>
     <style>
-        .navigation {
-            width:200px;
-            position:absolute;
-            left:0;
-            top:0;
-            background:#333340;
-            margin-top:50px;
-        }
-        .navigation ul, .navigation ul li {
-            position:relative;
-            width:200px;
-            list-style-type:none;
-            margin:0;
-            padding:0;
-        }
-        .navigation ul li a:link, .navigation ul li a:visited {
-            position:relative;
-            display:inline-block;
-            width:200px;
-            line-height:3em;
-            padding-left:1em;
-            color:#ddd;
-        }
-        .navigation ul li a:hover {
-            background-color:#9999AA;
-        }
-        .content {
-            padding-left:200px;
-        }
     </style>
 	<section class="content">
-        <section class="navigation">
-            <ul>
-                <li><a href="/#!/">Cats</a></li>
-                <li><a href="/#!/contacts">Contacts</a></li>
-                <li><a href="/#!/donation">Donations</a></li>
-                <li><a href="/#!/stats">Stats</a></li>
-                <li><a href="/#!/create">Create</a></li>
-            </ul>
-        </section>
 		<section class="container">
 			{% block content %}{% endblock %}
 		</section>
