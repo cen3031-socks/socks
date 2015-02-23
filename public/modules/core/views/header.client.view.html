@@ -6,17 +6,8 @@
 			<span class="icon-bar"></span>
 			<span class="icon-bar"></span>
 		</button>
-		<a href="/#!/" class="navbar-brand">SOCKS</a>
+		<a href="/#!/" class="navbar-brand">SOCKS.JS</a>
 	</div>
-    <section class="navigation">
-        <ul>
-            <li><a href="/#!/">Cats</a></li>
-            <li><a href="/#!/contacts">Contacts</a></li>
-            <li><a href="/#!/donations">Donations</a></li>
-            <li><a href="/#!/stats">Stats</a></li>
-            <li><a href="/#!/create">Create</a></li>
-        </ul>
-    </section>
 	<nav class="collapse navbar-collapse" collapse="!isCollapsed" role="navigation">
 		<ul class="nav navbar-nav" data-ng-if="menu.shouldRender(authentication.user);">
 			<li data-ng-repeat="item in menu.items | orderBy: 'position'" data-ng-if="item.shouldRender(authentication.user);" ng-switch="item.menuItemType" ui-route="{{item.uiRoute}}" class="{{item.menuItemClass}}" ng-class="{active: ($uiRoute)}" dropdown="item.menuItemType === 'dropdown'">
@@ -33,8 +24,8 @@
 			</li>
 		</ul>
 		<ul class="nav navbar-nav navbar-right" data-ng-hide="authentication.user">
-			<li ui-route="/signup" ng-class="{active: $uiRoute}">
-				<a href="/#!/signup">Sign Up</a>
+			<li ui-route="/creates" ng-class="{active: $uiRoute}">
+				<a href="/#!/creates">Create</a>
 			</li>
 			<li class="divider-vertical"></li>
 			<li ui-route="/signin" ng-class="{active: $uiRoute}">
