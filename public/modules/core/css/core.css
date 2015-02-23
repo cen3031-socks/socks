@@ -1,6 +1,40 @@
+.navigation {
+    width:200px;
+    position:absolute;
+    left:0;
+    top:0;
+    background:#333340;
+    margin-top:50px;
+}
+.navigation ul, .navigation ul li {
+    position:relative;
+    width:200px;
+    list-style-type:none;
+    margin:0;
+    padding:0;
+}
+.navigation ul li a:link, .navigation ul li a:visited {
+    position:relative;
+    display:inline-block;
+    width:200px;
+    line-height:3em;
+    padding-left:1em;
+    color:#ddd;
+}
+.navigation ul li a:hover {
+    background-color:#9999AA;
+}
+
 .content {
 	margin-top: 50px;
+    padding-left:200px;
+    box-sizing:border-box;
 }
+
+.content .container {
+    width:;
+}
+
 .undecorated-link:hover {
 	text-decoration: none;
 }
