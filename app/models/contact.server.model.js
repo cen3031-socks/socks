@@ -50,7 +50,7 @@ var ContactSchema = new Schema({
         default: '',
         trim: true
     },
-    volunteer: {
+    is_volunteer: {
         type: Boolean,
     },
     created: {

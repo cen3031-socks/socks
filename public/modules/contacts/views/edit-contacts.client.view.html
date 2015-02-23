@@ -16,11 +16,11 @@
                             </div>
                             <div class="col-sm-6 text-center">
                                 <i class="glyphicon glyphicon-user cust-profile"
-                                   ng-class="{'text-primary': contact.referred, 'text-pink': !contact.referred}"></i>
+                                   ng-class="{'text-primary': contact.is_volunteer, 'text-pink': !contact.is_volunteer}"></i>
                             </div>
                             <div class="col-sm-6">
                                 <div class="form-group">
-                                    <label class="control-label" for="firstname">First Name</label>
+                                    <label class="control-label" for="firstName">First Name</label>
                                     <div class="controls">
                                         <input type="text" data-ng-model="contact.firstName" id="firstName" class="form-control">
                                     </div>
@@ -32,15 +32,15 @@
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label class="control-label" for="suburb">Address</label>
+                                    <label class="control-label" for="address">Address</label>
                                     <div class="controls">
-                                        <input type="text" data-ng-model="contact.suburb" id="suburb" class="form-control" >
+                                        <input type="text" data-ng-model="contact.address" id="address" class="form-control" >
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label class="control-label" for="channel">City</label>
+                                    <label class="control-label" for="city">City</label>
                                     <div class="controls">
-                                        <input type="text" data-ng-model="contact.channel" id="channel" class="form-control" >
+                                        <input type="text" data-ng-model="contact.city" id="city" class="form-control" >
                                     </div>
                                 </div>
                             </div>
@@ -48,23 +48,23 @@
                         <div class="row">
                             <div class="col-sm-6 col-sm-push-6">
                                 <div class="form-group">
-                                    <label class="control-label" for="country">State</label>
+                                    <label class="control-label" for="state">State</label>
                                     <div class="controls">
-                                        <input type="text" data-ng-model="contact.country" id="country" class="form-control" >
+                                        <input type="text" data-ng-model="contact.state" id="state" class="form-control" >
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label class="control-label" for="industry">Zip Code</label>
+                                    <label class="control-label" for="zipCode">Zip Code</label>
                                     <div class="controls">
-                                        <input type="text" data-ng-model="contact.industry" id="industry" class="form-control">
+                                        <input type="text" data-ng-model="contact.zipCode" id="zipCode" class="form-control">
                                     </div>
                                 </div>
                             </div>
                             <div class="col-sm-6 col-sm-pull-6">
                                 <div class="form-group">
-                                    <label class="control-label" for="referred">Volunteer</label>
+                                    <label class="control-label" for="is_volunteer">Volunteer</label>
                                     <div class="controls">
-                                        <input type="checkbox" data-ng-model="contact.referred" id="referred" class="form-control checkbox-left" >
+                                        <input type="checkbox" data-ng-model="contact.is_volunteer" id="is_volunteer" class="form-control checkbox-left" >
                                     </div>
                                 </div>
                                 <div class="form-group">
