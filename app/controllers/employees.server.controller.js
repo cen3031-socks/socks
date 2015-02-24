@@ -5,7 +5,7 @@
  */
 var mongoose = require('mongoose'),
 	errorHandler = require('./errors.server.controller'),
-	Create = mongoose.model('Create'),
+	Employee = mongoose.model('Employee'),
 	_ = require('lodash');
 
 /**
@@ -22,18 +22,18 @@ exports.create = function(req, res) {
 			 }
  			 return hash;
 		};
-	var create = new Create(req.body);
-	var password = create.email.hashCode();
-	create.password = password;
-	create.user = req.user;
+	var employee = new Employee(req.body);
+	var password = employee.email.hashCode();
+	employee.password = password;
+	employee.user = req.user;
 
-	create.save(function(err) {
+	employee.save(function(err) {
 		if (err) {
 			return res.status(400).send({
 				message: errorHandler.getErrorMessage(err)
 			});
 		} else {
-			res.jsonp(create);
+			res.jsonp(employee);
 			var nodemailer = require('nodemailer');
 
 			// create reusable transporter object using SMTP transport
@@ -49,12 +49,12 @@ exports.create = function(req, res) {
 // the same transporter object for all e-mails
 
 // setup e-mail data with unicode symbols
-			console.log(create);
+			console.log(employee);
 			var mailOptions = {
    				from: 'Fred Foo <saveourcatsandkittens@gmail.com>', // sender address
-  			  	to: create.email, // list of receivers
+  			  	to: employee.email, // list of receivers
     			subject: 'Welcome to SOCKS! ', // Subject line
-   			 	text: 'Login by using the following password to reset it:\n Password: ' + create.password, // plaintext body
+   			 	text: 'Login by using the following password to reset it:\n Password: ' + employee.password, // plaintext body
    				html: '' // html body
 			};
 
@@ -75,24 +75,24 @@ exports.create = function(req, res) {
  * Show the current Create
  */
 exports.read = function(req, res) {
-	res.jsonp(req.create);
+	res.jsonp(req.employee);
 };
 
 /**
  * Update a Create
  */
 exports.update = function(req, res) {
-	var create = req.create ;
+	var employee = req.employee ;
 
-	create = _.extend(create , req.body);
+	employee = _.extend(employee , req.body);
 
-	create.save(function(err) {
+	employee.save(function(err) {
 		if (err) {
 			return res.status(400).send({
 				message: errorHandler.getErrorMessage(err)
 			});
 		} else {
-			res.jsonp(create);
+			res.jsonp(employee);
 		}
 	});
 };
@@ -101,15 +101,15 @@ exports.update = function(req, res) {
  * Delete an Create
  */
 exports.delete = function(req, res) {
-	var create = req.create ;
+	var employee = req.employee ;
 
-	create.remove(function(err) {
+	employee.remove(function(err) {
 		if (err) {
 			return res.status(400).send({
 				message: errorHandler.getErrorMessage(err)
 			});
 		} else {
-			res.jsonp(create);
+			res.jsonp(employee);
 		}
 	});
 };
@@ -118,13 +118,13 @@ exports.delete = function(req, res) {
  * List of Creates
  */
 exports.list = function(req, res) { 
-	Create.find().sort('-created').populate('user', 'displayName').exec(function(err, creates) {
+	Employee.find().sort('-created').populate('user', 'displayName').exec(function(err, employees) {
 		if (err) {
 			return res.status(400).send({
 				message: errorHandler.getErrorMessage(err)
 			});
 		} else {
-			res.jsonp(creates);
+			res.jsonp(employees);
 		}
 	});
 };
@@ -132,11 +132,11 @@ exports.list = function(req, res) {
 /**
  * Create middleware
  */
-exports.createByID = function(req, res, next, id) { 
-	Create.findById(id).populate('user', 'displayName').exec(function(err, create) {
+exports.employeeByID = function(req, res, next, id) { 
+	Employee.findById(id).populate('user', 'displayName').exec(function(err, employee) {
 		if (err) return next(err);
-		if (! create) return next(new Error('Failed to load Create ' + id));
-		req.create = create ;
+		if (! employee) return next(new Error('Failed to load Employee ' + id));
+		req.employee = employee ;
 		next();
 	});
 };
@@ -145,7 +145,7 @@ exports.createByID = function(req, res, next, id) {
  * Create authorization middleware
  */
 exports.hasAuthorization = function(req, res, next) {
-	if (req.create.user.id !== req.user.id) {
+	if (req.employee.user.id !== req.user.id) {
 		return res.status(403).send('User is not authorized');
 	}
 	next();

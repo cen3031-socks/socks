@@ -1,14 +1,14 @@
 'use strict';
 
 // Creates controller
-angular.module('creates').controller('CreatesController', ['$scope', '$stateParams', '$location', 'Authentication', 'Creates',
-	function($scope, $stateParams, $location, Authentication, Creates) {
+angular.module('employees').controller('EmployeesController', ['$scope', '$stateParams', '$location', 'Authentication', 'Employees',
+	function($scope, $stateParams, $location, Authentication, Employees) {
 		$scope.authentication = Authentication;
 
 		// Create new Create
 		$scope.create = function() {
 			// Create new Create object
-			var create = new Creates ({
+			var employee = new Employees ({
 				firstName: this.firstName,
 				lastName: this.lastName,
 				email: this.email,
@@ -17,9 +17,9 @@ angular.module('creates').controller('CreatesController', ['$scope', '$statePara
 				password: this.password
 			});
 
-			// Redirect after save
-			create.$save(function(response) {
-				$location.path('creates/' + response._id);
+			// Redirec after save
+			employee.$save(function(response) {
+				$location.path('employees/' + response._id);
 
 				// Clear form fields
 				$scope.firstName = '';
@@ -35,28 +35,28 @@ angular.module('creates').controller('CreatesController', ['$scope', '$statePara
 		};
 
 		// Remove existing Create
-		$scope.remove = function(create) {
-			if ( create ) { 
-				create.$remove();
+		$scope.remove = function(employee) {
+			if ( employee ) { 
+				employee.$remove();
 
-				for (var i in $scope.creates) {
-					if ($scope.creates [i] === create) {
-						$scope.creates.splice(i, 1);
+				for (var i in $scope.employees) {
+					if ($scope.employees [i] === employee) {
+						$scope.employees.splice(i, 1);
 					}
 				}
 			} else {
-				$scope.create.$remove(function() {
-					$location.path('creates');
+				$scope.employee.$remove(function() {
+					$location.path('employees');
 				});
 			}
 		};
 
 		// Update existing Create
 		$scope.update = function() {
-			var create = $scope.create;
+			var employee = $scope.employee;
 
-			create.$update(function() {
-				$location.path('creates/' + create._id);
+			employee.$update(function() {
+				$location.path('employees/' + employee._id);
 			}, function(errorResponse) {
 				$scope.error = errorResponse.data.message;
 			});
@@ -64,13 +64,13 @@ angular.module('creates').controller('CreatesController', ['$scope', '$statePara
 
 		// Find a list of Creates
 		$scope.find = function() {
-			$scope.creates = Creates.query();
+			$scope.employees = Employees.query();
 		};
 
 		// Find existing Create
 		$scope.findOne = function() {
-			$scope.create = Creates.get({ 
-				createId: $stateParams.createId
+			$scope.employee = Employees.get({ 
+				employeeId: $stateParams.employeeId
 			});
 		};
 	}

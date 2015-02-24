@@ -1,9 +1,9 @@
 'use strict';
 
 //Creates service used to communicate Creates REST endpoints
-angular.module('creates').factory('Creates', ['$resource',
+angular.module('employees').factory('Employees', ['$resource',
 	function($resource) {
-		return $resource('creates/:createId', { createId: '@_id'
+		return $resource('employees/:employeeId', { createId: '@_id'
 		}, {
 			update: {
 				method: 'PUT'
