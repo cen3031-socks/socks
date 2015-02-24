@@ -117,8 +117,8 @@ module.exports = function(grunt) {
 			}
 		},
 		concurrent: {
-			default: ['nodemon', 'watch'],
-			debug: ['nodemon', 'watch', 'node-inspector'],
+			default: ['shell:mongodb', 'nodemon', 'watch'],
+			debug: ['shell:mongodb', 'nodemon', 'watch', 'node-inspector'],
 			options: {
 				logConcurrentOutput: true,
 				limit: 10
@@ -192,7 +192,7 @@ module.exports = function(grunt) {
 	});
 
 	// Default task(s).
-	grunt.registerTask('default', ['lint', 'shell:mongodb', 'concurrent:default']);
+	grunt.registerTask('default', ['lint', 'concurrent:default']);
 
 	// Debug task.
 	grunt.registerTask('debug', ['lint', 'concurrent:debug']);
@@ -210,7 +210,7 @@ module.exports = function(grunt) {
 	grunt.registerTask('test', ['test:server', 'test:client', 'test:end-to-end']);
 	grunt.registerTask('test:server', ['env:test', 'mochaTest']);
 	grunt.registerTask('test:client', ['env:test', 'karma:unit']);
-    grunt.registerTask('test:end', ['clean-db', 'protractor']);
+    grunt.registerTask('test:e2e', ['clean-db', 'protractor']);
 
     grunt.registerTask('clean-db', 'drop the database', function() {
         var done = this.async();
