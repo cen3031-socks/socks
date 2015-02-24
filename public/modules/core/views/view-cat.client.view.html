@@ -10,7 +10,7 @@
         <img ng-src="{{cat.imageUrl}}" class="cat-profile-image" />
     </div>
     <div class="page-header col-md-8">
-        <h1>{{cat.name}}</h1>
+        <h1 id="name">{{cat.name}}</h1>
     </div>
     <div class="row col-md-8">
         <span class="col-md-3 profile-attribute">Sex</span>
@@ -18,7 +18,7 @@
     </div>
     <div class="row col-md-8">
         <span class="col-md-3 profile-attribute">Date of Birth</span>
-        <span class="col-md-9" id="dob">{{cat.dateOfBirth | date}}</span>
+        <span class="col-md-9" id="dateOfBirth">{{cat.dateOfBirth | date}}</span>
     </div>
     <div class="row col-md-8">
         <span class="col-md-3 profile-attribute">Color</span>
@@ -30,7 +30,7 @@
     </div>
     <div class="row col-md-8">
         <span class="col-md-3 profile-attribute">Current Location</span>
-        <span class="col-md-9" id="location">{{cat.location}}</span>
+        <span class="col-md-9" id="location">{{cat.currentLocation}}</span>
     </div>
     <div class="row col-md-8">
         <span class="col-md-3 profile-attribute">Temperament</span>
@@ -61,7 +61,18 @@
         <span class="col-md-9" id="description">{{cat.description}}</span>
     </div>
     <div class="row col-md-8">
-        <span class="col-md-3 profile-attribute">Notes</span>
-        <span class="col-md-9" id="notes">{{cat.notes}}</span>
+        <div class="col-md-12 profile-attribute">Notes</div>
+		<div class="col-md-12" id="notes">
+			<table style="width:100%">
+				<tr>
+					<th>Note</th>
+					<th>Person</th>
+				</tr>
+				<tr ng-repeat="note in cat.notes">
+					<td class="note">{{note}}</td>
+					<td class="note-person">Someone</td>
+				</tr>
+			</table>
+		</div>
     </div>
 </section>
