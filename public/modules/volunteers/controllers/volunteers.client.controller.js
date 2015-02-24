@@ -6,26 +6,67 @@ angular.module('volunteers').controller('VolunteersController', ['$scope', '$sta
 		$scope.authentication = Authentication;
 
 		// Create new Volunteer
-		$scope.create = function() {
-			// Create new Volunteer object
-			var volunteer = new Volunteers ({
-				name: this.name,
-                created: this.created,
-                signedIn: this.signedIn,
-                minutesVolunteeredInWee: this.minutesVolunteeredInWeek,
-                minutesVolunteeredEver: this.minutesVolunteeredEver
+		$scope.sign = function() {
+            /*
+            //var vol = db.collection.findOne({name: vname});
 
-			});
+            //if the volunteer's name is not in the database create them
+            if (true) {
+                var volunteer = new Volunteers({
+                    name: this.name,
+                    created: this.created,
+                    signedIn: this.signedIn,
+                    minutesVolunteeredInWee: this.minutesVolunteeredInWeek,
+                    minutesVolunteeredEver: this.minutesVolunteeredEver
+
+                });
+            }
+            else {
+                //var vol = volunteer with name just submitted
+                if(vol.signedIn == false) {
+                   vol.mostRecentSignIn = new Date();
+                    vol.signedIn = true;
+                }
+                else {
+                    vol.signedIn = false;
+                    var cur = new Date();
+                    tmp = new Date(cur - vol.mostRecentSignIn);
+                    vol.minutesVolunteeredInWeek += tmp.getMinutes();
+                }
+            }
+
 
 			// Redirect after save
 			volunteer.$save(function(response) {
-				$location.path('volunteers/' + response._id);
+			//	$location.path('volunteers/' + response._id);
 
 				// Clear form fields
 				$scope.name = '';
 			}, function(errorResponse) {
 				$scope.error = errorResponse.data.message;
 			});
+			*/
+
+
+            // Create new Volunteer object
+            var volunteer = new Volunteers ({
+                name: this.name,
+                created: this.created,
+                signedIn: this.signedIn,
+                minutesVolunteeredInWee: this.minutesVolunteeredInWeek,
+                minutesVolunteeredEver: this.minutesVolunteeredEver
+
+            });
+
+            // Redirect after save
+            volunteer.$save(function(response) {
+          //      $location.path('volunteers/' + response._id);
+
+                // Clear form fields
+                $scope.name = '';
+            }, function(errorResponse) {
+                $scope.error = errorResponse.data.message;
+            });
 		};
 
 		// Remove existing Volunteer

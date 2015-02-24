@@ -23,6 +23,9 @@ var VolunteerSchema = new Schema({
     signedIn: {
         type: Boolean
     },
+    mostRecentSignIn: {
+        type: Date
+    },
     minutesVolunteeredInWeek: {
         type: Number,
         default: '0'
