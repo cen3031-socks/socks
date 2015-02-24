@@ -26,8 +26,8 @@ contactsApp.controller('ContactsController', ['$scope', '$stateParams', 'Authent
 
                         $scope.ok = function () {
 
-                            if (updateContactForm.$valid){
-                            $modalInstance.close($scope.contact);
+                            if (document.updateContactForm.$valid){
+								$modalInstance.close($scope.contact);
                             }
                             $modalInstance.dismiss('cancel');
                         };
