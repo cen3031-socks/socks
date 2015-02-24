@@ -9,7 +9,7 @@ var mongoose = require('mongoose'),
 /**
  * Create Schema
  */
-var CreateSchema = new Schema({
+var EmployeeSchema = new Schema({
 	firstName: {
 		type: String,
 		default: '',
@@ -18,7 +18,6 @@ var CreateSchema = new Schema({
 	lastName: {
 		type: String,
 		default: '',
-		required: 'Please fill Last Name',
 		trim: true
 	},
 	email: {
@@ -48,4 +47,4 @@ var CreateSchema = new Schema({
 	}
 });
 
-mongoose.model('Create', CreateSchema);
+mongoose.model('Employee', EmployeeSchema);

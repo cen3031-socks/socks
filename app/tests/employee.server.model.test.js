@@ -6,17 +6,17 @@
 var should = require('should'),
 	mongoose = require('mongoose'),
 	User = mongoose.model('User'),
-	Create = mongoose.model('Create');
+	Employee = mongoose.model('Employee');
 
 /**
  * Globals
  */
-var user, create;
+var user, employee;
 
 /**
  * Unit tests
  */
-describe('Create Model Unit Tests:', function() {
+describe('Employee Model Unit Tests:', function() {
 	beforeEach(function(done) {
 		user = new User({
 			firstName: 'Full',
@@ -28,8 +28,8 @@ describe('Create Model Unit Tests:', function() {
 		});
 
 		user.save(function() { 
-			create = new Create({
-				name: 'Create Name',
+			employee = new Employee({
+				name: 'Employee Name',
 				user: user
 			});
 
@@ -39,16 +39,16 @@ describe('Create Model Unit Tests:', function() {
 
 	describe('Method Save', function() {
 		it('should be able to save without problems', function(done) {
-			return create.save(function(err) {
+			return employee.save(function(err) {
 				should.not.exist(err);
 				done();
 			});
 		});
 
 		it('should be able to show an error when try to save without name', function(done) { 
-			create.name = '';
+			employee.name = '';
 
-			return create.save(function(err) {
+			return employee.save(function(err) {
 				should.exist(err);
 				done();
 			});
@@ -56,7 +56,7 @@ describe('Create Model Unit Tests:', function() {
 	});
 
 	afterEach(function(done) { 
-		Create.remove().exec();
+		Employee.remove().exec();
 		User.remove().exec();
 
 		done();

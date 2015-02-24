@@ -6,7 +6,7 @@ angular.module('core').controller('HomeController', ['$scope', '$location', 'Aut
 			$scope.authentication = Authentication;
 
 			$scope.getAge = function(cat) {
-				if (cat.dateOfBirth == undefined) {
+				if (cat.dateOfBirth === undefined) {
 					return 'Unknown';
 				}
 				var dob = Date.parse(cat.dateOfBirth.toString());

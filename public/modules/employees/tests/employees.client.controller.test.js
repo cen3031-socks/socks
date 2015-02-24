@@ -2,9 +2,9 @@
 
 (function() {
 	// Creates Controller Spec
-	describe('Creates Controller Tests', function() {
+	describe('Employee Controller Tests', function() {
 		// Initialize global variables
-		var CreatesController,
+		var EmployeesController,
 		scope,
 		$httpBackend,
 		$stateParams,
@@ -45,119 +45,119 @@
 			$location = _$location_;
 
 			// Initialize the Creates controller.
-			CreatesController = $controller('CreatesController', {
+			EmployeesController = $controller('EmployeesController', {
 				$scope: scope
 			});
 		}));
 
-		it('$scope.find() should create an array with at least one Create object fetched from XHR', inject(function(Creates) {
+		it('$scope.find() should employee an array with at least one Employee object fetched from XHR', inject(function(Employees) {
 			// Create sample Create using the Creates service
-			var sampleCreate = new Creates({
-				name: 'New Create'
+			var sampleEmployee = new Employees({
+				name: 'New Employee'
 			});
 
 			// Create a sample Creates array that includes the new Create
-			var sampleCreates = [sampleCreate];
+			var sampleEmployees = [sampleEmployee];
 
 			// Set GET response
-			$httpBackend.expectGET('creates').respond(sampleCreates);
+			$httpBackend.expectGET('employees').respond(sampleEmployees);
 
 			// Run controller functionality
 			scope.find();
 			$httpBackend.flush();
 
 			// Test scope value
-			expect(scope.creates).toEqualData(sampleCreates);
+			expect(scope.employees).toEqualData(sampleEmployees);
 		}));
 
-		it('$scope.findOne() should create an array with one Create object fetched from XHR using a createId URL parameter', inject(function(Creates) {
+		it('$scope.findOne() should employee an array with one Employee object fetched from XHR using a employeeId URL parameter', inject(function(Employees) {
 			// Define a sample Create object
-			var sampleCreate = new Creates({
-				name: 'New Create'
+			var sampleEmployee = new Employees({
+				name: 'New Employee'
 			});
 
 			// Set the URL parameter
-			$stateParams.createId = '525a8422f6d0f87f0e407a33';
+			$stateParams.employeeId = '525a8422f6d0f87f0e407a33';
 
 			// Set GET response
-			$httpBackend.expectGET(/creates\/([0-9a-fA-F]{24})$/).respond(sampleCreate);
+			$httpBackend.expectGET(/employees\/([0-9a-fA-F]{24})$/).respond(sampleEmployee);
 
 			// Run controller functionality
 			scope.findOne();
 			$httpBackend.flush();
 
 			// Test scope value
-			expect(scope.create).toEqualData(sampleCreate);
+			expect(scope.employee).toEqualData(sampleEmployee);
 		}));
 
-		it('$scope.create() with valid form data should send a POST request with the form input values and then locate to new object URL', inject(function(Creates) {
+		it('$scope.employee() with valid form data should send a POST request with the form input values and then locate to new object URL', inject(function(Employees) {
 			// Create a sample Create object
-			var sampleCreatePostData = new Creates({
-				name: 'New Create'
+			var sampleEmployeePostData = new Employees({
+				name: 'New Employee'
 			});
 
 			// Create a sample Create response
-			var sampleCreateResponse = new Creates({
+			var sampleEmployeeResponse = new Employees({
 				_id: '525cf20451979dea2c000001',
-				name: 'New Create'
+				name: 'New Employee'
 			});
 
 			// Fixture mock form input values
-			scope.name = 'New Create';
+			scope.name = 'New Employee';
 
 			// Set POST response
-			$httpBackend.expectPOST('creates', sampleCreatePostData).respond(sampleCreateResponse);
+			$httpBackend.expectPOST('employees', sampleEmployeePostData).respond(sampleEmployeeResponse);
 
 			// Run controller functionality
-			scope.create();
+			scope.employee();
 			$httpBackend.flush();
 
 			// Test form inputs are reset
 			expect(scope.name).toEqual('');
 
 			// Test URL redirection after the Create was created
-			expect($location.path()).toBe('/creates/' + sampleCreateResponse._id);
+			expect($location.path()).toBe('/employees/' + sampleEmployeeResponse._id);
 		}));
 
-		it('$scope.update() should update a valid Create', inject(function(Creates) {
+		it('$scope.update() should update a valid Employee', inject(function(Employees) {
 			// Define a sample Create put data
-			var sampleCreatePutData = new Creates({
+			var sampleEmployeePutData = new Employees({
 				_id: '525cf20451979dea2c000001',
-				name: 'New Create'
+				name: 'New Employee'
 			});
 
 			// Mock Create in scope
-			scope.create = sampleCreatePutData;
+			scope.employee = sampleEmployeePutData;
 
 			// Set PUT response
-			$httpBackend.expectPUT(/creates\/([0-9a-fA-F]{24})$/).respond();
+			$httpBackend.expectPUT(/employees\/([0-9a-fA-F]{24})$/).respond();
 
 			// Run controller functionality
 			scope.update();
 			$httpBackend.flush();
 
 			// Test URL location to new object
-			expect($location.path()).toBe('/creates/' + sampleCreatePutData._id);
+			expect($location.path()).toBe('/employees/' + sampleEmployeePutData._id);
 		}));
 
-		it('$scope.remove() should send a DELETE request with a valid createId and remove the Create from the scope', inject(function(Creates) {
+		it('$scope.remove() should send a DELETE request with a valid employeeId and remove the Employee from the scope', inject(function(Employees) {
 			// Create new Create object
-			var sampleCreate = new Creates({
+			var sampleEmployee = new Employees({
 				_id: '525a8422f6d0f87f0e407a33'
 			});
 
 			// Create new Creates array and include the Create
-			scope.creates = [sampleCreate];
+			scope.employees = [sampleEmployee];
 
 			// Set expected DELETE response
-			$httpBackend.expectDELETE(/creates\/([0-9a-fA-F]{24})$/).respond(204);
+			$httpBackend.expectDELETE(/employees\/([0-9a-fA-F]{24})$/).respond(204);
 
 			// Run controller functionality
-			scope.remove(sampleCreate);
+			scope.remove(sampleEmployee);
 			$httpBackend.flush();
 
 			// Test array after successful delete
-			expect(scope.creates.length).toBe(0);
+			expect(scope.employees.length).toBe(0);
 		}));
 	});
 }());

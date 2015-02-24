@@ -1,0 +1,26 @@
+<section data-ng-controller="EmployeesController" data-ng-init="findOne()">
+<div class="list-group" ng-init="findOne()">
+    <h2>Account Summary</h2>
+    <fieldset>
+        <!--<div class="col-sm-6 text-center">-->
+        <!--&lt;!&ndash;<i class="glyphicon glyphicon-user cust-profile"  ng-class="{'text-primary': referred, 'text-danger': !referred}"></i>&ndash;&gt;-->
+        <!--</div>-->
+        
+        <div class="col-sm-6">
+            <h4><b>You have successfully created an {{employee.isAdmin ? 'Admin' : 'Employee'}}</b></h4>
+            </br>
+            <h4><b>Name:</b></h4>
+             <h4>{{employee.firstName}} {{employee.lastName}}</h4>
+             </br>
+            <h4><b>Phone Number:</b></h4>
+
+            <h4>{{employee.phone}}</h4>
+            </br>
+            <h4><b>Email:</b></h4>
+
+            <h4>{{employee.email}}</h4>
+
+        </div>
+    </fieldset>
+</div>
+</section>
