@@ -159,7 +159,21 @@ module.exports = function(grunt) {
                     args: {} // Target-specific arguments
                 }
             }
-        }
+        },
+		shell: {
+			mongodb: {
+				command: 'mongod --dbpath ./data/db',
+				options: {
+					async: true,
+					stdout: false,
+					stderr: true,
+					failOnError: true,
+					execOptions: {
+						cwd: '.'
+					}
+				}
+			}
+		}
 	});
 
 	// Load NPM tasks
@@ -178,7 +192,7 @@ module.exports = function(grunt) {
 	});
 
 	// Default task(s).
-	grunt.registerTask('default', ['lint', 'concurrent:default']);
+	grunt.registerTask('default', ['lint', 'shell:mongodb', 'concurrent:default']);
 
 	// Debug task.
 	grunt.registerTask('debug', ['lint', 'concurrent:debug']);
