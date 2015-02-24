@@ -5,46 +5,22 @@
         <!--<div class="col-sm-6 text-center">-->
         <!--&lt;!&ndash;<i class="glyphicon glyphicon-user cust-profile"  ng-class="{'text-primary': referred, 'text-danger': !referred}"></i>&ndash;&gt;-->
         <!--</div>-->
-
-     <!--    <h1>{{contact.firstName}} {{contact.surname}}</h1>
-        </br>
-        <div class="col-sm-3">
+        
+        <div class="col-sm-6">
+            <h4><b>You have successfully created an {{employee.isAdmin ? 'Admin' : 'Employee'}}</b></h4>
+            </br>
+            <h4><b>Name:</b></h4>
+             <h4>{{employee.firstName}} {{employee.lastName}}</h4>
+             </br>
             <h4><b>Phone Number:</b></h4>
-        </div>
-        <div class="col-sm-9">
-            <h4>{{contact.phone}}</h4>
-        </div>
-        <div class="col-sm-3">
-            <h4><b>Email:</b></h4>
-        </div>
-        <div class="col-sm-9">
-            <h4>{{contact.email}}</h4>
-        </div>
-        <div class="col-sm-3">
-            <h4><b>Address:</b></h4>
-        </div>
-        <div class="col-sm-9">
-            <h4>{{contact.suburb}}</h4>
-        </div>
-        <div class="col-sm-3">
-            <h4><b>City:</b></h4>
-        </div>
-        <div class="col-sm-9">
-            <h4>{{contact.channel}}</h4>
-        </div>
-        <div class="col-sm-3">
-            <h4><b>State:</b></h4>
-        </div>
-        <div class="col-sm-9">
-            <h4>{{contact.country}}</h4>
-        </div>
-        <div class="col-sm-3">
-            <h4><b>Zip Code:</b></h4>
-        </div>
-        <div class="col-sm-9">
-            <h4>{{contact.industry}}</h4>
-        </div> -->
 
+            <h4>{{employee.phone}}</h4>
+            </br>
+            <h4><b>Email:</b></h4>
+
+            <h4>{{employee.email}}</h4>
+
+        </div>
     </fieldset>
 </div>
 </section>
