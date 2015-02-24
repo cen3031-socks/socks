@@ -1,5 +1,5 @@
 'use strict';
-
+var mongoose = require('mongoose');
 module.exports = function(grunt) {
 	// Unified Watch Object
 	var watchFiles = {
@@ -143,7 +143,23 @@ module.exports = function(grunt) {
 			unit: {
 				configFile: 'karma.conf.js'
 			}
-		}
+		},
+        protractor: {
+            options: {
+                configFile: 'end-to-end-tests/config.js', // Default config file
+                keepAlive: true, // If false, the grunt process stops when the test fails.
+                noColor: false, // If true, protractor will not use colors in its output.
+                args: {
+                    // Arguments passed to the command
+                }
+            },
+            all: {   // Grunt requires at least one target to run so you can simply put 'all: {}' here too.
+                options: {
+                    configFile: 'end-to-end-tests/config.js', // Target-specific config file
+                    args: {} // Target-specific arguments
+                }
+            }
+        }
 	});
 
 	// Load NPM tasks
@@ -177,7 +193,24 @@ module.exports = function(grunt) {
 	grunt.registerTask('build', ['lint', 'loadConfig', 'ngAnnotate', 'uglify', 'cssmin']);
 
 	// Test task.
-	grunt.registerTask('test', ['test:server', 'test:client']);
+	grunt.registerTask('test', ['test:server', 'test:client', 'test:end-to-end']);
 	grunt.registerTask('test:server', ['env:test', 'mochaTest']);
 	grunt.registerTask('test:client', ['env:test', 'karma:unit']);
+    grunt.registerTask('test:end', ['clean-db', 'protractor']);
+
+    grunt.registerTask('clean-db', 'drop the database', function() {
+        var done = this.async();
+
+        mongoose.connection.on('open', function () {
+            mongoose.connection.db.executeDbCommand({dropDatabase:1},function(err) {
+                if(err) {
+                    console.log(err);
+                } else {
+                    console.log('Successfully dropped db');
+                }
+                mongoose.connection.close(done);
+            });
+        });
+        mongoose.connect("mongodb://localhost/mean-dev");
+    });
 };
