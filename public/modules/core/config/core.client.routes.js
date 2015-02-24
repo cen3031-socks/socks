@@ -19,6 +19,10 @@ angular.module('core').config(['$stateProvider', '$urlRouterProvider',
 		 .state('addemployee', {
 		      url: '/addemployee',
 		      templateUrl: 'modules/core/views/addemployee.client.view.html'
-		});
+		})
+        .state('viewCat', {
+            url: '/cats/:catId',
+            templateUrl: 'modules/core/views/view-cat.client.view.html'
+        });
 	}
 ]);

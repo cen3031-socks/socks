@@ -1,0 +1,99 @@
+<section data-ng-controller="ContactsUpdateController as contactUpCtrl">
+
+    <div class="modal-header">
+        <h3 class="modal-title">Update: {{contact.firstName}} {{contact.surname}}</h3>
+    </div>
+    <div class="modal-body">
+        <form name = "updateContactForm">
+                <fieldset>
+                        <div class="row">
+                            <div class="form-group">
+                                <div data-ng-show="error" class="text-center text-danger">
+                                    <div class="alert alert-danger" role=""alert">
+                                        <strong data-ng-bind="error"></strong>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6 text-center">
+                                <i class="glyphicon glyphicon-user cust-profile"
+                                   ng-class="{'text-primary': contact.is_volunteer, 'text-pink': !contact.is_volunteer}"></i>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label class="control-label" for="firstName">First Name</label>
+                                    <div class="controls">
+                                        <input type="text" data-ng-model="contact.firstName" id="firstName" class="form-control">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label" for="surname">Last Name</label>
+                                    <div class="controls">
+                                        <input type="text" data-ng-model="contact.surname" id="surname" class="form-control" required>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label" for="address">Address</label>
+                                    <div class="controls">
+                                        <input type="text" data-ng-model="contact.address" id="address" class="form-control" >
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label" for="city">City</label>
+                                    <div class="controls">
+                                        <input type="text" data-ng-model="contact.city" id="city" class="form-control" >
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-6 col-sm-push-6">
+                                <div class="form-group">
+                                    <label class="control-label" for="state">State</label>
+                                    <div class="controls">
+                                        <input type="text" data-ng-model="contact.state" id="state" class="form-control" >
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label" for="zipCode">Zip Code</label>
+                                    <div class="controls">
+                                        <input type="text" data-ng-model="contact.zipCode" id="zipCode" class="form-control">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6 col-sm-pull-6">
+                                <div class="form-group">
+                                    <label class="control-label" for="is_volunteer">Volunteer</label>
+                                    <div class="controls">
+                                        <input type="checkbox" data-ng-model="contact.is_volunteer" id="is_volunteer" class="form-control checkbox-left" >
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label" for="phone">Phone</label>
+                                    <div class="controls">
+                                        <input type="text" data-ng-model="contact.phone" id="phone" class="form-control">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label class="control-label" for="email">Email</label>
+                                    <div class="controls">
+                                        <input type="text" data-ng-model="contact.email" id="email" class="form-control" >
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                </fieldset>
+        </form>
+    </div>
+
+    <div class="modal-footer">
+        <button class="btn btn-success btn-lg" ng-click="contactUpCtrl.update(contact); ok()" ng-disabled="updateContactForm.$invalid">Update & Close</button>
+        <button class="btn btn-warning btn-lg" ng-click="cancel()">Cancel</button>
+    </div>
+
+
+
+</section>

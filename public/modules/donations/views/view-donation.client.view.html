@@ -1,4 +1,28 @@
 <section data-ng-controller="DonationsController" data-ng-init="findOne()">
+    <style type="text/css">
+        .myButton {
+            background-color: black;
+            border-radius:20px;
+            border:1px solid black;
+            display:inline-block;
+            cursor:pointer;
+            color: #D4D4D4;
+            font-family:arial;
+            font-size:17px;
+            padding:16px 31px;
+            text-decoration:none;
+            text-shadow:0px 1px 0px #2f6627;
+        }
+        .myButton:hover {
+            color:#ffffff;
+            text-decoration: none;
+        }
+        .myButton:active {
+            position:relative;
+            top:1px;
+        }
+
+    </style>
 	<div class="page-header">
 		<h1 data-ng-bind="donation.name"></h1>
 	</div>
@@ -18,4 +42,5 @@
 			<span data-ng-bind="donation.user.displayName"></span>
 		</em>
 	</small>
+    <a href="/#!/donations" class="myButton pull-right">Back to Donations</a>
 </section>
