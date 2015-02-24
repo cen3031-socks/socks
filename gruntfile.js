@@ -172,6 +172,18 @@ module.exports = function(grunt) {
 						cwd: '.'
 					}
 				}
+			},
+			'generate-data': {
+				command: './generate-data.sh n', 
+				options: {
+					async: false,
+					execOptions: {
+						cwd: './scripts/',
+						stdout: true,
+						stderr: true,
+						failOnError: true
+					}
+				}
 			}
 		}
 	});
@@ -207,10 +219,12 @@ module.exports = function(grunt) {
 	grunt.registerTask('build', ['lint', 'loadConfig', 'ngAnnotate', 'uglify', 'cssmin']);
 
 	// Test task.
-	grunt.registerTask('test', ['test:server', 'test:client', 'test:end-to-end']);
+	grunt.registerTask('test', ['test:server', 'test:client', 'test:e2e']);
 	grunt.registerTask('test:server', ['env:test', 'mochaTest']);
 	grunt.registerTask('test:client', ['env:test', 'karma:unit']);
     grunt.registerTask('test:e2e', ['clean-db', 'protractor']);
+
+	grunt.registerTask('generate-data', ['clean-db', 'shell:generate-data']);
 
     grunt.registerTask('clean-db', 'drop the database', function() {
         var done = this.async();
@@ -225,6 +239,12 @@ module.exports = function(grunt) {
                 mongoose.connection.close(done);
             });
         });
-        mongoose.connect("mongodb://localhost/mean-dev");
+		if (mongoose.connection.readyState !== 0) {
+			mongoose.connection.close(function() {
+				mongoose.connect("mongodb://localhost/mean-dev");
+			});
+		} else { 
+			mongoose.connect("mongodb://localhost/mean-dev");
+		}
     });
 };
