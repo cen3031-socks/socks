@@ -7,11 +7,15 @@ angular.module('volunteers').controller('VolunteersController', ['$scope', '$sta
 
 		// Create new Volunteer
 		$scope.sign = function() {
+
+
             /*
-            //var vol = db.collection.findOne({name: vname});
+
+            var vol = db.collection.findOne({name: this.name});
 
             //if the volunteer's name is not in the database create them
-            if (true) {
+
+            if (vol == null) {
                 var volunteer = new Volunteers({
                     name: this.name,
                     created: this.created,
@@ -21,6 +25,7 @@ angular.module('volunteers').controller('VolunteersController', ['$scope', '$sta
 
                 });
             }
+
             else {
                 //var vol = volunteer with name just submitted
                 if(vol.signedIn == false) {
@@ -45,10 +50,17 @@ angular.module('volunteers').controller('VolunteersController', ['$scope', '$sta
 			}, function(errorResponse) {
 				$scope.error = errorResponse.data.message;
 			});
-			*/
 
+            */
+
+
+
+
+            //The code below does not funcition correctly. The code above that is commented out will eventually replace this once the above code gets debugged.
 
             // Create new Volunteer object
+
+
             var volunteer = new Volunteers ({
                 name: this.name,
                 created: this.created,
@@ -60,13 +72,15 @@ angular.module('volunteers').controller('VolunteersController', ['$scope', '$sta
 
             // Redirect after save
             volunteer.$save(function(response) {
-          //      $location.path('volunteers/' + response._id);
+                //$location.path('volunteers/' + response._id);
 
                 // Clear form fields
                 $scope.name = '';
             }, function(errorResponse) {
                 $scope.error = errorResponse.data.message;
             });
+
+
 		};
 
 		// Remove existing Volunteer
