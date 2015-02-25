@@ -117,8 +117,8 @@ module.exports = function(grunt) {
 			}
 		},
 		concurrent: {
-			default: ['shell:mongodb', 'nodemon', 'watch'],
-			debug: ['shell:mongodb', 'nodemon', 'watch', 'node-inspector'],
+			default: ['nodemon', 'watch'],
+			debug: ['nodemon', 'watch', 'node-inspector'],
 			options: {
 				logConcurrentOutput: true,
 				limit: 10

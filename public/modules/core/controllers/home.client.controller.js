@@ -22,7 +22,7 @@ angular.module('core').controller('HomeController', ['$scope', '$location', 'Aut
 
 			$scope.create = function() {
 				var cat = new Cats({
-					dateOfBirth: this.dob,
+					dateOfBirth: new Date(Date.parse(this.dateOfBirth)/1 + 12*60*60*1000),
 					name: this.name,	
 					sex: this.sex,
 					vet: this.vet,
