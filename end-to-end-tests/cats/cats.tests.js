@@ -107,6 +107,13 @@ describe('cats homepage', function() {
 
 		it('should be able to add notes to a cat', function() {
 			browser.get('/#!/cats/' + this.createdCatId);
+
+			/* TODO: add user info checking to cat notes test */
+			var newNote = element(by.id('new-note'));
+			newNote
+				.element(by.model('new-note-value'))
+				.sendKeys('This is a new note.');
+			newNote.element(by.id('add-note')).click();
 		});
 	});
 

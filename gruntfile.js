@@ -158,8 +158,20 @@ module.exports = function(grunt) {
                     configFile: 'end-to-end-tests/config.js', // Target-specific config file
                     args: {} // Target-specific arguments
                 }
-            }
-        },
+            },
+			cats: {
+				options: {
+					configFile: 'end-to-end-tests/cats/config.js',
+					args: {}
+				}
+			},
+			contacts: {
+				options: {
+					configFile: 'end-to-end-tests/contacts/config.js',
+					args: {}
+				}
+			} 
+		},
 		shell: {
 			mongodb: {
 				command: 'mongod --dbpath ./data/db',
@@ -222,7 +234,7 @@ module.exports = function(grunt) {
 	grunt.registerTask('test', ['test:server', 'test:client', 'test:e2e']);
 	grunt.registerTask('test:server', ['env:test', 'mochaTest']);
 	grunt.registerTask('test:client', ['env:test', 'karma:unit']);
-    grunt.registerTask('test:e2e', ['clean-db', 'protractor']);
+    grunt.registerTask('test:e2e', ['clean-db', 'protractor:all']);
 
 	grunt.registerTask('generate-data', ['clean-db', 'shell:generate-data']);
 
