@@ -170,7 +170,13 @@ module.exports = function(grunt) {
 					configFile: 'end-to-end-tests/contacts/config.js',
 					args: {}
 				}
-			} 
+			},
+            volunteers: {
+                options: {
+                    configFile: 'end-to-end-tests/volunteers/config.js',
+                    args: {}
+                }
+            }
 		},
 		shell: {
 			mongodb: {
