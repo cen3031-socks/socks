@@ -129,7 +129,7 @@
 			$httpBackend.flush();
 
 			// Test form inputs are reset
-			expect(this.scope.firstName).toEqual('');
+			expect(this.scope.firstName).toEqual(undefined);
 
 			// Test URL redirection after the Contact was created
 			expect($location.path()).toBe('/contacts/' + sampleContactResponse._id);
@@ -169,14 +169,56 @@
 			$httpBackend.flush();
 
 			// Test form inputs are reset
-			expect(this.scope.firstName).toEqual('');
-			expect(this.scope.surname).toEqual('');
-			expect(this.scope.phone).toEqual('');
+			expect(this.scope.firstName).toEqual(undefined);
+			expect(this.scope.surname).toEqual(undefined);
+			expect(this.scope.phone).toEqual(undefined);
 
 
 			// Test URL redirection after the Contact was created
 			expect($location.path()).toBe('/contacts/' + sampleContactResponse._id);
 		}));
+		
+		it('$scope.create() Failure Emulation from httpBackend should get error',
+		 inject(function(Contacts, $controller, $rootScope) {
+			
+			this.scope = $rootScope.$new();
+			ContactsController = $controller('ContactsCreateController', {
+				$scope: this.scope
+			});
+			// Create a sample Contact object
+			
+			var sampleContactPostData = new Contacts({
+				firstName: 'New Contact',
+				surname: 'Last Name',
+				phone: ''
+			});
+
+			// Create a sample Contact response
+
+			// Fixture mock form input values
+			this.scope.firstName = sampleContactPostData.firstName;
+			this.scope.surname = sampleContactPostData.surname;
+			this.scope.phone = sampleContactPostData.phone;
+
+			// Set POST response
+			$httpBackend.expectPOST('contacts', sampleContactPostData).respond(500, '');
+
+			// Run controller functionality
+			spyOn(console, 'log');
+			spyOn($location, "path");
+			this.scope.create();
+			$httpBackend.flush();
+
+			// Test form inputs are reset
+			expect(this.scope.firstName).toEqual(sampleContactPostData.firstName);
+			expect(this.scope.surname).toEqual(sampleContactPostData.surname);
+			expect(this.scope.phone).toEqual(sampleContactPostData.phone);
+
+
+			// Test URL redirection after the Contact was created
+			expect($location.path).not.toHaveBeenCalled();
+		}));
+		
 
 		it('$scope.update() should update a valid Contact', inject(function(Contacts) {
 			// Define a sample Contact put data

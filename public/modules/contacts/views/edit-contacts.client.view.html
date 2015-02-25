@@ -1,4 +1,4 @@
-<section data-ng-controller="ContactsUpdateController as contactUpCtrl">
+<section data-ng-controller="ContactsUpdateController">
 
     <div class="modal-header">
         <h3 class="modal-title">Update: {{contact.firstName}} {{contact.surname}}</h3>
@@ -90,7 +90,7 @@
     </div>
 
     <div class="modal-footer">
-        <button class="btn btn-success btn-lg" ng-click="contactUpCtrl.update(contact); ok()" ng-disabled="updateContactForm.$invalid">Update & Close</button>
+        <button class="btn btn-success btn-lg" ng-click="update(contact); ok()" ng-disabled="updateContactForm.$invalid">Update & Close</button>
         <button class="btn btn-warning btn-lg" ng-click="cancel()">Cancel</button>
     </div>
 

@@ -77,15 +77,15 @@ contactsApp.controller('ContactsCreateController', ['$scope', 'Contacts', '$loca
                 $location.path('contacts/' + response._id);
 
                 // Clear form fields
-                $scope.firstName = '';
-                $scope.surname = '';
-                $scope.address = '';
-                $scope.state = '';
-                $scope.zipCode = '';
-                $scope.email = '';
-                $scope.phone = '';
-                $scope.is_volunteer = '';
-                $scope.city = '';
+                $scope.firstName = undefined;
+                $scope.surname = undefined;
+                $scope.address = undefined;
+                $scope.state = undefined;
+                $scope.zipCode = undefined;
+                $scope.email = undefined;
+                $scope.phone = undefined;
+                $scope.is_volunteer = undefined;
+                $scope.city = undefined;
             }, function(errorResponse) {
                 $scope.error = errorResponse.data.message;
                 console.log(errorResponse);
@@ -98,7 +98,7 @@ contactsApp.controller('ContactsUpdateController', ['$scope', 'Contacts',
     function($scope, Contacts) {
 
         // Update existing Contact
-        this.update = function(updatedContact) {
+        $scope.update = function(updatedContact) {
         	var contact = updatedContact;
 
         	contact.$update(function() {
