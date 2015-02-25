@@ -41,7 +41,7 @@ angular.module('core').controller('HomeController', ['$scope', '$location', 'Aut
 				});
 				cat.$save(function(response) {
 					$location.path('cats/' + response._id);
-					 this.dob = undefined;
+					 this.dateOfBirth = undefined;
 					 this.name = undefined;
 					 this.sex = undefined;
 					 this.vet = undefined;
