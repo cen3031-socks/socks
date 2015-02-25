@@ -37,7 +37,7 @@
 		// with the same name as the service.
 		beforeEach(inject(function($controller, $rootScope, _$location_, _$stateParams_, _$httpBackend_) {
 			// Set a new global scope
-			scope = $rootScope.$new();
+			this.scope = $rootScope.$new();
 
 			// Point global variables to injected services
 			$stateParams = _$stateParams_;
@@ -46,7 +46,7 @@
 
 			// Initialize the Contacts controller.
 			ContactsController = $controller('ContactsController', {
-				$scope: scope
+				$scope: this.scope
 			});
 		}));
 
@@ -63,14 +63,24 @@
 			$httpBackend.expectGET('contacts').respond(sampleContacts);
 
 			// Run controller functionality
-			scope.find();
+			this.scope.find();
 			$httpBackend.flush();
 
-			// Test scope value
-			expect(scope.contacts).toEqualData(sampleContacts);
+			for (var i in this.scope.contacts) {
+				// Test this.scope value
+				expect(this.scope.contacts[0].name).toBe(sampleContacts[0].name);
+
+			}
 		}));
 
-		it('$scope.findOne() should create an array with one Contact object fetched from XHR using a contactId URL parameter', inject(function(Contacts) {
+		it('$scope.findOne() should create an array with one Contact object fetched from XHR using a contactId URL parameter', 
+			inject(function(Contacts, $controller, $rootScope) {
+			
+			this.scope = $rootScope.$new();
+			ContactsController = $controller('ContactsViewController', {
+				$scope: this.scope
+			});
+			
 			// Define a sample Contact object
 			var sampleContact = new Contacts({
 				name: 'New Contact'
@@ -83,37 +93,86 @@
 			$httpBackend.expectGET(/contacts\/([0-9a-fA-F]{24})$/).respond(sampleContact);
 
 			// Run controller functionality
-			scope.findOne();
+			this.scope.findOne();
 			$httpBackend.flush();
 
 			// Test scope value
-			expect(scope.contact).toEqualData(sampleContact);
+			expect(this.scope.contact.name).toBe(sampleContact.name);
 		}));
 
-		it('$scope.create() with valid form data should send a POST request with the form input values and then locate to new object URL', inject(function(Contacts) {
+		it('$scope.create() with valid form data should send a POST request with the form input values and then locate to new object URL',
+		 inject(function(Contacts, $controller, $rootScope) {
+			this.scope = $rootScope.$new();
+			ContactsController = $controller('ContactsCreateController', {
+				$scope: this.scope
+			});
 			// Create a sample Contact object
+			
 			var sampleContactPostData = new Contacts({
-				name: 'New Contact'
+				firstName: 'New Contact'
 			});
 
 			// Create a sample Contact response
 			var sampleContactResponse = new Contacts({
 				_id: '525cf20451979dea2c000001',
-				name: 'New Contact'
+				firstName: 'New Contact'
 			});
 
 			// Fixture mock form input values
-			scope.name = 'New Contact';
+			this.scope.firstName = 'New Contact';
 
 			// Set POST response
 			$httpBackend.expectPOST('contacts', sampleContactPostData).respond(sampleContactResponse);
 
 			// Run controller functionality
-			scope.create();
+			this.scope.create();
 			$httpBackend.flush();
 
 			// Test form inputs are reset
-			expect(scope.name).toEqual('');
+			expect(this.scope.firstName).toEqual('');
+
+			// Test URL redirection after the Contact was created
+			expect($location.path()).toBe('/contacts/' + sampleContactResponse._id);
+		}));
+		it('$scope.create() with valid form data IN MULTIPLE FEILDS should send a POST request with the form input values and then locate to new object URL',
+		 inject(function(Contacts, $controller, $rootScope) {
+			this.scope = $rootScope.$new();
+			ContactsController = $controller('ContactsCreateController', {
+				$scope: this.scope
+			});
+			// Create a sample Contact object
+			
+			var sampleContactPostData = new Contacts({
+				firstName: 'New Contact',
+				surname: 'Last Name',
+				phone: ''
+			});
+
+			// Create a sample Contact response
+			var sampleContactResponse = new Contacts({
+				_id: '525cf20451979dea2c000001',
+				firstName: 'New Contact',
+				surname: 'Last Name',
+				phone: ''
+			});
+
+			// Fixture mock form input values
+			this.scope.firstName = 'New Contact';
+			this.scope.surname = 'Last Name';
+			this.scope.phone = '';
+
+			// Set POST response
+			$httpBackend.expectPOST('contacts', sampleContactPostData).respond(sampleContactResponse);
+
+			// Run controller functionality
+			this.scope.create();
+			$httpBackend.flush();
+
+			// Test form inputs are reset
+			expect(this.scope.firstName).toEqual('');
+			expect(this.scope.surname).toEqual('');
+			expect(this.scope.phone).toEqual('');
+
 
 			// Test URL redirection after the Contact was created
 			expect($location.path()).toBe('/contacts/' + sampleContactResponse._id);

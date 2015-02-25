@@ -14,8 +14,9 @@ contactsApp.controller('ContactsController', ['$scope', '$stateParams', 'Authent
         //}
 
         //find a list of Contacts
-            this.contacts = Contacts.query();
-
+        $scope.find = function() {
+            $scope.contacts = Contacts.query();
+        }
             // Open a modal window to Update a single contact record
             this.modalUpdate = function (size, selectedContact) {
 
@@ -60,15 +61,15 @@ contactsApp.controller('ContactsCreateController', ['$scope', 'Contacts', '$loca
         $scope.create = function() {
             // Create new Contact object
             var contact = new Contacts ({
-                firstName: this.firstName,
-                surname: this.surname,
-                address: this.address,
-                state: this.state,
-                zipCode: this.zipCode,
-                email: this.email,
-                phone: this.phone,
-                is_volunteer: this.is_volunteer,
-                city: this.city
+                firstName: $scope.firstName,
+                surname: $scope.surname,
+                address: $scope.address,
+                state: $scope.state,
+                zipCode: $scope.zipCode,
+                email: $scope.email,
+                phone: $scope.phone,
+                is_volunteer: $scope.is_volunteer,
+                city: $scope.city
             });
 
             // Redirect after save
@@ -77,7 +78,7 @@ contactsApp.controller('ContactsCreateController', ['$scope', 'Contacts', '$loca
 
                 // Clear form fields
                 $scope.firstName = '';
-                $scope.surName = '';
+                $scope.surname = '';
                 $scope.address = '';
                 $scope.state = '';
                 $scope.zipCode = '';
