@@ -123,3 +123,8 @@ body.ng-cloak {
 .row .form-group {
 	margin-left: 15px; 
 }
+
+.navbar .container .navbar-header {
+    height:55px;
+    color:#2F6FAD;
+}
