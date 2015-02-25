@@ -82,12 +82,12 @@ describe('cats homepage', function() {
 				});
 				scope.create().then(callback);
 			}).then(function(data) {
-				self.createdCatId = data._id;
+				self.createdCat = data;
 			}).then(done);
 		});
 
 		it('should be able to delete cat from database', function() {
-			browser.get('/#!/cats/' + this.createdCatId);
+			browser.get('/#!/cats/' + this.createdCat._id);
 			
 			/* delete the cat */
 			element(by.id('delete-cat')).click();
@@ -100,13 +100,13 @@ describe('cats homepage', function() {
 			/* check that the cat doesn't exist anymore */
 			element.all(by.repeater('cat in cats')).then(function(cats) {
 				for (var i in cats) {
-					expect(cats[i].evaluate('cat._id')).not.toBe(self.createdCatId);
+					expect(cats[i].evaluate('cat._id')).not.toBe(self.createdCat._id);
 				}
 			});
 		});
 
 		it('should be able to add notes to a cat', function() {
-			browser.get('/#!/cats/' + this.createdCatId);
+			browser.get('/#!/cats/' + this.createdCat._id);
 
 			/* TODO: add user info checking to cat notes test */
 			var newNote = element(by.id('new-note'));
@@ -115,6 +115,11 @@ describe('cats homepage', function() {
 				.sendKeys('This is a new note.');
 			newNote.element(by.id('add-note')).click();
 		});
-	});
 
+		it('should be able to get to vet contact info from details page', function() {
+			browser.get('/#!/cats/' + this.createdCat._id);
+			element(by.id('originPerson')).click();
+			expect(browser.getCurrentUrl()).toBe(browser.baseUrl + '/#!/contacts/' + this.createdCat.origin.person._id);
+		});
+	});
 });

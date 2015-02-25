@@ -237,7 +237,7 @@ module.exports = function(grunt) {
 	grunt.registerTask('build', ['lint', 'loadConfig', 'ngAnnotate', 'uglify', 'cssmin']);
 
 	// Test task.
-	grunt.registerTask('test', ['test:server', 'test:client', 'test:e2e']);
+	grunt.registerTask('test', ['test:client', 'test:e2e']);
 	grunt.registerTask('test:server', ['env:test', 'mochaTest']);
 	grunt.registerTask('test:client', ['env:test', 'karma:unit']);
     grunt.registerTask('test:e2e', ['clean-db', 'protractor:all']);

@@ -16,7 +16,5 @@ describe('volunteer page', function() {
 						  .column('volunteer.name'))
 					.map(function(e) { return e.getText(); }))
 			.toContain('Alexander Russ');
-
-
 	});
 });
