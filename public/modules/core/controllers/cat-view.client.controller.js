@@ -5,7 +5,11 @@ angular.module('core').controller('CatViewController', ['$scope', '$stateParams'
             // This provides Authentication context.
             $scope.authentication = Authentication;
 
-            $scope.cat = Cats.get({catId: $stateParams.catId});
+			$scope.isFound = false;
+            $scope.cat = Cats.get({catId: $stateParams.catId}, 
+				function() {
+					$scope.isFound = true;
+				});
 
             $scope.convertSex = function(sexNumber) {
                 if (sexNumber === 0) {
