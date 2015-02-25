@@ -1,4 +1,3 @@
-
 describe('volunteer page', function() {
     it('should be able to sign in', function() {
         browser.get('/#!/volunteers/create');
