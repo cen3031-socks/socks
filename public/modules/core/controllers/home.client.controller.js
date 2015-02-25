@@ -39,22 +39,8 @@ angular.module('core').controller('HomeController', ['$scope', '$location', 'Aut
 					owner: this.owner,
 					notes: [this.notes]
 				});
-				cat.$save(function(response) {
+				return cat.$save(function(response) {
 					$location.path('cats/' + response._id);
-					 this.dob = undefined;
-					 this.name = undefined;
-					 this.sex = undefined;
-					 this.vet = undefined;
-					 this.dateOfArrival = undefined;
-					 this.breed = undefined;
-					 this.color = undefined;
-					 this.description = undefined;
-					 this.temperament = undefined;
-					 this.originAddress = undefined;
-					 this.originPerson = undefined;
-					 this.location = undefined;
-					 this.owner = undefined;
-					 this.notes = undefined;
 				}, function(errorResponse) {
 					$scope.error = errorResponse.data.message;
 				});
