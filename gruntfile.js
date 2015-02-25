@@ -158,8 +158,20 @@ module.exports = function(grunt) {
                     configFile: 'end-to-end-tests/config.js', // Target-specific config file
                     args: {} // Target-specific arguments
                 }
-            }
-        },
+            },
+			cats: {
+				options: {
+					configFile: 'end-to-end-tests/cats/config.js',
+					args: {}
+				}
+			},
+			contacts: {
+				options: {
+					configFile: 'end-to-end-tests/contacts/config.js',
+					args: {}
+				}
+			} 
+		},
 		shell: {
 			mongodb: {
 				command: 'mongod --dbpath ./data/db',
@@ -170,6 +182,18 @@ module.exports = function(grunt) {
 					failOnError: true,
 					execOptions: {
 						cwd: '.'
+					}
+				}
+			},
+			'generate-data': {
+				command: './generate-data.sh n', 
+				options: {
+					async: false,
+					execOptions: {
+						cwd: './scripts/',
+						stdout: true,
+						stderr: true,
+						failOnError: true
 					}
 				}
 			}
@@ -192,7 +216,7 @@ module.exports = function(grunt) {
 	});
 
 	// Default task(s).
-	grunt.registerTask('default', ['lint', 'shell:mongodb', 'concurrent:default']);
+	grunt.registerTask('default', ['lint', 'concurrent:default']);
 
 	// Debug task.
 	grunt.registerTask('debug', ['lint', 'concurrent:debug']);
@@ -207,10 +231,12 @@ module.exports = function(grunt) {
 	grunt.registerTask('build', ['lint', 'loadConfig', 'ngAnnotate', 'uglify', 'cssmin']);
 
 	// Test task.
-	grunt.registerTask('test', ['test:server', 'test:client', 'test:end-to-end']);
+	grunt.registerTask('test', ['test:server', 'test:client', 'test:e2e']);
 	grunt.registerTask('test:server', ['env:test', 'mochaTest']);
 	grunt.registerTask('test:client', ['env:test', 'karma:unit']);
-    grunt.registerTask('test:end', ['clean-db', 'protractor']);
+    grunt.registerTask('test:e2e', ['clean-db', 'protractor:all']);
+
+	grunt.registerTask('generate-data', ['clean-db', 'shell:generate-data']);
 
     grunt.registerTask('clean-db', 'drop the database', function() {
         var done = this.async();
@@ -225,6 +251,12 @@ module.exports = function(grunt) {
                 mongoose.connection.close(done);
             });
         });
-        mongoose.connect("mongodb://localhost/mean-dev");
+		if (mongoose.connection.readyState !== 0) {
+			mongoose.connection.close(function() {
+				mongoose.connect("mongodb://localhost/mean-dev");
+			});
+		} else { 
+			mongoose.connect("mongodb://localhost/mean-dev");
+		}
     });
 };

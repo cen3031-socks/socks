@@ -22,7 +22,7 @@ angular.module('core').controller('HomeController', ['$scope', '$location', 'Aut
 
 			$scope.create = function() {
 				var cat = new Cats({
-					dateOfBirth: this.dob,
+					dateOfBirth: new Date(Date.parse(this.dateOfBirth)/1 + 12*60*60*1000),
 					name: this.name,	
 					sex: this.sex,
 					vet: this.vet,
@@ -39,22 +39,8 @@ angular.module('core').controller('HomeController', ['$scope', '$location', 'Aut
 					owner: this.owner,
 					notes: [this.notes]
 				});
-				cat.$save(function(response) {
+				return cat.$save(function(response) {
 					$location.path('cats/' + response._id);
-					 this.dob = undefined;
-					 this.name = undefined;
-					 this.sex = undefined;
-					 this.vet = undefined;
-					 this.dateOfArrival = undefined;
-					 this.breed = undefined;
-					 this.color = undefined;
-					 this.description = undefined;
-					 this.temperament = undefined;
-					 this.originAddress = undefined;
-					 this.originPerson = undefined;
-					 this.location = undefined;
-					 this.owner = undefined;
-					 this.notes = undefined;
 				}, function(errorResponse) {
 					$scope.error = errorResponse.data.message;
 				});

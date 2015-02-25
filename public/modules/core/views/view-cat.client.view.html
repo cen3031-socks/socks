@@ -1,67 +1,105 @@
 <section data-ng-controller="CatViewController">
-    <style>
-        .cat-profile-image-container { padding:1em; }
-        .cat-profile-image { width:100%; height:auto; }
-        .page-header h1 { display: inline-block; }
-        .page-header span { font-size:1.2em; }
-        .profile-attribute { font-weight:bold; }
-    </style>
-    <div class="col-md-4 cat-profile-image-container">
-        <img ng-src="{{cat.imageUrl}}" class="cat-profile-image" />
-    </div>
-    <div class="page-header col-md-8">
-        <h1>{{cat.name}}</h1>
-    </div>
-    <div class="row col-md-8">
-        <span class="col-md-3 profile-attribute">Sex</span>
-        <span class="col-md-9" id="sex">{{convertSex(cat.sex)}}</span>
-    </div>
-    <div class="row col-md-8">
-        <span class="col-md-3 profile-attribute">Date of Birth</span>
-        <span class="col-md-9" id="dob">{{cat.dateOfBirth | date}}</span>
-    </div>
-    <div class="row col-md-8">
-        <span class="col-md-3 profile-attribute">Color</span>
-        <span class="col-md-9" id="color">{{cat.color}}</span>
-    </div>
-    <div class="row col-md-8">
-        <span class="col-md-3 profile-attribute">Breed</span>
-        <span class="col-md-9" id="breed">{{cat.breed}}</span>
-    </div>
-    <div class="row col-md-8">
-        <span class="col-md-3 profile-attribute">Current Location</span>
-        <span class="col-md-9" id="location">{{cat.location}}</span>
-    </div>
-    <div class="row col-md-8">
-        <span class="col-md-3 profile-attribute">Temperament</span>
-        <span class="col-md-9" id="temperament">{{cat.temperament}}</span>
-    </div>
-    <div class="row col-md-8">
-        <span class="col-md-3 profile-attribute">Owner</span>
-        <span class="col-md-9" id="owner">{{cat.owner}}</span>
-    </div>
-    <div class="row col-md-8">
-        <span class="col-md-3 profile-attribute">Date of Arrival</span>
-        <span class="col-md-9" id="dateOfArrival">{{cat.dateOfArrival}}</span>
-    </div>
-    <div class="row col-md-8">
-        <span class="col-md-3 profile-attribute">Vet</span>
-        <span class="col-md-9" id="vet">{{cat.vet}}</span>
-    </div>
-    <div class="row col-md-8">
-        <span class="col-md-3 profile-attribute">Origin Address</span>
-        <span class="col-md-9" id="originAddress">{{cat.origin.address}}</span>
-    </div>
-    <div class="row col-md-8">
-        <span class="col-md-3 profile-attribute">Origin Person</span>
-        <span class="col-md-9" id="originPerson">{{cat.origin.person}}</span>
-    </div>
-    <div class="row col-md-8">
-        <span class="col-md-3 profile-attribute">Description</span>
-        <span class="col-md-9" id="description">{{cat.description}}</span>
-    </div>
-    <div class="row col-md-8">
-        <span class="col-md-3 profile-attribute">Notes</span>
-        <span class="col-md-9" id="notes">{{cat.notes}}</span>
-    </div>
+<div ng-show="isFound">
+	<style>
+		.page-header h1 { display: inline-block; }
+		.page-header span { font-size:1.2em; }
+		.profile-attribute { font-weight:bold; }
+		.alert.alert-danger { margin:2em; }
+		.cat-profile-image-container { min-height: 35em; background-color:#ccc;
+			margin-top:50px;
+			padding:0;
+			position:relative;}
+		.cat-profile-image-container .glyphicon { 
+			z-index:1;
+			width:100%;
+			font-size:10em; 
+			text-align:center;
+			line-height:3.5em;
+		}
+		.cat-profile-image { 
+			width:100%; 
+			height:auto; 
+			z-index:100; 
+			position:relative;
+			margin-top:0;
+		}
+	</style>
+	<div class="col-md-4 cat-profile-image-container">
+		<i class="glyphicon glyphicon-camera" ng-hide="cat.imageUrl"></i>
+		<img ng-src="{{cat.imageUrl}}" class="cat-profile-image" />
+	</div>
+	<div class="page-header col-md-8">
+		<h1 id="name">{{cat.name}}</h1>
+	</div>
+	<div class="row col-md-8">
+		<span class="col-md-3 profile-attribute">Sex</span>
+		<span class="col-md-9" id="sex">{{convertSex(cat.sex)}}</span>
+	</div>
+	<div class="row col-md-8">
+		<span class="col-md-3 profile-attribute">Date of Birth</span>
+		<span class="col-md-9" id="dob">{{cat.dateOfBirth | date}}</span>
+	</div>
+	<div class="row col-md-8">
+		<span class="col-md-3 profile-attribute">Color</span>
+		<span class="col-md-9" id="color">{{cat.color}}</span>
+	</div>
+	<div class="row col-md-8">
+		<span class="col-md-3 profile-attribute">Breed</span>
+		<span class="col-md-9" id="breed">{{cat.breed}}</span>
+	</div>
+	<div class="row col-md-8">
+		<span class="col-md-3 profile-attribute">Current Location</span>
+		<span class="col-md-9" id="location">{{cat.location}}</span>
+	</div>
+	<div class="row col-md-8">
+		<span class="col-md-3 profile-attribute">Temperament</span>
+		<span class="col-md-9" id="temperament">{{cat.temperament}}</span>
+	</div>
+	<div class="row col-md-8">
+		<span class="col-md-3 profile-attribute">Owner</span>
+		<span class="col-md-9" id="owner">{{cat.owner}}</span>
+	</div>
+	<div class="row col-md-8">
+		<span class="col-md-3 profile-attribute">Date of Arrival</span>
+		<span class="col-md-9" id="dateOfArrival">{{cat.dateOfArrival}}</span>
+	</div>
+	<div class="row col-md-8">
+		<span class="col-md-3 profile-attribute">Vet</span>
+		<span class="col-md-9" id="vet">{{cat.vet}}</span>
+	</div>
+	<div class="row col-md-8">
+		<span class="col-md-3 profile-attribute">Origin Address</span>
+		<span class="col-md-9" id="originAddress">{{cat.origin.address}}</span>
+	</div>
+	<div class="row col-md-8">
+		<span class="col-md-3 profile-attribute">Origin Person</span>
+		<span class="col-md-9" id="originPerson">{{cat.origin.person}}</span>
+	</div>
+	<div class="row col-md-8">
+		<span class="col-md-3 profile-attribute">Description</span>
+		<span class="col-md-9" id="description">{{cat.description}}</span>
+	</div>
+	<div class="row col-md-8">
+		<span class="col-md-3 profile-attribute">Notes</span>
+		<span class="col-md-9" id="notes">{{cat.notes}}</span>
+	</div>
+	<div class="row col-md-8">
+		<div class="col-md-12 profile-attribute">Notes</div>
+		<div class="col-md-12" id="notes">
+			<table style="width:100%">
+				<tr>
+					<th>Note</th>
+					<th>Person</th>
+				</tr>
+				<tr ng-repeat="note in cat.notes">
+					<td class="note">{{note}}</td>
+					<td class="note-person">Someone</td>
+				</tr>
+			</table>
+		</div>
+	</div>
+	<div class="alert alert-danger" ng-hide="isFound">
+		<i class="glyphicon glyphicon-exclamation-sign" aria-hidden=true></i>
+		That cat could not be found.
+	</div>
 </section>
