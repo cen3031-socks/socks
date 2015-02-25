@@ -14,8 +14,9 @@ contactsApp.controller('ContactsController', ['$scope', '$stateParams', 'Authent
         //}
 
         //find a list of Contacts
-            this.contacts = Contacts.query();
-
+        $scope.find = function() {
+            $scope.contacts = Contacts.query();
+        }
             // Open a modal window to Update a single contact record
             this.modalUpdate = function (size, selectedContact) {
 
@@ -60,15 +61,15 @@ contactsApp.controller('ContactsCreateController', ['$scope', 'Contacts', '$loca
         $scope.create = function() {
             // Create new Contact object
             var contact = new Contacts ({
-                firstName: this.firstName,
-                surname: this.surname,
-                address: this.address,
-                state: this.state,
-                zipCode: this.zipCode,
-                email: this.email,
-                phone: this.phone,
-                is_volunteer: this.is_volunteer,
-                city: this.city
+                firstName: $scope.firstName,
+                surname: $scope.surname,
+                address: $scope.address,
+                state: $scope.state,
+                zipCode: $scope.zipCode,
+                email: $scope.email,
+                phone: $scope.phone,
+                is_volunteer: $scope.is_volunteer,
+                city: $scope.city
             });
 
             // Redirect after save
@@ -76,15 +77,15 @@ contactsApp.controller('ContactsCreateController', ['$scope', 'Contacts', '$loca
                 $location.path('contacts/' + response._id);
 
                 // Clear form fields
-                $scope.firstName = '';
-                $scope.surName = '';
-                $scope.address = '';
-                $scope.state = '';
-                $scope.zipCode = '';
-                $scope.email = '';
-                $scope.phone = '';
-                $scope.is_volunteer = '';
-                $scope.city = '';
+                $scope.firstName = undefined;
+                $scope.surname = undefined;
+                $scope.address = undefined;
+                $scope.state = undefined;
+                $scope.zipCode = undefined;
+                $scope.email = undefined;
+                $scope.phone = undefined;
+                $scope.is_volunteer = undefined;
+                $scope.city = undefined;
             }, function(errorResponse) {
                 $scope.error = errorResponse.data.message;
                 console.log(errorResponse);
@@ -97,7 +98,7 @@ contactsApp.controller('ContactsUpdateController', ['$scope', 'Contacts',
     function($scope, Contacts) {
 
         // Update existing Contact
-        this.update = function(updatedContact) {
+        $scope.update = function(updatedContact) {
         	var contact = updatedContact;
 
         	contact.$update(function() {
