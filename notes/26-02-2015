@@ -45,7 +45,11 @@ Sprint 	Task Goal
 Work Items for Sprint 2
 
     Donation link with contacts, Styling, and Testing- (Ben)
-        Connect contacts and Donations (Donation has contact property)
+        Connect contacts and Donations (Donation has contact property) (make contact every time donation is made, display contact
+            when donation is viewed)
+        Make a minified donation to be included on contact page
+        UI stuff, enhance login page, apply consistent styling across all pages
+        Test everything above
         
         
     Login and Employee Edits - (Eric)
