@@ -241,6 +241,7 @@ module.exports = function(grunt) {
 	grunt.registerTask('test:server', ['env:test', 'mochaTest']);
 	grunt.registerTask('test:client', ['env:test', 'karma:unit']);
     grunt.registerTask('test:e2e', ['clean-db', 'protractor:all']);
+	grunt.registerTask('test:headless', ['test:server', 'test:client']);
 
 	grunt.registerTask('generate-data', ['clean-db', 'shell:generate-data']);
 
