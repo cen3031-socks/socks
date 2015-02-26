@@ -1,0 +1,76 @@
+Meeting on Wed, 11 Feb 2015
+Participants
+
+    Alex
+    Nick
+    Eric
+    Reid
+
+Overview
+
+    Created site map.
+    Discussed prioritization of tasks.
+    Tentatively divided tasks into sprints.
+    Talked about layout of home page (cat list) and cat detail page.
+    Created list of work items for S1.
+
+Site Map
+
+We talked in detail about the various pages we know of that will be required for our app. The best resources here are this image and this image which details the pages we talked about and the links between them.
+Task Priorities
+
+The basic rundown of tasks we came up with is as follows:
+
+    Cat List
+    Basic Cat Details
+    Contact List
+    Basic Contact Details
+    Template layout
+    Account creation/login
+    Cat/contact/employee creation
+    Volunteer time tracking (just by name, no accounts linked)
+    Donations
+    Add contact references (adopter, vet, fosterer) to cat pages
+    Add cat references (adopted, fostered, expressed interest?) to person pages
+    Cat/contact/employee modification
+    Link Volunteers in time tracking with Contacts
+    Mailing Lists
+    Access control
+    Advanced search
+    Stats (split to be more detailed later)
+    PetFinder auto-upload
+    Merging accounts (for error correction)
+
+Tentative Division into Sprints
+Sprint 	Task Goal
+1 	1—8
+2 	9-14
+3 	15-17
+4 	17-19
+Work Items for Sprint 2
+
+    Cats
+        Create the view listing all the cats for the home page.
+        Create the detail view for each cat containing basic cat info.
+            for now, ignore more complex features like medical records and notes
+    People/Contacts
+        Create the list view
+        Create the detail view
+    Template
+        Update the main template to match the layout we discussed in the meeting
+        Create the "glue" pages like /create which links to other pages like /new-cat and /new-contact which don't yet exist
+    Volunteer time tracking
+        Create the volunteer sign-in page
+        For now, just store in the database a time sheet entry with person's name and time in
+        In S2 we will be updating this to instead look up accounts and store that instead of name in the database.
+    Login and Employee Edits - (Eric)
+        Add login
+        Add password
+        Add field validation
+        After add employee, create contact, then create employee in the employee create. 
+        The employee has the property of a contact 
+        Editing— edit contact property, have option to change password
+    Donations
+        Create the list view for donations
+        Create the page for entering new donations into the database
+        Create the database schema for donations (for now just store name of donor)
