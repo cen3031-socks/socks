@@ -242,9 +242,7 @@ module.exports = function(grunt) {
 	grunt.registerTask('test:client', ['env:test', 'karma:unit']);
     grunt.registerTask('test:e2e', ['clean-db', 'protractor:all']);
 	grunt.registerTask('test:headless', ['force-off', 'test:server', 'test:client']);
-	grunt.registerTask('force-off', function() {
-		grunt.option('force', false);
-	});
+	grunt.registerTask('force-off', function() { grunt.option('force', false); });
 
 	grunt.registerTask('generate-data', ['clean-db', 'shell:generate-data']);
 
