@@ -44,20 +44,10 @@ Sprint 	Task Goal
 4 	17-19
 Work Items for Sprint 2
 
-    Cats
-        Create the view listing all the cats for the home page.
-        Create the detail view for each cat containing basic cat info.
-            for now, ignore more complex features like medical records and notes
-    People/Contacts
-        Create the list view
-        Create the detail view
-    Template
-        Update the main template to match the layout we discussed in the meeting
-        Create the "glue" pages like /create which links to other pages like /new-cat and /new-contact which don't yet exist
-    Volunteer time tracking
-        Create the volunteer sign-in page
-        For now, just store in the database a time sheet entry with person's name and time in
-        In S2 we will be updating this to instead look up accounts and store that instead of name in the database.
+    Donation link with contacts, Styling, and Testing- (Ben)
+        Connect contacts and Donations (Donation has contact property)
+        
+        
     Login and Employee Edits - (Eric)
         Add login
         Add password
@@ -65,7 +55,3 @@ Work Items for Sprint 2
         After add employee, create contact, then create employee in the employee create. 
         The employee has the property of a contact 
         Editing— edit contact property, have option to change password
-    Donations
-        Create the list view for donations
-        Create the page for entering new donations into the database
-        Create the database schema for donations (for now just store name of donor)
