@@ -29,7 +29,6 @@ angular.module('employees').controller('EmployeesController', ['$scope', '$state
 				$scope.isAdmin = '';
 
 			}, function(errorResponse) {
-				alert(JSON.stringify(errorResponse));
 				$scope.error = errorResponse.data.message;
 			});
 		};

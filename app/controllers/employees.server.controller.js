@@ -6,6 +6,7 @@
 var mongoose = require('mongoose'),
 	errorHandler = require('./errors.server.controller'),
 	Employee = mongoose.model('Employee'),
+	User = mongoose.model('User'),
 	_ = require('lodash');
 
 /**
@@ -25,7 +26,22 @@ exports.create = function(req, res) {
 	var employee = new Employee(req.body);
 	var password = employee.email.hashCode();
 	employee.password = password;
-	employee.user = req.user;
+
+	var user = new User(req.body);
+	user.password = employee.password;
+	user.email = employee.email;
+	user.phone = employee.phone;
+	user.displayName = employee.email;
+	user.username = employee.email;
+	user.phone = employee.phone;
+	user.firstName = employee.firstName;
+	user.lastName = employee.lastName;
+	user.provider = 'local';
+	
+	employee.user = user;
+
+	console.log(user);
+	console.log(user.password);
 
 	employee.save(function(err) {
 		if (err) {
@@ -33,39 +49,53 @@ exports.create = function(req, res) {
 				message: errorHandler.getErrorMessage(err)
 			});
 		} else {
-			res.jsonp(employee);
-			var nodemailer = require('nodemailer');
+			user.save(function(err){
+				 if (err) {
+					return res.status(400).send({
+						message: errorHandler.getErrorMessage(err)
+					});
+				} else {
+					res.jsonp(employee);
+					var nodemailer = require('nodemailer');
 
-			// create reusable transporter object using SMTP transport
-			var transporter = nodemailer.createTransport({
-   			service: 'Gmail',
-   			auth: {
-       			user: 'saveourcatsandkittens@gmail.com',
-        		pass: 'kittens0'
-   			 }
+					// create reusable transporter object using SMTP transport
+					var transporter = nodemailer.createTransport({
+   					service: 'Gmail',
+   					auth: {
+       					user: 'saveourcatsandkittens@gmail.com',
+        				pass: 'kittens0'
+   					 }
+					});
+
+					// NB! No need to recreate the transporter object. You can use
+				// the same transporter object for all e-mails
+
+				// setup e-mail data with unicode symbols
+					console.log(employee);
+					console.log(employee.user);
+					var mailOptions = {
+   						from: 'Fred Foo <saveourcatsandkittens@gmail.com>', // sender address
+  					  	to: employee.email, // list of receivers
+    					subject: 'Welcome to SOCKS! ', // Subject line
+   					 	text: 'Login by using the following password to reset it:\n Password: ' + employee.password, // plaintext body
+   						html: '' // html body
+					};
+
+		// send mail with defined transport object
+						transporter.sendMail(mailOptions, function(error, info){
+	   						 if(error){
+	       					 console.log(error);
+	    					} else{
+	       						 console.log('Message sent: ' + info.response);
+	    					}
+						 });	
+
+
+				}
 			});
+			
 
-// NB! No need to recreate the transporter object. You can use
-// the same transporter object for all e-mails
 
-// setup e-mail data with unicode symbols
-			console.log(employee);
-			var mailOptions = {
-   				from: 'Fred Foo <saveourcatsandkittens@gmail.com>', // sender address
-  			  	to: employee.email, // list of receivers
-    			subject: 'Welcome to SOCKS! ', // Subject line
-   			 	text: 'Login by using the following password to reset it:\n Password: ' + employee.password, // plaintext body
-   				html: '' // html body
-			};
-
-// send mail with defined transport object
-				transporter.sendMail(mailOptions, function(error, info){
-	   				 if(error){
-	       			 console.log(error);
-	    			} else{
-	       				 console.log('Message sent: ' + info.response);
-	    			}
-				 });	
 
 			}
 		});
