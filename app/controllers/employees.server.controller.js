@@ -6,6 +6,7 @@
 var mongoose = require('mongoose'),
 	errorHandler = require('./errors.server.controller'),
 	Employee = mongoose.model('Employee'),
+	Contact = mongoose.model('Contact'),
 	User = mongoose.model('User'),
 	_ = require('lodash');
 
@@ -37,12 +38,21 @@ exports.create = function(req, res) {
 	user.firstName = employee.firstName;
 	user.lastName = employee.lastName;
 	user.provider = 'local';
-	
+	user.parent = employee._id;
+
+	var contact = new Contact(req.body);
+	contact.firstName = employee.firstName;
+	contact.surname = employee.lastName;
+	contact.email = employee.email;
+	contact.phone = employee.phone;
+
+	employee.contact = contact;
 	employee.user = user;
 
 	console.log(user);
 	console.log(user.password);
-
+	console.log(user.parent.firstName);
+	
 	employee.save(function(err) {
 		if (err) {
 			return res.status(400).send({
@@ -55,17 +65,23 @@ exports.create = function(req, res) {
 						message: errorHandler.getErrorMessage(err)
 					});
 				} else {
-					res.jsonp(employee);
-					var nodemailer = require('nodemailer');
+					contact.save(function(err){
+				 	if (err) {
+						return res.status(400).send({
+							message: errorHandler.getErrorMessage(err)
+						});
+					} else {
+						res.jsonp(employee);
+						var nodemailer = require('nodemailer');
 
-					// create reusable transporter object using SMTP transport
-					var transporter = nodemailer.createTransport({
-   					service: 'Gmail',
-   					auth: {
-       					user: 'saveourcatsandkittens@gmail.com',
-        				pass: 'kittens0'
-   					 }
-					});
+						// create reusable transporter object using SMTP transport
+						var transporter = nodemailer.createTransport({
+	   					service: 'Gmail',
+	   					auth: {
+	       					user: 'saveourcatsandkittens@gmail.com',
+	        				pass: 'kittens0'
+	   					 }
+						});
 
 					// NB! No need to recreate the transporter object. You can use
 				// the same transporter object for all e-mails
@@ -89,13 +105,10 @@ exports.create = function(req, res) {
 	       						 console.log('Message sent: ' + info.response);
 	    					}
 						 });	
-
-
+					}
+					});
 				}
 			});
-			
-
-
 
 			}
 		});

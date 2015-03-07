@@ -44,6 +44,10 @@ var EmployeeSchema = new Schema({
 	user: {
 		type: Schema.ObjectId,
 		ref: 'User'
+	},
+	contact: {
+		type: Schema.ObjectId,
+		ref: 'Contact'
 	}
 });
 

@@ -59,6 +59,10 @@ var UserSchema = new Schema({
 		default: '',
 		validate: [validateLocalStrategyPassword, 'Password should be longer']
 	},
+	parent: {
+		type: Schema.ObjectId,
+		ref: 'Employee'
+	},
 	phone: {
 		type: String,
 		default: ''
