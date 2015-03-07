@@ -53,7 +53,7 @@ angular.module('employees').controller('EmployeesController', ['$scope', '$state
 		// Update existing Create
 		$scope.update = function() {
 			var employee = $scope.employee;
-
+			console.log(employee);
 			employee.$update(function() {
 				$location.path('employees/' + employee._id);
 			}, function(errorResponse) {

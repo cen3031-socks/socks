@@ -63,6 +63,10 @@ var UserSchema = new Schema({
 		type: Schema.ObjectId,
 		ref: 'Employee'
 	},
+	contact: {
+		type: Schema.ObjectId,
+		ref: 'Contact'
+	},
 	phone: {
 		type: String,
 		default: ''

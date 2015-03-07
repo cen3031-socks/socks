@@ -46,10 +46,12 @@ exports.create = function(req, res) {
 	contact.email = employee.email;
 	contact.phone = employee.phone;
 
-	employee.contact = contact;
-	employee.user = user;
+	employee.contact = contact._id;
+	employee.user = user._id;
+	user.contact = contact._id;
 
-	console.log(user);
+	console.log(contact);
+	console.log(user.contact);
 	console.log(user.password);
 	console.log(user.parent.firstName);
 	
