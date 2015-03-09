@@ -14,7 +14,7 @@
   },
   "scripts": {
     "start": "grunt",
-    "test": "grunt test",
+    "test": "grunt test:headless",
     "postinstall": "bower install --config.interactive=false"
   },
   "dependencies": {

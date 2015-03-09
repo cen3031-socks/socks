@@ -4,7 +4,7 @@
     left:0;
     top:0;
     background:#333340;
-    margin-top:50px;
+    margin-top:55px;
 }
 .navigation ul, .navigation ul li {
     position:relative;
@@ -20,6 +20,7 @@
     line-height:3em;
     padding-left:1em;
     color:#ddd;
+    background:#333340;
 }
 .navigation ul li a:hover {
     background-color:#9999AA;
@@ -122,4 +123,12 @@ body.ng-cloak {
 
 .row .form-group {
 	margin-left: 15px; 
+}
+
+.navbar .container .navbar-header {
+    height:55px;
+}
+
+.navbar.navbar-inverse.navbar-fixed-top {
+    background:#0071BC;
 }
