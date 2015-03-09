@@ -52,6 +52,12 @@ exports.update = function(req, res) {
 	});
 };
 
+exports.getByName = function(req, res) {
+
+    res.send(contacts.find({firstName:req.name.split()[0], surname:req.name.split()[1]}));
+
+}
+
 /**
  * Delete an Volunteer
  */

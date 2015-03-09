@@ -1,16 +1,41 @@
 'use strict';
 
 // Volunteers controller
-angular.module('volunteers').controller('VolunteersController', ['$scope', '$stateParams', '$location', 'Authentication', 'Volunteers',
-	function($scope, $stateParams, $location, Authentication, Volunteers) {
+angular.module('volunteers').controller('VolunteersController', ['$scope', '$stateParams', '$location', 'Authentication', 'Volunteers', '$modal', '$log' ,
+	function($scope, $stateParams, $location, Authentication, Volunteers, $modal, $log) {
 		$scope.authentication = Authentication;
+
+        $scope.modalUpdate = function (size, selectedVolunteer) {
+            $scope.selectedVolunteer = selectedVolunteer;
+
+            var modalInstance = $modal.open({
+                templateUrl: 'modules/volunteers/views/view-volunteer.client.view.html',
+                controller: function ($scope, $modalInstance, volunteer) {
+                    $scope.volunteer = volunteer;
+                    $scope.name = selectedVolunteer.name;
+                } ,
+                size: size,
+                resolve: {
+                    volunteer: function () {
+                        return $scope.selectedVolunteer;
+                    }
+                }
+            });
+
+            modalInstance.result.then(function (selectedItem) {
+                $scope.selected = selectedItem;
+            }, function () {
+                $log.info('Modal dismissed at: ' + new Date());
+            });
+        };
+
 
 		// Create new Volunteer
 		$scope.sign = function() {
 
 
-            /*
 
+            /*
             var vol = db.collection.findOne({name: this.name});
 
             //if the volunteer's name is not in the database create them
@@ -61,24 +86,23 @@ angular.module('volunteers').controller('VolunteersController', ['$scope', '$sta
             // Create new Volunteer object
 
 
-            var volunteer = new Volunteers ({
+            var volunteer = {
                 name: this.name,
-                created: this.created,
-                signedIn: this.signedIn,
-                minutesVolunteeredInWee: this.minutesVolunteeredInWeek,
-                minutesVolunteeredEver: this.minutesVolunteeredEver
+                timeIn: Date.now,
+                activeSession: true
+            };
 
-            });
+            $scope.modalUpdate('lg', volunteer);
 
             // Redirect after save
-            volunteer.$save(function(response) {
+            //volunteer.$save(function(response) {
                 //$location.path('volunteers/' + response._id);
 
                 // Clear form fields
                 $scope.name = '';
-            }, function(errorResponse) {
-                $scope.error = errorResponse.data.message;
-            });
+           // }, function(errorResponse) {
+            //    $scope.error = errorResponse.data.message;
+            //});
 
 
 		};
@@ -115,6 +139,29 @@ angular.module('volunteers').controller('VolunteersController', ['$scope', '$sta
 		$scope.find = function() {
 			$scope.volunteers = Volunteers.query();
 		};
+
+
+
+        //open a modal window confirming that volunteer sign ins are correct
+        this.modalConfirm = function (size, volunteerName) {
+
+            var modalInstance = $modal.open({
+                templateUrl: 'modules/volunteers/views/edit-volunteer.client.view.html',
+                controller: 'ModalInstanceCtrl',
+                size: size,
+                resolve: {
+                    items: function () {
+                        return $scope.items;
+                    }
+                }
+            });
+
+            modalInstance.result.then(function (selectedItem) {
+                $scope.selected = selectedItem;
+            }, function () {
+                $log.info('Modal dismissed at: ' + new Date());
+            });
+        };
 
 		// Find existing Volunteer
 		$scope.findOne = function() {
