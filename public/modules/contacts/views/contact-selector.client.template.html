@@ -1,10 +1,16 @@
-<ul>
-    <li ng-repeat="contact in selectedContacts">
-        {{contact.firstName}}
+<ul class="contact-selector">
+	<li ng-repeat="contact in selectedContacts" 
+	    ng-class="{last: $index == maxContacts - 1}">
+		<span>
+			{{contact.firstName}} {{contact.surname}}
+		</span>
+		<div ng-click="unselect(contact, $index)">
+			<i class="glyphicon glyphicon-trash"></i> 
+		</div>
     </li>
     <li>
-        <button class="btn btn-lg btn-success" ng-click="showModal()" ng-show="selectedContacts.length < maxContacts">
-            Add Contact
+        <button class="btn btn-lg" ng-click="showModal()" ng-show="selectedContacts.length < maxContacts">
+			+
         </button>
     </li>
 </ul>

@@ -1,12 +1,8 @@
-<style>
-    .selected {
-        background-color: blue;
-    }
-</style>
-<section style="padding:2em;">
+<section class="select-contact-list">
     <h1>Find a Contact</h1>
     <input type="text" class="form-control" ng-model="searchText" placeholder="Search...">
-    <ul data-ng-repeat="contact in contacts | filter:searchText" ng-hide="searchText + '' == ''">
-        <li ng-click="select(contact)" ng-class="{selected: isSelected(contact)}">{{contact.firstName}} {{contact.surname}}</li>
+    <ul>
+        <li data-ng-repeat="contact in contacts | filter:searchText | orderBy:'surname'" ng-click="select(contact)" ng-class="{selected: isSelected(contact)}">{{contact.firstName}} {{contact.surname}}</li>
+		<li ng-click="createContact()">+</li>
     </ul>
 </section>
