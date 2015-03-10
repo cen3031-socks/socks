@@ -9,7 +9,7 @@ var mongoose = require('mongoose'),
 	_ = require('lodash');
 
 exports.list = function(req, res) {
-	Cat.find().sort('-name').exec(function(err, cats) {
+	Cat.find().sort('name').exec(function(err, cats) {
 		if (err) {
 			console.log(err);
 			return res.status(400).send({

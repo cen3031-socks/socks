@@ -1,0 +1,10 @@
+<ul>
+    <li ng-repeat="contact in selectedContacts">
+        {{contact.firstName}}
+    </li>
+    <li>
+        <button class="btn btn-lg btn-success" ng-click="showModal()" ng-show="selectedContacts.length < maxContacts">
+            Add Contact
+        </button>
+    </li>
+</ul>
