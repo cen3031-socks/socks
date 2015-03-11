@@ -23,77 +23,119 @@
 			position:relative;
 			margin-top:0;
 		}
+        .profile {
+            font-size:0;
+        }
+        .profile-group {
+            display:inline-block;
+            width:50%;
+            margin:0;
+            padding:0.5em;
+            font-size:14px;
+        }
+        .profile-group.notes, #notes {
+            width:100%;
+            display:block;
+        }
+        .profile-group .profile-attribute {
+            color: #aaa;
+            font-size:0.8em;
+            border-bottom:1px solid #ddd;
+            margin-bottom:0.5em;
+            text-transform:uppercase;
+            padding:0.5em 0.5em 0.2em 0;
+            display:block;
+        }
+        .profile-group .profile-value {
+            min-height: 1em;
+            display:inline-block;
+        }
+        button i.glyphicon { display:block; margin-bottom:0.3em; }
+        ul.actions { list-style-type:none; margin:0; padding:0; float:right; }
+        ul.actions li { display:inline-block; }
 	</style>
-	<div class="col-md-4 cat-profile-image-container">
-		<i class="glyphicon glyphicon-camera" ng-hide="cat.imageUrl"></i>
-		<img ng-src="{{cat.imageUrl}}" class="cat-profile-image" />
-	</div>
-	<div class="page-header col-md-8">
+	<!--<div class="col-md-4 cat-profile-image-container">-->
+		<!--<i class="glyphicon glyphicon-camera" ng-hide="cat.imageUrl"></i>-->
+		<!--<img ng-src="{{cat.imageUrl}}" class="cat-profile-image" />-->
+	<!--</div>-->
+    <ul class="actions">
+        <li><button class="btn btn-lg btn-success text-center"><i class="glyphicon glyphicon-list"></i>Cat List</button></li>
+        <li><button class="btn btn-lg btn-primary text-center"><i class="glyphicon glyphicon-wrench"></i>Edit</button></li>
+    </ul>
+	<div class="page-header ">
 		<h1 id="name">{{cat.name}}</h1>
 	</div>
-	<div class="row col-md-8">
-		<span class="col-md-3 profile-attribute">Sex</span>
-		<span class="col-md-9" id="sex">{{convertSex(cat.sex)}}</span>
-	</div>
-	<div class="row col-md-8">
-		<span class="col-md-3 profile-attribute">Date of Birth</span>
-		<span class="col-md-9" id="dateOfBirth">{{cat.dateOfBirth | date}}</span>
-	</div>
-	<div class="row col-md-8">
-		<span class="col-md-3 profile-attribute">Color</span>
-		<span class="col-md-9" id="color">{{cat.color}}</span>
-	</div>
-	<div class="row col-md-8">
-		<span class="col-md-3 profile-attribute">Breed</span>
-		<span class="col-md-9" id="breed">{{cat.breed}}</span>
-	</div>
-	<div class="row col-md-8">
-		<span class="col-md-3 profile-attribute">Current Location</span>
-		<span class="col-md-9" id="location">{{cat.currentLocation}}</span>
-	</div>
-	<div class="row col-md-8">
-		<span class="col-md-3 profile-attribute">Temperament</span>
-		<span class="col-md-9" id="temperament">{{cat.temperament}}</span>
-	</div>
-	<div class="row col-md-8">
-		<span class="col-md-3 profile-attribute">Owner</span>
-		<span class="col-md-9" id="owner">{{cat.owner}}</span>
-	</div>
-	<div class="row col-md-8">
-		<span class="col-md-3 profile-attribute">Date of Arrival</span>
-		<span class="col-md-9" id="dateOfArrival">{{cat.dateOfArrival}}</span>
-	</div>
-	<div class="row col-md-8">
-		<span class="col-md-3 profile-attribute">Vet</span>
-		<span class="col-md-9" id="vet">{{cat.vet}}</span>
-	</div>
-	<div class="row col-md-8">
-		<span class="col-md-3 profile-attribute">Origin Address</span>
-		<span class="col-md-9" id="originAddress">{{cat.origin.address}}</span>
-	</div>
-	<div class="row col-md-8">
-		<span class="col-md-3 profile-attribute">Origin Person</span>
-		<span class="col-md-9" id="originPerson">{{cat.origin.person}}</span>
-	</div>
-	<div class="row col-md-8">
-		<span class="col-md-3 profile-attribute">Description</span>
-		<span class="col-md-9" id="description">{{cat.description}}</span>
-	</div>
-	<div class="row col-md-8">
-		<div class="col-md-12 profile-attribute">Notes</div>
-		<div class="col-md-12" id="notes">
-			<table style="width:100%">
-				<tr>
-					<th>Note</th>
-					<th>Person</th>
-				</tr>
-				<tr ng-repeat="note in cat.notes">
-					<td class="note">{{note}}</td>
-					<td class="note-person">Someone</td>
-				</tr>
-			</table>
-		</div>
-	</div>
+    <div class="profile">
+        <div class="profile-group">
+            <span class="profile-attribute">Sex</span>
+            <span class="profile-value" id="sex">{{convertSex(cat.sex)}}</span>
+        </div>
+        <div class="profile-group">
+            <span class="profile-attribute">Date of Birth</span>
+            <span class="profile-value" id="dateOfBirth">{{cat.dateOfBirth | date}}</span>
+        </div>
+        <div class="profile-group">
+            <span class="profile-attribute">Color</span>
+            <span class="profile-value" id="color">{{cat.color}}</span>
+        </div>
+        <div class="profile-group">
+            <span class="profile-attribute">Breed</span>
+            <span class="profile-value" id="breed">{{cat.breed}}</span>
+        </div>
+        <div class="profile-group">
+            <span class="profile-attribute">Current Location</span>
+            <span class="profile-value" id="location">{{cat.currentLocation}}</span>
+        </div>
+        <div class="profile-group">
+            <span class="profile-attribute">Temperament</span>
+            <span class="profile-value" id="temperament">{{cat.temperament}}</span>
+        </div>
+        <div class="profile-group">
+            <span class="profile-attribute">Owner</span>
+            <span class="profile-value" id="owner">{{cat.owner}}</span>
+        </div>
+        <div class="profile-group">
+            <span class="profile-attribute">Date of Arrival</span>
+            <span class="profile-value" id="dateOfArrival">{{cat.dateOfArrival}}</span>
+        </div>
+        <div class="profile-group">
+            <span class="profile-attribute">Vet</span>
+            <span class="profile-value" id="vet">{{cat.vet}}</span>
+        </div>
+        <div class="attribute-group">
+            <div class="profile-group">
+                <span class="profile-attribute">Origin Address</span>
+                <span class="profile-value" id="originAddress">{{cat.origin.address}}</span>
+            </div>
+            <div class="profile-group">
+                <span class="profile-attribute">Origin Person</span>
+                <span class="profile-value" id="originPerson">{{cat.origin.person}}</span>
+            </div>
+        </div>
+        <div class="profile-group">
+            <span class="profile-attribute">Description</span>
+            <span class="profile-value" id="description">{{cat.description}}</span>
+        </div>
+        <div class="profile-group notes">
+            <div class="profile-attribute">Notes</div>
+            <div class="profile-value" id="notes">
+                <table style="width:100%">
+                    <tr>
+                        <th>Note</th>
+                        <th>Person</th>
+                    </tr>
+                    <tr ng-repeat="note in cat.notes">
+                        <td class="note">{{note.message}}</td>
+                        <td class="note-person">{{note.sender}}</td>
+                    </tr>
+                    <tr>
+                        <td class="note"><input id="new-note" placeholder="Leave a new note..." /></td>
+                        <td class="note-person"><button type="submit" id="add-note">+</button></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
 	<div class="alert alert-danger" ng-hide="isFound">
 		<i class="glyphicon glyphicon-exclamation-sign" aria-hidden=true></i>
 		That cat could not be found.
