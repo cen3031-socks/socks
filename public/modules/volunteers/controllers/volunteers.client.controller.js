@@ -13,6 +13,7 @@ angular.module('volunteers').controller('VolunteersController', ['$scope', '$sta
                 controller: function ($scope, $modalInstance, volunteer) {
                     $scope.volunteer = volunteer;
                     $scope.name = selectedVolunteer.name;
+                    $scope.currTime = new Date();
                 } ,
                 size: size,
                 resolve: {
@@ -89,7 +90,6 @@ angular.module('volunteers').controller('VolunteersController', ['$scope', '$sta
             var volunteer = {
                 name: this.name,
                 timeIn: Date.now,
-                activeSession: true
             };
 
             $scope.modalUpdate('lg', volunteer);
