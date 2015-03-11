@@ -8,7 +8,7 @@
                 </br>
                 Have fun volunteering,{{volunteer.name}}!
                 </br>
-                <span class="text-muted">Sign in occured at: {{currTime.getHours()}}:{{currTime.getMinutes()}}</span>
+                <span class="text-muted">You signed in at {{currTime | date:'shortTime'}}.</span>
             </p>
 
         </section>
@@ -19,7 +19,8 @@
             <p>
                 </br>
                 Thank you for volunteering, {{volunteer.name}}!
-                <span class="text-muted">Sign out occured at: {{currTime.getHours()}}:{{currTime.getMinutes()}}</span>
+                </br>
+                <span class="text-muted">You signed out at {{currTime | date:'shortTime'}}.</span>
             </p>
 
         </section>
