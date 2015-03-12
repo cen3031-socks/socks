@@ -67,7 +67,18 @@ var CatSchema = new Schema({
                 type: Schema.ObjectId, ref: 'User'
             }
         }
-    ]
+    ],
+	events: [
+		{
+			detail: String,
+			label: String,
+			date: Date,
+			/* for events that have a duration, like trips to vet */
+			endDate: Date,
+			eventType: String,
+			icon: String
+		}
+	]
 });
 
 mongoose.model('Cat', CatSchema);
