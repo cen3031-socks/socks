@@ -62,7 +62,9 @@
 			</div>
 			<div class="profile-group">
 				<span class="profile-attribute">Vet</span>
-				<span class="profile-value" id="vet">{{cat.vet}}</span>
+				<span class="profile-value" id="vet">
+					<contact-link contact-id="cat.vet._id"></contact-link>
+				</span>
 			</div>
 		</div>
 		<div class="attribute-group timeline">
@@ -129,7 +131,9 @@
 			<h2>Arrival</h2>
             <div class="profile-group">
                 <span class="profile-attribute">Person</span>
-                <span class="profile-value" id="originPerson">{{cat.origin.person}}</span>
+                <span class="profile-value" id="originPerson">
+					<contact-link contact-id="cat.origin.person._id"></contact-link>
+				</span>
             </div>
             <div class="profile-group">
                 <span class="profile-attribute">Found at Address</span>
