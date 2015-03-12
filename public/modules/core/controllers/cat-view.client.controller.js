@@ -10,17 +10,21 @@ angular.module('core').controller('CatViewController', ['$scope', '$stateParams'
 				$scope.eventLimit += 5;
 			};
 			$scope.isFound = false;
-			$scope.cat = Cats.get({catId: $stateParams.catId}, 
-				function() {
-					$scope.isFound = true;
-					$scope.cat.owner = {_id: 12345}
+
+			$scope.getCat = function() {
+				$scope.cat = Cats.get({catId: $stateParams.catId}, 
+					function() {
+						$scope.isFound = true;
 				});
+			};
+
+			$scope.getCat();
 
 
 			$scope.addEvent = function() { 
 				$modal.open({
 					templateUrl: '/modules/cats/views/add-event.client.modal.html',
-					controller: function(cat, Cats, $scope) {
+					controller: function(cat, Cats, $scope, $modalInstance) {
 						$scope.getIcon = function() {
 							return 'glyphicon-pushpin';
 						};
@@ -31,6 +35,8 @@ angular.module('core').controller('CatViewController', ['$scope', '$stateParams'
 								label: $scope.label,
 								date: $scope.date,
 								icon: $scope.getIcon()
+							}, function() {
+								$modalInstance.close(true);
 							});
 						};
 						console.log(cat);
@@ -41,6 +47,8 @@ angular.module('core').controller('CatViewController', ['$scope', '$stateParams'
 							return $scope.cat;
 						}
 					}
+				}).result.then(function() {
+					$scope.getCat();
 				});
 			};
 
@@ -62,7 +70,7 @@ angular.module('core').controller('CatViewController', ['$scope', '$stateParams'
 				}
 			});
 
-			$scope.deleteEvent = function(index) {
+			$scope.deleteEvent = function(event) {
 				var modalScope = $rootScope.$new();
 				modalScope.message = 'Are you sure you want to delete this event?';
 				$modal.open({
@@ -70,7 +78,10 @@ angular.module('core').controller('CatViewController', ['$scope', '$stateParams'
 					scope: modalScope
 				}).result.then(function(result) {
 					if (result) {
-						Cats.deleteEvent({catId: $scope.cat._id, eventIndex: index});
+						Cats.deleteEvent({catId: $scope.cat._id, eventId: event._id},
+							function() {
+								$scope.getCat();
+							});
 					}
 				});
 			};

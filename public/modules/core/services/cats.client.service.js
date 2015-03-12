@@ -14,11 +14,11 @@ angular.module('core').factory('Cats', ['$resource',
 			},
 			editEvent: {
 				method: 'PUT',
-				url: 'cats/:catId/events/:eventIndex'
+				url: 'cats/:catId/events/:eventId'
 			},
 			deleteEvent: { 
 				method: 'DELETE',
-				url: 'cats/:catId/events/:eventIndex'
+				url: 'cats/:catId/events/:eventId'
 			}
 		});
 	}

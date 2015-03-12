@@ -1,10 +1,16 @@
 'use strict';
-
 /**
  * Module dependencies.
  */
 var mongoose = require('mongoose'),
 	Schema = mongoose.Schema;
+
+var AdoptionSchema = new Schema({
+	adopter: { type: Schema.Types.ObjectId, ref: 'Contact', required: true },
+	donation: { type: Schema.Types.ObjectId, ref: 'Donation' },
+	date: Date,
+	returnDate: Date
+});
 
 /**
  * Cat Schema
@@ -48,7 +54,7 @@ var CatSchema = new Schema({
 	imageUrl: String,
 	origin: {
 		address: String,
-		person: { type: Schema.ObjectId, ref: 'Contact' },
+		person: { type: Schema.Types.ObjectId, ref: 'Contact' },
         notes: String
 	},
 	medicalRecords: {
@@ -57,19 +63,20 @@ var CatSchema = new Schema({
 	},
 	currentLocation: String,
 	owner: {
-        type: Schema.ObjectId,
+        type: Schema.Types.ObjectId,
         ref: 'Contact'
 	},
 	notes: [
         {
             message: String,
             sender: {
-                type: Schema.ObjectId, ref: 'User'
+                type: Schema.Types.ObjectId, ref: 'User'
             }
         }
     ],
 	events: [
 		{
+			_id: Schema.Types.ObjectId,
 			detail: String,
 			label: String,
 			date: Date,
@@ -78,7 +85,22 @@ var CatSchema = new Schema({
 			eventType: String,
 			icon: String
 		}
-	]
+	],
+	adoptions: [{type: Schema.Types.ObjectId, ref: 'Adoption'}],
+	currentAdoption: { type: Schema.Types.ObjectId, ref: 'Adoption' }
 });
 
+mongoose.model('Adoption', AdoptionSchema);
 mongoose.model('Cat', CatSchema);
+
+CatSchema.pre('save', function(next) {
+	console.log(this);
+	var i = 0;
+	for (i = 0; i < this.adoptions.length; ++i) {
+		if (this.adoptions[i].returnDate === undefined) {
+			this.currentAdoption = this.adoptions[i];
+			break;
+		}
+	}
+	next();
+});

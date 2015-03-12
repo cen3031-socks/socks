@@ -20,9 +20,20 @@ angular.module('core').controller('HomeController', ['$scope', '$location', 'Aut
 
 			$scope.cats = Cats.query();
 
+			$scope.open = function($event) {
+				$event.preventDefault();
+				$event.stopPropagation();
+				$scope.opened = true;
+			};
+			$scope.openArrival = function($event) {
+				$event.preventDefault();
+				$event.stopPropagation();
+				$scope.arrivalDateOpened = true;
+			};
+
 			$scope.create = function() {
 				var cat = new Cats({
-					dateOfBirth: new Date(Date.parse(this.dateOfBirth)/1 + 12*60*60*1000),
+					dateOfBirth: this.dateOfBirth,
 					name: this.name,	
 					sex: this.sex,
 					vet: this.vet,

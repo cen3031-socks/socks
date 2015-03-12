@@ -4,11 +4,16 @@
 .profile-attribute { font-weight:bold; }
 .alert.alert-danger { margin:2em; }
 .cat-profile-image-container {
-   	min-height:35em;
-   	background-color:#ccc;
-	margin-top:50px;
+	display:inline-block;
+   	min-height:200px;
+	max-height:300px;
+	width:25%;
 	padding:0;
+	font-size:14px;
 	position:relative;
+	vertical-align:top;
+	border:1px solid #ddd;
+	text-align:center;
 }
 .cat-profile-image-container .glyphicon { 
 	z-index:1;
@@ -18,13 +23,19 @@
 	line-height:3.5em;
 }
 .cat-profile-image { 
-	width:100%; 
-	height:auto; 
-	z-index:100; 
-	position:relative;
+	zoom:2;
+	max-height:100%;
+	max-width:100%;
+	height:auto;
+	width:auto; 
 	margin-top:0;
 }
+.timeline, .profile-group {
+	font-size:14px;
+}
+/* Overall Profile Styles */
 .profile {
+	/* to make controlling space between inline elements possible */
 	font-size:0;
 }
 .profile-group {
@@ -33,10 +44,12 @@
 	margin:0;
 	padding:0.5em;
 }
-.timeline, .profile-group {
-	font-size:14px;
+.profile .basic-info {
+	padding-left:14px;
+	width:75%;
+	display:inline-block;
+	position:relative;
 }
-/* Overall Profile Styles */
 .profile-group.description { width: 75%; }
 @media (max-width: 520px) {
 	.profile-group {
@@ -79,6 +92,7 @@ ul.actions li { display:inline-block; margin-left:0.5em; }
 	width: 25em;
 	border-radius: 0.5em;
 	position:relative;
+	min-height:3em;
 }
 
 .timeline .timeline-event:before {
@@ -92,8 +106,10 @@ ul.actions li { display:inline-block; margin-left:0.5em; }
 	position:absolute;
 	left:-0.8em;
 	top:50%;
-	transform:translate(0,-0.4em);
 	-webkit-transform:translate(0,-0.8em);
+	-moz-transform:translate(0,-0.8em);
+	-ms-transform:translate(0,-0.8em);
+	transform:translate(0,-0.8em);
 }
 
 .timeline-content { 
@@ -146,9 +162,10 @@ ul.actions li { display:inline-block; margin-left:0.5em; }
 	position:absolute;
 	top:50%;
 	margin-left:0.5em;
-	transform:translate(0, -1em);
 	-webkit-transform:translate(0,-0.5em);
 	-moz-transform:translate(0,-0.5em);
+	-ms-transform:translate(0,-0.5em);
+	transform:translate(0, -0.5em);
 }
 .timeline a:link .action, .timeline a:visited .action  {
 	color:#666;
@@ -162,9 +179,10 @@ ul.actions li { display:inline-block; margin-left:0.5em; }
 	left: 0.5em;
 	top:50%;
 	font-size:2em;
-	transform:translate(0,-0.5em);
 	-webkit-transform:translate(0,-0.5em);
 	-moz-transform:translate(0,-0.5em);
+	-ms-transform:translate(0,-0.5em);
+	transform:translate(0,-0.5em);
 }
 
 .timeline-event .btn {
@@ -186,9 +204,10 @@ ul.actions li { display:inline-block; margin-left:0.5em; }
 	position:absolute;
 	right:26.5em;
 	top:50%;
-	transform:translate(0,-0.6em);
 	-webkit-transform:translate(0,-0.6em);
 	-moz-transform:translate(0,-0.6em);
+	-ms-transform:translate(0,-0.6em);
+	transform:translate(0,-0.6em);
 	width:10em;
 	text-align:right;
 	padding-right:0.2em;
