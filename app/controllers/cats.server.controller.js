@@ -65,6 +65,8 @@ exports.adopt = function(req, res) {
 	var adoption = new Adoption(req.body);
 	adoption.save(function(err) {
 		if (err) {
+			console.log("error saving adoption");
+			console.log(JSON.stringify(err));
 			return res.status(400).send({
 				message: errorHandler.getErrorMessage(err)
 			});
@@ -72,6 +74,7 @@ exports.adopt = function(req, res) {
 			req.cat.adoptions.push(adoption._id);
 			req.cat.save(function(err) {
 				if (err) {
+					console.log("error saving cat.");
 					return res.status(400).send({
 						message: errorHandler.getErrorMessage(err)
 					});

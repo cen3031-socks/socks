@@ -20,6 +20,39 @@ angular.module('core').controller('CatViewController', ['$scope', '$stateParams'
 
 			$scope.getCat();
 
+			$scope.adopt = function() {
+				$modal.open({
+					templateUrl: '/modules/cats/views/adopt-cat.client.modal.html',
+					controller: function(cat, Cats, $scope, $modalInstance) {
+						$scope.adoptCat = function() {
+							if ($scope.adopter.length !== 1) {
+								$scope.error = "You must select an adopter";
+							} else {
+								$scope.error = "";
+							}
+							Cats.adopt({catId: cat._id}, {
+								adopter: $scope.adopter[0]._id,
+								donation: $scope.donationId,
+								date: $scope.adoptionDate
+							}, function() {
+								$modalInstance.close(true);
+							});
+						};
+						$scope.open = function($event) {
+							$event.preventDefault();
+							$event.stopPropagation();
+							$scope.opened = true;
+						};
+					}, 
+					resolve: {
+						cat: function() {
+							return $scope.cat;
+						}
+					}
+				}).result.then(function() {
+					$scope.getCat();
+				});
+			};
 
 			$scope.addEvent = function() { 
 				$modal.open({

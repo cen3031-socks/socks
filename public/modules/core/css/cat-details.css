@@ -157,7 +157,11 @@ ul.actions li { display:inline-block; margin-left:0.5em; }
 	padding:0;
 	position:relative;
 }
-.timeline .action { position:relative; }
+.timeline .action {
+	position:relative; 
+	display:inline-block;
+	width:15em;
+}
 .timeline .action span {
 	position:absolute;
 	top:50%;

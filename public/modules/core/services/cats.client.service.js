@@ -19,6 +19,10 @@ angular.module('core').factory('Cats', ['$resource',
 			deleteEvent: { 
 				method: 'DELETE',
 				url: 'cats/:catId/events/:eventId'
+			},
+			adopt: {
+				method: 'POST',
+				url: 'cats/:catId/adoptions'
 			}
 		});
 	}
