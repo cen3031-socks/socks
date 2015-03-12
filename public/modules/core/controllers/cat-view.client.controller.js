@@ -15,35 +15,33 @@ angular.module('core').controller('CatViewController', ['$scope', '$stateParams'
 				$scope.cat = Cats.get({catId: $stateParams.catId}, 
 					function() {
 						$scope.isFound = true;
-				});
+						for (var i in $scope.cat.adoptions) {
+							$scope.cat.adoptions[i].eventType = 'adoption';
+						}
+						$scope.cat.events = $scope.cat.events.concat($scope.cat.adoptions);
+					});
 			};
 
 			$scope.getCat();
 
+			$scope.unadopt = function() {
+				$modal.open({
+					templateUrl: '/modules/cats/views/unadopt-cat.client.modal.html',
+					controller: adoptionController, 
+					resolve: {
+						cat: function() {
+							return $scope.cat;
+						}
+					}
+				}).result.then(function() {
+					$scope.getCat();
+				});
+			};
+
 			$scope.adopt = function() {
 				$modal.open({
 					templateUrl: '/modules/cats/views/adopt-cat.client.modal.html',
-					controller: function(cat, Cats, $scope, $modalInstance) {
-						$scope.adoptCat = function() {
-							if ($scope.adopter.length !== 1) {
-								$scope.error = "You must select an adopter";
-							} else {
-								$scope.error = "";
-							}
-							Cats.adopt({catId: cat._id}, {
-								adopter: $scope.adopter[0]._id,
-								donation: $scope.donationId,
-								date: $scope.adoptionDate
-							}, function() {
-								$modalInstance.close(true);
-							});
-						};
-						$scope.open = function($event) {
-							$event.preventDefault();
-							$event.stopPropagation();
-							$scope.opened = true;
-						};
-					}, 
+					controller: adoptionController, 
 					resolve: {
 						cat: function() {
 							return $scope.cat;
@@ -72,8 +70,6 @@ angular.module('core').controller('CatViewController', ['$scope', '$stateParams'
 								$modalInstance.close(true);
 							});
 						};
-						console.log(cat);
-						console.log($scope);
 					}, 
 					resolve: {
 						cat: function() {
@@ -86,7 +82,6 @@ angular.module('core').controller('CatViewController', ['$scope', '$stateParams'
 			};
 
 			$scope.onRouteChangeOff = $scope.$on('$locationChangeStart', function(event, newState, oldState) {
-				console.log($scope.newNote);
 				if (($scope.newNote || '') != '') {
 					var modalScope = $rootScope.$new();
 					modalScope.message = 'You have unsaved data entered on this page. Do you want to leave without saving?';
@@ -135,3 +130,28 @@ angular.module('core').controller('CatViewController', ['$scope', '$stateParams'
 			};
 		}]
 );
+
+var adoptionController = function(cat, Cats, $scope, $modalInstance) {
+	$scope.adoptCat = function() {
+		Cats.adopt({catId: cat._id}, {
+			adopter: $scope.adopter[0]._id,
+			donation: $scope.donationId,
+			date: $scope.adoptionDate
+		}, function() {
+			$modalInstance.close(true);
+		});
+	};
+	$scope.unadoptCat = function() {
+		Cats.unadopt({catId: cat._id, adoptionId: cat.currentAdoption._id}, {
+			endDate: $scope.returnDate,
+			reason: $scope.reason
+		}, function() {
+			$modalInstance.close(true);
+		});
+	};
+	$scope.open = function($event) {
+		$event.preventDefault();
+		$event.stopPropagation();
+		$scope.opened = true;
+	};
+}

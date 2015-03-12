@@ -4,6 +4,7 @@ angular.module('core').controller('HomeController', ['$scope', '$location', 'Aut
 		function($scope, $location, Authentication, Cats) {
 			// This provides Authentication context.
 			$scope.authentication = Authentication;
+			$scope.dateOfArrival = Date.now();
 
 			$scope.getAge = function(cat) {
 				if (cat.dateOfBirth === undefined) {

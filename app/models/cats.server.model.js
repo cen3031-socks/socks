@@ -9,7 +9,9 @@ var AdoptionSchema = new Schema({
 	adopter: { type: Schema.Types.ObjectId, ref: 'Contact', required: true },
 	donation: { type: Schema.Types.ObjectId, ref: 'Donation' },
 	date: Date,
-	returnDate: Date
+	endDate: Date, 
+	catId: { type: Schema.Types.ObjectId, ref: 'Cat' },
+	returnReason: String
 });
 
 /**
@@ -37,7 +39,8 @@ var CatSchema = new Schema({
 		type: Number,
 		default: 0
 	},
-	vet: String,
+	hairLength: String,
+	vet: { type: Schema.Types.ObjectId, ref: 'Contact' },
 	dateOfArrival: {
 		type: Date,
 		default: Date.now 
@@ -56,10 +59,6 @@ var CatSchema = new Schema({
 		address: String,
 		person: { type: Schema.Types.ObjectId, ref: 'Contact' },
         notes: String
-	},
-	medicalRecords: {
-		hasMicrochip: Boolean,
-		procedures: [{date: Date, name: String, notes: String}]
 	},
 	currentLocation: String,
 	owner: {
@@ -96,8 +95,9 @@ mongoose.model('Cat', CatSchema);
 CatSchema.pre('save', function(next) {
 	console.log(this);
 	var i = 0;
+	this.currentAdoption = undefined;
 	for (i = 0; i < this.adoptions.length; ++i) {
-		if (this.adoptions[i].returnDate === undefined) {
+		if (this.adoptions[i].endDate === undefined) {
 			this.currentAdoption = this.adoptions[i];
 			break;
 		}

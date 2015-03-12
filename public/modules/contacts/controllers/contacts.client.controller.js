@@ -116,7 +116,6 @@ function ($scope, Contacts, $stateParams) {
     $scope.findOne = function () {
         $scope.contact = Contacts.get({
             contactId: $stateParams.contactId
-
         });
         console.log($scope.contact);
     };

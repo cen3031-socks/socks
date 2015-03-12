@@ -14,7 +14,7 @@
 			</button>
 		</li>
 		<li ng-show="cat.currentAdoption !== undefined">
-			<button class="btn btn-lg btn-danger text-center" ng-click="return()">
+			<button class="btn btn-lg btn-danger text-center" ng-click="unadopt()">
 				<i class="glyphicon glyphicon-briefcase"></i>
 				Return
 			</button>
@@ -78,18 +78,33 @@
 					<i class="glyphicon glyphicon-briefcase"></i>
 					<span class="timeline-label">Adopted</span>
 					<span class="timeline-detail" id="owner">
-						Adopted by <person-link person-id="cat.currentAdoption.adopter._id"/>
+						Adopted by 
+						<contact-link contact-id="cat.currentAdoption.adopter._id"></contact-link>
 					</span>
 					<span class="timeline-date">{{cat.currentAdoption.date|date}}</span>
 				</div>
-				<div class="timeline-event" ng-repeat="event in cat.events|orderBy:'date':true|limitTo:eventLimit">
-					<i class="glyphicon" ng-class="event.icon"></i>
-					<span class="timeline-label">{{event.label}}</span>
-					<span class="timeline-detail">{{event.detail}}</span>
-					<span class="timeline-date">{{event.date|date}}</span>
-					<button class="btn" ng-click="deleteEvent(event)">
-						<i class="glyphicon glyphicon-remove"></i>
-					</button>
+				<div class="repeater"
+                     ng-repeat="event in cat.events|orderBy:'date':true|limitTo:eventLimit"
+					 ng-switch="event.eventType">
+					<div class="timeline-event" ng-switch-when="adoption" ng-show="event.endDate !== undefined">
+						<i class="glyphicon glyphicon-briefcase"></i>
+						<span class="timeline-label">Adopted and Returned</span>
+						<span class="timeline-detail">
+							Adopted by 
+								<contact-link contact-id="event.adopter._id"></contact-link>
+							then returned with reason: {{event.returnReason}}
+						</span>
+						<span class="timeline-date">{{event.date|date}}</span>
+					</div>
+					<div class="timeline-event" ng-switch-default>
+						<i class="glyphicon" ng-class="event.icon"></i>
+						<span class="timeline-label">{{event.label}}</span>
+						<span class="timeline-detail">{{event.detail}}</span>
+						<span class="timeline-date">{{event.date|date}}</span>
+						<button class="btn" ng-click="deleteEvent(event)">
+							<i class="glyphicon glyphicon-remove"></i>
+						</button>
+					</div>
 				</div>
 				<a ng-click="showMore()" href="">
 					<div class="show-more action" ng-hide="eventLimit >= cat.events.length">

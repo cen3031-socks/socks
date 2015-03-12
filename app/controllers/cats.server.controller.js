@@ -14,7 +14,6 @@ var mongoose = require('mongoose'),
 exports.list = function(req, res) {
 	Cat.find().sort('name').exec(function(err, cats) {
 		if (err) {
-			console.log(err);
 			return res.status(400).send({
 				message: errorHandler.getErrorMessage(err)
 			});
@@ -34,7 +33,6 @@ function isValidEvent(event) {
 }
 
 exports.addEvent = function(req, res) {
-	console.log('Event created');
 	if (!isValidEvent(req.body)) {
 		return res.status(400).send({
 			message: 'The given event is invalid.'
@@ -57,16 +55,14 @@ exports.addEvent = function(req, res) {
 
 exports.adopt = function(req, res) {
 	if (req.cat.currentAdoption !== undefined) {
-		console.log("Tried to adoped cat with current adoption:" + JSON.stringify(req.cat.currentAdoption));
 		return res.status(400).send({
 			message: 'Cannot adopt cat with current adopter.'
 		});
 	}
 	var adoption = new Adoption(req.body);
+	adoption.catId = req.cat._id;
 	adoption.save(function(err) {
 		if (err) {
-			console.log("error saving adoption");
-			console.log(JSON.stringify(err));
 			return res.status(400).send({
 				message: errorHandler.getErrorMessage(err)
 			});
@@ -74,7 +70,6 @@ exports.adopt = function(req, res) {
 			req.cat.adoptions.push(adoption._id);
 			req.cat.save(function(err) {
 				if (err) {
-					console.log("error saving cat.");
 					return res.status(400).send({
 						message: errorHandler.getErrorMessage(err)
 					});
@@ -87,6 +82,47 @@ exports.adopt = function(req, res) {
 };
 
 exports.unadopt = function(req, res) {
+	var adoption = req.adoption;
+	adoption.endDate = req.body.endDate;
+	adoption.returnReason = req.body.reason;
+	req.cat.currentAdoption = undefined;
+	adoption.save(function(err) {
+		if (err) {
+			return res.status(400).send({
+				message: errorHandler.getErrorMessage(err)
+			});
+		} else {
+			Cat.findById(adoption.catId).populate('adoptions currentAdoption')
+		.exec(function(err, cat) {
+			// this is ugly....
+			Cat.populate(cat, { 
+				path: 'adoptions.adopter currentAdoption.adopter', 
+				model: Contact
+			}, function(err, cat) {
+				Cat.populate(cat, { path: 'adoptions.donation currentAdoption.donation', model: Donation},
+					function(err, cat) {
+						if (err) return next(err);
+						if (!cat) {
+							return res.status(404).send({
+								message: 'Cat not found'
+							});
+						}
+						cat.currentAdoption = undefined;							
+						cat.save(function(err) {
+							if (err) {
+								return res.status(400).send({
+									message: errorHandler.getErrorMessage(err)
+								});
+							} else {
+								console.log(req.cat);
+								res.json({message: 'Deleted successfully'});
+							}
+						});
+					});
+			});
+		});
+		}
+	});
 };
 
 exports.editEvent = function(req, res) {
@@ -135,7 +171,27 @@ exports.deleteEvent = function(req, res) {
 	});
 };
 
-exports.catByID = function(req, res, next, id) {
+exports.adoptionById = function(req, res, next, id) {
+	Adoption.findById(id).exec(function(err, adoption) {
+		if (err) {
+			next(err);
+		} else {
+			req.adoption = adoption;
+			if (!adoption) {
+				return res.status(404).send({
+					message: 'Adoption not found'
+				});
+			} else if (adoption.catId !== req.params.catId && req.params.catId !== undefined && false) {
+				return res.status(400).send({
+					message: 'That adoption does not correspond to the given cat.'
+				});
+			}
+			next();
+		}
+	});	
+};
+
+exports.catById = function(req, res, next, id) {
     if (!mongoose.Types.ObjectId.isValid(id)) {
         return res.status(400).send({
             message: 'Cat is invalid'
