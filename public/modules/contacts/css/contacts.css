@@ -15,3 +15,10 @@
 .text-pink {
     color: #ff2c9c;
 }
+
+.action-buttons a { margin-left: 1em; text-decoration: none }
+@media (max-width: 568px) {
+    .action-buttons a { margin-left:0; }
+}
+
+.action-buttons a i { font-size: 1.75em}
