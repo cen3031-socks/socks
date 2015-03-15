@@ -77,7 +77,7 @@
 	min-height: 1em;
 	display:inline-block;
 }
-.btn i.glyphicon { display:block; margin-bottom:0.3em; }
+.actions .btn i.glyphicon { display:block; margin-bottom:0.3em; }
 ul.actions { list-style-type:none; margin:0; padding:0; float:right; }
 ul.actions li { display:inline-block; margin-left:0.5em; }
 
