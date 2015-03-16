@@ -62,13 +62,19 @@ angular.module('volunteers').controller('VolunteersController', ['$scope', '$sta
              $scope.error = errorResponse.data.message;
              });
              */
-//The code below does not funcition correctly. The code above that is commented out will eventually replace this once the above code gets debugged.
-// Create new Volunteer object
+
+            // Create new Volunteer object
             var volunteer = {
                 name: this.name,
                 timeIn: Date.now
             };
             $scope.modalUpdate('lg', volunteer);
+
+            var nameArray = this.name.split();
+
+            //check here if nameArray[0] matches a first name AND nameArray[1] matches a last name
+
+
 // Redirect after save
 //volunteer.$save(function(response) {
 //$location.path('volunteers/' + response._id);
