@@ -1,7 +1,7 @@
 'use strict';
 
-angular.module('core').controller('CatViewController', ['$scope', '$stateParams', 'Authentication', 'Cats', '$modal', '$location', '$rootScope',
-		function($scope, $stateParams, Authentication, Cats, $modal, $location, $rootScope) {
+angular.module('core').controller('CatViewController', ['$scope', '$stateParams', 'Authentication', 'Cats', '$modal', '$location', '$rootScope', 'Contacts',
+		function($scope, $stateParams, Authentication, Cats, $modal, $location, $rootScope, Contacts) {
 			// This provides Authentication context.
 			$scope.authentication = Authentication;
 
@@ -113,6 +113,22 @@ angular.module('core').controller('CatViewController', ['$scope', '$stateParams'
 					}
 				});
 			};
+
+            $scope.contacts = Contacts.query();
+
+            $scope.addNote = function() {
+                $scope.authentication = { user: { contact:$scope.contacts[0] } }
+                Cats.addNote({catId: $scope.cat._id}, {
+                    message: $scope.newNote,
+                    date: Date.now(),
+                    sender: ($scope.authentication
+                                && $scope.authentication && $scope.authentication.user
+                                && $scope.authentication.user.contact._id)
+                }, function() {
+                    $scope.getCat();
+                    $scope.newNote = '';
+                });
+            }
 
 			$scope.convertSex = function(sexNumber) {
 				if (sexNumber === 0) {

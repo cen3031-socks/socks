@@ -33,11 +33,15 @@ angular.module('core').controller('HomeController', ['$scope', '$location', 'Aut
 			};
 
 			$scope.create = function() {
+                if (this.originPerson.length !== 1) {
+                    $scope.error = "You must select an origin person";
+                }
+                console.log(this);
 				var cat = new Cats({
 					dateOfBirth: this.dateOfBirth,
 					name: this.name,	
 					sex: this.sex,
-					vet: this.vet,
+					vet: this.vet._id,
 					dateOfArrival: this.dateOfArrival,
 					breed: this.breed,
 					color: this.color,
@@ -45,7 +49,7 @@ angular.module('core').controller('HomeController', ['$scope', '$location', 'Aut
 					temperament: this.temperament,
 					origin: {
 						address: this.originAddress,
-						person: this.originPerson
+						person: this.originPerson[0]._id
 					},
 					currentLocation: this.location,
 					owner: this.owner,

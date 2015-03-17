@@ -61,16 +61,10 @@ var CatSchema = new Schema({
         notes: String
 	},
 	currentLocation: String,
-	owner: {
-        type: Schema.Types.ObjectId,
-        ref: 'Contact'
-	},
 	notes: [
         {
             message: String,
-            sender: {
-                type: Schema.Types.ObjectId, ref: 'User'
-            }
+            sender: { type: Schema.Types.ObjectId, ref: 'User' }
         }
     ],
 	events: [

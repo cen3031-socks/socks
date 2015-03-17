@@ -53,6 +53,20 @@ exports.addEvent = function(req, res) {
 	});
 };
 
+exports.addNote = function(req, res) {
+    var cat = req.cat;
+    cat.notes.push(req.body);
+    cat.save(function(err) {
+        if (err) {
+            return res.status(400).send({
+                message: errorHandler.getErrorMessage(err)
+            });
+        } else {
+            res.json(cat.events[cat.events.length - 1]);
+        }
+    });
+};
+
 exports.adopt = function(req, res) {
 	if (req.cat.currentAdoption !== undefined) {
 		return res.status(400).send({
@@ -101,10 +115,9 @@ exports.unadopt = function(req, res) {
 			}, function(err, cat) {
 				Cat.populate(cat, { path: 'adoptions.donation currentAdoption.donation', model: Donation},
 					function(err, cat) {
-						if (err) return next(err);
-						if (!cat) {
+						if (err || !cat) {
 							return res.status(404).send({
-								message: 'Cat not found'
+								message: errorHandler.getErrorMessage(err)
 							});
 						}
 						cat.currentAdoption = undefined;							
@@ -220,9 +233,12 @@ exports.catById = function(req, res, next, id) {
 };
 
 exports.create = function(req, res) {
+    console.log(req.body);
 	var cat = new Cat(req.body);
 	cat.save(function(err) {
 		if (err) {
+            console.log("There was an error");
+            console.log(err);
 			return res.status(400).send({
 				message: errorHandler.getErrorMessage(err)
 			});

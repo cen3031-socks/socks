@@ -22,6 +22,9 @@ module.exports = function(app) {
 	app.route('/cats/:catId/adoptions/:adoptionId')
 		.put(cats.unadopt);
 
+    app.route('/cats/:catId/notes')
+        .put(cats.addNote);
+
 	// Finish by binding the cat middleware
 	app.param('catId', cats.catById);
 	app.param('adoptionId', cats.adoptionById);

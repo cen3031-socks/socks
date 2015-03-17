@@ -27,8 +27,11 @@ angular.module('core').factory('Cats', ['$resource',
 			unadopt: {
 				method: 'PUT',
 				url: 'cats/:catId/adoptions/:adoptionId'
-			}
-
+			},
+            addNote: {
+                method: 'PUT',
+                url: 'cats/:catId/notes'
+            }
 		});
 	}
 ]);
