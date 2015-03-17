@@ -14,77 +14,155 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-sm-6 text-center">
-                                <i class="glyphicon glyphicon-user cust-profile"
-                                   ng-class="{'text-primary': contact.is_volunteer, 'text-pink': !contact.is_volunteer}"></i>
+                            <!--<div class="col-sm-6 text-center">-->
+                                <!--<i class="glyphicon glyphicon-user cust-profile"-->
+                                   <!--ng-class="{'text-primary': contact.is_volunteer, 'text-pink': !contact.is_volunteer}"></i>-->
+                            <!--</div>-->
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label class="control-label" for="firstName">First Name</label>
+                                        <div class="controls">
+                                            <input type="text" data-ng-model="contact.firstName" id="firstName" class="form-control">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label class="control-label" for="surname">Last Name</label>
+                                        <div class="controls">
+                                            <input type="text" data-ng-model="contact.surname" id="surname" class="form-control" required>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="col-sm-6">
-                                <div class="form-group">
-                                    <label class="control-label" for="firstName">First Name</label>
-                                    <div class="controls">
-                                        <input type="text" data-ng-model="contact.firstName" id="firstName" class="form-control">
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label class="control-label" for="address">Address</label>
+                                        <div class="controls">
+                                            <input type="text" data-ng-model="contact.address" id="address" class="form-control" >
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="form-group">
-                                    <label class="control-label" for="surname">Last Name</label>
-                                    <div class="controls">
-                                        <input type="text" data-ng-model="contact.surname" id="surname" class="form-control" required>
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label class="control-label" for="city">City</label>
+                                        <div class="controls">
+                                            <input type="text" data-ng-model="contact.city" id="city" class="form-control" >
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="form-group">
-                                    <label class="control-label" for="address">Address</label>
-                                    <div class="controls">
-                                        <input type="text" data-ng-model="contact.address" id="address" class="form-control" >
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label class="control-label" for="state">State</label>
+                                        <div class="controls">
+                                            <input type="text" data-ng-model="contact.state" id="state" class="form-control" >
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="form-group">
-                                    <label class="control-label" for="city">City</label>
-                                    <div class="controls">
-                                        <input type="text" data-ng-model="contact.city" id="city" class="form-control" >
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label class="control-label" for="zipCode">Zip Code</label>
+                                        <div class="controls">
+                                            <input type="text" data-ng-model="contact.zipCode" id="zipCode" class="form-control">
+                                        </div>
                                     </div>
                                 </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label class="control-label" for="email">Email</label>
+                                        <div class="controls">
+                                            <input type="text" data-ng-model="contact.email" id="email" class="form-control" >
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6 right_col">
+                                    <div class="form-group">
+                                        <label class="control-label" for="phone">Phone</label>
+                                        <div class="controls">
+                                            <input type="text" data-ng-model="contact.phone" id="phone" class="form-control">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xs-6 col-sm-3">
+                                    <div class="form-group text-center">
+                                        <label class="control-label" for="is_volunteer">Volunteer</label>
+                                        <div class="controls">
+                                            <input type="checkbox" data-ng-model="contact.is_volunteer" id="is_volunteer" class="form-control" >
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xs-6 col-sm-3">
+                                    <div class="form-group text-center">
+                                        <label class="control-label" for="is_adopter">Adopter</label>
+                                        <div class="controls">
+                                            <input type="checkbox" data-ng-model="contact.is_adopter" id="is_adopter" class="form-control" >
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xs-6 col-sm-3">
+                                    <div class="form-group text-center">
+                                        <label class="control-label" for="is_fosterer">Fosterer</label>
+                                        <div class="controls">
+                                            <input type="checkbox" data-ng-model="contact.is_fosterer" id="is_fosterer" class="form-control" >
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xs-6 col-sm-3">
+                                    <div class="form-group text-center">
+                                        <label class="control-label" for="is_donator">Donator</label>
+                                        <div class="controls">
+                                            <input type="checkbox" data-ng-model="contact.is_donator" id="is_donator" class="form-control" >
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="row">
+                                <div class="col-xs-6 col-sm-3">
+                                    <div class="form-group text-center">
+                                        <label class="control-label" for="is_vet">Veterinarian</label>
+                                        <div class="controls">
+                                            <input type="checkbox" data-ng-model="contact.is_vet" id="is_vet" class="form-control" >
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xs-6 col-sm-3">
+                                    <div class="form-group text-center">
+                                        <label class="control-label" for="is_employee">Employee</label>
+                                        <div class="controls">
+                                            <input type="checkbox" data-ng-model="contact.is_employee" id="is_employee" class="form-control" >
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xs-6 col-sm-3">
+                                    <div class="form-group text-center">
+                                        <label class="control-label" for="is_admin">Administrator</label>
+                                        <div class="controls">
+                                            <input type="checkbox" data-ng-model="contact.is_admin" id="is_admin" class="form-control" >
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xs-6 col-sm-3">
+                                    <div class="form-group text-center">
+                                        <label class="control-label" for="deleted_contact">Delete Contact?</label>
+                                        <div class="controls">
+                                            <input type="checkbox" data-ng-model="contact.deleted_contact" id="deleted_contact" class="form-control" >
+                                        </div>
+                                    </div>
+                                </div>
+
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="col-sm-6 col-sm-push-6">
-                                <div class="form-group">
-                                    <label class="control-label" for="state">State</label>
-                                    <div class="controls">
-                                        <input type="text" data-ng-model="contact.state" id="state" class="form-control" >
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="control-label" for="zipCode">Zip Code</label>
-                                    <div class="controls">
-                                        <input type="text" data-ng-model="contact.zipCode" id="zipCode" class="form-control">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-sm-6 col-sm-pull-6">
-                                <div class="form-group">
-                                    <label class="control-label" for="is_volunteer">Volunteer</label>
-                                    <div class="controls">
-                                        <input type="checkbox" data-ng-model="contact.is_volunteer" id="is_volunteer" class="form-control checkbox-left" >
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="control-label" for="phone">Phone</label>
-                                    <div class="controls">
-                                        <input type="text" data-ng-model="contact.phone" id="phone" class="form-control">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-sm-6">
-                                <div class="form-group">
-                                    <label class="control-label" for="email">Email</label>
-                                    <div class="controls">
-                                        <input type="text" data-ng-model="contact.email" id="email" class="form-control" >
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                </div>
+
                 </fieldset>
         </form>
     </div>
