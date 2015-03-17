@@ -11,6 +11,8 @@ angular.module('volunteers').controller('VolunteersController', ['$scope', '$sta
                 controller: function ($scope, $modalInstance, volunteer) {
                     $scope.volunteer = volunteer;
                     $scope.name = selectedVolunteer.name;
+                    $scope.firstName = selectedVolunteer.firstName;
+                    $scope.lastName = selectedVolunteer.lastName;
                     $scope.currTime = new Date();
                 } ,
                 size: size,
@@ -64,13 +66,17 @@ angular.module('volunteers').controller('VolunteersController', ['$scope', '$sta
              */
 
             // Create new Volunteer object
+            var nameArray = this.name.split(" ");
+
             var volunteer = {
                 name: this.name,
+                firstName: nameArray[0],
+                lastName: nameArray[1],
                 timeIn: Date.now
             };
             $scope.modalUpdate('lg', volunteer);
 
-            var nameArray = this.name.split();
+
 
             //check here if nameArray[0] matches a first name AND nameArray[1] matches a last name
 
