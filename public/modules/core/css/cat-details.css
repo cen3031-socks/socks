@@ -189,20 +189,26 @@ ul.actions li { display:inline-block; margin-left:0.5em; }
 	transform:translate(0,-0.5em);
 }
 
-.timeline-event .btn {
+
+.note-delete {position:relative;}
+.note-delete .btn, .timeline-event .btn {
 	position:absolute;
 	top:0.5em;
 	right:0.5em;
 	background:none;
 	border-radius:0;
+    border:0;
+    color:black;
 	padding:0;
 	height:1.3em;
 	line-height:1.5em;
 }
-.timeline-event .btn:hover {
+.note-delete .btn:hover, .timeline-event .btn:hover {
 	background-color: #a33;
 	color:white;
 }
+.note td { padding:0.5em; }
+.note:hover { background: #ccc; }
 
 .timeline-event .timeline-date {
 	position:absolute;

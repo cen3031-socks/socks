@@ -24,6 +24,8 @@ module.exports = function(app) {
 
     app.route('/cats/:catId/notes')
         .put(cats.addNote);
+    app.route('/cats/:catId/notes/:noteId')
+        .delete(cats.deleteNote);
 
 	// Finish by binding the cat middleware
 	app.param('catId', cats.catById);

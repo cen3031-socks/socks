@@ -148,16 +148,22 @@
             <div class="profile-attribute">Notes</div>
             <div class="profile-value" id="notes">
                 <table style="width:100%">
-                    <tr ng-repeat="note in cat.notes">
-                        <td class="note">{{note.message}}</td>
+                    <tr ng-repeat="note in cat.notes" class="note">
+                        <td class="note-message">{{note.message}}</td>
 						<td class="note-date">{{note.date|date}}</td>
                         <td class="note-person"><contact-link contact-id="note.sender"></contact-link></td>
+                        <td class="note-delete">
+                            <button class="btn btn-danger" ng-click="deleteNote(note, $index)">
+                                <i class="glyphicon glyphicon-remove"></i>
+                            </button>
+                        </td>
                     </tr>
                     <tr>
 						<form>
 							<td class="note"><input name="note-message" ng-model="newNote" class="new-note" id="new-note" placeholder="Leave a new note..." /></td>
 							<td></td>
 							<td class="note-person"><button class="btn btn-default" ng-click="addNote()" type="submit" id="add-note">+</button></td>
+                            <td></td>
 						</form>
                     </tr>
                 </table>

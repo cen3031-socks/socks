@@ -36,7 +36,6 @@ angular.module('core').controller('HomeController', ['$scope', '$location', 'Aut
                 if (this.originPerson.length !== 1) {
                     $scope.error = "You must select an origin person";
                 }
-                console.log(this);
 				var cat = new Cats({
 					dateOfBirth: this.dateOfBirth,
 					name: this.name,	

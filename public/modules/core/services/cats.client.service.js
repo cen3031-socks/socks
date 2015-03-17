@@ -31,6 +31,10 @@ angular.module('core').factory('Cats', ['$resource',
             addNote: {
                 method: 'PUT',
                 url: 'cats/:catId/notes'
+            },
+            deleteNote: {
+                method: 'DELETE',
+                url: 'cats/:catId/notes/:noteId'
             }
 		});
 	}

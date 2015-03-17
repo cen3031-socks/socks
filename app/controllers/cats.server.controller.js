@@ -53,8 +53,40 @@ exports.addEvent = function(req, res) {
 	});
 };
 
+exports.deleteNote = function(req, res) {
+    var cat = req.cat;
+    var note = req.body;
+    note._id = mongoose.Types.ObjectId();
+
+    var index = -1;
+    for (var i in cat.notes) {
+        if (cat.notes[i]._id.toString() === req.params.noteId) {
+            index = i;
+            break;
+        }
+    }
+    if (index === -1) {
+        return res.status(404).send({
+            message: 'That note does not exist with this cat.'
+        });
+    }
+
+    cat.notes.splice(index, 1);
+    cat.save(function(err) {
+        if (err) {
+            return res.status(400).send({
+                message: errorHandler.getErrorMessage(err)
+            });
+        } else {
+            res.json({message: "Succesfully deleted."});
+        }
+    });
+};
+
 exports.addNote = function(req, res) {
     var cat = req.cat;
+    var note = req.body;
+    note._id = mongoose.Types.ObjectId();
     cat.notes.push(req.body);
     cat.save(function(err) {
         if (err) {
@@ -62,7 +94,7 @@ exports.addNote = function(req, res) {
                 message: errorHandler.getErrorMessage(err)
             });
         } else {
-            res.json(cat.events[cat.events.length - 1]);
+            res.json(cat.notes[cat.notes.length - 1]);
         }
     });
 };

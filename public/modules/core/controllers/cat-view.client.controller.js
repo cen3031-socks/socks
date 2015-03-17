@@ -98,6 +98,23 @@ angular.module('core').controller('CatViewController', ['$scope', '$stateParams'
 				}
 			});
 
+            $scope.deleteNote = function(note, index) {
+
+                var modalScope = $rootScope.$new();
+                modalScope.message = 'Are you sure you want to delete this note?';
+                $modal.open({
+                    templateUrl: '/modules/core/views/confirm-dialog.client.modal.html',
+                    scope: modalScope
+                }).result.then(function(result) {
+                        if (result) {
+                            Cats.deleteNote({catId: $scope.cat._id, noteId: note._id},
+                                function() {
+                                    $scope.getCat();
+                                });
+                        }
+                    });
+            };
+
 			$scope.deleteEvent = function(event) {
 				var modalScope = $rootScope.$new();
 				modalScope.message = 'Are you sure you want to delete this event?';
@@ -116,19 +133,22 @@ angular.module('core').controller('CatViewController', ['$scope', '$stateParams'
 
             $scope.contacts = Contacts.query();
 
+            $scope.canAddNote = function() {
+                return $scope.authentication && $scope.authentication.user && $scope.authentication.user.contact && $scope.newNote != '';
+            };
+
             $scope.addNote = function() {
                 $scope.authentication = { user: { contact:$scope.contacts[0] } }
+                if (!$scope.canAddNote()) return;
                 Cats.addNote({catId: $scope.cat._id}, {
                     message: $scope.newNote,
                     date: Date.now(),
-                    sender: ($scope.authentication
-                                && $scope.authentication && $scope.authentication.user
-                                && $scope.authentication.user.contact._id)
+                    sender: $scope.authentication.user.contact._id
                 }, function() {
                     $scope.getCat();
                     $scope.newNote = '';
                 });
-            }
+            };
 
 			$scope.convertSex = function(sexNumber) {
 				if (sexNumber === 0) {

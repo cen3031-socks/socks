@@ -64,7 +64,9 @@ var CatSchema = new Schema({
 	notes: [
         {
             message: String,
-            sender: { type: Schema.Types.ObjectId, ref: 'User' }
+            date: Date,
+            sender: { type: Schema.Types.ObjectId, ref: 'User' },
+            _id: Schema.Types.ObjectId
         }
     ],
 	events: [
