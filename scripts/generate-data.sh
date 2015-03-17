@@ -8,17 +8,7 @@ if type /usr/bin/python >/dev/null 2>&1; then
 	./generate-contacts.py > ./contacts-data.json
 fi
 
-if [ $# -eq 0 ]; then
-	read -p "Do you want to remove pre-existing mongo data? (y/n): "  -n 1 -r
-	echo 
-	answer=$REPLY
-else
-	answer=$1
-fi
 
-
-if [[ $answer =~ ^[Yy]$ ]]
-then
 	echo "Removing pre-existing mongo data..."
 	mongo << EOF
 	use mean-dev
@@ -26,9 +16,7 @@ then
 	db.cats.drop()
 	db.donations.drop()
 EOF
-else 
-	echo "Leaving pre-existing data, just adding new."
-fi 
+ 
 
 echo "Importing donations data..."
 mongoimport --db mean-dev --collection donations --type json donations.json --jsonArray
