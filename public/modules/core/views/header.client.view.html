@@ -6,15 +6,18 @@
 			<span class="icon-bar"></span>
 			<span class="icon-bar"></span>
 		</button>
-		<a href="/#!/" class="navbar-brand">SOCKS</a>
+		<a href="/#!/" class="navbar-brand">
+            <img style="max-width:100px; margin-top: -7px;" ng-src="modules/core/img/brand/sockslogo.gif">
+        </a>
 	</div>
+    <!--<img src="public/modules/core/img/brand/sockslogo.gif">-->
     <section class="navigation">
         <ul>
             <li><a href="/#!/">Cats</a></li>
             <li><a href="/#!/contacts">Contacts</a></li>
             <li><a href="/#!/donations">Donations</a></li>
             <li><a href="/#!/stats">Stats</a></li>
-            <li><a href="/#!/creates">Create User</a></li>
+            <li><a href="/#!/employees">Create User</a></li>
         </ul>
     </section>
 	<nav class="collapse navbar-collapse" collapse="!isCollapsed" role="navigation">
@@ -33,12 +36,9 @@
 			</li>
 		</ul>
 		<ul class="nav navbar-nav navbar-right" data-ng-hide="authentication.user">
-			<li ui-route="/signup" ng-class="{active: $uiRoute}">
-				<a href="/#!/signup">Sign Up</a>
-			</li>
 			<li class="divider-vertical"></li>
 			<li ui-route="/signin" ng-class="{active: $uiRoute}">
-				<a href="/#!/signin">Sign In</a>
+				<a href="/#!/signin" class="signin-button">Sign In</a>
 			</li>
 		</ul>
 		<ul class="nav navbar-nav navbar-right" data-ng-show="authentication.user">
@@ -48,10 +48,7 @@
 				</a>
 				<ul class="dropdown-menu">
 					<li>
-						<a href="/#!/settings/profile">Edit Profile</a>
-					</li>
-					<li>
-						<a href="/#!/settings/accounts">Manage Social Accounts</a>
+						<a href="/#!/contacts/{{authentication.user.contact}}/edit">Edit Profile</a>
 					</li>
 					<li data-ng-show="authentication.user.provider === 'local'">
 						<a href="/#!/settings/password">Change Password</a>

@@ -12,14 +12,18 @@ angular.module('core').config(['$stateProvider', '$urlRouterProvider',
 			url: '/',
 			templateUrl: 'modules/core/views/home.client.view.html'
 		})
-		 .state('create', {
+		.state('create', {
 		      url: '/create',
 		      templateUrl: 'modules/core/views/create.client.view.html'
 		})
-		 .state('addemployee', {
+		.state('addemployee', {
 		      url: '/addemployee',
 		      templateUrl: 'modules/core/views/addemployee.client.view.html'
 		})
+        .state('createCat', {
+            url: '/cats/create',
+            templateUrl: 'modules/core/views/create-cat.client.view.html'
+        })
         .state('viewCat', {
             url: '/cats/:catId',
             templateUrl: 'modules/core/views/view-cat.client.view.html'

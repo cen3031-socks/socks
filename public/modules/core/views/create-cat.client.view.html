@@ -27,7 +27,7 @@
 					<div class="form-group col-md-4">
 						<label class="control-label" for="dob">Date of Birth</label>
 						<div class="controls">
-							<input name="dob" type="date" date-ng-model="dateOfBirth"
+							<input name="dob" type="date" data-ng-model="dateOfBirth"
 							id="dob" class="form-control" placeholder="Birthdate" />
 						</div>
 					</div>
@@ -68,14 +68,14 @@
 					<div class="form-group col-md-6">
 						<label class="control-label" for="dateOfArrival">Date of Arrival</label>
 						<div class="controls">
-							<input name="dateOfArrival" type="text" date-ng-model="dateOfArrival" id="dateOfArrival"
+							<input name="dateOfArrival" type="text" data-ng-model="dateOfArrival" id="dateOfArrival"
 							class="form-control" placeholder="Mr. Smith" />
 						</div>
 					</div>
 					<div class="form-group col-md-6">
 						<label class="control-label" for="vet">Vet</label>
 						<div class="controls">
-							<input name="vet" type="text" date-ng-model="vet" id="vet"
+							<input name="vet" type="text" data-ng-model="vet" id="vet"
 							class="form-control" placeholder="Mr. Smith" />
 						</div>
 					</div>
@@ -85,7 +85,7 @@
 						<label class="control-label" for="Address">Origin Address</label>
 						<div class="controls">
 							<input name="address" type="text"
-							date-ng-model="originAddress" id="address"
+							data-ng-model="originAddress" id="address"
 							class="form-control" placeholder="1 Main St." />
 						</div>
 					</div>
@@ -93,7 +93,7 @@
 						<label class="control-label" for="originPerson">Origin Person</label>
 						<div class="controls">
 							<input name="originPerson" type="text"
-							date-ng-model="originPerson" id="originPerson"
+							data-ng-model="originPerson" id="originPerson"
 							class="form-control" placeholder="Mr. Smith" />
 						</div>
 					</div>
@@ -115,7 +115,7 @@
 					</div>
 				</div>
 				<div class="form-group">
-					<input type="submit" class="btn btn-default">
+					<input id="submit" type="submit" class="btn btn-default">
 				</div>
 				<div data-ng-show="error" class="text-danger">
 					<strong data-ng-bind="error"></strong>

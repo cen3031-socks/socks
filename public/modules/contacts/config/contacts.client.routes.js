@@ -1,7 +1,7 @@
 'use strict';
 
 //Setting up route
-angular.module('contacts').config(['$stateProvider',
+angular.module('contacts', ['ui.router']).config(['$stateProvider',
 	function($stateProvider) {
 		// Contacts state routing
 		$stateProvider.
