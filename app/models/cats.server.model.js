@@ -48,7 +48,8 @@ var CatSchema = new Schema({
 	imageUrl: String,
 	origin: {
 		address: String,
-		person: String
+		person: { type: Schema.ObjectId, ref: 'Contact' },
+        notes: String
 	},
 	medicalRecords: {
 		hasMicrochip: Boolean,
@@ -56,11 +57,17 @@ var CatSchema = new Schema({
 	},
 	currentLocation: String,
 	owner: {
-		type: String,
-		default: '',
-		trim: true
+        type: Schema.ObjectId,
+        ref: 'Contact'
 	},
-	notes: [String]
+	notes: [
+        {
+            message: String,
+            sender: {
+                type: Schema.ObjectId, ref: 'User'
+            }
+        }
+    ]
 });
 
 mongoose.model('Cat', CatSchema);
