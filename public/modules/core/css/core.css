@@ -1,35 +1,77 @@
-.navigation {
-    width:200px;
-    position:absolute;
-    left:0;
-    top:0;
-    background:#333340;
-    margin-top:55px;
+.no-padding.no-damn-padding{
+	padding:0;
+	margin:0;
+	height:100%;
 }
-.navigation ul, .navigation ul li {
+.navigation{
+	background: #0071BC;
+	height:100%;
+	width: 100%;
+
+
+}
+.color-blue{
+	background-color: #0071BC;
+	height: 100%;
+
+}
+ul.link-list {
+	background:#0071BC;
+	width:100%;
+	list-style-type: none;
+	padding: 0;
+}
+li.list-element{
+	position: relative;
+	background:#0071BC;
+}
+a.list-link{
+	width: 100%
+}
+a.list-link,a.list-link:visited{
+	position:relative;
+    display:inline-block;
+    line-height:3em;
+    padding-left:1em;
+    font-size: 1.7em;
+    color: white;
+    text-decoration: none;
+}
+a.list-link:hover{
+	text-decoration: none;
+	background: #29abe2;
+	color: white;
+}
+ul li.link-element:hover{
+	background: white;
+	color: blue;
+}
+/*.link-list ul, .link-list ul li {
     position:relative;
-    width:200px;
     list-style-type:none;
     margin:0;
     padding:0;
 }
-.navigation ul li a:link, .navigation ul li a:visited {
+.link-list ul li a:link, .link-list ul li a:visited {
     position:relative;
     display:inline-block;
-    width:200px;
     line-height:3em;
     padding-left:1em;
     color:#ddd;
     background:#333340;
 }
-.navigation ul li a:hover {
+.link-list ul li a:hover {
     background-color:#9999AA;
+}*/
+.brand-image{
+	margin-top: 0;
+	width: 100%;
 }
-
 .content {
-	margin-top: 50px;
-    padding-left:200px;
     box-sizing:border-box;
+    display: inline-block;
+	vertical-align: top;
+	margin-left: 16em;
 }
 
 .content .container {
@@ -124,11 +166,16 @@ body.ng-cloak {
 .row .form-group {
 	margin-left: 15px; 
 }
-
-.navbar .container .navbar-header {
-    height:55px;
+.head{
+	background:#0071BC;
 }
-
-.navbar.navbar-inverse.navbar-fixed-top {
-    background:#0071BC;
+header{
+	width: 15em;
+	height: 100%;
+	position: absolute;
+	margin-top: 0;
+}
+html, body{
+	min-height:100%;
+	background-color: #def;
 }
