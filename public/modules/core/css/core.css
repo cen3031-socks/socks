@@ -30,7 +30,7 @@
     background-color:#9999AA;
 }
 
-.content {
+.main-layout .content {
 	margin-top: 50px;
     padding-left:200px;
     box-sizing:border-box;
