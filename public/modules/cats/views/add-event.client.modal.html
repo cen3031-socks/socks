@@ -1,0 +1,32 @@
+<section>
+	<form>
+		<div class="form-group">
+			<label for="eventType">Event Type</label>
+			<select class="form-control" ng-model="eventType" required>
+				<option value="vet">Vet Trip</option>
+				<option value="foster">Foster</option>
+				<option value="deceased">Deceased</option>
+				<option value="other">Other...</option>
+			</select>
+		</div>
+		<div class="form-group">
+			<datepicker ng-model="$parent.date" ng-required="true" />
+		</div>
+		<div class="form-group">
+			<label for="label">Label</label>
+			<input type="text"  class="form-control"
+			name="label" ng-model="label" 
+			placeholder="Type a label..." required/>
+		</div>
+		<div class="form-group">
+			<label for="detail">Details</label>
+			<textarea class="form-control"
+				name="detail" ng-model="detail" 
+				placeholder="Type more details..." 
+				rows=8>
+			</textarea>
+		</div>
+		<button class="btn btn-lg btn-default" ng-click="$dismiss()">Cancel</button>
+		<button class="btn btn-lg btn-primary" ng-click="createEvent()">Create</button>
+	</form>
+</section>
