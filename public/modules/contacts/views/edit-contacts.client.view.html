@@ -56,13 +56,76 @@
                             </div>
                             <div class="row">
                                 <div class="col-sm-6">
+
                                     <div class="form-group">
                                         <label class="control-label" for="state">State</label>
                                         <div class="controls">
-                                            <input type="text" data-ng-model="contact.state" id="state" class="form-control" >
+                                            <!--<input type="text" data-ng-model="name" id="name" class="form-control" placeholder="Name" required>-->
+                                            <select data-ng-model="contact.state" id="state" class="form-control" placeholder="State" required>
+                                                <option value="" disabled selected>Select a State</option>
+                                                <option value="AL">AL</option>
+                                                <option value="AK">AK</option>
+                                                <option value="AZ">AZ</option>
+                                                <option value="AR">AR</option>
+                                                <option value="CA">CA</option>
+                                                <option value="CO">CO</option>
+                                                <option value="CT">CT</option>
+                                                <option value="DE">DE</option>
+                                                <option value="DC">DC</option>
+                                                <option value="FL">FL</option>
+                                                <option value="GA">GA</option>
+                                                <option value="HI">HI</option>
+                                                <option value="ID">ID</option>
+                                                <option value="IL">IL</option>
+                                                <option value="IN">IN</option>
+                                                <option value="IA">IA</option>
+                                                <option value="KS">KS</option>
+                                                <option value="KY">KY</option>
+                                                <option value="LA">LA</option>
+                                                <option value="ME">ME</option>
+                                                <option value="MD">MD</option>
+                                                <option value="MA">MA</option>
+                                                <option value="MI">MI</option>
+                                                <option value="MN">MN</option>
+                                                <option value="MS">MS</option>
+                                                <option value="MO">MO</option>
+                                                <option value="MT">MT</option>
+                                                <option value="NE">NE</option>
+                                                <option value="NV">NV</option>
+                                                <option value="NH">NH</option>
+                                                <option value="NJ">NJ</option>
+                                                <option value="NM">NM</option>
+                                                <option value="NY">NY</option>
+                                                <option value="NC">NC</option>
+                                                <option value="ND">ND</option>
+                                                <option value="OH">OH</option>
+                                                <option value="OK">OK</option>
+                                                <option value="OR">OR</option>
+                                                <option value="PA">PA</option>
+                                                <option value="RI">RI</option>
+                                                <option value="SC">SC</option>
+                                                <option value="SD">SD</option>
+                                                <option value="TN">TN</option>
+                                                <option value="TX">TX</option>
+                                                <option value="UT">UT</option>
+                                                <option value="VT">VT</option>
+                                                <option value="VA">VA</option>
+                                                <option value="WA">WA</option>
+                                                <option value="WV">WV</option>
+                                                <option value="WI">WI</option>
+                                                <option value="WY">WY</option>
+                                            </select>
                                         </div>
                                     </div>
+
+                                    <!--<div class="form-group">-->
+                                        <!--<label class="control-label" for="state">State</label>-->
+                                        <!--<div class="controls">-->
+                                            <!--<input type="text" data-ng-model="contact.state" id="state" class="form-control" >-->
+                                        <!--</div>-->
+                                    <!--</div>-->
                                 </div>
+
                                 <div class="col-sm-6">
                                     <div class="form-group">
                                         <label class="control-label" for="zipCode">Zip Code</label>
@@ -90,74 +153,28 @@
                                     </div>
                                 </div>
                             </div>
+
                             <div class="row">
-                                <div class="col-xs-6 col-sm-3">
-                                    <div class="form-group text-center">
-                                        <label class="control-label" for="is_volunteer">Volunteer</label>
-                                        <div class="controls">
-                                            <input type="checkbox" data-ng-model="contact.is_volunteer" id="is_volunteer" class="form-control" >
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-xs-6 col-sm-3">
-                                    <div class="form-group text-center">
-                                        <label class="control-label" for="is_adopter">Adopter</label>
-                                        <div class="controls">
-                                            <input type="checkbox" data-ng-model="contact.is_adopter" id="is_adopter" class="form-control" >
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-xs-6 col-sm-3">
-                                    <div class="form-group text-center">
-                                        <label class="control-label" for="is_fosterer">Fosterer</label>
-                                        <div class="controls">
-                                            <input type="checkbox" data-ng-model="contact.is_fosterer" id="is_fosterer" class="form-control" >
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-xs-6 col-sm-3">
-                                    <div class="form-group text-center">
-                                        <label class="control-label" for="is_donator">Donator</label>
-                                        <div class="controls">
-                                            <input type="checkbox" data-ng-model="contact.is_donator" id="is_donator" class="form-control" >
-                                        </div>
-                                    </div>
+                                <div class="col-xs-offset-6 col-xs-6 col-sm-offset-9 col-sm-3">
+                                    <button type="button" class="btn btn-danger text-center btn-sm" >
+                                        <!--<button type="button" class="btn btn-primary text-center" href="/#!/contacts/create">-->
+
+                                        <i class="glyphicon glyphicon-trash"></i> <br>
+                                        Delete Contact?
+                                        <input type="checkbox" data-ng-model="contact.deleted_contact" id="deleted_contact" class="form-control" >
+                                    </button>
                                 </div>
 
-                            </div>
-                            <div class="row">
-                                <div class="col-xs-6 col-sm-3">
-                                    <div class="form-group text-center">
-                                        <label class="control-label" for="is_vet">Veterinarian</label>
-                                        <div class="controls">
-                                            <input type="checkbox" data-ng-model="contact.is_vet" id="is_vet" class="form-control" >
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-xs-6 col-sm-3">
-                                    <div class="form-group text-center">
-                                        <label class="control-label" for="is_employee">Employee</label>
-                                        <div class="controls">
-                                            <input type="checkbox" data-ng-model="contact.is_employee" id="is_employee" class="form-control" >
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-xs-6 col-sm-3">
-                                    <div class="form-group text-center">
-                                        <label class="control-label" for="is_admin">Administrator</label>
-                                        <div class="controls">
-                                            <input type="checkbox" data-ng-model="contact.is_admin" id="is_admin" class="form-control" >
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-xs-6 col-sm-3">
-                                    <div class="form-group text-center">
-                                        <label class="control-label" for="deleted_contact">Delete Contact?</label>
-                                        <div class="controls">
-                                            <input type="checkbox" data-ng-model="contact.deleted_contact" id="deleted_contact" class="form-control" >
-                                        </div>
-                                    </div>
-                                </div>
+
+
+                                <!--<div class="col-xs-offset-6 col-xs-6 col-sm-offset-9 col-sm-3">-->
+                                    <!--<div class="form-group text-center">-->
+                                        <!--<label class="control-label" for="deleted_contact">Delete Contact?</label>-->
+                                        <!--<div class="controls">-->
+                                            <!--<input type="checkbox" data-ng-model="contact.deleted_contact" id="deleted_contact" class="form-control" >-->
+                                        <!--</div>-->
+                                    <!--</div>-->
+                                <!--</div>-->
 
                             </div>
                         </div>

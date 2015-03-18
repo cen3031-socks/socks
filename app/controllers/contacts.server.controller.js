@@ -5,8 +5,27 @@
  */
 var mongoose = require('mongoose'),
 	errorHandler = require('./errors.server.controller'),
-	Contact = mongoose.model('Contact'),
+	Contact = mongoose.model('Contact'), Adoption = mongoose.model('Adoption'),
 	_ = require('lodash');
+
+/**
+ * Find adopted cats
+ */
+//
+//function exec(callback) {
+//    // get the stuff
+//    results = [..];
+//    callback(error, results);
+//}
+
+exports.findAdoptedCats = function(req, res) {
+    Adoption.find({adopter: req.contact._id, endDate: null}).exec(function(err, adoptions) {
+        if (err) {
+           return res.status(400);
+        }
+        return res.jsonp(adoptions);
+    });
+}
 
 /**
  * Create a Contact

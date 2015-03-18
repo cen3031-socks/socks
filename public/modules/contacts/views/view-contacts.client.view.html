@@ -27,53 +27,41 @@
                 </a>
             </div>
         </div>
+        <div class="row">
+            <div ng-show="contact.isAdopter" class = "col-xs-12 col-sm-6 col-md-2">
+                <button type="button" class="btn btn-default btn-md background-pink">
+                    <span class="glyphicon glyphicon-heart" aria-hidden="true"></span> Adopter
+                </button>
+            </div>
 
-        <div class="row">
-            <div class="col-sm-3">
-                <h4><b>Phone Number:</b></h4>
-            </div>
-            <div class="col-sm-9">
-                <h4>{{contact.phone}}</h4>
-            </div>
         </div>
-        <div class="row">
-            <div class="col-sm-3">
-                <h4><b>Email:</b></h4>
-            </div>
-            <div class="col-sm-9">
-                <h4>{{contact.email}}</h4>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-sm-3">
-                <h4><b>Address:</b></h4>
-            </div>
-            <div class="col-sm-9">
-                <h4>{{contact.address}}</h4>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-sm-3">
-                <h4><b>City:</b></h4>
-            </div>
-            <div class="col-sm-9">
-                <h4>{{contact.city}}</h4>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-sm-3">
-                <h4><b>State:</b></h4>
-            </div>
-            <div class="col-sm-9">
-                <h4>{{contact.state}}</h4>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-sm-3">
-                <h4><b>Zip Code:</b></h4>
-            </div>
-            <div class="col-sm-9">
-                <h4>{{contact.zipCode}}</h4>
+        <div class="profile">
+            <div class="attribute-group">
+                <h2>Basic Info</h2>
+                <div class="profile-group">
+                    <span class="profile-attribute">Phone Number:</span>
+                    <span class="profile-value" id="sex">{{contact.phone}}</span>
+                </div>
+                <div class="profile-group">
+                    <span class="profile-attribute">Email</span>
+                    <span class="profile-value" id="color">{{contact.email}}</span>
+                </div>
+                <div class="profile-group">
+                    <span class="profile-attribute">Address</span>
+                    <span class="profile-value" id="breed">{{contact.address}}</span>
+                </div>
+                <div class="profile-group">
+                    <span class="profile-attribute">City</span>
+                    <span class="profile-value" id="temperament">{{contact.city}}</span>
+                </div>
+                <div class="profile-group">
+                    <span class="profile-attribute">State</span>
+                    <span class="profile-value" id="description">{{contact.state}}</span>
+                </div>
+                <div class="profile-group">
+                    <span class="profile-attribute">Zip Code</span>
+                    <span class="profile-value" id="dateOfBirth">{{contact.zipCode}}</span>
+                </div>
             </div>
         </div>
 

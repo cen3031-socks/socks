@@ -120,6 +120,9 @@ function ($scope, Contacts, $stateParams, $modal) {
         $scope.contact = Contacts.get({
             contactId: $stateParams.contactId
         });
+        var adoptions = Contacts.findAdoptedCats({contactId: $stateParams.contactId}, function() {
+            $scope.contact.isAdopter = adoptions.length > 0;
+        });
         console.log($scope.contact);
     };
 

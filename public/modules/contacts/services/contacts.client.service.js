@@ -6,7 +6,12 @@ angular.module('contacts').factory('Contacts', ['$resource',
 		}, {
 			update: {
 				method: 'PUT'
-			}
+			},
+            findAdoptedCats: {
+                method: 'GET',
+                url: 'contacts/:contactId/adoptions',
+                isArray: true
+            }
 		});
 	}
 ]);

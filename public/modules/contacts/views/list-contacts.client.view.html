@@ -4,11 +4,9 @@
     </div>
     <div class="row">
         <div class="col-xs-12 col-sm-8">
-            <div class="input-group input-group-lg">
-                <input type="text" class="form-control" ng-model="searchText" placeholder="Search...">
-                 <span class="input-group-btn">
-                     <button class="btn btn-default" type="button">Go!</button>
-                 </span>
+            <div class="input-group input-group-lg contact_input">
+                <input type="text" class="form-control" ng-model="searchText" placeholder="Search Contacts...">
+
             </div><!-- /input-group -->
         </div>
         <div class="col-xs-12 col-sm-4 text-center">
@@ -41,7 +39,7 @@
             <tbody>
             <tr data-ng-repeat="contact in contacts | filter:searchText"
                xng-click="contactsCtrl.modalUpdate('lg', contact)"
-               ng-click="getDetails(contact)"
+               ng-click="getDetails(contact)" ng-hide="contact.deleted_contact"
                     >
 
                 <td>{{contact.firstName}}</td>

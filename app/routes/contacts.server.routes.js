@@ -14,6 +14,9 @@ module.exports = function(app) {
         .put(contacts.update)
         .delete(contacts.delete);
 
+    app.route('/contacts/:contactId/adoptions')
+        .get(contacts.findAdoptedCats);
+
     // Finish by binding the Contact middleware
     app.param('contactId', contacts.contactByID);
 };
