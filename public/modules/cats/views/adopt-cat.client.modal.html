@@ -1,0 +1,25 @@
+<section>
+	<form>
+		<div class="alert alert-danger" ng-show="error">{{error}}</div>
+		<div class="form-group">
+			<label>Adoption Date</label>
+			<p class="input-group">
+			<input type="text" class="form-control" datepicker-popup="dd MMM yyyy" ng-model="$parent.adoptionDate" 
+				is-open="opened" ng-required="true" close-text="Close" />
+			<span class="input-group-btn">
+				<button type="button" class="form-control btn btn-default" ng-click="open($event)">
+					<i class="glyphicon glyphicon-calendar"></i>
+				</button>
+			</span>
+			</p>
+		</div>
+		<div class="form-group">
+			<label for="Adopter">Adopter</label>
+			<div>
+				<contacts-selector max=1 ng-model="adopter" />
+			</div>
+		</div>
+		<button class="btn btn-lg btn-default" ng-click="$dismiss()">Cancel</button>
+		<button class="btn btn-lg btn-primary" ng-click="adoptCat()">Adopt</button>
+	</form>
+</section>
