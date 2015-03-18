@@ -1,7 +1,26 @@
-.signin-button {
-	
+.navbar-nav > .active > a.signin-button {
+	background-color:#0071BC;
+	color:#FFF;
 }
 
+.navbar-nav > .open > a.signin-button {
+	background-color:#0071BC;
+	color:#FFF;
+}
+.navbar-inverse .navbar-nav > li > a {
+	background-color:#0071BC;
+	color:#FFF;
+}
+
+body .navbar-inverse .navbar-nav > .active > a {
+	background-color:#0071BC !important;
+}
+.navbar-inverse .navbar-nav > .open > a {
+	background-color:#0071BC;
+}
+body .navbar-inverse .navbar-nav > li  {
+	background-color:#0071BC !important;
+}
 .navigation {
     width:200px;
     position:absolute;

@@ -39,7 +39,10 @@ exports.create = function(req, res) {
 	user.lastName = employee.lastName;
 	user.provider = 'local';
 	user.parent = employee._id;
-
+	if(employee.permissionLevel > 0) {
+		user.permissionLevel = employee.permissionLevel;
+	}
+	console.log(employee.permissionLevel);
 	var contact = new Contact(req.body);
 	contact.firstName = employee.firstName;
 	contact.surname = employee.lastName;
