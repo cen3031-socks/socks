@@ -44,13 +44,12 @@
 	<![endif]-->
 </head>
 
-<body class="ng-cloak">
-	<header data-ng-include="'/modules/core/views/header.client.view.html'" class="navbar navbar-fixed-top navbar-inverse"></header>
-	<section class="content">
-		<section class="container">
-			{% block content %}{% endblock %}
+<body class="ng-cloak container no-padding no-damn-padding">
+	<header data-ng-include="'/modules/core/views/header.client.view.html'" class="head"></header><section class="content">
+			<section class="">
+				{% block content %}{% endblock %}
+			</section>
 		</section>
-	</section>
 
 	<!--Embedding The User Object-->
 	<script type="text/javascript">
