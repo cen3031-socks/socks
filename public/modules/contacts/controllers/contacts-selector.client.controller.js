@@ -1,3 +1,4 @@
+'use strict';
 
 angular.module('contacts')
     .controller('ContactsSelectorController', ['$stateParams', 'Contacts', '$modal', '$scope',
@@ -46,7 +47,16 @@ angular.module('contacts')
 			$scope.unselect = function(contact, index) {
 				$scope.selectedContacts.splice(index, 1);
 			};
-    }]).directive('contactsSelector',
+		}]).controller('ContactLinkController', [ '$scope', 'Contacts',
+			function($scope, Contacts) {
+				$scope.$watch('contactId', function() {
+					if ($scope.contactId !== undefined) {
+						$scope.contact = Contacts.get({contactId: $scope.contactId});
+					} else { 
+						$scope.contact = undefined;
+					}
+				});
+		}]).directive('contactsSelector',
         function() {
             return {
                 restrict: 'E',
@@ -56,4 +66,18 @@ angular.module('contacts')
                 link: function(scope, element, attrs, ctrl) { }
             };
         }
-    );
+    ).directive('contactLink', ['Contacts', 
+		function(Contacts) {
+            return {
+                restrict: 'E',
+                controller: 'ContactLinkController',
+
+                template: '<a href="#!/contacts/{{contact._id}}">{{contact.firstName}} {{contact.surname}}</a>',
+				scope: { contactId: '=contactId' },
+                link: function(scope, element, attrs, ctrl) {
+					/*console.log(JSON.stringify(scope));*/
+				}
+            };
+		}]
+	);
+

@@ -11,12 +11,23 @@ module.exports = function(app) {
 	app.route('/cats')
 		.get(cats.list)
 		.post(cats.create);
-
 	app.route('/cats/:catId').get(cats.view);
-	/*.put(users.requiresLogin, cats.hasAuthorization, cats.update)*/
-	/*.delete(users.requiresLogin, cats.hasAuthorization, cats.delete);*/
+	app.route('/cats/:catId/events')
+		.post(cats.addEvent);
+	app.route('/cats/:catId/events/:eventId')
+		.put(cats.editEvent)
+		.delete(cats.deleteEvent);
+	app.route('/cats/:catId/adoptions')
+		.post(cats.adopt);
+	app.route('/cats/:catId/adoptions/:adoptionId')
+		.put(cats.unadopt);
+
+    app.route('/cats/:catId/notes')
+        .put(cats.addNote);
+    app.route('/cats/:catId/notes/:noteId')
+        .delete(cats.deleteNote);
 
 	// Finish by binding the cat middleware
-	app.param('catId', cats.catByID);
+	app.param('catId', cats.catById);
+	app.param('adoptionId', cats.adoptionById);
 };
-
