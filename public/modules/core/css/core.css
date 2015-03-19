@@ -68,7 +68,10 @@ ul li.link-element:hover{
 	margin-top: 0;
 	width: 100%;
 }
-.content {
+
+.main-layout .content {
+	margin-top: 50px;
+    padding-left:200px;
     box-sizing:border-box;
     display: inline-block;
 	vertical-align: top;

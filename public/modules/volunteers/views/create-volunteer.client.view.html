@@ -2,12 +2,12 @@
 <section data-ng-controller="VolunteersController" data-ng-init="find()">
 
     <div class="page-header text-center">
-        <h1>Welcome!</h1>
+        <h1>Volunteer Sign-In</h1>
     </div>
     <div class="alert alert-info text-center">
-        If you are here to volunteer, please enter your full name below.
+        If you are here to volunteer, please enter your full (first and last) name below.
     </div>
-    <form class="form-horizontal" data-ng-submit="create()" novalidate>
+    <form class="form-horizontal" data-ng-submit="sign()" novalidate>
         <div class = "form-group input-group input-group-lg">
         <span class="input-group-addon">
             <i class = "text-muted glyphicon glyphicon-user"></i>
@@ -15,8 +15,7 @@
             <input type="text" id="volunteer-name" name="username" class="form-control" data-ng-model="name" placeholder="Full Name">
         </div>
         <div class="form-group text-center">
-            <button type="submit" class="btn btn-primary">Sign In</button>
-            <button type="submit" class="btn btn-primary">Sign Out</button>
+            <button type="submit" class="btn btn-primary">Submit</button>
         </div>
     </form>
 
