@@ -29,7 +29,7 @@ li.list-element{
 a.list-link{
 	width: 100%
 }
-a.list-link,a.list-link:visited{
+a.list-link,a.list-link:visited {
 	position:relative;
     display:inline-block;
     line-height:3em;
@@ -38,12 +38,12 @@ a.list-link,a.list-link:visited{
     color: white;
     text-decoration: none;
 }
-a.list-link:hover{
+a.list-link:hover {
 	text-decoration: none;
 	background: #29abe2;
 	color: white;
 }
-ul li.link-element:hover{
+ul li.link-element:hover {
 	background: white;
 	color: blue;
 }
@@ -70,16 +70,17 @@ ul li.link-element:hover{
 }
 
 .main-layout .content {
-	margin-top: 50px;
-    padding-left:200px;
     box-sizing:border-box;
-    display: inline-block;
 	vertical-align: top;
 	margin-left: 16em;
+	margin-right:auto;
 }
-
-.content .container {
-    width:100%;
+.main-layout .content .page-header {
+	padding:0;
+	margin:0;
+}
+.container {
+	width:auto;
 }
 
 .undecorated-link:hover {
@@ -100,7 +101,6 @@ body.ng-cloak {
 }
 
 .cat-grid {
-	max-width:70em;
 	margin:auto;
 }
 
@@ -173,13 +173,16 @@ body.ng-cloak {
 .head{
 	background:#0071BC;
 }
-header{
+header {
 	width: 15em;
 	height: 100%;
 	position: absolute;
 	margin-top: 0;
+	left:0;
+	top:0;
 }
-html, body{
+html, body {
 	min-height:100%;
+	width:100%;
 	background-color: #def;
 }
