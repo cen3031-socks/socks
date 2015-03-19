@@ -73,7 +73,7 @@ ul li.link-element:hover {
     box-sizing:border-box;
 	vertical-align: top;
 	margin-left: 16em;
-	margin-right:auto;
+	margin-right:1em;
 }
 .main-layout .content .page-header {
 	padding:0;
