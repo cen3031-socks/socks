@@ -97,8 +97,8 @@ contactsApp.controller('ContactsCreateController', ['$scope', 'Contacts', '$loca
     }
 ]);
 
-contactsApp.controller('ContactsUpdateController', ['$scope', 'Contacts',
-    function($scope, Contacts) {
+contactsApp.controller('ContactsUpdateController', ['$scope', 'Contacts', '$stateParams', '$modal',
+    function($scope, Contacts, $stateParams, $modal) {
 
         // Update existing Contact
         $scope.update = function(updatedContact) {
@@ -110,8 +110,50 @@ contactsApp.controller('ContactsUpdateController', ['$scope', 'Contacts',
         	});
         };
 
+        // Open a modal window to delete a single contact record
+        this.modalDelete = function (size, selectedContact) {
+
+            var modalInstance = $modal.open({
+                templateUrl: 'modules/contacts/views/delete-confirm.client.view.html',
+                controller: function($scope, $modalInstance, contact){
+                    $scope.contact = contact;
+
+                    $scope.ok = function () {
+
+                        if (document.updateContactForm.$valid){
+                            $modalInstance.close($scope.contact);
+                        }
+                        $modalInstance.dismiss('cancel');
+                    };
+
+                    $scope.cancel = function () {
+                        $modalInstance.dismiss('cancel');
+                    };
+                },
+                size: size,
+                resolve: {
+                    contact: function () {
+                        return selectedContact;
+                    }
+                }
+            });
+
+            modalInstance.result.then(function (selectedItem) {
+                $scope.selected = selectedItem;
+            }, function () {
+                $log.info('Modal dismissed at: ' + new Date());
+            });
+        };
+
     }
+
+
 ]);
+
+
+
+
+
 
 contactsApp.controller('ContactsViewController', [ '$scope', 'Contacts', '$stateParams', '$modal',
 function ($scope, Contacts, $stateParams, $modal) {
@@ -161,9 +203,41 @@ function ($scope, Contacts, $stateParams, $modal) {
         });
     };
 
+    // Open a modal window to view a contact's adopted cats
+    this.modalAdoptedCatsView = function (size, selectedContact) {
+
+        var modalInstance = $modal.open({
+            templateUrl: 'modules/contacts/views/adopted-cats.client.view.html',
+            controller: function($scope, $modalInstance, contact){
+                $scope.contact = contact;
+
+                $scope.adoptions = Contacts.findAdoptedCats({contactId:contact._id});
+
+                $scope.cancel = function () {
+                    $modalInstance.dismiss('cancel');
+                };
+            },
+            size: size,
+            resolve: {
+                contact: function () {
+                    return selectedContact;
+                }
+            }
+        });
+
+        modalInstance.result.then(function (selectedItem) {
+            $scope.selected = selectedItem;
+        }, function () {
+            $log.info('Modal dismissed at: ' + new Date());
+        });
+    };
+
 
 
 }]);
+
+
+
 contactsApp.directive('contactList', [function() {
     return {
         restrict: 'E',

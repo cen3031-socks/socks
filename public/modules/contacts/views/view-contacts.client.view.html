@@ -29,9 +29,11 @@
         </div>
         <div class="row">
             <div ng-show="contact.isAdopter" class = "col-xs-12 col-sm-6 col-md-2">
-                <button type="button" class="btn btn-default btn-md background-pink">
-                    <span class="glyphicon glyphicon-heart" aria-hidden="true"></span> Adopter
-                </button>
+                <a ng-click="contactViewCtrl.modalAdoptedCatsView('lg', contact)">
+                    <button type="button" class="btn btn-default btn-md background-pink">
+                        <span class="glyphicon glyphicon-heart" aria-hidden="true"></span> Adopter
+                    </button>
+                </a>
             </div>
 
         </div>

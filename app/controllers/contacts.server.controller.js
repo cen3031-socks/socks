@@ -5,7 +5,7 @@
  */
 var mongoose = require('mongoose'),
 	errorHandler = require('./errors.server.controller'),
-	Contact = mongoose.model('Contact'), Adoption = mongoose.model('Adoption'),
+	Contact = mongoose.model('Contact'), Adoption = mongoose.model('Adoption'), Cat = mongoose.model('Cat'),
 	_ = require('lodash');
 
 /**
@@ -23,7 +23,14 @@ exports.findAdoptedCats = function(req, res) {
         if (err) {
            return res.status(400);
         }
-        return res.jsonp(adoptions);
+        Adoption.populate(adoptions, { path: 'catId', model: Cat},
+            function(err, adoptions) {
+                if (err) {
+                    return res.status(400);
+                }
+                else return res.jsonp(adoptions);
+            }
+        );
     });
 }
 
