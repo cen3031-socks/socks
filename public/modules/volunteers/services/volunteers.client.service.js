@@ -7,7 +7,13 @@ angular.module('volunteers').factory('Volunteers', ['$resource',
 		}, {
 			update: {
 				method: 'PUT'
-			}
+			},
+
+            getByName: {
+                method: 'GET',
+                url: '/volunteers/by-name',
+                isArray: true
+            }
 		});
 	}
 ]);

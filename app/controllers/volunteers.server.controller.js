@@ -75,6 +75,19 @@ exports.delete = function(req, res) {
 	});
 };
 
+exports.getVolunteerByName = function(req, res) {
+    Volunteer.find({firstName:req.body.firstName,lastName:req.body.lastName, timeOut: null}).exec(function(err, volunteers) {
+        if (err) {
+            return res.status(400).send({
+                message: errorHandler.getErrorMessage(err)
+            });
+        } else {
+            res.jsonp(volunteers);
+        }
+    });
+}
+
+
 /**
  * List of Volunteers
  */

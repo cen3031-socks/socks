@@ -68,24 +68,45 @@ angular.module('volunteers').controller('VolunteersController', ['$scope', '$sta
             // Create new Volunteer object
             var nameArray = this.name.split(" ");
 
+
+            //$scope.volunteers = Volunteers.query();
+
             var volunteer = {
                 name: this.name,
                 firstName: nameArray[0],
                 lastName: nameArray[1],
                 timeIn: Date.now
             };
-            $scope.modalUpdate('lg', volunteer);
+
+            console.log("OOOOOOHHHHHHHHH");
+
+            var correctVolunteer = Volunteers.getByName({firstName: volunteer.firstName, lastName: volunteer.lastName}, function(){
+                if (true) {
+                    console.log("AHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH");
+
+                    $scope.modalUpdate('lg', volunteer);
+
+                }
+                else {
+
+
+                }
+
+
+                $scope.name = '';
 
 
 
-            //check here if nameArray[0] matches a first name AND nameArray[1] matches a last name
+
+
+            });
+
 
 
 // Redirect after save
 //volunteer.$save(function(response) {
 //$location.path('volunteers/' + response._id);
 // Clear form fields
-            $scope.name = '';
 // }, function(errorResponse) {
 // $scope.error = errorResponse.data.message;
 //});
