@@ -1,0 +1,42 @@
+<section data-ng-controller="ContactsUpdateController as contactUpdCtrl">
+
+    <div class="modal-header">
+        <div class="row">
+            <h3 class="modal-title">Delete {{contact.firstName}} {{contact.surname}}?</h3>
+            <h4 class="modal-title">(This can be recovered)</h4>
+        </div>
+        <div class="row">
+            <div class = "col-xs-offset-6 col-xs-3"
+                <a href="/#!/contacts">
+                  <button class="btn btn-danger btn-lg" ng-click="contact.deleted_contact = true; update(contact); ok()" ng-disabled="updateContactForm.$invalid">Delete</button>
+                </a>
+            </div>
+            <div class="col-xs-3">
+                <button class="btn btn-warning btn-lg" ng-click="cancel()">Cancel</button>
+            </div>
+        </div>
+    </div>
+    <!--<div class="modal-body">-->
+        <!--<form name="updateContactForm">-->
+            <!--<fieldset>-->
+                <!--<div class="col-xs-offset-6 col-xs-6 col-sm-offset-9 col-sm-3">-->
+                            <!--<div class="form-group text-center">-->
+                                <!--<label class="control-label" for="deleted_contact">Delete Contact?</label>-->
+                                <!--<div class="controls">-->
+                                    <!--<input type="checkbox" data-ng-model="contact.deleted_contact" id="deleted_contact" class="form-control" >-->
+                                <!--</div>-->
+                            <!--</div>-->
+                        <!--</div>-->
+
+                    <!--</div>-->
+                <!--</div>-->
+    <!--</div>-->
+
+    <!--</fieldset>-->
+    <!--</form>-->
+    <!--</div>-->
+
+
+
+
+</section>
