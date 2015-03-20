@@ -1,7 +1,8 @@
 'use strict';
 
-angular.module('core').controller('CatViewController', ['$scope', '$stateParams', 'Authentication', 'Cats', '$modal', '$location', '$rootScope', 'Contacts',
-		function($scope, $stateParams, Authentication, Cats, $modal, $location, $rootScope, Contacts) {
+angular.module('core').controller('CatViewController',
+    ['$scope', '$stateParams', 'Authentication', 'Cats', '$modal', '$location', '$rootScope', 'Contacts', 'Dialogs',
+		function($scope, $stateParams, Authentication, Cats, $modal, $location, $rootScope, Contacts, Dialogs) {
 			// This provides Authentication context.
 			$scope.authentication = Authentication;
 
@@ -83,52 +84,36 @@ angular.module('core').controller('CatViewController', ['$scope', '$stateParams'
 
 			$scope.onRouteChangeOff = $scope.$on('$locationChangeStart', function(event, newState, oldState) {
 				if (($scope.newNote || '') != '') {
-					var modalScope = $rootScope.$new();
-					modalScope.message = 'You have unsaved data entered on this page. Do you want to leave without saving?';
-					$modal.open({
-						templateUrl: '/modules/core/views/confirm-dialog.client.modal.html',
-						scope: modalScope
-					}).result.then(function(result) {
-						if (result) {
-							$scope.onRouteChangeOff();
-							$location.path(newState);
-						}
-					});
+                    Dialogs
+                        .confirm('You have unsaved data entered on this page. Do you want to leave without saving?')
+                        .then(function(result) {
+                            if (result) {
+                                $scope.onRouteChangeOff();
+                                $location.path(newState);
+                            }
+                        });
 					event.preventDefault();
 				}
 			});
 
             $scope.deleteNote = function(note, index) {
-
-                var modalScope = $rootScope.$new();
-                modalScope.message = 'Are you sure you want to delete this note?';
-                $modal.open({
-                    templateUrl: '/modules/core/views/confirm-dialog.client.modal.html',
-                    scope: modalScope
-                }).result.then(function(result) {
+                Dialogs
+                    .confirm('Are you sure you want to delete this note?')
+                    .then(function(result) {
                         if (result) {
-                            Cats.deleteNote({catId: $scope.cat._id, noteId: note._id},
-                                function() {
-                                    $scope.getCat();
-                                });
+                            Cats.deleteNote({catId: $scope.cat._id, noteId: note._id}, $scope.getCat);
                         }
                     });
             };
 
 			$scope.deleteEvent = function(event) {
-				var modalScope = $rootScope.$new();
-				modalScope.message = 'Are you sure you want to delete this event?';
-				$modal.open({
-					templateUrl: '/modules/core/views/confirm-dialog.client.modal.html',
-					scope: modalScope
-				}).result.then(function(result) {
-					if (result) {
-						Cats.deleteEvent({catId: $scope.cat._id, eventId: event._id},
-							function() {
-								$scope.getCat();
-							});
-					}
-				});
+                Dialogs
+                    .confirm('Are you sure you want to delete this event?')
+                    .then(function(result) {
+                        if (result) {
+                            Cats.deleteEvent({catId: $scope.cat._id, eventId: event._id}, $scope.getCat);
+                        }
+                    });
 			};
 
             $scope.contacts = Contacts.query();
