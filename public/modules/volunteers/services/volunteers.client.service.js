@@ -11,7 +11,7 @@ angular.module('volunteers').factory('Volunteers', ['$resource',
 
             getByName: {
                 method: 'GET',
-                url: '/volunteers/by-name',
+                url: '/volunteers/by-name/:contactId',
                 isArray: true
             }
 		});

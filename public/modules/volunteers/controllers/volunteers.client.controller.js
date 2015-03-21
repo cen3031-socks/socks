@@ -10,10 +10,12 @@ angular.module('volunteers').controller('VolunteersController', ['$scope', '$sta
                 templateUrl: 'modules/volunteers/views/view-volunteer.client.view.html',
                 controller: function ($scope, $modalInstance, volunteer) {
                     $scope.volunteer = volunteer;
-                    $scope.name = selectedVolunteer.name;
-                    $scope.firstName = selectedVolunteer.firstName;
-                    $scope.lastName = selectedVolunteer.lastName;
+                    //$scope.name = selectedVolunteer.name;
+                    //$scope.firstName = selectedVolunteer.firstName;
+                    //$scope.lastName = selectedVolunteer.lastName;
+                    $scope.contact = volunteer.contact;
                     $scope.currTime = new Date();
+                    setTimeout($modalInstance.dismiss, 3000);
                 } ,
                 size: size,
                 resolve: {
@@ -30,70 +32,46 @@ angular.module('volunteers').controller('VolunteersController', ['$scope', '$sta
         };
 // Create new Volunteer
         $scope.sign = function() {
-            /*
-             var vol = db.collection.findOne({name: this.name});
-             //if the volunteer's name is not in the database create them
-             if (vol == null) {
-             var volunteer = new Volunteers({
-             name: this.name,
-             created: this.created,
-             signedIn: this.signedIn,
-             minutesVolunteeredInWee: this.minutesVolunteeredInWeek,
-             minutesVolunteeredEver: this.minutesVolunteeredEver
-             });
-             }
-             else {
-             //var vol = volunteer with name just submitted
-             if(vol.signedIn == false) {
-             vol.mostRecentSignIn = new Date();
-             vol.signedIn = true;
-             }
-             else {
-             vol.signedIn = false;
-             var cur = new Date();
-             tmp = new Date(cur - vol.mostRecentSignIn);
-             vol.minutesVolunteeredInWeek += tmp.getMinutes();
-             }
-             }
-             // Redirect after save
-             volunteer.$save(function(response) {
-             // $location.path('volunteers/' + response._id);
-             // Clear form fields
-             $scope.name = '';
-             }, function(errorResponse) {
-             $scope.error = errorResponse.data.message;
-             });
-             */
-
-            // Create new Volunteer object
-            var nameArray = this.name.split(" ");
 
 
-            //$scope.volunteers = Volunteers.query();
 
-            var volunteer = {
-                name: this.name,
-                firstName: nameArray[0],
-                lastName: nameArray[1],
-                timeIn: Date.now
-            };
+            var correctVolunteer = Volunteers.getByName({contactId:$scope.contact[0]._id}, function(){
+                console.log(correctVolunteer);
 
-            console.log("OOOOOOHHHHHHHHH");
+                if (correctVolunteer.length==0) {
+                    console.log("first");
+                    //create new volunteer
+                    var volunteer = new Volunteers( {
+                        contact: $scope.contact[0]._id,
+                        timeIn: Date.now()
+                    });
+                    volunteer.$save(function(response) {
+                        $scope.contact = [];
+                        $scope.modalUpdate('lg', volunteer);
+                    }, function(errorResponse) {
+                        $scope.error = errorResponse.data.message;
+                        //console.log(errorResponse);
+                    });
+                } else {
 
-            var correctVolunteer = Volunteers.getByName({firstName: volunteer.firstName, lastName: volunteer.lastName}, function(){
-                if (true) {
-                    console.log("AHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH");
+                    console.log("second");
+                    //you probably can't do this
+                    correctVolunteer[0].timeOut = Date.now();
+                    correctVolunteer[0].$update(function(response) {
 
-                    $scope.modalUpdate('lg', volunteer);
-
-                }
-                else {
+                        $scope.modalUpdate('lg', correctVolunteer[0]);
+                        $scope.contact = [];
 
 
+                    }, function(errorResponse) {
+                        $scope.error = errorResponse.data.message;
+                        //console.log(errorResponse);
+                    });
                 }
 
 
-                $scope.name = '';
+
+                //$scope.name = '';
 
 
 

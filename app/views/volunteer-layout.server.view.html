@@ -59,7 +59,8 @@
         <span class="input-group-addon">
             <i class = "text-muted glyphicon glyphicon-user"></i>
             </span>
-                    <input type="text" id="volunteer-name" name="username" class="form-control" data-ng-model="name" placeholder="Full Name">
+                    <contacts-selector max="1" ng-model="contact"></contacts-selector>
+                    <!--<input type="text" id="volunteer-name" name="username" class="form-control" data-ng-model="name" placeholder="Full Name">-->
                 </div>
                 <div class="form-group text-center">
                     <button type="submit" class="btn btn-default">Submit</button>

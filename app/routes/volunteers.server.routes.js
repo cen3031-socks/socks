@@ -10,7 +10,7 @@ module.exports = function(app) {
 		.post(volunteers.create);
 
 
-    app.route('/volunteers/by-name')
+    app.route('/volunteers/by-name/:contactId')
         .get(volunteers.getVolunteerByName);
 
 	app.route('/volunteers/:volunteerId')
