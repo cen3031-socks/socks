@@ -97,8 +97,8 @@ contactsApp.controller('ContactsCreateController', ['$scope', 'Contacts', '$loca
     }
 ]);
 
-contactsApp.controller('ContactsUpdateController', ['$scope', 'Contacts', '$stateParams', '$modal',
-    function($scope, Contacts, $stateParams, $modal) {
+contactsApp.controller('ContactsUpdateController', ['$scope', 'Contacts', '$stateParams', '$modal', 'Dialogs',
+    function($scope, Contacts, $stateParams, $modal, Dialogs) {
 
         // Update existing Contact
         $scope.update = function(updatedContact) {
