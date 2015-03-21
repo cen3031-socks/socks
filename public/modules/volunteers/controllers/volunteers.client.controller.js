@@ -10,12 +10,9 @@ angular.module('volunteers').controller('VolunteersController', ['$scope', '$sta
                 templateUrl: 'modules/volunteers/views/view-volunteer.client.view.html',
                 controller: function ($scope, $modalInstance, volunteer) {
                     $scope.volunteer = volunteer;
-                    //$scope.name = selectedVolunteer.name;
-                    //$scope.firstName = selectedVolunteer.firstName;
-                    //$scope.lastName = selectedVolunteer.lastName;
                     $scope.contact = volunteer.contact;
                     $scope.currTime = new Date();
-                    setTimeout($modalInstance.dismiss, 3000);
+                    setTimeout($modalInstance.dismiss, 4000);
                 } ,
                 size: size,
                 resolve: {
@@ -39,7 +36,7 @@ angular.module('volunteers').controller('VolunteersController', ['$scope', '$sta
                 console.log(correctVolunteer);
 
                 if (correctVolunteer.length==0) {
-                    console.log("first");
+                    console.log("Creating new volunteer session");
                     //create new volunteer
                     var volunteer = new Volunteers( {
                         contact: $scope.contact[0]._id,
@@ -54,7 +51,7 @@ angular.module('volunteers').controller('VolunteersController', ['$scope', '$sta
                     });
                 } else {
 
-                    console.log("second");
+                    console.log("Ending existing volunteer session");
                     //you probably can't do this
                     correctVolunteer[0].timeOut = Date.now();
                     correctVolunteer[0].$update(function(response) {

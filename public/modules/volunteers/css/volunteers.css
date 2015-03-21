@@ -1,6 +1,6 @@
 .volunteer-bg {
 
-    background: linear-gradient(358deg, #ffffff, #0071bc);
+    background-color: #0071bc;
     background-size: 400% 400%;
 }
 
@@ -11,3 +11,21 @@
     padding-left: 50px;
     padding-right: 50px;
 }
+
+.vertPad{
+    padding-top: -10px;
+}
+
+.centButton{
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.volinstlist{
+    padding-left : 30%;
+    padding-right: 30%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+html,body { height:100%; }
