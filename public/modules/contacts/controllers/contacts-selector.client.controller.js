@@ -1,12 +1,16 @@
 'use strict';
 
 angular.module('contacts')
-    .controller('ContactsSelectorController', ['$stateParams', 'Contacts', '$modal', '$scope',
-        function($stateParams, Contacts, $modal, $scope) {
+    .controller('ContactsSelectorController', ['$stateParams', 'Contacts', '$modal', '$scope', '$rootScope',
+        function($stateParams, Contacts, $modal, $scope, $rootScope) {
             $scope.selectedContacts = [];
 
             $scope.showModal = function() {
+                var modalScope = $rootScope.new();
+                modalScope.title = $scope.title || 'Find a Contact';
+                modalScope.hideUntil = 3;
                 var modalInstance = $modal.open({
+                    scope: modalScope,
                     templateUrl: '/modules/contacts/views/select-contact-list.client.template.html',
                     controller: function($scope, $modalInstance, Contacts, $modal) {
                         $scope.contacts = Contacts.query();
@@ -22,7 +26,7 @@ angular.module('contacts')
 								size: 'lg',
 								controller: ''
 							});
-							onRouteChangeOff = $scope.$on('$locationChangeStart', function(event, newState, oldState) {
+							var onRouteChangeOff = $scope.$on('$locationChangeStart', function(event, newState, oldState) {
 								if (newState.match(/\/contacts\/[\w\d]{24}$/)) {
 									onRouteChangeOff();
 									createModal.dismiss();
@@ -61,7 +65,7 @@ angular.module('contacts')
             return {
                 restrict: 'E',
                 controller: 'ContactsSelectorController',
-                scope: { maxContacts: '=max', selectedContacts: '=?ngModel' },
+                scope: { maxContacts: '=max', selectedContacts: '=?ngModel', title: '=?title', hideUntil: '=?hideUntil' },
                 templateUrl: '/modules/contacts/views/contact-selector.client.template.html',
                 link: function(scope, element, attrs, ctrl) { }
             };
