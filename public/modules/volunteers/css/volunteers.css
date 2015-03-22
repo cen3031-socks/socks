@@ -1,3 +1,13 @@
-.volunteer-bg{
-    background-color: #dcdcdc;
+.volunteer-bg {
+
+    background: linear-gradient(358deg, #ffffff, #0071bc);
+    background-size: 400% 400%;
+}
+
+.white-text{
+    color: #FFFFFF;
+}
+.volunteer-pad{
+    padding-left: 50px;
+    padding-right: 50px;
 }

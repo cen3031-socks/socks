@@ -52,6 +52,7 @@ exports.update = function(req, res) {
 	});
 };
 
+
 /**
  * Delete an Volunteer
  */
@@ -68,6 +69,19 @@ exports.delete = function(req, res) {
 		}
 	});
 };
+
+exports.getVolunteerByName = function(req, res) {
+    Volunteer.find({contact:req.params.contactId,timeOut: null}).exec(function(err, volunteers) {
+        if (err) {
+            return res.status(400).send({
+                message: errorHandler.getErrorMessage(err)
+            });
+        } else {
+            res.jsonp(volunteers);
+        }
+    });
+}
+
 
 /**
  * List of Volunteers

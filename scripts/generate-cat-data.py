@@ -12,7 +12,7 @@ breeds = ["Calico", "Bobtail", "Manx", "Ragdoll", "Siamese"]
 
 cats = []
 
-for i in range(0, 100):
+for i in range(0, 20):
 	cats.append(dict({
 		"name" : names[i],
 		"breed" : random.choice(breeds),

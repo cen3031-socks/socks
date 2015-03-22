@@ -1,0 +1,8 @@
+<section>
+    <h1>{{title}}</h1>
+	<div class="message">
+		{{message}}
+	</div>
+	<button class="btn btn-lg text-right" ng-class="trueButtonType" ng-click="$close(true)">{{trueText}}</button>
+	<button class="btn btn-lg text-right" ng-class="falseButtonType" ng-click="$dismiss('canceled')">{{falseText}}</button>
+</section>
