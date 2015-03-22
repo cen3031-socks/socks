@@ -13,23 +13,23 @@ var mongoose = require('mongoose'),
 /**
  * Create a Create
  */
+
 exports.create = function(req, res) {
-	String.prototype.hashCode = function() {
-		var hash = 0, i, chr, len;
-  		if (this.length === 0) return hash;
- 		 for (i = 0, len = this.length; i < len; i++) {
-  			  chr   = this.charCodeAt(i);
-  			 hash  = ((hash << 5) - hash) + chr;
-  			 hash |= 0; // Convert to 32bit integer
-			 }
- 			 return hash;
-		};
+	String.prototype.makePass = function() {
+		var text = "";
+   		 var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+
+   		 for( var i=0; i < 8; i++ )
+      		  text += possible.charAt(Math.floor(Math.random() * possible.length));
+
+   		 return text;
+	};
+
 	var employee = new Employee(req.body);
-	var password = employee.email.hashCode();
-	employee.password = password;
+	var password = employee.email.makePass();
 
 	var user = new User(req.body);
-	user.password = employee.password;
+	user.password = password;
 	user.email = employee.email;
 	user.phone = employee.phone;
 	user.displayName = employee.email;
@@ -95,10 +95,10 @@ exports.create = function(req, res) {
 					console.log(employee);
 					console.log(employee.user);
 					var mailOptions = {
-   						from: 'Fred Foo <saveourcatsandkittens@gmail.com>', // sender address
+   						from: '<saveourcatsandkittens@gmail.com>', // sender address
   					  	to: employee.email, // list of receivers
     					subject: 'Welcome to SOCKS! ', // Subject line
-   					 	text: 'Login by using the following password to reset it:\n Password: ' + employee.password, // plaintext body
+   					 	text: 'Login by using the following password to reset it:\n Password: ' + password, // plaintext body
    						html: '' // html body
 					};
 
