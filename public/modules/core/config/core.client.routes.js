@@ -22,11 +22,11 @@ angular.module('core').config(['$stateProvider', '$urlRouterProvider',
 		})
         .state('createCat', {
             url: '/cats/create',
-            templateUrl: 'modules/core/views/create-cat.client.view.html'
+            templateUrl: 'modules/cats/views/create-cat.client.view.html'
         })
         .state('viewCat', {
             url: '/cats/:catId',
-            templateUrl: 'modules/core/views/view-cat.client.view.html'
+            templateUrl: 'modules/cats/views/view-cat.client.view.html'
         });
 	}
 ]);
