@@ -9,7 +9,7 @@ angular.module('donations').controller('DonationsController', ['$scope', '$state
 		$scope.create = function() {
 			// Create new Donation object
 			var donation = new Donations ({
-				name: this.name,
+				name: this.contacts[0].firstName + ' ' + this.contacts[0].surname,
                 dollarAmount: this.dollarAmount,
                 donationType: this.donationType
 			});
@@ -26,6 +26,15 @@ angular.module('donations').controller('DonationsController', ['$scope', '$state
 				$scope.error = errorResponse.data.message;
 			});
 		};
+
+		//load more elements in donations infinte scroll
+		$scope.loadMore = function() {
+			var nextEnd = $scope.donations.length+10;
+			for(var i=$scope.donations.length; i<nextEnd; i++)
+			{
+				$scope.donations.push($scope.allDonations[i])
+			}
+		}
 
 		// Remove existing Donation
 		$scope.remove = function(donation) {
@@ -57,7 +66,11 @@ angular.module('donations').controller('DonationsController', ['$scope', '$state
 
 		// Find a list of Donations
 		$scope.find = function() {
-			$scope.donations = Donations.query();
+			
+			$scope.allDonations = Donations.query(function(){
+				$scope.donations=[];
+				$scope.loadMore();
+			});
 		};
 
 		// Find existing Donation
