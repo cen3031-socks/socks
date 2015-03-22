@@ -4,11 +4,9 @@
     </div>
     <div class="row">
         <div class="col-xs-12 col-sm-8">
-            <div class="input-group input-group-lg">
-                <input type="text" class="form-control" ng-model="searchText" placeholder="Search...">
-                 <span class="input-group-btn">
-                     <button class="btn btn-default" type="button">Go!</button>
-                 </span>
+            <div class="input-group input-group-lg contact_input">
+                <input type="text" class="form-control" ng-model="searchText" placeholder="Search Contacts...">
+
             </div><!-- /input-group -->
         </div>
         <div class="col-xs-12 col-sm-4 text-center">
@@ -34,13 +32,15 @@
                     <th style="width: 20%">Email</th>
                     <th style="width: 30%">Location</th>
 
-                    <th style="width: 15%">Creation Date</th>
+                    <!--<th style="width: 15%">Creation Date</th>-->
                     <!--<th class="numeric">Open</th>-->
                 </tr>
             </thread>
             <tbody>
             <tr data-ng-repeat="contact in contacts | filter:searchText"
-                ng-click="contactsCtrl.modalUpdate('lg', contact)">
+               xng-click="contactsCtrl.modalUpdate('lg', contact)"
+               ng-click="getDetails(contact)" ng-hide="contact.deleted_contact"
+                    >
 
                 <td>{{contact.firstName}}</td>
                 <td>{{contact.surname}}</td>
@@ -48,9 +48,9 @@
                 <td>{{contact.email}}</td>
                 <td>{{contact.address}}, {{contact.city}}, {{contact.state}}, {{contact.zipCode}}</td>
 
-                <td>
-                    <span data-ng-bind="contact.created | date:'medium'" ></span>
-                </td>
+                <!--<td>-->
+                    <!--<span data-ng-bind="contact.created | date:'medium'" ></span>-->
+                <!--</td>-->
                 <!--<td class="numeric">$1.39</td>-->
             </tr>
             </tbody>

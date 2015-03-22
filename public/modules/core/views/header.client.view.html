@@ -1,26 +1,20 @@
-<div class="container" data-ng-controller="HeaderController">
-	<div class="navbar-header">
-		<button class="navbar-toggle" type="button" data-ng-click="toggleCollapsibleMenu()">
-			<span class="sr-only">Toggle navigation</span>
-			<span class="icon-bar"></span>
-			<span class="icon-bar"></span>
-			<span class="icon-bar"></span>
-		</button>
-		<a href="/#!/" class="navbar-brand">
-            <img style="max-width:100px; margin-top: -7px;" ng-src="modules/core/img/brand/sockslogo.gif">
+<div class="navigation" data-ng-controller="HeaderController">
+	<div class="brand-image">
+		<a href="/#!/">
+            <img width ="100%" ng-src="modules/core/img/brand/sockslogo.gif">
         </a>
 	</div>
     <!--<img src="public/modules/core/img/brand/sockslogo.gif">-->
-    <section class="navigation">
-        <ul>
-            <li><a href="/#!/">Cats</a></li>
-            <li><a href="/#!/contacts">Contacts</a></li>
-            <li><a href="/#!/donations">Donations</a></li>
-            <li><a href="/#!/stats">Stats</a></li>
-            <li><a href="/#!/employees">Create User</a></li>
+    <div class="link-list">
+        <ul class="link-list">
+            <li class = "list-element"><a href="/#!/" class = 'list-link'>Cats</a></li>
+            <li class = "list-element"><a href="/#!/contacts" class = 'list-link'>Contacts</a></li>
+            <li class = "list-element"><a href="/#!/donations" class = 'list-link'>Donations</a></li>
+            <li class = "list-element"><a href="/#!/stats" class = 'list-link'>Stats</a></li>
+            <li class = "list-element"><a href="/#!/employees" class = 'list-link'>Create User</a></li>
         </ul>
-    </section>
-	<nav class="collapse navbar-collapse" collapse="!isCollapsed" role="navigation">
+    </div>
+	<!-- <nav class="collapse navbar-collapse" collapse="!isCollapsed" role="navigation">
 		<ul class="nav navbar-nav" data-ng-if="menu.shouldRender(authentication.user);">
 			<li data-ng-repeat="item in menu.items | orderBy: 'position'" data-ng-if="item.shouldRender(authentication.user);" ng-switch="item.menuItemType" ui-route="{{item.uiRoute}}" class="{{item.menuItemClass}}" ng-class="{active: ($uiRoute)}" dropdown="item.menuItemType === 'dropdown'">
 				<a ng-switch-when="dropdown" class="dropdown-toggle" dropdown-toggle>
@@ -38,7 +32,7 @@
 		<ul class="nav navbar-nav navbar-right" data-ng-hide="authentication.user">
 			<li class="divider-vertical"></li>
 			<li ui-route="/signin" ng-class="{active: $uiRoute}">
-				<a href="/#!/signin">Sign In</a>
+				<a href="/#!/signin" class="signin-button">Sign In</a>
 			</li>
 		</ul>
 		<ul class="nav navbar-nav navbar-right" data-ng-show="authentication.user">
@@ -48,10 +42,7 @@
 				</a>
 				<ul class="dropdown-menu">
 					<li>
-						<a href="/#!/settings/profile">Edit Profile</a>
-					</li>
-					<li>
-						<a href="/#!/settings/accounts">Manage Social Accounts</a>
+						<a href="/#!/contacts/{{authentication.user.contact}}/edit">Edit Profile</a>
 					</li>
 					<li data-ng-show="authentication.user.provider === 'local'">
 						<a href="/#!/settings/password">Change Password</a>
@@ -63,5 +54,5 @@
 				</ul>
 			</li>
 		</ul>
-	</nav>
+	</nav> -->
 </div>

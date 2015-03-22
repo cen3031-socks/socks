@@ -1,50 +1,74 @@
 <div class="list-group" data-ng-controller="ContactsViewController as contactViewCtrl"
-     ng-init="findOne()">
+     ng-init="findOne()" style="padding-top:1.5em;">
     <fieldset>
         <!--<div class="col-sm-6 text-center">-->
         <!--&lt;!&ndash;<i class="glyphicon glyphicon-user cust-profile"  ng-class="{'text-primary': is_volunteer, 'text-danger': !is_volunteer}"></i>&ndash;&gt;-->
         <!--</div>-->
 
-        <h1>{{contact.firstName}} {{contact.surname}}</h1>
-        </br>
-        <div class="col-sm-3">
-            <h4><b>Phone Number:</b></h4>
+        <div class="row">
+            <div class="col-xs-12 col-sm-6 col-md-7">
+                <h1><b> {{contact.firstName}} {{contact.surname}} </b></h1>
+            </div>
+            <div class="col-xs-12 col-sm-6 col-md-5 text-center pull-right action-buttons">
+                <a href="/#!/contacts">
+                    <button type="button" class="btn btn-success btn-md text-center" href="/#!/contacts">
+
+                        <i class="glyphicon glyphicon-list"></i> <br>
+                        List of Contacts
+                    </button>
+                </a>
+                <a ng-click="contactViewCtrl.modalUpdate('lg', contact)">
+                    <button type="button" class="btn btn-primary text-center btn-md" >
+                        <!--<button type="button" class="btn btn-primary text-center" href="/#!/contacts/create">-->
+
+                        <i class="glyphicon glyphicon-wrench"></i> <br>
+                        Edit Contact
+                    </button>
+                </a>
+            </div>
         </div>
-        <div class="col-sm-9">
-            <h4>{{contact.phone}}</h4>
+        <div class="row">
+            <div ng-show="contact.isAdopter" class = "col-xs-12 col-sm-6 col-md-2">
+                <a ng-click="contactViewCtrl.modalAdoptedCatsView('lg', contact)">
+                    <button type="button" class="btn btn-default btn-md background-pink">
+                        <span class="glyphicon glyphicon-heart" aria-hidden="true"></span> Adopter
+                    </button>
+                </a>
+            </div>
+
         </div>
-        <div class="col-sm-3">
-            <h4><b>Email:</b></h4>
-        </div>
-        <div class="col-sm-9">
-            <h4>{{contact.email}}</h4>
-        </div>
-        <div class="col-sm-3">
-            <h4><b>Address:</b></h4>
-        </div>
-        <div class="col-sm-9">
-            <h4>{{contact.address}}</h4>
-        </div>
-        <div class="col-sm-3">
-            <h4><b>City:</b></h4>
-        </div>
-        <div class="col-sm-9">
-            <h4>{{contact.city}}</h4>
-        </div>
-        <div class="col-sm-3">
-            <h4><b>State:</b></h4>
-        </div>
-        <div class="col-sm-9">
-            <h4>{{contact.state}}</h4>
-        </div>
-        <div class="col-sm-3">
-            <h4><b>Zip Code:</b></h4>
-        </div>
-        <div class="col-sm-9">
-            <h4>{{contact.zipCode}}</h4>
+        <div class="profile">
+            <div class="attribute-group">
+                <h2>Basic Info</h2>
+                <div class="profile-group">
+                    <span class="profile-attribute">Phone Number:</span>
+                    <span class="profile-value" id="sex">{{contact.phone}}</span>
+                </div>
+                <div class="profile-group">
+                    <span class="profile-attribute">Email</span>
+                    <span class="profile-value" id="color">{{contact.email}}</span>
+                </div>
+                <div class="profile-group">
+                    <span class="profile-attribute">Address</span>
+                    <span class="profile-value" id="breed">{{contact.address}}</span>
+                </div>
+                <div class="profile-group">
+                    <span class="profile-attribute">City</span>
+                    <span class="profile-value" id="temperament">{{contact.city}}</span>
+                </div>
+                <div class="profile-group">
+                    <span class="profile-attribute">State</span>
+                    <span class="profile-value" id="description">{{contact.state}}</span>
+                </div>
+                <div class="profile-group">
+                    <span class="profile-attribute">Zip Code</span>
+                    <span class="profile-value" id="dateOfBirth">{{contact.zipCode}}</span>
+                </div>
+            </div>
         </div>
 
     </fieldset>
+
 
 
     <!--<div class = "col-xs-12">-->

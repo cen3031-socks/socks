@@ -29,7 +29,6 @@ angular.module('employees').controller('EmployeesController', ['$scope', '$state
 				$scope.isAdmin = '';
 
 			}, function(errorResponse) {
-				alert(JSON.stringify(errorResponse));
 				$scope.error = errorResponse.data.message;
 			});
 		};
@@ -54,7 +53,7 @@ angular.module('employees').controller('EmployeesController', ['$scope', '$state
 		// Update existing Create
 		$scope.update = function() {
 			var employee = $scope.employee;
-
+			console.log(employee);
 			employee.$update(function() {
 				$location.path('employees/' + employee._id);
 			}, function(errorResponse) {

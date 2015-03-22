@@ -1,8 +1,35 @@
-<section data-ng-controller="VolunteersController" data-ng-init="findOne()">
+<section data-ng-init="findOne()">
 	<div class="page-header">
-		<h1 data-ng-bind="volunteer.name"></h1>
+        <section class="text-center" ng-show="volunteer.timeOut == null">
+            <h3>
+                Sign in Successful
+            </h3>
+            <p>
+                </br>
+                Have fun volunteering, {{volunteer.firstName}}!
+                </br>
+                <span class="text-muted">You signed in at {{currTime | date:'shortTime'}}.</span>
+            </p>
+
+        </section>
+		<section class="text-center" ng-show="volunteer.timeOut != null">
+            <h3>
+            Sign out Successful
+        </h3>
+            <p>
+                </br>
+                Thank you for volunteering, {{volunteer.name}}!
+                </br>
+                <span class="text-muted">You signed out at {{currTime | date:'shortTime'}}.</span>
+            </p>
+
+        </section>
+
+        </br>
 	</div>
-	<div class="pull-right" data-ng-show="((authentication.user) && (authentication.user._id == volunteer.user._id))">
+
+	<!--
+    <div class="pull-right" data-ng-show="((authentication.user) && (authentication.user._id == volunteer.user._id))">
 		<a class="btn btn-primary" href="/#!/volunteers/{{volunteer._id}}/edit">
 			<i class="glyphicon glyphicon-edit"></i>
 		</a>
@@ -18,4 +45,5 @@
 			<span data-ng-bind="volunteer.user.displayName"></span>
 		</em>
 	</small>
+    -->
 </section>

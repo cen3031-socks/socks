@@ -53,6 +53,27 @@ var ContactSchema = new Schema({
     is_volunteer: {
         type: Boolean,
     },
+    is_adopter: {
+        type: Boolean,
+    },
+    is_fosterer: {
+        type: Boolean,
+    },
+    is_donator: {
+        type: Boolean,
+    },
+    is_vet: {
+        type: Boolean,
+    },
+    is_employee: {
+        type: Boolean,
+    },
+    is_admin: {
+        type:  Boolean,
+    },
+    deleted_contact: {
+        type: Boolean,
+    },
     created: {
         type: Date,
         default: Date.now

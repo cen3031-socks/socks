@@ -1,0 +1,23 @@
+<section>
+	<form>
+		<div class="alert alert-danger" ng-show="error">{{error}}</div>
+		<div class="form-group">
+			<label>Return Date</label>
+			<p class="input-group">
+			<input type="text" class="form-control" datepicker-popup="dd MMM yyyy" ng-model="$parent.returnDate" 
+				is-open="opened" ng-required="true" close-text="Close" />
+			<span class="input-group-btn">
+				<button type="button" class="form-control btn btn-default" ng-click="open($event)">
+					<i class="glyphicon glyphicon-calendar"></i>
+				</button>
+			</span>
+			</p>
+		</div>
+		<div class="form-group">
+			<label for="reason">Reason</label>
+			<input type="text" name="reason" ng-model="reason" />
+		</div>
+		<button class="btn btn-lg btn-default" ng-click="$dismiss()">Cancel</button>
+		<button class="btn btn-lg btn-primary" ng-click="unadoptCat()">Return</button>
+	</form>
+</section>

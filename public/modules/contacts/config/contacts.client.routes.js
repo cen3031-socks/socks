@@ -20,6 +20,14 @@ angular.module('contacts', ['ui.router']).config(['$stateProvider',
 		state('editContact', {
 			url: '/contacts/:contactId/edit',
 			templateUrl: 'modules/contacts/views/edit-contacts.client.view.html'
-		});
+		}).
+            state('deleteContact', {
+                url: '/contacts/:contactId/edit/delete',
+                templateUrl: 'modules/contacts/views/delete-confirm.client.view.html'
+            }).
+            state('adoptedCats', {
+                url: '/contacts/:contactID/adoptedCats',
+                templateUrl: 'modules/contacts/views/adopted-cats.client.view.html'
+            });
 	}
 ]);

@@ -9,3 +9,10 @@ exports.index = function(req, res) {
 		request: req
 	});
 };
+
+exports.volunteers = function(req, res) {
+    res.render('volunteer-layout', {
+        user: req.user || null,
+        request: req
+    });
+};

@@ -1,10 +1,18 @@
 'use strict';
-
 /**
  * Module dependencies.
  */
 var mongoose = require('mongoose'),
 	Schema = mongoose.Schema;
+
+var AdoptionSchema = new Schema({
+	adopter: { type: Schema.Types.ObjectId, ref: 'Contact', required: true },
+	donation: { type: Schema.Types.ObjectId, ref: 'Donation' },
+	date: Date,
+	endDate: Date, 
+	catId: { type: Schema.Types.ObjectId, ref: 'Cat' },
+	returnReason: String
+});
 
 /**
  * Cat Schema
@@ -31,7 +39,8 @@ var CatSchema = new Schema({
 		type: Number,
 		default: 0
 	},
-	vet: String,
+	hairLength: String,
+	vet: { type: Schema.Types.ObjectId, ref: 'Contact' },
 	dateOfArrival: {
 		type: Date,
 		default: Date.now 
@@ -48,19 +57,46 @@ var CatSchema = new Schema({
 	imageUrl: String,
 	origin: {
 		address: String,
-		person: String
-	},
-	medicalRecords: {
-		hasMicrochip: Boolean,
-		procedures: [{date: Date, name: String, notes: String}]
+		person: { type: Schema.Types.ObjectId, ref: 'Contact' },
+        notes: String
 	},
 	currentLocation: String,
-	owner: {
-		type: String,
-		default: '',
-		trim: true
-	},
-	notes: [String]
+	notes: [
+        {
+            message: String,
+            date: Date,
+            sender: { type: Schema.Types.ObjectId, ref: 'User' },
+            _id: Schema.Types.ObjectId
+        }
+    ],
+	events: [
+		{
+			_id: Schema.Types.ObjectId,
+			detail: String,
+			label: String,
+			date: Date,
+			/* for events that have a duration, like trips to vet */
+			endDate: Date,
+			eventType: String,
+			icon: String
+		}
+	],
+	adoptions: [{type: Schema.Types.ObjectId, ref: 'Adoption'}],
+	currentAdoption: { type: Schema.Types.ObjectId, ref: 'Adoption' }
 });
 
+mongoose.model('Adoption', AdoptionSchema);
 mongoose.model('Cat', CatSchema);
+
+CatSchema.pre('save', function(next) {
+	console.log(this);
+	var i = 0;
+	this.currentAdoption = undefined;
+	for (i = 0; i < this.adoptions.length; ++i) {
+		if (this.adoptions[i].endDate === undefined) {
+			this.currentAdoption = this.adoptions[i];
+			break;
+		}
+	}
+	next();
+});

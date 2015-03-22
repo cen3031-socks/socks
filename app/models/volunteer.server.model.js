@@ -16,25 +16,30 @@ var VolunteerSchema = new Schema({
 		required: 'Please fill Volunteer name',
 		trim: true
 	},
-	created: {
+
+    firstName: {
+        type: String,
+        default: '',
+        trim: true
+    },
+    lastName: {
+        type: String,
+        default: '',
+        trim: true
+    },
+
+    contact: {
+        type: Schema.ObjectId,
+        ref: 'User'
+    },
+	timeIn: {
 		type: Date,
 		default: Date.now
 	},
-    signedIn: {
-        type: Boolean
-    },
-    minutesVolunteeredInWeek: {
-        type: Number,
-        default: '0'
-    },
-    minutesVolunteeredEver: {
-        type: Number,
-        default: '0'
-    },
-	user: {
-		type: Schema.ObjectId,
-		ref: 'User'
-	}
+    timeOut: {
+        type: Date,
+        default: null
+    }
 });
 
 mongoose.model('Volunteer', VolunteerSchema);

@@ -1,0 +1,76 @@
+.select-contact-list ul, .contact-selector {
+	list-style-type:none;
+	margin:0;
+	padding:0;
+	display:inline-block;
+}
+
+.contact-selector li {
+	position:relative;
+	display:table-row;
+}
+
+.contact-selector li span, .contact-selector li div {
+	box-sizing: border-box;
+	display:table-cell;
+	height:2em;
+	line-height:2em;
+}
+.contact-selector li span, .select-contact-list ul li {
+	border:1px solid #bbb;
+	background-color: #dedede;
+	padding-left:1em;
+	padding-right:1em;
+}
+.contact-selector li div {
+	padding:0.5em;
+	text-align:center;
+	color:#C03;
+}
+
+.contact-selector li div:hover {
+	cursor:pointer;
+	color:#F66;
+}
+
+.contact-selector button {
+	background-color:#ddd;
+	border-top-left-radius:0;
+	border-top-right-radius:0;
+	border:1px solid #bbb;
+}
+.contact-selector button:hover, .select-contact-list li:hover  {
+	cursor:pointer;
+	background-color:#ccc;
+}
+.contact-selector li:first-child button,
+.contact-selector li:first-child span,
+.select-contact-list li:first-child {
+	border-top-left-radius:6px;
+	border-top-right-radius:6px;
+}
+.contact-selector li:last-child button,
+.contact-selector li.last span, 
+.select-contact-list li:last-child {
+	border-bottom-left-radius:6px;
+	border-bottom-right-radius:6px;
+}
+
+.contact-selector .btn {
+	font-size:100%; 
+	width:100%;
+}
+
+.select-contact-list {
+	padding:2em;
+}
+
+.select-contact-list ul {
+	margin:1em;
+}
+.select-contact-list ul li {
+	display:block;
+}
+.select-contact-list ul li:last-child {
+	text-align:center;
+}
