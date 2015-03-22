@@ -14,6 +14,7 @@ angular.module('employees').controller('EmployeesController', ['$scope', '$state
 				email: this.email,
 				phone: this.phone,
 				isAdmin: this.isAdmin,
+				permissionLevel:this.permissionLevel,
 				password: this.password
 			});
 
