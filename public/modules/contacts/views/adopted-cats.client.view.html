@@ -1,0 +1,27 @@
+<section class="cat-grid">
+
+    <div class="modal-header">
+        <div class="row">
+            <h3 class="modal-title">{{contact.firstName}} {{contact.surname}}'s adopted cat(s):</h3>
+        </div>
+    </div>
+    <div class="modal-body" ng-hide="contact.deleted_contact">
+        <div class="row">
+            <a ng-repeat="adoption in adoptions" class="cat-grid-item" href="#!/cats/{{adoption.catId._id}}" ng-click="cancel()">
+                <img ng-src="{{adoption.catId.imageUrl}}" />
+		        <span class="details">
+			         <span class="name">{{adoption.catId.name}}</span>
+			         <span class="breed">
+                        {{adoption.catId.breed}}
+                    </span>
+		        </span>
+            </a>
+        </div>
+    </div>
+
+    <div class="modal-footer">
+
+        <button class="btn btn-warning btn-lg" ng-click="cancel()">Close</button>
+    </div>
+
+</section>

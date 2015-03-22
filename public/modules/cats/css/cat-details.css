@@ -41,10 +41,15 @@
 }
 .profile-group {
 	display:inline-block;
-	width:25%;
+	width:50%;
 	margin:0;
 	padding:0.5em;
 }
+
+.profile .basic-info .profile-group {
+    width:25%;
+}
+
 .profile .basic-info {
 	padding-left:14px;
 	width:75%;

@@ -6,7 +6,7 @@
         <a data-ng-repeat="volunteer in volunteers" data-ng-href="#!/volunteers/{{volunteer._id}}" class="list-group-item">
             <h4 class="list-group-item-heading" data-ng-bind="volunteer.name"></h4>
             <small class="list-group-item-text">
-                Was created on
+                began the session on
                 <span data-ng-bind="volunteer.created | date:'medium'"></span>
             </small>
         </a>

@@ -7,11 +7,34 @@
     <!--<img src="public/modules/core/img/brand/sockslogo.gif">-->
     <div class="link-list">
         <ul class="link-list">
+        	<li class="divider-vertical">
+				<li ui-route="/signin" data-ng-hide="authentication.user" ng-class="{active: $uiRoute}">
+					<a href="/#!/signin" class= 'list-link'>Sign In</a>
+				</li>
+			</li>
+			<li class="dropdown" data-ng-show="authentication.user" dropdown>
+				<a href="#" class="dropdown-toggle" data-toggle="dropdown" dropdown-toggle>
+					<span data-ng-bind="authentication.user.displayName"></span> <b class="caret"></b>
+				</a>
+				<ul class="dropdown-menu">
+					<li>
+						<a href="/#!/contacts/{{authentication.user.contact}}/edit">Edit Profile</a>
+					</li>
+					<li data-ng-show="authentication.user.provider === 'local'">
+						<a href="/#!/settings/password">Change Password</a>
+					</li>
+					<li class="divider"></li>
+					<li>
+						<a href="/auth/signout">Signout</a>
+					</li>
+				</ul>
+			</li>
+
             <li class = "list-element"><a href="/#!/" class = 'list-link'>Cats</a></li>
-            <li class = "list-element"><a href="/#!/contacts" class = 'list-link'>Contacts</a></li>
-            <li class = "list-element"><a href="/#!/donations" class = 'list-link'>Donations</a></li>
-            <li class = "list-element"><a href="/#!/stats" class = 'list-link'>Stats</a></li>
-            <li class = "list-element"><a href="/#!/employees" class = 'list-link'>Create User</a></li>
+            <li data-ng-show="authentication.user" class = "list-element"><a href="/#!/contacts" class = 'list-link'>Contacts</a></li>
+            <li data-ng-show="authentication.user" class = "list-element"><a href="/#!/donations" class = 'list-link'>Donations</a></li>
+            <li data-ng-show="authentication.user" class = "list-element"><a href="/#!/stats" class = 'list-link'>Stats</a></li>
+            <li data-ng-show="authentication.user.permissionLevel > 0" class = "list-element"><a href="/#!/employees" class = 'list-link'>Create User</a></li>
         </ul>
     </div>
 	<!-- <nav class="collapse navbar-collapse" collapse="!isCollapsed" role="navigation">
