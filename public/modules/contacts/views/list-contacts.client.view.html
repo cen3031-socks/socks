@@ -19,9 +19,6 @@
             </a>
         </div>
     </div>
-    </br>
-    </br>
-
     <div class="table-responsive">
         <table class="table table-bordered">
             <thread>
@@ -38,7 +35,6 @@
             </thread>
             <tbody>
             <tr data-ng-repeat="contact in contacts | filter:searchText"
-               xng-click="contactsCtrl.modalUpdate('lg', contact)"
                ng-click="getDetails(contact)" ng-hide="contact.deleted_contact"
                     >
 
