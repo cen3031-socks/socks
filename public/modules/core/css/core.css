@@ -119,6 +119,17 @@ body.ng-cloak {
 	height: 100%;
 }
 
+.table-responsive .table.table-bordered {
+    margin-top:1em;
+}
+
+.table-responsive .table.table-bordered,
+.table-responsive .table.table-bordered tbody,
+.table-responsive .table.table-bordered tr th,
+.table-responsive .table.table-bordered tr td {
+    border:1px solid #bcd;
+}
+
 .cat-grid-item:hover {
 	cursor:pointer;
 	background-color:#888;
