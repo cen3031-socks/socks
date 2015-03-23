@@ -1,0 +1,177 @@
+<section data-ng-controller="CatViewController">
+<div ng-show="isFound">
+    <ul class="actions">
+		<li>
+			<a class="btn btn-lg btn-success text-center" href="/#!/">
+				<i class="glyphicon glyphicon-list"></i>
+				Cat List
+			</a>
+		</li>
+		<li ng-show="cat.currentAdoption === undefined">
+			<button class="btn btn-lg btn-info text-center" ng-click="adopt()">
+				<i class="glyphicon glyphicon-briefcase"></i>
+				Adopt
+			</button>
+		</li>
+		<li ng-show="cat.currentAdoption !== undefined">
+			<button class="btn btn-lg btn-danger text-center" ng-click="unadopt()">
+				<i class="glyphicon glyphicon-briefcase"></i>
+				Return
+			</button>
+		</li>
+		<li>
+			<button class="btn btn-lg btn-primary text-center" ng-click="edit()">
+				<i class="glyphicon glyphicon-wrench"></i>
+				Edit
+			</button>
+		</li>
+    </ul>
+	<div class="page-header ">
+		<h1 id="name">{{cat.name}}</h1>
+	</div>
+    <div class="profile">
+		<div class="cat-profile-image-container">
+			<i class="glyphicon glyphicon-camera" ng-hide="cat.imageUrl"></i>
+			<img ng-src="{{cat.imageUrl}}" class="cat-profile-image" />
+		</div>
+		<div class="attribute-group basic-info">
+			<h2>Basic Info</h2>
+			<div class="profile-group">
+				<span class="profile-attribute">Sex</span>
+				<span class="profile-value" id="sex">{{convertSex(cat.sex)}}</span>
+			</div>
+			<div class="profile-group">
+				<span class="profile-attribute">Color</span>
+				<span class="profile-value" id="color">{{cat.color}}</span>
+			</div>
+			<div class="profile-group">
+				<span class="profile-attribute">Breed</span>
+				<span class="profile-value" id="breed">{{cat.breed}}</span>
+			</div>
+			<div class="profile-group">
+				<span class="profile-attribute">Temperament</span>
+				<span class="profile-value" id="temperament">{{cat.temperament}}</span>
+			</div>
+			<div class="profile-group description">
+				<span class="profile-attribute">Description</span>
+				<span class="profile-value" id="description">{{cat.description}}</span>
+			</div>
+			<div class="profile-group">
+				<span class="profile-attribute">Date of Birth</span>
+				<span class="profile-value" id="dateOfBirth">{{cat.dateOfBirth | date}}</span>
+			</div>
+			<div class="profile-group">
+				<span class="profile-attribute">Vet</span>
+				<span class="profile-value" id="vet">
+					<contact-link contact-id="cat.vet._id"></contact-link>
+				</span>
+			</div>
+		</div>
+		<div class="attribute-group timeline">
+			<h2>Timeline</h2>
+			<div class="timeline-content">
+				<a ng-click="addEvent()" href="">
+					<div class="add-event action">
+						<i class="glyphicon glyphicon-plus"></i>
+						<span>Add Event</span>
+					</div>
+				</a>
+				<div class="timeline-event" ng-show="cat.currentAdoption !== undefined">
+					<i class="glyphicon glyphicon-briefcase"></i>
+					<span class="timeline-label">Adopted</span>
+					<span class="timeline-detail" id="owner">
+						Adopted by 
+						<contact-link contact-id="cat.currentAdoption.adopter._id"></contact-link>
+					</span>
+					<span class="timeline-date">{{cat.currentAdoption.date|date}}</span>
+				</div>
+				<div class="repeater"
+                     ng-repeat="event in cat.events|orderBy:'date':true|limitTo:eventLimit"
+					 ng-switch="event.eventType">
+					<div class="timeline-event" ng-switch-when="adoption" ng-show="event.endDate !== undefined">
+						<i class="glyphicon glyphicon-briefcase"></i>
+						<span class="timeline-label">Adopted and Returned</span>
+						<span class="timeline-detail">
+							Adopted by 
+								<contact-link contact-id="event.adopter._id"></contact-link>
+							then returned with reason: {{event.returnReason}}
+						</span>
+						<span class="timeline-date">{{event.date|date}}</span>
+					</div>
+					<div class="timeline-event" ng-switch-default>
+						<i class="glyphicon" ng-class="event.icon"></i>
+						<span class="timeline-label">{{event.label}}</span>
+						<span class="timeline-detail">{{event.detail}}</span>
+						<span class="timeline-date">{{event.date|date}}</span>
+						<button class="btn" ng-click="deleteEvent(event)">
+							<i class="glyphicon glyphicon-remove"></i>
+						</button>
+					</div>
+				</div>
+				<a ng-click="showMore()" href="">
+					<div class="show-more action" ng-hide="eventLimit >= cat.events.length">
+						<i class="glyphicon glyphicon-option-vertical"></i>
+						<span>Show More...</span>
+					</div>
+				</a>
+				<div class="timeline-event">
+					<i class="glyphicon glyphicon-home"></i>
+					<span class="timeline-label">Arrived</span>
+					<span class="timeline-detail">{{shortOrigin(cat.origin)}}</span>
+					<span class="timeline-date">{{cat.dateOfArrival|date}}</span>
+				</div>
+				<div class="timeline-event">
+					<i class="glyphicon glyphicon-heart"></i>
+					<span class="timeline-label">Born</span>
+					<span class="timeline-date">{{cat.dateOfBirth|date}}</span>
+				</div>
+			</div>
+		</div>
+        <div class="attribute-group origin">
+			<h2>Arrival</h2>
+            <div class="profile-group">
+                <span class="profile-attribute">Person</span>
+                <span class="profile-value" id="originPerson">
+					<contact-link contact-id="cat.origin.person._id"></contact-link>
+				</span>
+            </div>
+            <div class="profile-group">
+                <span class="profile-attribute">Found at Address</span>
+                <span class="profile-value" id="originAddress">{{cat.origin.address}}</span>
+            </div>
+            <div class="profile-group">
+                <span class="profile-attribute">Organization</span>
+                <span class="profile-value" id="originOrg">{{cat.origin.organization}}</span>
+            </div>
+        </div>
+        <div class="profile-group notes">
+            <div class="profile-attribute">Notes</div>
+            <div class="profile-value">
+                <table style="width:100%">
+                    <tr ng-repeat="note in cat.notes" class="note">
+                        <td class="note-message">{{note.message}}</td>
+						<td class="note-date">{{note.date|date}}</td>
+                        <td class="note-person"><contact-link contact-id="note.sender"></contact-link></td>
+                        <td class="note-delete">
+                            <button class="btn btn-danger" ng-click="deleteNote(note, $index)">
+                                <i class="glyphicon glyphicon-remove"></i>
+                            </button>
+                        </td>
+                    </tr>
+                    <tr>
+						<form>
+							<td><input name="note-message" ng-model="newNote" class="new-note" id="new-note" placeholder="Leave a new note..." /></td>
+							<td></td>
+							<td class="note-person"><button class="btn btn-default" ng-click="addNote()" type="submit" id="add-note">+</button></td>
+                            <td></td>
+						</form>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+	<div class="alert alert-danger" ng-hide="isFound">
+		<i class="glyphicon glyphicon-exclamation-sign" aria-hidden=true></i>
+		That cat could not be found.
+	</div>
+</section>
