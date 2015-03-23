@@ -10,11 +10,10 @@ var mongoose = require('mongoose'),
  * Donation Schema
  */
 var DonationSchema = new Schema({
-	name: {
-		type: String,
-		default: '',
-		required: 'Please fill in the name of the donor.',
-		trim: true
+	donor: {
+		type: Schema.Types.ObjectId,
+        ref: 'Contact', 
+		required: 'Please fill select or make a new contact.'
 	},
 
     created: {

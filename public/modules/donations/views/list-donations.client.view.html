@@ -26,18 +26,46 @@
     <div class="page-header">
         <h1>Donations</h1>
     </div>
-    <div class="list-group">
-        <a data-ng-repeat="donation in donations" data-ng-href="#!/donations/{{donation._id}}" class="list-group-item">
+
+
+<div class="row">
+        <div class="col-xs-12 col-sm-8">
+            <div class="input-group input-group-lg donations_input">
+                <input type="text" class="form-control" ng-model="searchText" placeholder="Search Donations...">
+
+            </div><!-- /input-group -->
+        </div>
+        <div class="col-xs-12 col-sm-4 text-center">
+            <a href="/#!/donations/create">
+                <button class="myButton" href="/#!/donations/create">
+
+                    <!--<i class="glyphicon glyphicon-user"></i> <br>-->
+                    New Donation
+                </button>
+            </a>
+        </div>
+    </div>
+
+
+   <div class="list-group" infinite-scroll='loadMore()'>
+        <a data-ng-repeat="donation in donations | filter:searchText" data-ng-href="#!/donations/{{donation._id}}" class="list-group-item">
 			<small class="list-group-item-text">
-				Posted on
-				<span data-ng-bind="donation.created | date:'medium'"></span>
-				by
-				<span data-ng-bind="donation.user.displayName"></span>
-			</small>
+                <!--donor name-->
+				<span data-ng-bind="donation.donor.firstName" style='font-size:2.0em;'></span>
+                <span data-ng-bind="donation.donor.surname" style='font-size:2.0em;'></span>
+                <br>
+                <span data-ng-bind="donation.created | date:'medium'"></span>
+
+                <span style='float:right; font-size:2.0em;' data-ng-bind="donation.dollarAmount"></span><span style='float:right; font-size:2.0em;'>$</span>
+            </small>
 			<h4 class="list-group-item-heading" data-ng-bind="donation.name"></h4>
         </a>
     </div>
-    <a href="/#!/donations/create" class="myButton" >Create Donation</a>
+
+
+
+
+  <!--  <a href="/#!/donations/create" class="myButton" >Create Donation</a> -->
     <div class="alert alert-warning text-center" data-ng-hide="!donations.$resolved || donations.length">
     	No Donations yet, why don't you <a href="/#!/donations/create">create one</a>?
     </div>
