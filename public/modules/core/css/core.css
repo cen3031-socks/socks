@@ -7,8 +7,9 @@
 	background: #0071BC;
 	height:100%;
 	width: 100%;
-
-
+}
+.dropdown .dropdown-menu li.display-bold a {
+	font-weight: bold;
 }
 .color-blue{
 	background-color: #0071BC;
