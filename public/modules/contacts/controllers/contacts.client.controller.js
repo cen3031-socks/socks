@@ -4,8 +4,8 @@
 
 var contactsApp = angular.module('contacts');
 
-contactsApp.controller('ContactsController', ['$scope', '$stateParams', 'Authentication', 'Contacts', '$modal', '$log', '$location',
-	function($scope, $stateParams, Authentication, Contacts, $modal, $log, $location) {
+contactsApp.controller('ContactsController', ['$scope', '$stateParams', 'Authentication', 'Contacts', '$modal', '$log', '$location', 'Dialogs',
+	function($scope, $stateParams, Authentication, Contacts, $modal, $log, $location, Dialogs) {
 
         this.authentication = Authentication;
 
@@ -98,60 +98,10 @@ contactsApp.controller('ContactsCreateController', ['$scope', 'Contacts', '$loca
 ]);
 
 contactsApp.controller('ContactsUpdateController', ['$scope', 'Contacts', '$stateParams', '$modal', 'Dialogs',
-    function($scope, Contacts, $stateParams, $modal, Dialogs) {
-
-        // Update existing Contact
-        $scope.update = function(updatedContact) {
-        	var contact = updatedContact;
-
-        	contact.$update(function() {
-        	}, function(errorResponse) {
-        		$scope.error = errorResponse.data.message;
-        	});
-        };
-
-        // Open a modal window to delete a single contact record
-        this.modalDelete = function (size, selectedContact) {
-
-            var modalInstance = $modal.open({
-                templateUrl: 'modules/contacts/views/delete-confirm.client.view.html',
-                controller: function($scope, $modalInstance, contact){
-                    $scope.contact = contact;
-
-                    $scope.ok = function () {
-
-                        if (document.updateContactForm.$valid){
-                            $modalInstance.close($scope.contact);
-                        }
-                        $modalInstance.dismiss('cancel');
-                    };
-
-                    $scope.cancel = function () {
-                        $modalInstance.dismiss('cancel');
-                    };
-                },
-                size: size,
-                resolve: {
-                    contact: function () {
-                        return selectedContact;
-                    }
-                }
-            });
-
-            modalInstance.result.then(function (selectedItem) {
-                $scope.selected = selectedItem;
-            }, function () {
-                $log.info('Modal dismissed at: ' + new Date());
-            });
-        };
+        function($scope, Contacts, $stateParams, $modal, Dialogs) {
 
     }
-
-
 ]);
-
-
-
 
 
 
@@ -168,16 +118,52 @@ function ($scope, Contacts, $stateParams, $modal) {
         console.log($scope.contact);
     };
 
+    $scope.formatPhoneNumber = function (phone) {
+        if (!phone) return "";
+        var newPhone = "";
+        if (phone.length == 12) {
+            newPhone += "+"+phone[0]+phone[1]+" ("+phone[2]+phone[3]+phone[4]+") "+phone[5]+phone[6]+phone[7]+
+            "-"+phone[8]+phone[9]+phone[10]+phone[11];
+        }
+        else if (phone.length == 11) {
+            newPhone += "+"+phone[0]+" ("+phone[1]+phone[2]+phone[3]+") "+phone[4]+phone[5]+phone[6]+
+            "-"+phone[7]+phone[8]+phone[9]+phone[10];
+        }
+        else if (phone.length == 10) {
+            newPhone += "("+phone[0]+phone[1]+phone[2]+") "+phone[3]+phone[4]+phone[5]+
+            "-"+phone[8]+phone[7]+phone[8]+phone[9];
+        }
+        else {
+            return;
+        }
+        return newPhone;
+    };
+
+    $scope.formatZipCode = function (zipCode) {
+        if (!zipCode) return "";
+        var newZipCode = "";
+        if (zipCode.length == 5) {
+            newZipCode += zipCode[0]+zipCode[1]+zipCode[2]+zipCode[3]+zipCode[4];
+        }
+        else if (zipCode.length == 9) {
+            newZipCode += +zipCode[0]+zipCode[1]+zipCode[2]+zipCode[3]+zipCode[4]+
+            "-"+zipCode[5]+zipCode[6]+zipCode[7]+zipCode[8];
+        }
+        else {
+            return;
+        }
+        return newZipCode;
+    };
+
     // Open a modal window to Update a single contact record
     this.modalUpdate = function (size, selectedContact) {
 
         var modalInstance = $modal.open({
             templateUrl: 'modules/contacts/views/edit-contacts.client.view.html',
-            controller: function($scope, $modalInstance, contact){
+            controller: function($scope, $modalInstance, contact, Dialogs, $location){
                 $scope.contact = contact;
 
                 $scope.ok = function () {
-
                     if (document.updateContactForm.$valid){
                         $modalInstance.close($scope.contact);
                     }
@@ -186,6 +172,27 @@ function ($scope, Contacts, $stateParams, $modal) {
 
                 $scope.cancel = function () {
                     $modalInstance.dismiss('cancel');
+                };
+                $scope.update = function(updatedContact) {
+                    var contact = updatedContact;
+
+                    contact.$update(function() {
+                    }, function(errorResponse) {
+                        console.log
+                        $scope.error = errorResponse.data.message;
+                    });
+                };
+                $scope.deleteContact = function(contact, index) {
+                    Dialogs
+                        .confirm('Delete Contact?')
+                        .then(function(result) {
+                            if (result) {
+                                contact.deleted_contact = true;
+                                $scope.update(contact);
+                                $modalInstance.dismiss('deleted');
+                                $location.path('/contacts');
+                            }
+                        });
                 };
             },
             size: size,
@@ -231,8 +238,6 @@ function ($scope, Contacts, $stateParams, $modal) {
             $log.info('Modal dismissed at: ' + new Date());
         });
     };
-
-
 
 }]);
 
