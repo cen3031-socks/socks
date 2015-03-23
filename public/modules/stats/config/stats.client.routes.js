@@ -3,11 +3,11 @@
 //Setting up route
 angular.module('stats').config(['$stateProvider',
 	function($stateProvider) {
-		// Creates state routing
+		console.log("a");
 		$stateProvider.
 		state('listStats', {
 			url: '/stats',
-			templateUrl: 'modules/employees/views/list-stats.client.view.html'
+			templateUrl: 'modules/stats/views/list-stats.client.view.html'
 		}).
 		state('mapStats', {
 			url: '/stats/map',
