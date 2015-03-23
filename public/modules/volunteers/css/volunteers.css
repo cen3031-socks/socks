@@ -1,49 +1,13 @@
 .volunteer-bg {
 
-    background: linear-gradient(358deg, #ffffff, #0071bc);
+    /*background-color: #0071bc;*/
     background-size: 400% 400%;
-
-    -webkit-animation: AnimationName 30s ease infinite;
-    -moz-animation: AnimationName 30s ease infinite;
-    animation: AnimationName 30s ease infinite;
-
-@-webkit-keyframes AnimationName {
-    0% {
-        background-position: 51% 0%
-    }
-    50% {
-        background-position: 50% 100%
-    }
-    100% {
-        background-position: 51% 0%
-    }
+    background: -webkit-linear-gradient(#0071bc, darkgray); /* For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(#0071bc, darkgray); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(#0071bc, darkgray); /* For Firefox 3.6 to 15 */
+    background: linear-gradient(#0071bc, darkgray); /* Standard syntax */
 }
 
-@-moz-keyframes AnimationName {
-    0% {
-        background-position: 51% 0%
-    }
-    50% {
-        background-position: 50% 100%
-    }
-    100% {
-        background-position: 51% 0%
-    }
-}
-
-@keyframes AnimationName {
-    0% {
-        background-position: 51% 0%
-    }
-    50% {
-        background-position: 50% 100%
-    }
-    100% {
-        background-position: 51% 0%
-    }
-}
-
-}
 .white-text{
     color: #FFFFFF;
 }
@@ -51,3 +15,27 @@
     padding-left: 50px;
     padding-right: 50px;
 }
+
+.vertPad{
+    padding-top: -10px;
+}
+
+.centButton{
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.volinstlist{
+    padding-left : 30%;
+    padding-right: 30%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.volunteerSelector {
+    width: 300px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+html,body { height:100%; }

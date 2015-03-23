@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml">
-
 <head>
     <title>SOCKS (Save Our Cats and Kittens)</title> <!--{{title}}-->
 
@@ -50,18 +49,27 @@
         <section data-ng-controller="VolunteersController" data-ng-init="find()">
 
             <div class="page-header text-center">
-                <h1 class="white-text">Volunteer Sign-In</h1>
+                <h1 class="white-text">Volunteer Timesheet</h1>
             </div>
-            <!--<div class="alert alert-info text-center"> -->
-                <div class="text-center white-text h4">If you are here to volunteer, please enter your full (first and last) name below.</div>
+                <div class="text-center white-text h4">If you are here to volunteer:</div>
+                <div class="volinstlist white-text h5">
+                <li>Click on the "+" below.</li>
+                <li>Select your name from the list or, if it's not there, click on the "+" button at the bottom of the list to add it.</li>
+                <li>Click on submit to sign in.</li>
+                <li>Before you leave make sure to do the same to sign out.</li>
+                </div>
                 </br>
-            <!--</div>-->
             <form class="form-horizontal volunteer-pad" data-ng-submit="sign()" novalidate>
                 <div class = "form-group input-group input-group-lg">
-        <span class="input-group-addon">
-            <i class = "text-muted glyphicon glyphicon-user"></i>
-            </span>
-                    <input type="text" id="volunteer-name" name="username" class="form-control" data-ng-model="name" placeholder="Full Name">
+                    <!--
+                        <span class="input-group-addon">
+                            <i class = "text-muted glyphicon glyphicon-user vertPad"> Name: </i>
+                            </span>
+                    -->
+
+                    <div class = "volunteerSelector">
+                        <contacts-selector max="1" ng-model="contact" ></contacts-selector>
+                    </div>
                 </div>
                 <div class="form-group text-center">
                     <button type="submit" class="btn btn-default">Submit</button>

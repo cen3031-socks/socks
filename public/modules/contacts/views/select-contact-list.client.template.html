@@ -1,8 +1,11 @@
 <section class="select-contact-list">
     <h1>Find a Contact</h1>
     <input type="text" class="form-control" ng-model="searchText" placeholder="Search...">
-    <ul>
-        <li data-ng-repeat="contact in contacts | filter:searchText | orderBy:'surname'" ng-click="select(contact)" ng-class="{selected: isSelected(contact)}">{{contact.firstName}} {{contact.surname}}</li>
+    <ul >
+        <li ng-show="hideUntil <= searchText.length"
+            data-ng-repeat="contact in contacts | filter:searchText | orderBy:'surname'"
+            ng-click="select(contact)"
+            ng-class="{selected: isSelected(contact)}">{{contact.firstName}} {{contact.surname}}</li>
 		<li ng-click="createContact()">+</li>
     </ul>
 </section>

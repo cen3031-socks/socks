@@ -33,23 +33,23 @@
 	color:#F66;
 }
 
-.contact-selector button {
+.contact-selector .btn {
 	background-color:#ddd;
 	border-top-left-radius:0;
 	border-top-right-radius:0;
 	border:1px solid #bbb;
 }
-.contact-selector button:hover, .select-contact-list li:hover  {
+.contact-selector .btn:hover, .select-contact-list li:hover  {
 	cursor:pointer;
 	background-color:#ccc;
 }
-.contact-selector li:first-child button,
+.contact-selector li:first-child .btn,
 .contact-selector li:first-child span,
 .select-contact-list li:first-child {
 	border-top-left-radius:6px;
 	border-top-right-radius:6px;
 }
-.contact-selector li:last-child button,
+.contact-selector li:last-child .btn,
 .contact-selector li.last span, 
 .select-contact-list li:last-child {
 	border-bottom-left-radius:6px;
@@ -58,6 +58,8 @@
 
 .contact-selector .btn {
 	font-size:100%; 
+	min-width:4.0em; 
+	height:2.0em;
 	width:100%;
 }
 

@@ -45,6 +45,10 @@ var EmployeeSchema = new Schema({
 		type: Schema.ObjectId,
 		ref: 'User'
 	},
+	permissionLevel: {
+		type: Number,
+		default: 0
+	},
 	contact: {
 		type: Schema.ObjectId,
 		ref: 'Contact'

@@ -78,6 +78,10 @@ var UserSchema = new Schema({
 		type: String,
 		required: 'Provider is required'
 	},
+	permissionLevel: {
+		type: Number,
+		default: 0
+	},
 	providerData: {},
 	additionalProvidersData: {},
 	roles: {
