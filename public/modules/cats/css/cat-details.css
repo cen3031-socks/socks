@@ -12,7 +12,7 @@
 	font-size:14px;
 	position:relative;
 	vertical-align:top;
-	border:1px solid #ddd;
+	border:1px solid #bcd;
 	text-align:center;
     overflow:hidden;
 }
@@ -66,14 +66,14 @@
 .attribute-group h2 {
 	font-size:22px;
 }
-.profile-group.notes, #notes {
+.profile-group.notes, .profile-group.notes .profile-value {
 	width:100%;
 	display:block;
 }
 .profile-group .profile-attribute {
-	color: #aaa;
+	color: #678;
 	font-size:0.8em;
-	border-bottom:1px solid #ddd;
+	border-bottom:1px solid #bcd;
 	margin-bottom:0.5em;
 	text-transform:uppercase;
 	padding:0.5em 0.5em 0.2em 0;
@@ -94,7 +94,7 @@ ul.actions li { display:inline-block; margin-left:0.5em; }
 .timeline .timeline-event {
 	margin:2em 1em 2em 3.0em;
 	padding:1em 1em 1em 4em;
-	background-color:#ddd;
+	background-color:#bcd;
 	width: 25em;
 	border-radius: 0.5em;
 	position:relative;
@@ -104,17 +104,18 @@ ul.actions li { display:inline-block; margin-left:0.5em; }
 .timeline .timeline-event:before {
 	/* triangle to the left of each event */
 	content:"";
-	border:0.8em solid transparent;
+	border:0.8em solid;
 	border-left:none;
 	border-top-color:transparent;
 	border-bottom-color:transparent;
-	border-right-color:#ddd;
+	border-right-color:#bcd;
 	position:absolute;
 	left:-0.8em;
 	top:50%;
 	-webkit-transform:translate(0,-0.8em);
 	-moz-transform:translate(0,-0.8em);
 	-ms-transform:translate(0,-0.8em);
+    -o-transform:translate(0,-0.8em);
 	transform:translate(0,-0.8em);
 }
 
@@ -149,13 +150,13 @@ ul.actions li { display:inline-block; margin-left:0.5em; }
 .timeline-event .timeline-label {
 	text-transform:uppercase;
 	font-weight:bold;
-	color:#666;
+	color:#223333;
 	font-size:85%;
 	display:block;
 }
 .timeline .action > .glyphicon {
 	margin-left:0.5em;
-	background-color:white;
+	background-color:#def;
 	z-index:100;
 	font-size:200%;
 	height:1.5em;
@@ -175,6 +176,7 @@ ul.actions li { display:inline-block; margin-left:0.5em; }
 	-webkit-transform:translate(0,-0.5em);
 	-moz-transform:translate(0,-0.5em);
 	-ms-transform:translate(0,-0.5em);
+    -o-transform:translate(0,-0.5em);
 	transform:translate(0, -0.5em);
 }
 .timeline a:link .action, .timeline a:visited .action  {
@@ -185,6 +187,7 @@ ul.actions li { display:inline-block; margin-left:0.5em; }
 }
 
 .timeline-event > .glyphicon {
+    color:#223333;
 	position:absolute;
 	left: 0.5em;
 	top:50%;
@@ -192,6 +195,7 @@ ul.actions li { display:inline-block; margin-left:0.5em; }
 	-webkit-transform:translate(0,-0.5em);
 	-moz-transform:translate(0,-0.5em);
 	-ms-transform:translate(0,-0.5em);
+    -o-transform:translate(0,-0.5em);
 	transform:translate(0,-0.5em);
 }
 
@@ -223,6 +227,7 @@ ul.actions li { display:inline-block; margin-left:0.5em; }
 	-webkit-transform:translate(0,-0.6em);
 	-moz-transform:translate(0,-0.6em);
 	-ms-transform:translate(0,-0.6em);
+    -o-transform:translate(0,-0.6em);
 	transform:translate(0,-0.6em);
 	width:10em;
 	text-align:right;
@@ -233,6 +238,7 @@ ul.actions li { display:inline-block; margin-left:0.5em; }
 .new-note {
 	width: 100%;
 	border:0;
+    background-color:transparent;
 	border-bottom:2px solid transparent;
 }
 .new-note:hover {
@@ -242,7 +248,7 @@ ul.actions li { display:inline-block; margin-left:0.5em; }
 	border-bottom-color:#09f;
 	outline:none;
 }
-#new-note.ng-dirty {
+.new-note.ng-dirty {
 	border-bottom-color:#c30;
 }
 .note {
