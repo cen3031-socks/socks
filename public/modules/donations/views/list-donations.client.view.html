@@ -54,7 +54,9 @@
 				<span data-ng-bind="donation.created | date:'medium'"></span>
 				by
 				<span data-ng-bind="donation.user.displayName"></span>
-			</small>
+                
+                <span style='float:right; font-size:2.0em;' data-ng-bind="donation.dollarAmount"></span><span style='float:right; font-size:2.0em;'>$</span>
+            </small>
 			<h4 class="list-group-item-heading" data-ng-bind="donation.name"></h4>
         </a>
     </div>
