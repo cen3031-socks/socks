@@ -33,7 +33,12 @@
 .contact_input {
     width: 100%;
 }
+
+.button-padding {
+    margin-top: 1em;
+}
  
 .table tr:hover {
     background-color:#29abe2;
 }
+
