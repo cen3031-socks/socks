@@ -17,6 +17,9 @@ module.exports = function(app) {
     app.route('/contacts/:contactId/adoptions')
         .get(contacts.findAdoptedCats);
 
+    app.route('/adopters')
+        .get(contacts.getAllAdopters);
+
     // Finish by binding the Contact middleware
     app.param('contactId', contacts.contactByID);
 };

@@ -58,8 +58,8 @@ module.exports.getGlobbedFiles = function(globPatterns, removeRoot) {
  */
 module.exports.getJavaScriptAssets = function(includeTests) {
 	var output = this.getGlobbedFiles(this.assets.lib.js.concat(this.assets.js), 'public/');
+	output.push('lib/ngInfiniteScroll/build/ng-infinite-scroll.min.js');
 
-	output.push('lib/BootstrapFormHelpers-master/dist/js/bootstrap-formhelpers.min.js');
 	// To include tests
 	if (includeTests) {
 		output = _.union(output, this.getGlobbedFiles(this.assets.tests));

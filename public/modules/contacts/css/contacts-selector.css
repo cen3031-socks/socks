@@ -58,6 +58,8 @@
 
 .contact-selector .btn {
 	font-size:100%; 
+	min-width:4.0em; 
+	height:2.0em;
 	width:100%;
 }
 
