@@ -9,7 +9,7 @@ angular.module('donations').controller('DonationsController', ['$scope', '$state
 		$scope.create = function() {
 			// Create new Donation object
 			var donation = new Donations ({
-				name: this.contacts[0].firstName + ' ' + this.contacts[0].surname,
+				donor: this.contacts[0]._id,
                 dollarAmount: this.dollarAmount,
                 donationType: this.donationType
 			});
