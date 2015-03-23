@@ -10,7 +10,8 @@
     "angular-mocks": "~1.2",
     "angular-bootstrap": "~0.12.0",
     "angular-ui-utils": "~0.1.1",
-    "angular-ui-router": "~0.2.11"
+    "angular-ui-router": "~0.2.11",
+    "ngInfiniteScroll": "~1.2.0"
   },
   "devDependencies": {
     "ngInfiniteScroll": "~1.2.0"
