@@ -95,6 +95,22 @@ exports.delete = function(req, res) {
 	});
 };
 
+exports.getAllAdopters = function(req, res) {
+    Adoption.find().populate('adopter').exec(function(err, adoptions) {
+        if (err) {
+            return res.status(400).send({
+                message: errorHandler.getErrorMessage(err)
+            });
+        } else {
+            var adopters = [];
+            for (var i = 0; i < adoptions.length; ++i) {
+                adopters.push(adoptions[i].adopter);
+            }
+            return res.jsonp(adopters);
+        }
+    });
+};
+
 /**
  * List of Contacts
  */
