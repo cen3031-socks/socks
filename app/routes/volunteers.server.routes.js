@@ -9,6 +9,10 @@ module.exports = function(app) {
         .get(volunteers.list)
 		.post(volunteers.create);
 
+
+    app.route('/volunteers/by-name/:contactId')
+        .get(volunteers.getVolunteerByName);
+
 	app.route('/volunteers/:volunteerId')
 		.get(volunteers.read)
 		.put(volunteers.update)
@@ -16,4 +20,5 @@ module.exports = function(app) {
 
 	// Finish by binding the Volunteer middleware
 	app.param('volunteerId', volunteers.volunteerByID);
+
 };

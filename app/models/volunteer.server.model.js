@@ -10,24 +10,6 @@ var mongoose = require('mongoose'),
  * Volunteer Schema
  */
 var VolunteerSchema = new Schema({
-	name: {
-		type: String,
-		default: '',
-		required: 'Please fill Volunteer name',
-		trim: true
-	},
-
-    firstName: {
-        type: String,
-        default: '',
-        trim: true
-    },
-    lastName: {
-        type: String,
-        default: '',
-        trim: true
-    },
-
     contact: {
         type: Schema.ObjectId,
         ref: 'User'
