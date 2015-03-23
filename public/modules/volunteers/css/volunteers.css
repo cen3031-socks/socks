@@ -1,7 +1,11 @@
 .volunteer-bg {
 
-    background-color: #0071bc;
+    /*background-color: #0071bc;*/
     background-size: 400% 400%;
+    background: -webkit-linear-gradient(#0071bc, darkgray); /* For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(#0071bc, darkgray); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(#0071bc, darkgray); /* For Firefox 3.6 to 15 */
+    background: linear-gradient(#0071bc, darkgray); /* Standard syntax */
 }
 
 .white-text{
@@ -24,6 +28,12 @@
 .volinstlist{
     padding-left : 30%;
     padding-right: 30%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.volunteerSelector {
+    width: 300px;
     margin-left: auto;
     margin-right: auto;
 }
