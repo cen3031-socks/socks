@@ -7,16 +7,17 @@
     <!--<img src="public/modules/core/img/brand/sockslogo.gif">-->
     <div class="link-list">
         <ul class="link-list">
-        	<li class="divider-vertical">
 				<li ui-route="/signin" data-ng-hide="authentication.user" ng-class="{active: $uiRoute}">
 					<a href="/#!/signin" class= 'list-link'>Sign In</a>
 				</li>
-			</li>
 			<li class="dropdown" data-ng-show="authentication.user" dropdown>
-				<a href="#" class="dropdown-toggle" data-toggle="dropdown" dropdown-toggle>
-					<span data-ng-bind="authentication.user.displayName"></span> <b class="caret"></b>
+				<a href="#" class="dropdown-toggle list-link" data-toggle="dropdown" dropdown-toggle>
+					<span>My Account</span> <b class="caret"></b>
 				</a>
 				<ul class="dropdown-menu">
+					<li class="display-bold">
+						<a data-ng-bind="authentication.user.displayName"></a>
+					</li>
 					<li>
 						<a href="/#!/contacts/{{authentication.user.contact}}/edit">Edit Profile</a>
 					</li>
