@@ -109,7 +109,7 @@ exports.update = function(req, res) {
  * Delete an Contact
  */
 exports.delete = function(req, res) {
-	var contact = req.contact ;
+	var contact = req.contact;
 
 	contact.remove(function(err) {
 		if (err) {
