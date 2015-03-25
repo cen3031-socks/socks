@@ -24,7 +24,8 @@
 
     </style>
 	<div class="page-header">
-		<h1 data-ng-bind="donation.name"></h1>
+		<h1 data-ng-bind="donation.donor.firstName"></h1>
+        <h1 data-ng-bind="donation.donor.surname"></h1>
 	</div>
 	<div class="pull-right" data-ng-show="((authentication.user) && (authentication.user._id == donation.user._id))">
 		<a class="btn btn-primary" href="/#!/donations/{{donation._id}}/edit">
@@ -36,11 +37,15 @@
 	</div>
 	<small>
 		<em class="text-muted">
+            <span style='font-size:2.0em;'>$</span>
+            <span style='font-size:2.0em;' data-ng-bind="donation.dollarAmount"></span>
 			Posted on
 			<span data-ng-bind="donation.created | date:'mediumDate'"></span>
 			by
-			<span data-ng-bind="donation.user.displayName"></span>
+			<span data-ng-bind="donation.donor.firstName"></span>
+            <span data-ng-bind="donation.donor.surname"></span>
 		</em>
 	</small>
+    <contact-link contact-id="donation.donor._id"></contact-link>
     <a href="/#!/donations" class="myButton pull-right">Back to Donations</a>
 </section>

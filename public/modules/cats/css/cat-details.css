@@ -58,7 +58,7 @@
 }
 .profile .basic-info .profile-group.description { width: 75%; }
 @media (max-width: 520px) {
-	.profile-group {
+	.profile .profile-group {
 		width: 100%;
 	}
 }

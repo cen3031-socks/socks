@@ -42,7 +42,7 @@
                 <h2>Basic Info</h2>
                 <div class="profile-group">
                     <span class="profile-attribute">Phone Number:</span>
-                    <span class="profile-value" id="sex">{{contact.phone}}</span>
+                    <span class="profile-value" id="sex">{{ formatPhoneNumber(contact.phone) }}</span>
                 </div>
                 <div class="profile-group">
                     <span class="profile-attribute">Email</span>
@@ -62,7 +62,7 @@
                 </div>
                 <div class="profile-group">
                     <span class="profile-attribute">Zip Code</span>
-                    <span class="profile-value" id="dateOfBirth">{{contact.zipCode}}</span>
+                    <span class="profile-value" id="dateOfBirth">{{ formatZipCode(contact.zipCode) }}</span>
                 </div>
             </div>
         </div>

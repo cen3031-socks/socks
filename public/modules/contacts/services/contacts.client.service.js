@@ -11,6 +11,11 @@ angular.module('contacts').factory('Contacts', ['$resource',
                 method: 'GET',
                 url: 'contacts/:contactId/adoptions',
                 isArray: true
+            },
+            getAllAdopters: {
+                method: 'GET',
+                url: 'adopters',
+                isArray: true
             }
 		});
 	}
