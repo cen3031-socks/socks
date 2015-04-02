@@ -109,7 +109,7 @@ exports.hasAuthorization = function(req, res, next) {
 
 
 function isValidItem(event) {
-	// TODO: better event validation
+	// TODO: better item validation---is this even necessary??
 	return true;
 }
 
@@ -119,29 +119,29 @@ exports.addItem = function(req, res) {
 			message: 'The given event is invalid.'
 		});
 	}
-	var cat = req.cat;
-	var event = req.body;
-	event._id = mongoose.Types.ObjectId();
-	cat.events.push(event);
-	cat.save(function(err) {
+	var donation = req.donation;
+	var item = req.body;
+	item._id = mongoose.Types.ObjectId();
+	donation.items.push(item);
+	donation.save(function(err) {
 		if (err) {
 			return res.status(400).send({
 				message: errorHandler.getErrorMessage(err)
 			});
 		} else {
-			res.json(cat.events[cat.events.length - 1]);
+			res.json(donation.items[donation.items.length - 1]);
 		}
 	});
 };
 
 exports.deleteItem = function(req, res) {
-    var cat = req.cat;
-    var note = req.body;
-    note._id = mongoose.Types.ObjectId();
+    var donation = req.donation;						//TODO:
+    var item = req.body;								//ummmm will this work? Stolen from alex
+    item._id = mongoose.Types.ObjectId();				//from cats.server.controller.deleteNote
 
     var index = -1;
-    for (var i in cat.notes) {
-        if (cat.notes[i]._id.toString() === req.params.noteId) {
+    for (var i in donation.items) {
+        if (donation.items[i]._id.toString() === req.params.itemId) {		//itemID? Where does it exist?
             index = i;
             break;
         }
@@ -152,8 +152,8 @@ exports.deleteItem = function(req, res) {
         });
     }
 
-    cat.notes.splice(index, 1);
-    cat.save(function(err) {
+    donation.items.splice(index, 1);
+    donation.save(function(err) {
         if (err) {
             return res.status(400).send({
                 message: errorHandler.getErrorMessage(err)
@@ -163,3 +163,23 @@ exports.deleteItem = function(req, res) {
         }
     });
 };
+
+/*
+exports.editItem = function(req, res) {
+	if (!isValidItem(req.body)) {
+		return res.status(400).send({
+			message: 'The given event is invalid.'
+		});
+	}
+	var donation = req.donation;
+	donation.items[req.params.itemIndex] = req.body;			//TODO: edit items? or just delete and
+	donation.save(function(err) {								//add a new one..
+		if (err) {
+			return res.status(400).send({
+				message: errorHandler.getErrorMessage(err)
+			});
+		} else {
+			res.json(cat.events[req.params.eventIndex]);
+		}
+	});
+};*/
