@@ -6,6 +6,7 @@
 var mongoose = require('mongoose'),
 	Schema = mongoose.Schema;
 
+
 /**
  * Donation Schema
  */
@@ -21,17 +22,35 @@ var DonationSchema = new Schema({
 		default: Date.now
 	},
 
-    dollarAmount: {
-        type: Number,
-        default: 0.0,
-        trim: true
-    },
+ /*   totalAmount: {                //an automatic statistic that gets calculated and appears
+        type: Number,               //at the bottom of the receipt-like donation view
+        default: null,
+        trim: true,
+        units: String
+    },*/
 
-    paymentType: {
+    items: [
+        {
+            type: String,                                               //food/monetary/cleaning supplies/etc..      
+            _id: Schema.Types.ObjectId,                                 //an id to delete/edit later
+            icon: String,                                                //icon representing type
+            description: String,
+            value: {
+                type: Number,
+                default: null,
+                trim: true,
+                units: String
+            }
+        }
+    ]
+
+    /*paymentType: {
         type: String,
         default: '',
         trim: true
-    }
+    },*/
+
+
 });
 
 mongoose.model('Donation', DonationSchema);
