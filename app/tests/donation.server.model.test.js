@@ -27,10 +27,16 @@ describe('Donation Model Unit Tests:', function() {
 			password: 'password'
 		});
 
-		user.save(function() { 
-			donation = new Donation({
-				name: 'Donation Name',
-				user: user
+
+		user.save(function() {
+			contact = new Contact({
+				firstName: 'FirstName',
+				surname: "surname"
+			});
+			contact.save(function(){ 
+				donation = new Donation({
+					donor: contact._id
+				});
 			});
 
 			done();
@@ -45,7 +51,7 @@ describe('Donation Model Unit Tests:', function() {
 			});
 		});
 
-		it('should be able to show an error when try to save without name', function(done) { 
+		it('should be able to show an error when try to save without a contact', function(done) { 
 			donation.name = '';
 
 			return donation.save(function(err) {

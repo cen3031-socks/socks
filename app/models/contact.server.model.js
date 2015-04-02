@@ -16,9 +16,51 @@ var validatePhoneNumber= function(phoneNumber) {
 /**
  * A Validation function to make sure phone number is 5 or 9 digits long
  */
-var validateZipCode= function(zipCode) {
-    return ( (zipCode.length == 0) || (zipCode.length == 5) || (zipCode.length == 9) );
+var validateZipCode= function(zipCode) { 
+    if(zipCode == ''){
+        return true;
+    }
+    if( (zipCode.length == 0) || (zipCode.length == 5) || (zipCode.length == 9) ){
+        for(var i = 0; i < zipCode.length; i++){
+            if(isNaN(zipCode.charAt(i))){
+                return false;
+            }
+        }
+        return true;
+    }
+    return false;
 };
+
+/**
+* Ensures that the state variable will be a two letter code that matches to a real state
+*/
+var validateStateCode= function(state){
+    if (state == ''){
+        return true;
+    }
+    var stateCodes = ['AK', 'AL', 'AR', 'AZ', 'CA', 'CO', 'CT', 'DC', 'DE', 'FL', 'GA', 'HI', 
+    'IA', 'ID', 'IL', 'IN', 'KS', 'KY', 'LA', 'MA', 'MD', 'ME', 'MI', 'MN', 'MO', 'MS', 'MT', 
+    'NC', 'ND', 'NE', 'NH', 'NJ', 'NM', 'NV', 'NY', 'OH', 'OK', 'OR', 'PA', 'RI', 'SC', 'SD', 
+    'TN', 'TX', 'UT', 'VA', 'VT', 'WA', 'WI', 'WV', 'WY'];
+    for(var i = 0; i < stateCodes.length; i++){
+        if (state == stateCodes[i]){
+            return true;
+        }
+    }
+    return false;
+}
+
+var validateEmail= function(email){
+    if(email == ''){
+        return true;
+    }
+    var testresults = false;
+    var filter=/^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
+    if (filter.test(email)){
+        testresults=true;
+    }
+    return testresults;
+}
 
 
 /**
@@ -28,12 +70,14 @@ var ContactSchema = new Schema({
     firstName: {
         type: String,
         default: '',
-        trim: true
+        trim: true,
+        required: 'first Name is required'
     },
     surname: {
         type: String,
         default: '',
-        trim: true
+        trim: true,
+        required: 'surname is required'
     },
     address: {
         type: String,
@@ -48,7 +92,8 @@ var ContactSchema = new Schema({
     state: {
         type: String,
         default: '',
-        trim: true
+        trim: true,
+        validate: [validateStateCode, 'Put a valid two character state code']
     },
     zipCode: {
         type: String,
@@ -59,7 +104,8 @@ var ContactSchema = new Schema({
     email: {
         type: String,
         default: '',
-        trim: true
+        trim: true,
+        validate: [validateEmail, 'please enter a valid email']
     },
     phone: {
         type: String,
@@ -67,37 +113,13 @@ var ContactSchema = new Schema({
         trim: true,
         validate: [validatePhoneNumber, 'Put in a valid phone number']
     },
-    is_volunteer: {
-        type: Boolean,
-    },
-    is_adopter: {
-        type: Boolean,
-    },
-    is_fosterer: {
-        type: Boolean,
-    },
-    is_donator: {
-        type: Boolean,
-    },
-    is_vet: {
-        type: Boolean,
-    },
-    is_employee: {
-        type: Boolean,
-    },
-    is_admin: {
-        type:  Boolean,
-    },
     deleted_contact: {
         type: Boolean,
+        default: false
     },
     created: {
         type: Date,
         default: Date.now
-    },
-    user: {
-        type: Schema.ObjectId,
-        ref: 'User'
     }
 });
 

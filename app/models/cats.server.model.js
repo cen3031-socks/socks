@@ -8,9 +8,13 @@ var mongoose = require('mongoose'),
 var AdoptionSchema = new Schema({
 	adopter: { type: Schema.Types.ObjectId, ref: 'Contact', required: true },
 	donation: { type: Schema.Types.ObjectId, ref: 'Donation' },
-	date: Date,
+	date: {
+		type: Date,
+		default: Date.now,
+		required: 'must have adoption date'
+	},
 	endDate: Date, 
-	catId: { type: Schema.Types.ObjectId, ref: 'Cat' },
+	catId: { type: Schema.Types.ObjectId, ref: 'Cat', required: 'must adopt a cat' },
 	returnReason: String
 });
 
@@ -63,9 +67,17 @@ var CatSchema = new Schema({
 	currentLocation: String,
 	notes: [
         {
-            message: String,
-            date: Date,
-            sender: { type: Schema.Types.ObjectId, ref: 'User' },
+            message: {
+            	type: String,
+            	required: 'message must not be empty'
+            },
+            date: {
+            	type:Date,
+            	default: Date.now,
+            	required: 'date is required'
+            },
+
+            sender: { type: Schema.Types.ObjectId, ref: 'User', required: 'needs user' },
             _id: Schema.Types.ObjectId
         }
     ],
@@ -73,11 +85,20 @@ var CatSchema = new Schema({
 		{
 			_id: Schema.Types.ObjectId,
 			detail: String,
-			label: String,
-			date: Date,
+			label: {
+				type: String,
+				required: 'must have a label'
+			},
+			date: {
+				type: Date,
+				required: 'must have a date'
+			},
 			/* for events that have a duration, like trips to vet */
 			endDate: Date,
-			eventType: String,
+			eventType: {
+				type: String,
+				required: 'must have a event type'
+			},
 			icon: String
 		}
 	],
