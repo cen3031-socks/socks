@@ -20,7 +20,7 @@ angular.module('employees').controller('EmployeesController', ['$scope', '$state
 
 			// Redirec after save
 			employee.$save(function(response) {
-				$location.path('employees/' + response._id);
+				$location.path('/');
 
 				// Clear form fields
 				$scope.firstName = '';

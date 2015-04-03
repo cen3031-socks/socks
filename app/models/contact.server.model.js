@@ -115,7 +115,8 @@ var ContactSchema = new Schema({
     },
     deleted_contact: {
         type: Boolean,
-        default: false
+
+        default: true
     },
     created: {
         type: Date,
