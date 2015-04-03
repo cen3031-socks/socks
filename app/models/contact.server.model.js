@@ -67,37 +67,13 @@ var ContactSchema = new Schema({
         trim: true,
         validate: [validatePhoneNumber, 'Put in a valid phone number']
     },
-    is_volunteer: {
-        type: Boolean,
-    },
-    is_adopter: {
-        type: Boolean,
-    },
-    is_fosterer: {
-        type: Boolean,
-    },
-    is_donator: {
-        type: Boolean,
-    },
-    is_vet: {
-        type: Boolean,
-    },
-    is_employee: {
-        type: Boolean,
-    },
-    is_admin: {
-        type:  Boolean,
-    },
     deleted_contact: {
         type: Boolean,
+        default: true
     },
     created: {
         type: Date,
         default: Date.now
-    },
-    user: {
-        type: Schema.ObjectId,
-        ref: 'User'
     }
 });
 
