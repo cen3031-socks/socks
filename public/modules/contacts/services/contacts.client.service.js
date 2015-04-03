@@ -16,7 +16,17 @@ angular.module('contacts').factory('Contacts', ['$resource',
                 method: 'GET',
                 url: 'adopters',
                 isArray: true
-            }
+            },
+            findCatsWithVets: {
+                method: 'GET',
+                url: '/contacts/:contactId/vets',
+                isArray: true
+            },
+            findDonations: {
+                method: 'GET',
+                url: 'contacts/:contactId/donations',
+                isArray: true
+            },
 		});
 	}
 ]);

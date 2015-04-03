@@ -1,0 +1,1344 @@
+[33mcommit afec81e95014407c9c883a6ee0cb1bd56c7d0f76[m
+Author: Alexander Russ <git@alexanderruss.com>
+Date:   Mon Mar 23 00:24:56 2015 -0400
+
+    Adds ngInfiniteScroll to dependencies for production.
+
+[33mcommit ca9e61f545dcd8eff5641998edcf03f80747e408[m
+Author: Alexander Russ <git@alexanderruss.com>
+Date:   Mon Mar 23 00:23:17 2015 -0400
+
+    Moves CSS out of HTML.
+
+[33mcommit a5144f178b76d61f2fa8ef15da305ebc2863efeb[m
+Author: Alexander Russ <git@alexanderruss.com>
+Date:   Mon Mar 23 00:15:19 2015 -0400
+
+    Adds ng-infinite-scroll dependency.
+
+[33mcommit ce4b9afe78c48bac8d93ecd1593c84c7f574a12c[m
+Author: bdgrider <bdgrider17@ufl.edu>
+Date:   Sun Mar 22 22:47:56 2015 -0400
+
+    Adding donations updates/linking to contacts
+
+[33mcommit a1cd00a5fa19af02142635394df053717a9d16b9[m
+Author: bdgrider <bdgrider17@ufl.edu>
+Date:   Sun Mar 22 20:22:17 2015 -0400
+
+    Adding donations updates
+
+[33mcommit 2cd0440a6b8e0c982f5a08f067034e51bb24ade1[m
+Author: bdgrider <bdgrider17@ufl.edu>
+Date:   Sun Mar 22 18:36:22 2015 -0400
+
+    donations infinite scroll
+
+[33mcommit 6ce258de07588cb436ce89589c5549d5e6997134[m
+Merge: c2c8c53 bf455f9
+Author: bdgrider <bdgrider17@ufl.edu>
+Date:   Sun Mar 22 16:28:23 2015 -0400
+
+    Merge branch 'master' into ben-testing
+
+[33mcommit c2c8c53f38e197b60679c8a5be85ba6f2b5bc8d0[m
+Author: bdgrider <bdgrider17@ufl.edu>
+Date:   Fri Mar 20 20:11:55 2015 -0400
+
+    linking donation and contact create views
+
+[33mcommit bf455f917bd642de6bb13d784d1fd3814c7d2811[m
+Merge: cf60bc2 5fe44eb
+Author: reidgill <reidgill12@ufl.edu>
+Date:   Fri Mar 20 19:46:12 2015 -0400
+
+    Merge pull request #31 from cen3031-socks/contact_fixes
+    
+    Added adoption view to contact, added delete button, visually matched contact view to cat, other small fixes
+
+[33mcommit 5fe44ebca1b7a85f2cbe7c4bf08e2d51aa7f8a18[m
+Merge: f2866d1 cf60bc2
+Author: Reid Gill <reidgill12@ufl.edu>
+Date:   Fri Mar 20 19:39:13 2015 -0400
+
+    Merge branch 'master' into contact_fixes
+
+[33mcommit f2866d162dd231d77d9835e042ef4bae2ffcbe69[m
+Author: Reid Gill <reidgill12@ufl.edu>
+Date:   Fri Mar 20 19:33:18 2015 -0400
+
+    Added adopted cats view on contacts and a delete button
+
+[33mcommit cf60bc2bdb98c3755ecc3c08a3a5c4ae3d323262[m
+Merge: 660a484 e775d67
+Author: Alexander Russ <a.h.russ@gmail.com>
+Date:   Fri Mar 20 17:44:15 2015 -0400
+
+    Merge pull request #30 from cen3031-socks/confirm-dialog
+    
+    Creates a dialogs service.
+
+[33mcommit e775d67ef5976269ea496a48e816b0c443b73f22[m
+Author: Alexander Russ <git@alexanderruss.com>
+Date:   Fri Mar 20 17:43:12 2015 -0400
+
+    Creates a dialogs service.
+
+[33mcommit 660a48491045c3a904cb2e2d5cec47761ffd714f[m
+Merge: d43b620 95d1e5f
+Author: Alexander Russ <git@alexanderruss.com>
+Date:   Wed Mar 18 23:41:12 2015 -0400
+
+    Merge branch 'master' of github.com:cen3031-socks/socks
+
+[33mcommit d43b6200eccc0c7c914878d56f3166fe33b1eb07[m
+Author: Alexander Russ <git@alexanderruss.com>
+Date:   Wed Mar 18 23:40:59 2015 -0400
+
+    hotfix to make the content styling symmetric.
+
+[33mcommit a15193ecc15439326168b0efd95399e5e56519bd[m
+Author: Alexander Russ <git@alexanderruss.com>
+Date:   Wed Mar 18 23:37:58 2015 -0400
+
+    Fixes styling merge issues
+
+[33mcommit 95d1e5ffc3f6089dd88fa66bf9155352d108ad84[m
+Merge: 74db882 792dcf2
+Author: Alexander Russ <a.h.russ@gmail.com>
+Date:   Wed Mar 18 23:27:31 2015 -0400
+
+    Merge pull request #28 from cen3031-socks/nm_branch
+    
+    Improves volunteer page.
+
+[33mcommit 792dcf2ce7e1063906f8b9996b6288bfeff7138d[m
+Merge: 3656f64 74db882
+Author: Alexander Russ <git@alexanderruss.com>
+Date:   Wed Mar 18 23:27:05 2015 -0400
+
+    Merge layout changes for volunteer page.
+
+[33mcommit 74db8823c17722635ac504611b622f06715edf01[m
+Merge: cb2fb4e dde9ed2
+Author: Alexander Russ <a.h.russ@gmail.com>
+Date:   Wed Mar 18 00:53:44 2015 -0400
+
+    Merge pull request #29 from cen3031-socks/as_navigationStyleTest
+    
+    Moved nav bar to side
+
+[33mcommit 627be0497d60b59b1bae882938b0d464f21de770[m
+Author: Reid Gill <reidgill12@ufl.edu>
+Date:   Wed Mar 18 00:51:12 2015 -0400
+
+    Connected cat to contact and added some buttons; a few hotfixes
+
+[33mcommit dde9ed22251af3efc50bb8429c1906ffb32bed94[m
+Merge: e813440 cb2fb4e
+Author: Aaorn <asilcott1@gmail.com>
+Date:   Wed Mar 18 00:51:03 2015 -0400
+
+    fixed merge confilqt
+
+[33mcommit e813440dbb77b56ca8db5e1b1af2003169777a98[m
+Author: Aaorn <asilcott1@gmail.com>
+Date:   Wed Mar 18 00:43:16 2015 -0400
+
+    Changed the UI to Side bar and changed colors around
+
+[33mcommit 3656f643d3802c1acfed4fb892d12d4a1f70a44d[m
+Author: munarriz <munarriz@ufl.edu>
+Date:   Tue Mar 17 21:44:29 2015 -0400
+
+    added style to volunteer sign-in
+
+[33mcommit 3c543ba984b24d5b9a8ec321e76d06b8b91e86cc[m
+Author: Alexander Russ <git@alexanderruss.com>
+Date:   Tue Mar 17 21:01:32 2015 -0400
+
+    Fixes profile CSS
+
+[33mcommit d811ebc6744c300a4e719ef69805d921aac4fa04[m
+Author: Alexander Russ <git@alexanderruss.com>
+Date:   Tue Mar 17 20:54:18 2015 -0400
+
+    Modifies core css so that volunteers doesn't have indentation.
+
+[33mcommit cb2fb4ebca9f211f727ed99a6e5cc3acd7e4cfa5[m
+Author: Alexander Russ <git@alexanderruss.com>
+Date:   Tue Mar 17 20:38:41 2015 -0400
+
+    Cat details hotfix.
+
+[33mcommit 83af9fa2c3d58b71d7bab5e45763a7df07b82fde[m
+Merge: a986342 df7b49f
+Author: Alexander Russ <git@alexanderruss.com>
+Date:   Tue Mar 17 20:20:00 2015 -0400
+
+    Merge branch 'master' into contact_fixes
+
+[33mcommit df7b49f221d4b1c475503d3c6ddfeabd94f2d3cb[m
+Author: Alexander Russ <git@alexanderruss.com>
+Date:   Tue Mar 17 20:19:46 2015 -0400
+
+    Cat details CSS hotfix
+
+[33mcommit a9863422cf4d5f1faeaec0cd611ba607357056fc[m
+Merge: 174a5f4 b681344
+Author: Reid Gill <reidgill12@ufl.edu>
+Date:   Tue Mar 17 20:05:26 2015 -0400
+
+    merge`
+
+[33mcommit b6813446237d18e6c08c800fac84dbc817621c7a[m
+Merge: 0221ff9 ac4a7d6
+Author: reidgill <reidgill12@ufl.edu>
+Date:   Tue Mar 17 20:04:22 2015 -0400
+
+    Merge pull request #27 from cen3031-socks/ahr_cat-details
+    
+    Improves the cat details page.
+
+[33mcommit ac4a7d620193248ac6c2c1e504dfeb1b7afe27fd[m
+Merge: 5440b04 0221ff9
+Author: Alexander Russ <git@alexanderruss.com>
+Date:   Tue Mar 17 20:04:13 2015 -0400
+
+    Merge branch 'master' into ahr_cat-details
+
+[33mcommit 174a5f4e9fb71eb56ff7b84b09fd4e77e39692dd[m
+Merge: 308c9e2 0221ff9
+Author: Reid Gill <reidgill12@ufl.edu>
+Date:   Tue Mar 17 20:02:49 2015 -0400
+
+    Merge branch 'master' into contact_fixes
+
+[33mcommit 1be7a12e79cabd89180f21d49ad271aacf5f2048[m
+Merge: 1262ad2 0221ff9
+Author: munarriz <munarriz@ufl.edu>
+Date:   Tue Mar 17 20:01:45 2015 -0400
+
+    Merge branch 'master' into nm_branch
+
+[33mcommit 308c9e2a10f4b05a35f10f5164a6a3c96f3bd827[m
+Author: Reid Gill <reidgill12@ufl.edu>
+Date:   Tue Mar 17 19:59:15 2015 -0400
+
+    made the contact edit look different
+
+[33mcommit 5440b04f507a5433115d3c45f46ebf543c336b05[m
+Author: Alexander Russ <git@alexanderruss.com>
+Date:   Tue Mar 17 19:58:07 2015 -0400
+
+    Makes it possible to delete notes.
+
+[33mcommit 1262ad2dd8aebed1cdbd301b6ad865e04556f0a2[m
+Author: munarriz <munarriz@ufl.edu>
+Date:   Tue Mar 17 19:57:18 2015 -0400
+
+    make sign in modal show only first name
+
+[33mcommit e3c9a12e22b32fec0ee6036093fcd7059ee1f654[m
+Merge: c7346f5 f987bc6
+Author: Alexander Russ <git@alexanderruss.com>
+Date:   Tue Mar 17 18:54:32 2015 -0400
+
+    Merge branch 'master' into ahr_cat-details
+
+[33mcommit c7346f5e2ff31111eb63d3e2caf6658e8e220849[m
+Author: Alexander Russ <git@alexanderruss.com>
+Date:   Tue Mar 17 18:54:27 2015 -0400
+
+    Makes it possible to add notes to cats.
+
+[33mcommit 0221ff9b2aa07f61f28675d5a65c4dd7e1fcc91c[m
+Merge: 6f7ed06 a7a5d4e
+Author: Alexander Russ <a.h.russ@gmail.com>
+Date:   Tue Mar 17 18:12:24 2015 -0400
+
+    Merge pull request #25 from cen3031-socks/ahr_contact-selector
+    
+    Create contact selector directive.
+
+[33mcommit 76588591f1cfc7355056598159aafbd398d71380[m
+Author: munarriz <munarriz@ufl.edu>
+Date:   Sun Mar 15 23:20:09 2015 -0400
+
+    split volunteer name into first and last
+
+[33mcommit 6f7ed06312d57f32385c423f392be1cef6dee39e[m
+Merge: f987bc6 ad14534
+Author: Alexander Russ <a.h.russ@gmail.com>
+Date:   Sun Mar 15 19:46:11 2015 -0400
+
+    Merge pull request #26 from cen3031-socks/ep_login
+    
+    Login functionality added
+
+[33mcommit ad145341e2434b2717e12a2efa2d07b12d269cdd[m
+Merge: 9e6fe2f f987bc6
+Author: Alexander Russ <git@alexanderruss.com>
+Date:   Sun Mar 15 19:45:35 2015 -0400
+
+    Merges conficts
+
+[33mcommit 7e9d37299c97ffd60d85ef389a75b40783b41c03[m
+Author: Alexander Russ <git@alexanderruss.com>
+Date:   Sun Mar 15 19:43:11 2015 -0400
+
+    Modifies cat creation form.
+
+[33mcommit 9e6fe2faea83de05ee969d3779728d3339652d13[m
+Author: Eric Pogash <ericpogash@gmail.com>
+Date:   Sun Mar 15 19:38:19 2015 -0400
+
+    CSS changes for Sign In
+
+[33mcommit f987bc670fbf0627bb45130646e625983cfab486[m
+Merge: 48fc6c7 2143b61
+Author: bdgrider <bdgrider17@ufl.edu>
+Date:   Sun Mar 15 18:56:29 2015 -0400
+
+    fixing data merge conflict
+
+[33mcommit 48fc6c74c421e560b8dc27d0e26145409b6f9781[m
+Author: bdgrider <bdgrider17@ufl.edu>
+Date:   Sun Mar 15 18:15:52 2015 -0400
+
+    reducing number of cat photos
+
+[33mcommit cd96cd1c9afc61719cf60655e43eeb3ab2292981[m
+Author: Alexander Russ <git@alexanderruss.com>
+Date:   Thu Mar 12 15:53:35 2015 -0400
+
+    Changes raw person info in details page to contact-links
+
+[33mcommit 2d9d0a36c9b0565a445870c4f0cba2c57c8c6b22[m
+Author: Alexander Russ <git@alexanderruss.com>
+Date:   Thu Mar 12 15:49:01 2015 -0400
+
+    Makes it possible to return a cat and adds contact-link directive to make linking to contacts less painful.
+
+[33mcommit 88d28a78ede43ae788c7f036c0da1993dffe73a6[m
+Author: Alexander Russ <git@alexanderruss.com>
+Date:   Thu Mar 12 02:58:42 2015 -0400
+
+    Adds ability to adopt cats from the user interface and fixes graphical glitches with the add event button.
+
+[33mcommit f2dc359c4add62aae66072371c4fb8af81a3002c[m
+Author: Alexander Russ <git@alexanderruss.com>
+Date:   Thu Mar 12 02:31:11 2015 -0400
+
+    Makes it possible to adopt a cat.
+
+[33mcommit b477b2824b869ab4e979cb00218f6e2505748481[m
+Author: Alexander Russ <git@alexanderruss.com>
+Date:   Wed Mar 11 23:37:36 2015 -0400
+
+    Adds event timeline to cat page and enables event creation.
+
+[33mcommit 227be29dfb8c16cbfff2cc8c021a17fbe92ba8b0[m
+Author: Alexander Russ <git@alexanderruss.com>
+Date:   Wed Mar 11 10:27:36 2015 -0400
+
+    Initial rearrangement of the cat detail view.
+
+[33mcommit 013d81d1d0145269dd83bea9aba2ee4fe6d56426[m
+Author: munarriz <munarriz@ufl.edu>
+Date:   Wed Mar 11 10:05:24 2015 -0400
+
+    added time to popup modal
+
+[33mcommit 2143b619c119d613b77acf7d70abbf5007e7f880[m
+Merge: 4c7f815 4d4c100
+Author: Alexander Russ <a.h.russ@gmail.com>
+Date:   Wed Mar 11 09:44:51 2015 -0400
+
+    Merge pull request #24 from cen3031-socks/contact_fixes
+    
+    Adds buttons to the top left of the contact page.
+
+[33mcommit 3fdcf6f78238f63a844d24e1d7d7d21e9067f505[m
+Author: munarriz <munarriz@ufl.edu>
+Date:   Tue Mar 10 23:01:08 2015 -0400
+
+    added time to popup modal
+
+[33mcommit a7a5d4e9e13b0522d0417187fd8d21daf976b9f8[m
+Author: Alexander Russ <git@alexanderruss.com>
+Date:   Tue Mar 10 12:19:56 2015 -0400
+
+    Makes contact selector look better and adds the ability to create a new contact from the selector interface.
+
+[33mcommit 4d4c100e35db1ba254b584acc387bbdb8cb4a2e4[m
+Author: Reid Gill <reidgill12@ufl.edu>
+Date:   Mon Mar 9 21:42:10 2015 -0400
+
+    added "cute" buttons to the contact page
+
+[33mcommit 84f6610db3384d6ccf5d34768786e241987bdf34[m
+Author: Alexander Russ <git@alexanderruss.com>
+Date:   Mon Mar 9 21:41:18 2015 -0400
+
+    Adds a contact selector directive.
+
+[33mcommit 3df7f9c9b2c743a1b59c06e2032ac43bfca3a92b[m
+Author: munarriz <munarriz@ufl.edu>
+Date:   Mon Mar 9 19:36:48 2015 -0400
+
+    created modal for sign in/out
+
+[33mcommit e06dda30c1b13b0c1ef030e1046590b4899f286e[m
+Merge: e8950f7 4c7f815
+Author: Reid Gill <reidgill12@ufl.edu>
+Date:   Mon Mar 9 17:55:20 2015 -0400
+
+    Merge branch 'master' of https://github.com/cen3031-socks/socks
+    
+    Conflicts:
+    	scripts/cats-data.json
+    D
+    A
+    B
+    grrwrr It looks like you may be committing a merge.
+
+[33mcommit 5274962d0bb67cc80078c0556ca4190f7d3dd4ba[m
+Author: Eric Pogash <ericpogash@gmail.com>
+Date:   Fri Mar 6 23:39:24 2015 -0500
+
+    User can now edit contact property
+
+[33mcommit c1ccffbe1f992abce0ddda1cbe78db17adb7e23c[m
+Author: Eric Pogash <ericpogash@gmail.com>
+Date:   Fri Mar 6 22:18:50 2015 -0500
+
+    Added Contact property for Employees
+
+[33mcommit ebaebdc050d4a6ce0424cd75acad668fc7bfc8d6[m
+Author: Eric Pogash <ericpogash@gmail.com>
+Date:   Fri Mar 6 16:48:21 2015 -0500
+
+    Users can now login, form validation
+
+[33mcommit 4c7f81549d5b22e0e0c89d9cdc5eeb38721dd0bc[m
+Author: Alexander Russ <git@alexanderruss.com>
+Date:   Thu Feb 26 22:55:20 2015 -0500
+
+    Converts meeting notes to markdown format.
+
+[33mcommit a861017c2b87cfb1822ce4dbb17c9f3603e0cf29[m
+Merge: d7c96a8 17e339a
+Author: Alexander Russ <a.h.russ@gmail.com>
+Date:   Thu Feb 26 16:08:27 2015 -0500
+
+    Merge pull request #23 from cen3031-socks/ben-testing
+    
+    Makes navbar more closely match socks site.
+
+[33mcommit d7c96a86823c653116849514211ea133018aaec4[m
+Author: Eric Pogash <epogash@ufl.edu>
+Date:   Thu Feb 26 14:22:18 2015 -0500
+
+    Update 26-02-2015
+
+[33mcommit 505a9a29e30762ed44ae23e8d9c63efa67d999c0[m
+Author: Eric Pogash <epogash@ufl.edu>
+Date:   Thu Feb 26 14:15:35 2015 -0500
+
+    Update 26-02-2015
+
+[33mcommit 6cc3f5b1cb041f2a5ece90b27c594fefc5a30a68[m
+Author: Eric Pogash <epogash@ufl.edu>
+Date:   Thu Feb 26 13:59:06 2015 -0500
+
+    Update 26-02-2015
+
+[33mcommit dbb4f36250754534ebc87ae133cf30358f4d32cb[m
+Author: Eric Pogash <epogash@ufl.edu>
+Date:   Thu Feb 26 13:57:46 2015 -0500
+
+    Update 26-02-2015
+
+[33mcommit 4b24d180923f89b31e726cc68d8f46d71ff0fa0d[m
+Author: Eric Pogash <epogash@ufl.edu>
+Date:   Thu Feb 26 13:57:27 2015 -0500
+
+    Notes for Sprint 2 Meeting
+    
+    Notes for Sprint 2 Meeting
+
+[33mcommit 17e339ab62b9f229de0adf55f0672cacac2352bf[m
+Author: bdgrider <bdgrider17@ufl.edu>
+Date:   Thu Feb 26 13:46:33 2015 -0500
+
+    modified data gen and adding nav bar changes
+
+[33mcommit 953bea95e211c759643c495b3ca1f78c68451857[m
+Merge: f4baf43 46467cd
+Author: Alexander Russ <a.h.russ@gmail.com>
+Date:   Thu Feb 26 13:40:19 2015 -0500
+
+    Merge pull request #22 from cen3031-socks/screenshot-generation
+    
+    Adds automatic screenshot generation for homepage.
+
+[33mcommit 46467cd38a3d2ab0365e7bcfbd71400789eba895[m
+Author: Alexander Russ <git@alexanderruss.com>
+Date:   Thu Feb 26 01:03:41 2015 -0500
+
+    Adds automatic screenshot generation for homepage.
+
+[33mcommit f4baf43e337b71d6968987057dbec15b9a31d7a2[m
+Author: Alexander Russ <git@alexanderruss.com>
+Date:   Wed Feb 25 23:16:58 2015 -0500
+
+    Suppresses server output for travis tests.
+
+[33mcommit d80e977f0484ca5e9554c4da85f7cca413d26d68[m
+Author: Alexander Russ <git@alexanderruss.com>
+Date:   Wed Feb 25 22:51:41 2015 -0500
+
+    Modifies gruntfile to return errors for travis tests.
+
+[33mcommit 34d7b688e4a3aa11229472ee3294bc3fe467de67[m
+Author: Alexander Russ <git@alexanderruss.com>
+Date:   Wed Feb 25 22:33:46 2015 -0500
+
+    Modifies config files for travis CI
+
+[33mcommit 2702e64b13c1efbcf89bd8a6b2f3d71bf3698f25[m
+Author: Alexander Russ <git@alexanderruss.com>
+Date:   Wed Feb 25 13:29:52 2015 -0500
+
+    Fixes import-data.bat.
+
+[33mcommit b5b7e024871ec8302b033d49d48d4c9657bd4fc0[m
+Author: Alexander Russ <git@alexanderruss.com>
+Date:   Wed Feb 25 13:10:39 2015 -0500
+
+    Adds a batch script just to import data.
+
+[33mcommit e8950f7138acd06c7b9d06327d9720e8a0b51eda[m
+Merge: faf8cf3 6452049
+Author: Reid Gill <reidgill12@ufl.edu>
+Date:   Wed Feb 25 13:06:06 2015 -0500
+
+    ge branch 'master' of https://github.com/cen3031-socks/socks
+    
+    Conflicts:
+    	scripts/cats-data.json
+    
+    q
+    A
+    B
+    C
+    A
+    A
+    A
+    A
+    A
+
+[33mcommit faf8cf3a3e493408a8d0d01ade3dae7e0b3f88be[m
+Author: Reid Gill <reidgill12@ufl.edu>
+Date:   Wed Feb 25 13:04:26 2015 -0500
+
+    adding data
+
+[33mcommit 553ceb19a670b686c236d32df4adcf224fc9fcf1[m
+Author: bdgrider <bdgrider17@ufl.edu>
+Date:   Wed Feb 25 00:54:13 2015 -0500
+
+    Logo/nav styling additions
+
+[33mcommit 30ea5ba99bc6fefe38e49abdb321d151b8bdd7c6[m
+Author: bdgrider <bdgrider17@ufl.edu>
+Date:   Wed Feb 25 00:21:41 2015 -0500
+
+    Creating header logo
+
+[33mcommit 6452049070cdcd4178579878d29869a85d2e4633[m
+Merge: e9e3439 5bdf89f
+Author: Alexander Russ <a.h.russ@gmail.com>
+Date:   Wed Feb 25 09:20:33 2015 -0500
+
+    Merge pull request #21 from cen3031-socks/ahr_integration-tests-s2
+    
+    Adds a few more e2e tests and prettifies their output.
+
+[33mcommit 5bdf89fd025e6c6494cffd7d0914d6f2a690cfe1[m
+Author: Alexander Russ <git@alexanderruss.com>
+Date:   Wed Feb 25 09:19:32 2015 -0500
+
+    Adds a few more e2e tests and prettifies their output.
+
+[33mcommit e9e3439e403248d7a08f2714e868ebbd0161f21a[m
+Merge: 4ceacd0 e1cf875
+Author: Alexander Russ <a.h.russ@gmail.com>
+Date:   Wed Feb 25 04:49:48 2015 -0500
+
+    Merge pull request #20 from cen3031-socks/ahr_fix-cat-merge-bug
+    
+    Fixes bugs caused by the merge in PR#14
+
+[33mcommit e1cf875a3c3977f9049932cf53704fe46ed414ed[m
+Author: Alexander Russ <git@alexanderruss.com>
+Date:   Wed Feb 25 04:47:37 2015 -0500
+
+    Fixes bugs caused by the merge in PR#14
+
+[33mcommit 4ceacd0491eea53396f7ac4c0d86f8ffa4b7ea12[m
+Merge: 9525e53 257494b
+Author: Alexander Russ <a.h.russ@gmail.com>
+Date:   Wed Feb 25 04:28:16 2015 -0500
+
+    Merge pull request #18 from cen3031-socks/ahr_e2e-tests
+    
+    Fixes the volunteer integration test to actually work.
+
+[33mcommit 257494b0987926c18d9c9246ba10fe528a4ed50b[m
+Author: Alexander Russ <git@alexanderruss.com>
+Date:   Wed Feb 25 04:26:44 2015 -0500
+
+    Finally fixes that volunteer test.
+
+[33mcommit dee5667342dcc624c63c3a55e20118f37a612953[m
+Author: Alexander Russ <git@alexanderruss.com>
+Date:   Wed Feb 25 03:20:48 2015 -0500
+
+    Adds volunteer tets to gruntfile and works towards fixing the broken volunteer test.
+
+[33mcommit 9525e5351d26ac8332fa1de26a34202df96ee572[m
+Merge: 2da2049 1bbf096
+Author: Alexander Russ <a.h.russ@gmail.com>
+Date:   Wed Feb 25 03:09:22 2015 -0500
+
+    Merge pull request #17 from cen3031-socks/as_branch
+    
+    Test correction and creation/ Contact Code correction
+
+[33mcommit 1bbf096ec21af9ea6ab75176d6adb0d390c167cb[m
+Author: Aaorn <asilcott1@gmail.com>
+Date:   Wed Feb 25 03:04:26 2015 -0500
+
+    Fixed tests and changed Contact controller's update function to use  instead of this and editted associated view
+
+[33mcommit fbdb04acb660e5a338492f258c9fac54cf004721[m
+Merge: 5aaa7e7 2da2049
+Author: Aaorn <asilcott1@gmail.com>
+Date:   Wed Feb 25 02:15:01 2015 -0500
+
+    Merge branch 'master' into as_branch
+
+[33mcommit 5aaa7e76f8d6b01575defb164e41ab879ae5ed9f[m
+Author: Aaorn <asilcott1@gmail.com>
+Date:   Wed Feb 25 02:12:40 2015 -0500
+
+    Fixes client Side tests and Contact code Testablility/naming convention standardization
+
+[33mcommit 2da20491a4bd95017a5770f4c0721fb0d8886848[m
+Author: Alexander Russ <git@alexanderruss.com>
+Date:   Wed Feb 25 01:34:27 2015 -0500
+
+    Removes references to articles.
+
+[33mcommit e8d2c83cbdbc55c6cbc730ccd0ab073c186f14b7[m
+Merge: f2e0d12 23cd78a
+Author: Alexander Russ <a.h.russ@gmail.com>
+Date:   Wed Feb 25 01:12:06 2015 -0500
+
+    Merge pull request #14 from cen3031-socks/ahr_cat-creation-bugs
+    
+    Squashing cat creation bugs
+
+[33mcommit 23cd78a3f2096d3bb768c2b4a91a185ea40cdefc[m
+Merge: 1dd4eb4 5006b76
+Author: Alexander Russ <git@alexanderruss.com>
+Date:   Wed Feb 25 01:11:20 2015 -0500
+
+    Merges master into ahr_cat-creation-bugs.
+
+[33mcommit 5006b76314769a2ea34dae38ee327dd98fd071ec[m
+Merge: b1262f3 f2e0d12
+Author: Alexander Russ <git@alexanderruss.com>
+Date:   Wed Feb 25 01:09:02 2015 -0500
+
+    Merge branch 'master' of github.com:cen3031-socks/socks
+
+[33mcommit 1dd4eb4a3d11e82666cb6e077f740ba1d785a44d[m
+Merge: 64a828c b1262f3
+Author: Alexander Russ <git@alexanderruss.com>
+Date:   Wed Feb 25 01:08:37 2015 -0500
+
+    Merge branch 'master' into ahr_cat-creation-bugs
+
+[33mcommit f2e0d12f176c0ec70ffb3e69e9f2d2e2f5b29c74[m
+Merge: 2841d42 e587a9d
+Author: Alexander Russ <a.h.russ@gmail.com>
+Date:   Wed Feb 25 01:07:34 2015 -0500
+
+    Merge pull request #16 from cen3031-socks/ahr_cat-error-handling
+    
+    Makes the view cat page degrade more gracefully when viewing a cat.
+
+[33mcommit b1262f3154cedd3d1e82587ef52016e329168b2b[m
+Author: Alexander Russ <git@alexanderruss.com>
+Date:   Wed Feb 25 01:07:07 2015 -0500
+
+    Fixes grunt file.
+
+[33mcommit 2841d42c00896445aed42a2368f271c67dac51b2[m
+Merge: ed2f9d1 0bc1941
+Author: Alexander Russ <a.h.russ@gmail.com>
+Date:   Wed Feb 25 00:55:11 2015 -0500
+
+    Merge pull request #15 from cen3031-socks/ahr_testing
+    
+    Adds protractor tests.
+
+[33mcommit 0bc1941f4568c9ad9ca7adf8789d8914767bad06[m
+Author: Alexander Russ <git@alexanderruss.com>
+Date:   Tue Feb 24 22:27:02 2015 -0500
+
+    Broken volunteers test.
+
+[33mcommit f03ca7ed11cae9b71a46ab0873278731d389bcda[m
+Author: munarriz <munarriz@ufl.edu>
+Date:   Tue Feb 24 22:21:54 2015 -0500
+
+    Added commented out buggy code
+
+[33mcommit ad134085fda632374b86382a2a9e2c7e47409d2e[m
+Author: Alexander Russ <git@alexanderruss.com>
+Date:   Tue Feb 24 21:17:30 2015 -0500
+
+    Adds contact creation test.
+
+[33mcommit e587a9d7b829cbf25f4f1b28b785748bbbc888f9[m
+Author: Alexander Russ <git@alexanderruss.com>
+Date:   Tue Feb 24 20:20:07 2015 -0500
+
+    Makes the view cat page degrade more gracefully when viewing a cat which doesn't exist.
+
+[33mcommit eb9280d894eda52b259200be8975b9cb4541a213[m
+Author: Alexander Russ <git@alexanderruss.com>
+Date:   Tue Feb 24 19:16:16 2015 -0500
+
+    Adds test for deleting cats.
+
+[33mcommit 22efdc73fab475ffed7da698df73cd419960dd55[m
+Author: Alexander Russ <git@alexanderruss.com>
+Date:   Tue Feb 24 17:11:00 2015 -0500
+
+    Adds data generation to gruntfile.
+
+[33mcommit bd6b389b6315d51c429ae9fb5321aa21c35675c7[m
+Author: munarriz <munarriz@ufl.edu>
+Date:   Tue Feb 24 14:41:49 2015 -0500
+
+    No longer changes page on volunteer submit
+
+[33mcommit 64a828cb7979ce90584d6c297ed397adcab7b8d0[m
+Author: Alexander Russ <git@alexanderruss.com>
+Date:   Tue Feb 24 11:49:05 2015 -0500
+
+    Fixes bugs with cat creation involving date display.
+
+[33mcommit c2e5727df1fc655ecf4062f7c1b59381a9f09add[m
+Author: Alexander Russ <git@alexanderruss.com>
+Date:   Tue Feb 24 11:39:41 2015 -0500
+
+    Finalizes first cat creation end-to-end test.
+
+[33mcommit ed2f9d1fcad4b8b9653a5a3c98d2c3a040f94b7a[m
+Author: Alexander Russ <git@alexanderruss.com>
+Date:   Tue Feb 24 02:00:54 2015 -0500
+
+    Fixes typo in create-cat.client.view.html (date-ng-model -> data-ng-model)
+
+[33mcommit 6ba5ff2a774243e8f25b2d3d2bbcb8069aeb1771[m
+Merge: 9019141 a119a35
+Author: Alexander Russ <git@alexanderruss.com>
+Date:   Tue Feb 24 00:23:31 2015 -0500
+
+    Merge branch 'master' into ahr_testing
+
+[33mcommit a119a35486285ef55806169cb36f6f4b3b20dfc4[m
+Merge: 9756870 0e73b1f
+Author: Alexander Russ <a.h.russ@gmail.com>
+Date:   Tue Feb 24 00:20:23 2015 -0500
+
+    Merge pull request #13 from cen3031-socks/ahr_fix-lint-errors
+    
+    Fixes small errors to make the linters happy.
+
+[33mcommit 0e73b1f2a2299320bc450d674870a466608113d4[m
+Author: Alexander Russ <git@alexanderruss.com>
+Date:   Tue Feb 24 00:09:59 2015 -0500
+
+    Fixes small errors to make the linters happy.
+
+[33mcommit 90191411730e02d26f7b39166c392b285687f319[m
+Author: Alexander Russ <git@alexanderruss.com>
+Date:   Mon Feb 23 23:59:51 2015 -0500
+
+    Adds running mongodb to the grunt configuration.
+
+[33mcommit 975687043c9329cb391bcb4979fe6a799020fc86[m
+Merge: 3e83e1d d6cba31
+Author: Alexander Russ <a.h.russ@gmail.com>
+Date:   Mon Feb 23 23:39:52 2015 -0500
+
+    Merge pull request #12 from cen3031-socks/ep_branch
+    
+    Renames the poorly named "Create" object to "Employee"
+
+[33mcommit d6cba315d9c46a0d18c8a628e89d0e5bd91b9081[m
+Merge: 60f4eda 3e83e1d
+Author: Alexander Russ <git@alexanderruss.com>
+Date:   Mon Feb 23 23:38:51 2015 -0500
+
+    Fixes merge conflicts between rename of Creates -> Employees and master.
+
+[33mcommit 87996c7f117de70ef4969cf5093af39a570646b6[m
+Author: Alexander Russ <git@alexanderruss.com>
+Date:   Mon Feb 23 23:36:43 2015 -0500
+
+    Adds protractor tests.
+
+[33mcommit 60f4eda08c10962aab05768d86c46dcc9f555d32[m
+Author: Eric Pogash <ericpogash@gmail.com>
+Date:   Mon Feb 23 22:38:13 2015 -0500
+
+    Edited sign in page
+
+[33mcommit 9ddaa53b62b073c5d8f7a8030afa4dc4e637e014[m
+Author: Eric Pogash <ericpogash@gmail.com>
+Date:   Mon Feb 23 21:55:40 2015 -0500
+
+    Added account summary page after creating new account
+
+[33mcommit e7670d41728db636c744879af6288c2505f4a682[m
+Author: Eric Pogash <ericpogash@gmail.com>
+Date:   Mon Feb 23 21:32:20 2015 -0500
+
+    Reconfiguring
+
+[33mcommit b3f977d9124cd5671f7b5dfdda8f08636242738c[m
+Author: Eric Pogash <ericpogash@gmail.com>
+Date:   Mon Feb 23 21:29:11 2015 -0500
+
+    Renamed files.
+
+[33mcommit 3e83e1d43a1be682d2d51f3beb2e1a48eb5c6d2f[m
+Author: Alexander Russ <git@alexanderruss.com>
+Date:   Mon Feb 23 12:12:30 2015 -0500
+
+    Updates data generation scripts to generate contact data.
+
+[33mcommit 1ad79b2d9aab076399a5e353b0cef3beba2fca4b[m
+Author: Alexander Russ <git@alexanderruss.com>
+Date:   Mon Feb 23 02:13:40 2015 -0500
+
+    Adds missing generate data.
+
+[33mcommit e0084a823784585ca173854c04f5df175cb310e2[m
+Merge: 12236d6 7d24802
+Author: Alexander Russ <git@alexanderruss.com>
+Date:   Mon Feb 23 02:06:49 2015 -0500
+
+    Merge branch 'master' of github.com:cen3031-socks/socks
+
+[33mcommit 12236d6e52a2c05ca0fa52eb1cd890b3411ad74c[m
+Author: Alexander Russ <git@alexanderruss.com>
+Date:   Mon Feb 23 02:06:41 2015 -0500
+
+    Combines data generation scripts
+
+[33mcommit 7d2480259ca723d4ced9f0dab9e9afb6bc78dc69[m
+Merge: 20eb1a1 dc71d29
+Author: reidgill <reidgill12@ufl.edu>
+Date:   Mon Feb 23 02:04:28 2015 -0500
+
+    Merge pull request #11 from cen3031-socks/rg_branch
+    
+    fixed location errors with contacts
+
+[33mcommit 20eb1a1e01fedf3e48748fe0c9730a111c0bdff0[m
+Merge: 22474cc d36116b
+Author: Ben <bdgrider17@ufl.edu>
+Date:   Mon Feb 23 01:59:28 2015 -0500
+
+    Merge pull request #10 from cen3031-socks/ben-testing
+    
+    Adding datagen script and donations data
+
+[33mcommit 22474ccabf410d2ff24db33525980bf303f28f87[m
+Author: Alexander Russ <git@alexanderruss.com>
+Date:   Mon Feb 23 01:59:01 2015 -0500
+
+    Adds cat generation script.
+
+[33mcommit 15cc1e2357522f3aa4d1ef11f5d4c269ece1ca6a[m
+Author: Alexander Russ <git@alexanderruss.com>
+Date:   Mon Feb 23 01:58:47 2015 -0500
+
+    Adds cat generation script.
+
+[33mcommit d36116bc4aa5511eb841f81146835c7f747efd57[m
+Author: bdgrider <bdgrider17@ufl.edu>
+Date:   Mon Feb 23 01:53:02 2015 -0500
+
+    Adding datagen script and donations data
+
+[33mcommit dc71d291bacfef2678ab657ca27451643cc8509b[m
+Author: Reid Gill <reidgill12@ufl.edu>
+Date:   Mon Feb 23 01:34:17 2015 -0500
+
+    fixed location errors with contacts
+
+[33mcommit 9fac46a0013a98e10b1d34081f73ae43364914f9[m
+Author: Alexander Russ <git@alexanderruss.com>
+Date:   Mon Feb 23 00:49:18 2015 -0500
+
+    Adds missing routes to core.
+
+[33mcommit 131821d690204e1a9a75d4e3d2c23b126e1b0679[m
+Merge: 90810a7 4b66073
+Author: bdgrider <bdgrider17@ufl.edu>
+Date:   Mon Feb 23 00:41:40 2015 -0500
+
+    Fixing merge conflicts
+
+[33mcommit 4b66073ba409f782fd4b59bb101e63c9615c14c1[m
+Merge: e7ebfde 3be93a2
+Author: Ben <bdgrider17@ufl.edu>
+Date:   Mon Feb 23 00:32:48 2015 -0500
+
+    Merge pull request #9 from cen3031-socks/ben-testing
+    
+    Ben testing
+
+[33mcommit 3be93a220101cd0c250eb25dc6f791d6f1f6945d[m
+Merge: 8e088fd e7ebfde
+Author: bdgrider <bdgrider17@ufl.edu>
+Date:   Mon Feb 23 00:23:58 2015 -0500
+
+    Merge branch 'master' of https://github.com/cen3031-socks/socks into ben-testing
+
+[33mcommit 90810a7ef75ed29fa72876223cc4e32db7869195[m
+Author: bdgrider <bdgrider17@ufl.edu>
+Date:   Mon Feb 23 00:23:43 2015 -0500
+
+    Changed site title
+
+[33mcommit e7ebfdee7cc6799844359eddc0d715dbad5dba6f[m
+Author: Alexander Russ <git@alexanderruss.com>
+Date:   Mon Feb 23 00:20:21 2015 -0500
+
+    Removes requiresAuth from all routes.
+
+[33mcommit 81ee81c756667742a76df0d5a2a4f644f1e13205[m
+Author: Eric Pogash <ericpogash@gmail.com>
+Date:   Mon Feb 23 00:11:48 2015 -0500
+
+    Added creates link
+
+[33mcommit 01e76bac0cf1aefa330e0825c7dc717e54a3e451[m
+Author: Alexander Russ <git@alexanderruss.com>
+Date:   Mon Feb 23 00:10:50 2015 -0500
+
+    Fixes horizontal scrollbar due to navigation.
+
+[33mcommit 81f3511105b9714747cb596959df1081bb78b4e7[m
+Merge: 7c9b283 cbd2388
+Author: Alexander Russ <a.h.russ@gmail.com>
+Date:   Mon Feb 23 00:07:47 2015 -0500
+
+    Merge pull request #8 from cen3031-socks/rg_test
+    
+    Rg test
+
+[33mcommit cbd23886353da4cb58df73f7f959e7e18dfe86ea[m
+Merge: 1b6523a 82c84b5
+Author: Alexander Russ <git@alexanderruss.com>
+Date:   Mon Feb 23 00:07:27 2015 -0500
+
+    Merge branch 'master' into rg_test
+
+[33mcommit 1b6523ac396bc2f84a1aecb8cf031bd931ccd4bb[m
+Author: Alexander Russ <git@alexanderruss.com>
+Date:   Mon Feb 23 00:06:59 2015 -0500
+
+    Fixes conflicts with master merge.
+
+[33mcommit 7c9b283fedac0c243e12cec3d8920f383208eaa2[m
+Author: Eric Pogash <ericpogash@gmail.com>
+Date:   Mon Feb 23 00:05:45 2015 -0500
+
+    Updated correct create link on sidebar.
+
+[33mcommit 82c84b5e637e89816dd29c0ff4d2c38495672963[m
+Merge: 3a3b58a 8f6daed
+Author: Alexander Russ <git@alexanderruss.com>
+Date:   Mon Feb 23 00:00:58 2015 -0500
+
+    Merge branch 'ep_branch'
+
+[33mcommit 8f6daed0739a2cfb4ffe528a28c1b6e78ecb06a0[m
+Author: Eric Pogash <ericpogash@gmail.com>
+Date:   Sun Feb 22 23:55:26 2015 -0500
+
+    Un-merges some files that shouldn't have been merged into accounts.
+
+[33mcommit c388db257d060e3d837f2db99810b8747e45ec78[m
+Author: Alexander Russ <git@alexanderruss.com>
+Date:   Sun Feb 22 23:04:38 2015 -0500
+
+    Fixes contacts from reid
+
+[33mcommit 3a3b58a031649ca25920d9371f5c4daec39698f8[m
+Merge: e6d189e 13757ab
+Author: Eric Pogash <epogash@ufl.edu>
+Date:   Sun Feb 22 22:56:54 2015 -0500
+
+    Merge pull request #7 from cen3031-socks/ep_branch
+    
+    Creates interface for creating user accounts
+
+[33mcommit 13757ab86875ee51b992eaa78758928d2a29629d[m
+Author: Eric Pogash <ericpogash@gmail.com>
+Date:   Sun Feb 22 22:50:20 2015 -0500
+
+    Creates interface for creating user accounts
+
+[33mcommit 0912f9a79479e75fa541f5d2e6760243e77dd8a1[m
+Merge: 854136e f80e668
+Author: Alexander Russ <git@alexanderruss.com>
+Date:   Sun Feb 22 20:55:03 2015 -0500
+
+    Merge branch 'rg_test' of github.com:cen3031-socks/socks into rg_test
+
+[33mcommit f80e668eb5559703974eab3595cf0e2d2cf2fb2f[m
+Author: Reid Gill <reidgill12@ufl.edu>
+Date:   Sun Feb 22 20:54:32 2015 -0500
+
+    socks contacts commit
+
+[33mcommit 854136ee22a0d0bdde83b655c4b48ea7d4024da4[m
+Merge: 90f8fb3 ea12418
+Author: Alexander Russ <git@alexanderruss.com>
+Date:   Sun Feb 22 20:49:31 2015 -0500
+
+    Merge branch 'rg_test' of github.com:cen3031-socks/socks into rg_test
+
+[33mcommit e6d189eda087c0c6d14e8c310b7cfb0301f994d9[m
+Merge: 1160b64 ac2457d
+Author: Alexander Russ <a.h.russ@gmail.com>
+Date:   Sun Feb 22 20:45:32 2015 -0500
+
+    Merge pull request #6 from cen3031-socks/ahr_template
+    
+    Moves navigation to core/header instead of layout.
+
+[33mcommit 1160b64a241071e1283101c62c1d3f2150d4ac6c[m
+Merge: 4808263 4899017
+Author: Alexander Russ <a.h.russ@gmail.com>
+Date:   Sun Feb 22 20:38:21 2015 -0500
+
+    Merge pull request #5 from cen3031-socks/nm_branch
+    
+    Adds volunteer time tracking page.
+
+[33mcommit 489901760c38e52fc9986c2a146299e2eac1bc1e[m
+Merge: fb2a17a 4808263
+Author: Alexander Russ <git@alexanderruss.com>
+Date:   Sun Feb 22 20:38:06 2015 -0500
+
+    Fixes merge conflicts.
+
+[33mcommit 90f8fb346945cc99e772e77961827818c46faa46[m
+Author: Reid Gill <reidgill12@ufl.edu>
+Date:   Wed Feb 18 13:46:19 2015 -0500
+
+    commit before I pulled from origin
+
+[33mcommit ea124184d8bae438628279854c2c5fe18d45fffe[m
+Author: Reid Gill <reidgill12@ufl.edu>
+Date:   Sun Feb 22 20:21:10 2015 -0500
+
+    contacts first commit
+
+[33mcommit fb2a17a0c458d843ab59c215755fdaff36045e8f[m
+Author: munarriz <munarriz@ufl.edu>
+Date:   Sun Feb 22 20:19:02 2015 -0500
+
+    Fixed error message on list volunteer page
+
+[33mcommit ac2457d2d14a17ab38f74ca4029345d506c79a16[m
+Author: Alexander Russ <git@alexanderruss.com>
+Date:   Sun Feb 22 20:07:37 2015 -0500
+
+    Moves navigation to core/header instead of layout.
+
+[33mcommit 4808263ae6a0e31a641eb5d909eb33154058df32[m
+Merge: a72196b d403000
+Author: Alexander Russ <a.h.russ@gmail.com>
+Date:   Sun Feb 22 19:49:35 2015 -0500
+
+    Merge pull request #2 from cen3031-socks/ahr-cat-list
+    
+    Add a cat list to the front page and the ability to add new cats.
+
+[33mcommit a72196be50159eafdaa5c9608eda85083e3c028a[m
+Merge: 8f617ea c2f54d6
+Author: Ben <bdgrider17@ufl.edu>
+Date:   Sun Feb 22 19:43:22 2015 -0500
+
+    Merge pull request #4 from cen3031-socks/ahr_template
+    
+    Adds the sidebar to the left of the template layout.
+
+[33mcommit 8f617eaf319868580f7e5b77f0de0555a838fac2[m
+Author: Alexander Russ <git@alexanderruss.com>
+Date:   Sun Feb 22 19:42:52 2015 -0500
+
+    Reverts changes to the core/home view.
+
+[33mcommit 8e088fd890b1eafecd29fc66242a77b50672cf43[m
+Merge: 3f66675 e0bf432
+Author: bdgrider <bdgrider17@ufl.edu>
+Date:   Sun Feb 22 19:31:40 2015 -0500
+
+    Merge branch 'master' of https://github.com/cen3031-socks/socks into ben-testing
+
+[33mcommit c2f54d67703ab4ae6c986dd2c3930e24713c8696[m
+Author: Alexander Russ <git@alexanderruss.com>
+Date:   Sun Feb 22 19:22:02 2015 -0500
+
+    Adds the sidebar to the left of the template layout.
+
+[33mcommit e0bf432888871066324572b7539111001f78c26a[m
+Merge: 3bb8f1b 2a486b1
+Author: Alexander Russ <a.h.russ@gmail.com>
+Date:   Sun Feb 22 19:21:33 2015 -0500
+
+    Merge pull request #3 from cen3031-socks/ben-testing
+    
+    Adding base functionality of donations plus a special favicon ;)
+
+[33mcommit c9226288fdf48df1fa1d4c0a1ea525696013e040[m
+Author: munarriz <munarriz@ufl.edu>
+Date:   Sun Feb 22 19:14:37 2015 -0500
+
+    volunteers now added to database
+
+[33mcommit 3f66675bb17832b2c0010445aaf227ef8b9a6310[m
+Author: bdgrider <bdgrider17@ufl.edu>
+Date:   Sun Feb 22 19:14:12 2015 -0500
+
+    Adding donations UI flow
+
+[33mcommit 978c0703444b5c3448db331cba7206e67d5b29cf[m
+Author: bdgrider <bdgrider17@ufl.edu>
+Date:   Sun Feb 22 18:43:32 2015 -0500
+
+    Adding css file and donation view
+
+[33mcommit 010325f11ff42a0b87e33cc4ab96aef18445e5a4[m
+Author: bdgrider <bdgrider17@ufl.edu>
+Date:   Sun Feb 22 17:05:51 2015 -0500
+
+    Adding UI elements
+
+[33mcommit 2a486b1bc8f17cfa74ad62fc87a14d9211a4b7da[m
+Author: bdgrider <bdgrider17@ufl.edu>
+Date:   Fri Feb 20 08:01:52 2015 -0500
+
+    adding donations module so I can rebase my branch ..oops
+
+[33mcommit 625ca6164ccfcf7619413904725c899dcbd853ec[m
+Author: munarriz <munarriz@ufl.edu>
+Date:   Thu Feb 19 18:09:22 2015 -0500
+
+    fixed name inconsistency in volunteer model
+
+[33mcommit 2d1089716ec644f05f12fbd116505b3f50393857[m
+Author: munarriz <munarriz@ufl.edu>
+Date:   Thu Feb 19 17:09:20 2015 -0500
+
+    added volunteer model and additional files
+
+[33mcommit 56dd32881480815329afd4140a7fe077718f5e89[m
+Author: munarriz <munarriz@ufl.edu>
+Date:   Thu Feb 19 15:34:55 2015 -0500
+
+    added date to volunteer controller
+
+[33mcommit 76224f00dbd41d7460899ef52aa0564986ac71c5[m
+Author: munarriz <munarriz@ufl.edu>
+Date:   Thu Feb 19 14:50:38 2015 -0500
+
+    added volunteer module
+
+[33mcommit cbc2d640e096c5e3150a0a50ec20f7a2f1e53273[m
+Author: munarriz <munarriz@ufl.edu>
+Date:   Thu Feb 19 13:39:34 2015 -0500
+
+    added volunteer module
+
+[33mcommit 3753c5bfc08f6f2548bd2d6aa6bb101e394346b0[m
+Author: munarriz <munarriz@ufl.edu>
+Date:   Thu Feb 19 13:33:09 2015 -0500
+
+    added volunteer module
+
+[33mcommit d403000e1e869fa3e22ea7434ff98a3f4d93b5b5[m
+Author: Alexander Russ <git@alexanderruss.com>
+Date:   Wed Feb 18 19:38:49 2015 -0500
+
+    Rearrange and re-style the cat details page.
+
+[33mcommit 4dffca0fd03e6ece6186f0b562303953a3c806cd[m
+Author: munarriz <munarriz@ufl.edu>
+Date:   Wed Feb 18 17:27:50 2015 -0500
+
+    volunteers almost working
+
+[33mcommit 3bb8f1b29478c9a1c536ced23d40235a1489210c[m
+Author: Eric Pogash <epogash@ufl.edu>
+Date:   Wed Feb 18 16:51:25 2015 -0500
+
+    Update 11-feb-2015.md
+
+[33mcommit 991528e5e27f5c802d1676fa91b147ca7c95b69c[m
+Merge: dee63b5 b95b98b
+Author: Reid Gill <reidgill12@ufl.edu>
+Date:   Wed Feb 18 13:46:27 2015 -0500
+
+    Merge branch 'master' of https://github.com/cen3031-socks/socks
+
+[33mcommit dee63b5fdbb40091c1548ba4a8d80e15c3ea1370[m
+Author: Reid Gill <reidgill12@ufl.edu>
+Date:   Wed Feb 18 13:46:19 2015 -0500
+
+    commit before I pulled from origin
+
+[33mcommit b95b98b26677a96919bbf1d23cd5fcb9411e0b54[m
+Author: aaroniey <asilcott1@gmail.com>
+Date:   Wed Feb 18 02:54:11 2015 -0500
+
+    eddited the front page to match the general layout of the outline.
+
+[33mcommit a15afb8dc815eb7957cc8152fa88315bd1bacec4[m
+Author: Eric Pogash <epogash@ufl.edu>
+Date:   Fri Feb 13 19:25:16 2015 -0500
+
+    Update 11-feb-2015.md
+
+[33mcommit aa2bcd90f6818d8db07b16a48b36a17f7ea41d3a[m
+Author: Alexander Russ <git@alexanderruss.com>
+Date:   Fri Feb 13 16:47:04 2015 -0500
+
+    Fixes markdown error in meeting notes
+
+[33mcommit ee02ec855ebeac18e7fde5156852318559a96601[m
+Author: Alexander Russ <git@alexanderruss.com>
+Date:   Fri Feb 13 16:45:16 2015 -0500
+
+    Adds notes from 11 Feb 2015 meeting.
+
+[33mcommit 09e4e22b7e149d26ced9e84cb798b0e453a519b1[m
+Author: Alexander Russ <git@alexanderruss.com>
+Date:   Tue Feb 10 13:59:31 2015 -0500
+
+    Fixes bug where submitting on the create-cat page wouldn't take you to the cat detail view.
+
+[33mcommit 1e795fab578cd78255c9beec43a84c66b9301c71[m
+Author: Alexander Russ <git@alexanderruss.com>
+Date:   Mon Feb 9 21:37:31 2015 -0500
+
+    Adds the ability to view details about an individual cat.
+
+[33mcommit 5b248e198bf8b5681a1cacd0089a5f32245be13f[m
+Merge: 21a19f1 78c4290
+Author: Alexander Russ <git@alexanderruss.com>
+Date:   Mon Feb 9 20:18:56 2015 -0500
+
+    Merge branch 'master' of github.com:cen3031-socks/socks
+
+[33mcommit 21a19f1e604daae4bc8049536040ba5eb5546a10[m
+Author: Alexander Russ <git@alexanderruss.com>
+Date:   Mon Feb 9 20:18:36 2015 -0500
+
+    Add information about running mongod to the README.
+
+[33mcommit 92d2325ba9779b03977d2b05b15258848fd44908[m
+Author: munarriz <munarriz@ufl.edu>
+Date:   Mon Feb 9 19:38:59 2015 -0500
+
+    started volunteer page
+
+[33mcommit f063262396c5abd21abbeba9c6ebb265334494ff[m
+Author: Alexander Russ <git@alexanderruss.com>
+Date:   Mon Feb 9 19:30:53 2015 -0500
+
+    Add a cat list to the front page and the ability to add new cats.
+
+[33mcommit 380ba8892fcfda1edb9ed6c8375abf21184a29de[m
+Author: munarriz <munarriz@ufl.edu>
+Date:   Fri Feb 6 16:03:24 2015 -0500
+
+    test commit
+
+[33mcommit 78c429012ea7324dccb9eacc2f4aa52d7795bee2[m
+Merge: e2361e9 cf6bf6f
+Author: bdgrider <bdgrider17@ufl.edu>
+Date:   Wed Feb 4 16:05:05 2015 -0500
+
+    Merge branch 'master' of https://github.com/cen3031-socks/socks
+
+[33mcommit e2361e94d47a6119db5e8f8fdc71147c84282d5e[m
+Author: bdgrider <bdgrider17@ufl.edu>
+Date:   Wed Feb 4 16:04:53 2015 -0500
+
+    Ben's test commit
+
+[33mcommit cf6bf6fc8c648c651b6d9a7eec9922ff1b3eb2de[m
+Merge: c9bcd34 8f9e82a
+Author: Alexander Russ <a.h.russ@gmail.com>
+Date:   Wed Feb 4 15:54:32 2015 -0500
+
+    Merge pull request #1 from cen3031-socks/rg_test
+    
+    test_commit
+
+[33mcommit 8f9e82a0805ad5a778a6f769257768bc34e349c9[m
+Author: Reid Gill <reidgill12@ufl.edu>
+Date:   Wed Feb 4 15:47:09 2015 -0500
+
+    test_commit
+
+[33mcommit c9bcd34afd4ecc30ae0551b57eb1ba9b757aeb2e[m
+Author: munarriz <munarriz@ufl.edu>
+Date:   Mon Feb 2 13:10:31 2015 -0500
+
+    Added user stories to readme
+
+[33mcommit 0cc4d8df29ae899dc15eedc9210715a58c5624a7[m
+Author: Eric Pogash <ericpogash@gmail.com>
+Date:   Wed Jan 28 20:47:41 2015 -0500
+
+    Test commit
+
+[33mcommit e9579b6f87eaa0c8fb2d2c98864e668a4bc5248a[m
+Author: Alexander Russ <git@alexanderruss.com>
+Date:   Wed Jan 28 17:37:11 2015 -0500
+
+    Update README to be project-specific.
+
+[33mcommit ad2eb8a502fd6e24fd0db331592664339145924f[m
+Author: Alexander Russ <git@alexanderruss.com>
+Date:   Wed Jan 28 16:59:05 2015 -0500
+
+    Initial fork of MEAN.js

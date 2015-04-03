@@ -115,6 +115,13 @@ function ($scope, Contacts, $stateParams, $modal) {
         var adoptions = Contacts.findAdoptedCats({contactId: $stateParams.contactId}, function() {
             $scope.contact.isAdopter = adoptions.length > 0;
         });
+
+        var vets = Contacts.findCatsWithVets({contactId: $stateParams.contactId}, function() {
+            $scope.contact.isVet = vets.length > 0;
+        });
+        var donations = Contacts.findDonations({contactId: $stateParams.contactId}, function() {
+            $scope.contact.isDonator = donations.length > 0;
+        });
         console.log($scope.contact);
     };
 

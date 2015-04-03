@@ -17,6 +17,13 @@ module.exports = function(app) {
     app.route('/contacts/:contactId/adoptions')
         .get(contacts.findAdoptedCats);
 
+    app.route('/contacts/:contactId/vets')
+        .get(contacts.findCatsWithVets);
+
+    app.route('contacts/:contactId/donations')
+        .get(contacts.findDonations);
+
+    app.route('/contacts/:contactId')
     app.route('/adopters')
         .get(contacts.getAllAdopters);
 

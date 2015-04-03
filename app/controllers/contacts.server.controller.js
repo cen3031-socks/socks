@@ -6,6 +6,7 @@
 var mongoose = require('mongoose'),
 	errorHandler = require('./errors.server.controller'),
 	Contact = mongoose.model('Contact'), Adoption = mongoose.model('Adoption'), Cat = mongoose.model('Cat'),
+    Donation = mongoose.model('Donation'),
 	_ = require('lodash');
 
 /**
@@ -31,6 +32,24 @@ exports.findAdoptedCats = function(req, res) {
                 else return res.jsonp(adoptions);
             }
         );
+    });
+}
+
+exports.findCatsWithVets = function(req, res) {
+    Cat.find({vet: req.contact._id}).exec(function(err, cats) {
+        if (err) {
+            return res.status(400);
+        }
+        else return res.jsonp(cats);
+    });
+}
+
+exports.findDonations = function(req, res) {
+    Donation.find({donation: req.contact._id}).exec(function(err, donations) {
+        if (err) {
+            return res.status(400);
+        }
+        else return res.jsonp(donations);
     });
 }
 

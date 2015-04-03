@@ -35,6 +35,20 @@
                     </button>
                 </a>
             </div>
+            <div ng-show="contact.isVet" class = "col-xs-12 col-sm-6 col-md-2">
+                <a ng-click="contactViewCtrl.modalAdoptedCatsView('lg', contact)">
+                    <button type="button" class="btn btn-default btn-md background-pink">
+                        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Adopter
+                    </button>
+                </a>
+            </div>
+            <div ng-show="contact.isDonator" class = "col-xs-12 col-sm-6 col-md-2">
+                <a ng-click="contactViewCtrl.modalAdoptedCatsView('lg', contact)">
+                    <button type="button" class="btn btn-default btn-md background-pink">
+                        <span class="glyphicon glyphicon-usd" aria-hidden="true"></span> Adopter
+                    </button>
+                </a>
+            </div>
 
         </div>
         <div class="profile">
