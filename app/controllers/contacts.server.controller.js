@@ -40,6 +40,8 @@ exports.findAdoptedCats = function(req, res) {
 exports.create = function(req, res) {
 	var contact = new Contact(req.body);
 	contact.user = req.user;
+    contact.phone = cleanPhoneNumber(contact.phone);
+    contact.zipCode = cleanZipCode(contact.zipCode);
 
 	contact.save(function(err) {
 		if (err) {
@@ -50,7 +52,29 @@ exports.create = function(req, res) {
 			res.jsonp(contact);
 		}
 	});
+
 };
+
+var cleanPhoneNumber = function(phone) {
+    var newPhone = "";
+    for (var i = 0; i < phone.length; ++i){
+        if (phone[i].match(/\d/)){
+            newPhone += phone[i];
+        }
+    }
+    return newPhone;
+}
+
+var cleanZipCode = function(zipCode) {
+    var newZipCode = "";
+    for (var i = 0; i < zipCode.length; ++i){
+        if (zipCode[i].match(/\d/)){
+            newZipCode += zipCode[i];
+        }
+    }
+    return newZipCode;
+}
+
 
 /**
  * Show the current Contact
@@ -66,8 +90,11 @@ exports.update = function(req, res) {
 	var contact = req.contact ;
 
 	contact = _.extend(contact , req.body);
+    contact.phone = cleanPhoneNumber(contact.phone);
+    contact.zipCode = cleanZipCode(contact.zipCode);
 
-	contact.save(function(err) {
+
+    contact.save(function(err) {
 		if (err) {
 			return res.status(400).send({
 				message: errorHandler.getErrorMessage(err)
@@ -82,7 +109,7 @@ exports.update = function(req, res) {
  * Delete an Contact
  */
 exports.delete = function(req, res) {
-	var contact = req.contact ;
+	var contact = req.contact;
 
 	contact.remove(function(err) {
 		if (err) {
@@ -93,6 +120,22 @@ exports.delete = function(req, res) {
 			res.jsonp(contact);
 		}
 	});
+};
+
+exports.getAllAdopters = function(req, res) {
+    Adoption.find().populate('adopter').exec(function(err, adoptions) {
+        if (err) {
+            return res.status(400).send({
+                message: errorHandler.getErrorMessage(err)
+            });
+        } else {
+            var adopters = [];
+            for (var i = 0; i < adoptions.length; ++i) {
+                adopters.push(adoptions[i].adopter);
+            }
+            return res.jsonp(adopters);
+        }
+    });
 };
 
 /**

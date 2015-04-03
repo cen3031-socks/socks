@@ -73,7 +73,7 @@ exports.delete = function(req, res) {
  * List of Donations
  */
 exports.list = function(req, res) { 
-	Donation.find().sort('-created').populate('user', 'displayName').exec(function(err, donations) {
+	Donation.find().sort('-created').populate('donor').exec(function(err, donations) {
 		if (err) {
 			return res.status(400).send({
 				message: errorHandler.getErrorMessage(err)
@@ -88,7 +88,7 @@ exports.list = function(req, res) {
  * Donation middleware
  */
 exports.donationByID = function(req, res, next, id) { 
-	Donation.findById(id).populate('user', 'displayName').exec(function(err, donation) {
+	Donation.findById(id).populate('donor').exec(function(err, donation) {
 		if (err) return next(err);
 		if (! donation) return next(new Error('Failed to load Donation ' + id));
 		req.donation = donation ;

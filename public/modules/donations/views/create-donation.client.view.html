@@ -29,10 +29,15 @@
     <div class="col-md-12">
         <form class="form-horizontal" data-ng-submit="create()" novalidate>
             <fieldset>
-               <div class="form-group">
+               <!--<div class="form-group">
                     <label class="control-label" for="name">Name</label>
                     <div class="controls">
-                        <input type="text" data-ng-model="name" id="name" class="form-control" placeholder="Name" required>
+                        <input type="text" data-ng-model="name" id="name" class="form-control" placeholder="Name" required> -->
+
+                <div class="form-group">
+                    <label class="control-label" for="name">Name</label>
+                    <div class="controls">
+                        <contacts-selector max=1 ng-model=contacts> Select donor from contacts list: </contacts-selector>
                     </div>
                 </div>
                 <div class="form-group">
