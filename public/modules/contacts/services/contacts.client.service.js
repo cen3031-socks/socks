@@ -27,6 +27,14 @@ angular.module('contacts').factory('Contacts', ['$resource',
                 url: 'contacts/:contactId/donations',
                 isArray: true
             },
+            addNote: {
+                method: 'PUT',
+                url: 'contacts/:contactId/notes'
+            },
+            deleteNote: {
+                method: 'DELETE',
+                url: 'contacts/:contactId/notes/:noteId'
+            }
 		});
 	}
 ]);

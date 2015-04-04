@@ -27,6 +27,11 @@ module.exports = function(app) {
     app.route('/adopters')
         .get(contacts.getAllAdopters);
 
+    app.route('/contacts/:contactId/notes')
+        .put(contacts.addNote);
+    app.route('/contacts/:contactId/notes/:noteId')
+        .delete(contacts.deleteNote);
+
     // Finish by binding the Contact middleware
     app.param('contactId', contacts.contactByID);
 };

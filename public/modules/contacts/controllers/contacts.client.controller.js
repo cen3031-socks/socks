@@ -115,13 +115,6 @@ function ($scope, Contacts, $stateParams, $modal) {
         var adoptions = Contacts.findAdoptedCats({contactId: $stateParams.contactId}, function() {
             $scope.contact.isAdopter = adoptions.length > 0;
         });
-
-        var vets = Contacts.findCatsWithVets({contactId: $stateParams.contactId}, function() {
-            $scope.contact.isVet = vets.length > 0;
-        });
-        var donations = Contacts.findDonations({contactId: $stateParams.contactId}, function() {
-            $scope.contact.isDonator = donations.length > 0;
-        });
         console.log($scope.contact);
     };
 
@@ -162,6 +155,33 @@ function ($scope, Contacts, $stateParams, $modal) {
         return newZipCode;
     };
 
+    $scope.deleteNote = function(note, index) {
+        Dialogs
+            .confirm('Are you sure you want to delete this note?')
+            .then(function(result) {
+                if (result) {
+                    Contacts.deleteNote({contactId: $scope.contact._id, noteId: note._id}, $scope.getContact);
+                }
+            });
+    };
+
+    $scope.canAddNote = function() {
+        return $scope.authentication && $scope.authentication.user && $scope.authentication.user.contact && $scope.newNote != '';
+    };
+
+    $scope.addNote = function() {
+        $scope.authentication = { user: { contact:$scope.contacts[0] } }
+        if (!$scope.canAddNote()) return;
+        Contacts.addNote({contactId: $scope.contact._id}, {
+            message: $scope.newNote,
+            date: Date.now(),
+            sender: $scope.authentication.user.contact._id
+        }, function() {
+            $scope.getContact();
+            $scope.newNote = '';
+        });
+    };
+
     // Open a modal window to Update a single contact record
     this.modalUpdate = function (size, selectedContact) {
 
@@ -198,6 +218,30 @@ function ($scope, Contacts, $stateParams, $modal) {
                                 $scope.update(contact);
                                 $modalInstance.dismiss('deleted');
                                 $location.path('/contacts');
+                            }
+                        });
+                };
+                $scope.addToDoNotAdoptList = function(contact, index) {
+                    Dialogs
+                        .confirm('Add contact to the "Do not adopt" list?')
+                        .then(function(result) {
+                            if (result) {
+                                contact.do_not_adopt = true;
+                                $scope.update(contact);
+                                $modalInstance.dismiss('Added to "Do not adopt" list');
+                               // $location.path('/contacts');
+                            }
+                        });
+                };
+                $scope.removeFromDoNotAdoptList = function(contact, index) {
+                    Dialogs
+                        .confirm('Remove contact from the "Do not adopt" list?')
+                        .then(function(result) {
+                            if (result) {
+                                contact.do_not_adopt = false;
+                                $scope.update(contact);
+                                $modalInstance.dismiss('Removed from "Do not adopt" list');
+                                // $location.path('/contacts');
                             }
                         });
                 };
