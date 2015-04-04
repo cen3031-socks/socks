@@ -82,6 +82,34 @@ exports.getVolunteerByName = function(req, res) {
     });
 }
 
+/*
+*Get hours worked by a volunteer
+ */
+
+ exports.minutesWorked = function(req, res, firstDate, lastDate) {
+     var minutes = 0;
+     var vols = Volunteer.find({contact:req.params.contactID});
+     for (var i = 0; i < vols.length; ++i) {
+         //if session is from before desired range
+         if ((vols[i].timeIn - firstDate < 0) || (vols[i].timeOut - lastDate > 0)) {
+             //this session is not in the requested range
+         }
+         else {
+             //this volunteer session is in the range
+             minutes += ((vols[i].timeOut - vols[i].timeIn)/60000)
+         }
+     }
+     if (err) {
+         return res.status(400).send({
+             message: errorHandler.getErrorMessage(err)
+         });
+     }
+     else {
+         res.jsonp(minutes);
+     }
+ }
+
+
 
 /**
  * List of Volunteers
@@ -119,3 +147,4 @@ exports.hasAuthorization = function(req, res, next) {
 	}
 	next();
 };
+
