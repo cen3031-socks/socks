@@ -16,6 +16,24 @@ angular.module('contacts').factory('Contacts', ['$resource',
                 method: 'GET',
                 url: 'adopters',
                 isArray: true
+            },
+            findCatsWithVets: {
+                method: 'GET',
+                url: '/contacts/:contactId/vets',
+                isArray: true
+            },
+            findDonations: {
+                method: 'GET',
+                url: 'contacts/:contactId/donations',
+                isArray: true
+            },
+            addNote: {
+                method: 'PUT',
+                url: 'contacts/:contactId/notes'
+            },
+            deleteNote: {
+                method: 'DELETE',
+                url: 'contacts/:contactId/notes/:noteId'
             }
 		});
 	}
