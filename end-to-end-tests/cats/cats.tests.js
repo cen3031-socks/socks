@@ -1,3 +1,6 @@
+var MongoClient = require('mongodb').MongoClient;
+var utils = require('../test-utils.js');
+
 describe('cats homepage', function() {
     it('should have a title', function() {
         browser.get('/');
@@ -53,37 +56,40 @@ describe('cats homepage', function() {
 
 	describe('with pre-existing data', function() {
 		beforeEach(function(done) {
-			browser.get('/#!/');
-			browser.waitForAngular();
 			var self = this;
-			browser.executeAsyncScript(function(callback) {
-				/* Make sure there's at least one cat in the db */
-				var element = document.querySelector('.cat-grid');
-				var scope = angular.element(element).scope();
-				var newCat = {
-					name: 'Test Cat',
-					color: 'Green',
-					breed: 'Test Breed', 
-					location: 'Test Location',
-					dateOfBirth: '02/15/2014',
-					dateOfArrival: '02/15/2015',
-					vet: 'Dr. Smith',
-					temperament: 'Test Temperament',
-					owner: 'Test Owner',
-					description: 'Test Description',
-					originAddress: '1 Somewhere Street',
-					originPerson: 'Mr. Nobody',
-					notes: ['Test Note']
-				};
-				scope.$apply(function() {
-					for (var attr in newCat) {
-						scope[attr] = newCat[attr];
-					}
-				});
-				scope.create().then(callback);
-			}).then(function(data) {
-				self.createdCat = data;
-			}).then(done);
+            var contact = {
+                firstName: "John",
+                surname: "Appleseed",
+                address: "1 Infinite Loop",
+                city: "Cupertino",
+                state: "California",
+                zipCode: "12345",
+                phone: "(850) 555 - 1234",
+                email: "john.appleseed@example.com"
+            };
+
+            var flow = protractor.promise.controlFlow();
+            flow.execute(utils.dropDb);
+            flow.execute(function() {
+                return utils.db(function(db) {
+                    db.collection('contacts').insert(contact, utils.throwIfPresent);
+                    var newCat = {
+                        name: 'Test Cat',
+                        color: 'Green',
+                        breed: 'Test Breed',
+                        location: 'Test Location',
+                        dateOfBirth: '02/15/2014',
+                        dateOfArrival: '02/15/2015',
+                        temperament: 'Test Temperament',
+                        description: 'Test Description'
+                    };
+                    db.collection('cats').insert(newCat, function (err, cats) {
+                        utils.throwIfPresent(err);
+                        self.createdCat = cats[0];
+                        done();
+                    });
+                });
+            });
 		});
 
 		it('should be able to delete cat from database', function() {
@@ -92,10 +98,10 @@ describe('cats homepage', function() {
 			/* delete the cat */
 			element(by.id('delete-cat')).click();
 
-			browser.get('/#!/');
 			/* check that we went back to the homepage organically */
 			expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + "/#!/");
-			
+            browser.get('/#!/');
+
 			var self = this;
 			/* check that the cat doesn't exist anymore */
 			element.all(by.repeater('cat in cats')).then(function(cats) {
@@ -105,15 +111,53 @@ describe('cats homepage', function() {
 			});
 		});
 
-		it('should be able to add notes to a cat', function() {
-			browser.get('/#!/cats/' + this.createdCat._id);
+        it('should not be able to add a note if not logged in', function() {
+            browser.get('/#!/cats/' + this.createdCat._id);
+            var noteText = 'This is a new note.';
+            element(by.model('newNote')).sendKeys(noteText);
+            element(by.id('add-note')).click();
 
-			/* TODO: add user info checking to cat notes test */
-			var newNote = element(by.id('new-note'));
-			newNote
-				.element(by.model('new-note-value'))
-				.sendKeys('This is a new note.');
-			newNote.element(by.id('add-note')).click();
+            browser.get('/#!/cats/' + this.createdCat._id);
+            var notes = element.all(by.repeater('note in cat.notes'));
+            element.all(by.repeater('note in notes')).then(function(elements) {
+                console.log(elements);
+            });
+            expect(notes.count()).toBe(0);
+        });
+
+		it('should be able to add notes to a cat if signed in', function() {
+
+            browser.get('/#!/employees/create');
+
+            var user = {
+                firstName: 'First',
+                lastName: 'Last',
+                email: 'a.h.russ@gmail.com',
+                password: 'password'
+            };
+
+            /* Create an account */
+            element(by.model('firstName')).sendKeys(user.firstName);
+            element(by.model('lastName')).sendKeys(user.lastName);
+            element(by.model('email')).sendKeys(user.email);
+            utils.selectDropdownByNumber(element(by.model('permissionLevel')), 0);
+            element(by.buttonText('Create')).click();
+
+            // TODO: Get username and password from server.
+            /* Sign In */
+            element(by.linkText('Sign In')).click();
+            element(by.model('credentials.username')).sendKeys(user.email);
+            element(by.model('credentials.password')).sendKeys(user.password);
+
+            /* Actually try to create the note */
+			browser.get('/#!/cats/' + this.createdCat._id);
+            var noteText = 'This is a new note.';
+            element(by.model('newNote')).sendKeys(noteText);
+			element(by.id('add-note')).click();
+
+            /* Test that the note was created. */
+            var note = element.all(by.repeater('note in cat.notes')).first().element(by.css('.note-message'));
+            expect(note.getText()).toBe(noteText);
 		});
 
 		it('should be able to get to vet contact info from details page', function() {

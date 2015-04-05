@@ -9,7 +9,7 @@
 
             </div><!-- /input-group -->
         </div>
-        <div class="col-xs-12 col-sm-4 text-center">
+        <div class="col-xs-12 col-sm-4 text-center button-padding">
             <a href="/#!/contacts/create">
                 <button type="button" class="btn btn-success text-center" href="/#!/contacts/create">
 
@@ -20,14 +20,14 @@
         </div>
     </div>
     <div class="table-responsive">
-        <table class="table table-bordered">
+        <table class="table table-bordered" data-sort-order="desc">
             <thread>
                 <tr>
-                    <th style="width: 10%">First Name</th>
-                    <th style="width: 10%">Last Name</th>
-                    <th style="width: 15%">Phone</th>
-                    <th style="width: 20%">Email</th>
-                    <th style="width: 30%">Location</th>
+                    <th data-field="{{contact.firstName}}" data-sortable="true" style="width: 10%" >First Name</th>
+                    <th data-field="{{contact.surname}}" data-sortable="true" style="width: 10%" >Last Name</th>
+                    <th data-field="{{contact.phone}}" data-sortable="true" style="width: 15%" >Phone</th>
+                    <th data-field="{{contact.email}}" data-sortable="true" style="width: 20%" >Email</th>
+                    <th data-field="{{contact.city}}" data-sortable="true" style="width: 30%" >Location</th>
 
                     <!--<th style="width: 15%">Creation Date</th>-->
                     <!--<th class="numeric">Open</th>-->
