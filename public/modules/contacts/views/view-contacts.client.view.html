@@ -108,6 +108,35 @@
             </div>
         </div>
 
+        <div class="profile-group" ng-show="isVolunteer()">
+            <span class="profile-attribute">Hours Volunteered</span>
+            <span class="profile-value" id="hours">Between
+                <div class="controls">
+                    <p class="input-group">
+                        <input type="text" class="form-control" datepicker-popup="dd MMM yyyy" ng-model="firstDate"
+                               is-open="opened" ng-required="true" close-text="Close" />
+								<span class="input-group-btn">
+									<button type="button" class="form-control btn btn-default" ng-click="open($event)">
+                                        <i class="glyphicon glyphicon-calendar"></i>
+                                    </button>
+								</span>
+                    </p>
+                    and
+                    <p class="input-group">
+                        <input type="text" class="form-control" datepicker-popup="dd MMM yyyy" ng-model="lastDate"
+                               is-open="opened" ng-required="true" close-text="Close" />
+								<span class="input-group-btn">
+									<button type="button" class="form-control btn btn-default" ng-click="open($event)">
+                                        <i class="glyphicon glyphicon-calendar"></i>
+                                    </button>
+								</span>
+                    </p>
+
+                </div>
+                <!--should call the minutesWorked function from the volunteer server controller -->
+                are {{(minutesWorked(firstDate, lastDate))/60}}</span>
+        </div>
+
     </fieldset>
 
 

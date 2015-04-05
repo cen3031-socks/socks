@@ -54,6 +54,17 @@ contactsApp.controller('ContactsController', ['$scope', '$stateParams', 'Authent
                     $log.info('Modal dismissed at: ' + new Date());
                 });
             };
+    },
+
+    $scope.isVolunteer = function() {
+        var currDate = new Date();
+        var oldDate =  new Date();
+        oldDate.setFullYear(2000);
+        //If statement should call minutes worked from volunteers.server.controller.js
+        if (minutesWorked(oldDate, currDate)>0) {
+            return true;
+        }
+        return false;
     }
 ]);
 
