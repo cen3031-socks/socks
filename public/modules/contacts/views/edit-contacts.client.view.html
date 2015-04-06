@@ -22,7 +22,7 @@
                                         <div class="form-group">
                                             <label class="control-label" for="firstName">First Name</label>
                                             <div class="controls">
-                                                <input type="text" data-ng-model="contact.firstName" id="firstName" class="form-control">
+                                                <input type="text" data-ng-model="contact.firstName" id="firstName" class="form-control" required>
                                             </div>
                                         </div>
                                     </div>
@@ -177,6 +177,18 @@
                         <!--<button type="button" class="btn btn-primary text-center" href="/#!/contacts/create">-->
                         <i class="glyphicon glyphicon-trash"></i> <br>
                         Delete Contact?
+                    </button>
+                    <button type="button" class="btn btn-info text-center btn-sm"
+                            ng-hide="contact.do_not_adopt" ng-click="addToDoNotAdoptList(contact, $index)">
+                        <!--<button type="button" class="btn btn-primary text-center" href="/#!/contacts/create">-->
+                        <i class="glyphicon glyphicon-ban-circle"></i> <br>
+                        Add to "Do not adopt" list?
+                    </button>
+                    <button type="button" class="btn btn-info text-center btn-sm"
+                            ng-hide="!contact.do_not_adopt" ng-click="removeFromDoNotAdoptList(contact, $index)">
+                        <!--<button type="button" class="btn btn-primary text-center" href="/#!/contacts/create">-->
+                        <i class="glyphicon glyphicon-ban-circle"></i> <br>
+                        Remove from "Do not adopt" list?
                     </button>
                 <!--</a>-->
             </div>

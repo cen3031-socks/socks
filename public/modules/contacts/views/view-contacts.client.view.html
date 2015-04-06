@@ -7,7 +7,8 @@
 
         <div class="row">
             <div class="col-xs-12 col-sm-6 col-md-7">
-                <h1><b> {{contact.firstName}} {{contact.surname}} </b></h1>
+                <h1><b> {{contact.firstName}} {{contact.surname}} </b><span class="label label-danger"
+                        ng-show="contact.do_not_adopt">DO NOT ADOPT</span></h1>
             </div>
             <div class="col-xs-12 col-sm-6 col-md-5 text-center pull-right action-buttons">
                 <a href="/#!/contacts">
@@ -32,6 +33,20 @@
                 <a ng-click="contactViewCtrl.modalAdoptedCatsView('lg', contact)">
                     <button type="button" class="btn btn-default btn-md background-pink">
                         <span class="glyphicon glyphicon-heart" aria-hidden="true"></span> Adopter
+                    </button>
+                </a>
+            </div>
+            <div ng-show="contact.isVet" class = "col-xs-12 col-sm-6 col-md-2">
+                <a ng-click="contactViewCtrl.modalAdoptedCatsView('lg', contact)">
+                    <button type="button" class="btn btn-default btn-md background-pink">
+                        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Adopter
+                    </button>
+                </a>
+            </div>
+            <div ng-show="contact.isDonator" class = "col-xs-12 col-sm-6 col-md-2">
+                <a ng-click="contactViewCtrl.modalAdoptedCatsView('lg', contact)">
+                    <button type="button" class="btn btn-default btn-md background-pink">
+                        <span class="glyphicon glyphicon-usd" aria-hidden="true"></span> Adopter
                     </button>
                 </a>
             </div>
@@ -64,6 +79,32 @@
                     <span class="profile-attribute">Zip Code</span>
                     <span class="profile-value" id="dateOfBirth">{{ formatZipCode(contact.zipCode) }}</span>
                 </div>
+            </div>
+        </div>
+
+        <div class="profile-group notes">
+            <div class="profile-attribute">Notes</div>
+            <div class="profile-value">
+                <table style="width:100%">
+                    <tr ng-repeat="note in contact.notes" class="note">
+                        <td class="note-message">{{note.message}}</td>
+                        <td class="note-date">{{note.date|date}}</td>
+                        <td class="note-person"><contact-link contact-id="note.sender"></contact-link></td>
+                        <td class="note-delete">
+                            <button class="btn btn-danger" ng-click="deleteNote(note, $index)">
+                                <i class="glyphicon glyphicon-remove"></i>
+                            </button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <form>
+                            <td><input name="note-message" ng-model="newNote" class="new-note" id="new-note" placeholder="Leave a new note..." /></td>
+                            <td></td>
+                            <td class="note-person"><button class="btn btn-default" ng-click="addNote()" type="submit" id="add-note">+</button></td>
+                            <td></td>
+                        </form>
+                    </tr>
+                </table>
             </div>
         </div>
 

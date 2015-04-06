@@ -67,9 +67,21 @@ var ContactSchema = new Schema({
         trim: true,
         validate: [validatePhoneNumber, 'Put in a valid phone number']
     },
+    notes: [
+        {
+            message: String,
+            date: Date,
+            sender: { type: Schema.Types.ObjectId, ref: 'User' },
+            _id: Schema.Types.ObjectId
+        }
+    ],
+    do_not_adopt: {
+        type: Boolean,
+        default: false
+    },
     deleted_contact: {
         type: Boolean,
-        default: true
+        default: false
     },
     created: {
         type: Date,
