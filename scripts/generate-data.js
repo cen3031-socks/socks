@@ -25,7 +25,7 @@ MongoClient.connect('mongodb://localhost/mean-dev', function(err, db) {
 			var donations = [];
 			var names=['Food', 'Monetary', 'Supplies'];
 			var unit=['lbs', 'dollars', 'rupees'];
-			var icons=['glyphicon-heart', 'glyphicon-usd', 'glyphicon-wrench'];
+			var icons=['glyphicon glyphicon-heart', 'glyphicon glyphicon-usd', 'glyphicon glyphicon-wrench'];
 			for(var i=0; i<80; i++)
 			{
 				//console.log('inside for loop');

@@ -55,9 +55,15 @@
                 <span data-ng-bind="donation.donor.surname" style='font-size:2.0em;'></span>
                 <br>
                 <span data-ng-bind="donation.created | date:'medium'"></span>
-
-                <span style='float:right; font-size:2.0em;' data-ng-bind="donation.dollarAmount"></span><span style='float:right; font-size:2.0em;'>$</span>
+              <!--  <span style='float:right; font-size:2.0em;' data-ng-bind="donation.dollarAmount"></span><span style='float:right; font-size:2.0em;'>$</span> -->
             </small>
+
+            <ul class="items" style='float:right; list-style-type: none;'>
+                <li style="float:right; margin:0.2em;" data-ng-repeat="item in donation.items | unique:'icon'">
+                    <i style='font-size:1.5em;' class="{{item.icon}}"></i>
+                </li>
+            </ul>
+
 			<h4 class="list-group-item-heading" data-ng-bind="donation.name"></h4>
         </a>
     </div>
