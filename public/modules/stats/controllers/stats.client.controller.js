@@ -4,6 +4,7 @@ angular.module('stats').directive('myMap', function(Contacts) {
 	var adopterWithAddress = [];
 	var geocoder= new google.maps.Geocoder();
     var streets = [];
+    var citiesStatesZipCodes = [];
     // directive link function
     var link = function(scope, element, attrs) {
     	var map, infoWindow;
@@ -23,7 +24,8 @@ angular.module('stats').directive('myMap', function(Contacts) {
         		for(var i = 0; i < adopters.length; i++) {
         			adopterWithAddress.push(adopters[i].firstName + " " + adopters[i].surname);
                     streets.push(adopters[i].address);
-        			addresses.push(adopters[i].city + ", " + adopters[i].state + " " + adopters[i].zipCode);	
+                    citiesStatesZipCodes.push(adopters[i].city + ", " + adopters[i].state + " " + adopters[i].zipCode);
+        			addresses.push(adopters[i]. address + ", " + adopters[i].city + ", " + adopters[i].state + " " + adopters[i].zipCode);	
         		}
         		var i = 0;
         		for(var j = 0; j < addresses.length; j++) {
@@ -46,7 +48,7 @@ angular.module('stats').directive('myMap', function(Contacts) {
         		position: position,
         		map: map,
         		title: title,
-        		icon: 'https://maps.google.com/mapfiles/ms/icons/green-dot.png'
+        		icon: 'https://maps.google.com/mapfiles/ms/icons/blue-dot.png'
         	};
 
         	marker = new google.maps.Marker(markerOptions);
@@ -70,7 +72,7 @@ angular.module('stats').directive('myMap', function(Contacts) {
         	geocoder.geocode( { 'address': address}, function(results, status) {
         		if (status == google.maps.GeocoderStatus.OK) {
         			var p = results[0].geometry.location;
-        			setMarker(map, p, '', adopterWithAddress[i] + "<br/>" + streets[i] + "<br/>" + addresses[i]);
+        			setMarker(map, p, '', adopterWithAddress[i] + "<br/>" + streets[i] + "<br/>" + citiesStatesZipCodes[i]);
         		} else {
         			alert('Geocode was not successful for the following reason: ' + status);
         		}
