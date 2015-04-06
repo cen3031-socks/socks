@@ -18,27 +18,11 @@ var user, contact;
  */
 describe('Contact Model Unit Tests:', function() {
 	beforeEach(function(done) {
-<<<<<<< HEAD
-=======
-		user = new User({
-			firstName: 'Full',
-			lastName: 'Name',
-			displayName: 'Full Name',
-			email: 'test@test.com',
-			username: 'username',
-			password: 'password'
-		});
-
-		user.save(function() { 
-			contact = new Contact({
-				firstName: 'Contact Name',
-				surname: 'lastName'
-			});
->>>>>>> master
-
 		contact = new Contact({
-			name: 'Contact Name',
+			firstName: 'Contact Name',
+			surname: 'lastName'
 		});
+		done();
 	});
 
 	describe('Method Save', function() {
