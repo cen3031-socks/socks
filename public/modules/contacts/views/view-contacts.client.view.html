@@ -50,6 +50,13 @@
                     </button>
                 </a>
             </div>
+            <div ng-show="contact.isVolunteer" class = "col-xs-12 col-sm-6 col-md-2">
+                <a ng-click="contactViewCtrl.modalVolunteerHoursView('lg', contact)">
+                    <button type="button" class="btn btn-default btn-md btn-warning">
+                        <span class="glyphicon glyphicon-user" aria-hidden="true"></span> Volunteer
+                    </button>
+                </a>
+            </div>
 
         </div>
         <div class="profile">
