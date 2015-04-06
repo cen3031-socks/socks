@@ -25,6 +25,13 @@ var amountAndUnitsChecker= function(items) {
         return false;
     }
 };
+var oneItemPresent = function(size){
+    if(size.length >= 1){
+        return true;
+    } else {
+        return false;
+    }
+}
 
 /**
  * Donation Schema
@@ -49,8 +56,8 @@ var DonationSchema = new Schema({
         units: String
     },*/
 
-    items: [
-        {
+    items:{
+        type: [{
             name: {
                 type: String,
                 required: 'name must be present',
@@ -61,12 +68,38 @@ var DonationSchema = new Schema({
             description: String,
             value: {
                 amount: Number,
-                trim: true,
                 units: String,
                 validate:[amountAndUnitsChecker, 'if amount is present units must be present']
             }
-        }
-    ]
+        }],
+        validate:[oneItemPresent, 'must have one item present in list']
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     /*paymentType: {
         type: String,
