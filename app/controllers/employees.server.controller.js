@@ -14,16 +14,12 @@ var generatePassword = function(length) {
     return crypto.randomBytes(length).toString('hex');
 };
 
-var hardcodePassword = function() {
-    return 'test_test_test_test';
-}
-
 /**
  * Create an employee
  */
 exports.create = function(req, res) {
     var contact = new Contact(req.body);
-    var password = hardcodePassword();
+    var password = generatePassword(24); //hardcodePassword() use this function for editing purposes
 	var user = new User(req.body);
     user.username = contact.email;
     user.password = password;
