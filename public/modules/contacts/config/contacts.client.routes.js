@@ -21,10 +21,6 @@ angular.module('contacts', ['ui.router']).config(['$stateProvider',
 			url: '/contacts/:contactId/edit',
 			templateUrl: 'modules/contacts/views/edit-contacts.client.view.html'
 		}).
-            state('editNotModalContact', {
-                url: '/contacts/:contactId/editNotModal',
-                templateUrl: 'modules/contacts/views/edit-contacts-not-modal.client.view.html'
-            }).
             state('deleteContact', {
                 url: '/contacts/:contactId/edit/delete',
                 templateUrl: 'modules/contacts/views/delete-confirm.client.view.html'

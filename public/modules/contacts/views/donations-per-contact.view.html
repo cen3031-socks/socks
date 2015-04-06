@@ -1,0 +1,36 @@
+<section class="cat-grid">
+
+    <div class="modal-header">
+        <div class="row">
+            <h3 class="modal-title">{{contact.firstName}} {{contact.surname}}'s Donation(s):</h3>
+        </div>
+    </div>
+    <div class="modal-body" ng-hide="contact.deleted_contact">
+
+        <div class="table-responsive">
+            <table class="table table-bordered" data-sort-order="desc">
+                <thread>
+                    <tr>
+                        <th style="width: 10%" >Dollar Amount:</th>
+                        <!--<th style="width: 10%" >Payment Type:</th>-->
+                        <th style="width: 15%" >Date Received:</th>
+                    </tr>
+                </thread>
+                <tbody>
+                <tr data-ng-repeat="donation in donations"
+                    ng-click="linkToDonation(donation)">
+                    <td>$ {{donation.dollarAmount}}</td>
+                   <!-- <td>{{donation.paymentType}}</td>-->
+                    <td>{{donation.created}}</td>
+
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+    <div class="modal-footer">
+
+        <button class="btn btn-warning btn-lg" ng-click="cancel()">Close</button>
+    </div>
+
+</section>
