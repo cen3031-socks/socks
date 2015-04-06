@@ -40,6 +40,17 @@ angular.module('core').service('Dialogs', [ '$modal', '$rootScope',
                 scope: modalScope
             }).result;
         };
+
+        this.notify = function(message, options) {
+            var options = options || {};
+            var modalScope = $rootScope.$new();
+            modalScope.title = options.title || 'Notification';
+            modalScope.message = message;
+            return $modal.open({
+                template: '<h2>{{title}}</h2><p>{{message}}</p><button type="button" class="btn btn-lg btn-success" ng-click="$close(true)">Dismiss</button>',
+                scope: modalScope
+            }).result;
+        };
         return this;
     }
 ]);
