@@ -3,6 +3,7 @@ angular.module('stats').directive('myMap', function(Contacts) {
 	var latlong = [];
 	var adopterWithAddress = [];
 	var geocoder= new google.maps.Geocoder();
+    var streets = [];
     // directive link function
     var link = function(scope, element, attrs) {
     	var map, infoWindow;
@@ -21,6 +22,7 @@ angular.module('stats').directive('myMap', function(Contacts) {
         	var adopters = Contacts.getAllAdopters(function() {
         		for(var i = 0; i < adopters.length; i++) {
         			adopterWithAddress.push(adopters[i].firstName + " " + adopters[i].surname);
+                    streets.push(adopters[i].address);
         			addresses.push(adopters[i].city + ", " + adopters[i].state + " " + adopters[i].zipCode);	
         		}
         		var i = 0;
@@ -68,7 +70,7 @@ angular.module('stats').directive('myMap', function(Contacts) {
         	geocoder.geocode( { 'address': address}, function(results, status) {
         		if (status == google.maps.GeocoderStatus.OK) {
         			var p = results[0].geometry.location;
-        			setMarker(map, p, '', adopterWithAddress[i] + "");
+        			setMarker(map, p, '', adopterWithAddress[i] + "<br/>" + streets[i] + "<br/>" + addresses[i]);
         		} else {
         			alert('Geocode was not successful for the following reason: ' + status);
         		}
