@@ -7,26 +7,52 @@
     </div>
     <div class="modal-body" ng-hide="contact.deleted_contact">
 
-        <div class="table-responsive">
-            <table class="table table-bordered" data-sort-order="desc">
-                <thread>
-                    <tr>
-                        <th style="width: 10%" >Dollar Amount:</th>
-                        <!--<th style="width: 10%" >Payment Type:</th>-->
-                        <th style="width: 15%" >Date Received:</th>
-                    </tr>
-                </thread>
-                <tbody>
-                <tr data-ng-repeat="donation in donations"
-                    ng-click="linkToDonation(donation)">
-                    <td>$ {{donation.dollarAmount}}</td>
-                   <!-- <td>{{donation.paymentType}}</td>-->
-                    <td>{{donation.created}}</td>
+        <a data-ng-repeat="donation in donations | filter:searchText" ng-click="donation.isExpanded = !donation.isExpanded" class="list-group-item">
+            <span>
 
-                </tr>
-                </tbody>
-            </table>
-        </div>
+                 <ul class="itemsIcons" style='float:right; list-style-type: none;'>
+                     <li style="float:right; margin:0.2em;" data-ng-repeat="item in donation.items | unique:'icon'">
+                         <i style='font-size:1.5em;' class="{{item.icon}}"></i>
+                     </li>
+                 </ul>
+                <h2 class="list-group-item-text" data-ng-bind="donation.created | date:'medium'"></h2>
+
+
+
+    			<h4 class="list-group-item-heading" data-ng-bind="donation.name"></h4>
+            </span>
+
+            <ul ng-show="donation.isExpanded" class="itemsSublist" style='list-style-type: none;'>
+                <li  data-ng-repeat="item in donation.items">
+                    <span data-ng-bind="item.name" style='font-size:1.5em;'></span>
+                    <span data-ng-bind="item.value.amount" style='font-size:1.5em;'></span>
+                    <span data-ng-bind="item.value.units" style='font-size:1.5em;'></span>
+                    <i style='font-size:1.5em;' class="{{item.icon}}"></i>
+                </li>
+            </ul>
+
+        </a>
+
+        <!--<div class="table-responsive">-->
+            <!--<table class="table table-bordered" data-sort-order="desc">-->
+                <!--<thread>-->
+                    <!--<tr>-->
+                        <!--<th style="width: 10%" >Dollar Amount:</th>-->
+                        <!--&lt;!&ndash;<th style="width: 10%" >Payment Type:</th>&ndash;&gt;-->
+                        <!--<th style="width: 15%" >Date Received:</th>-->
+                    <!--</tr>-->
+                <!--</thread>-->
+                <!--<tbody>-->
+                <!--<tr data-ng-repeat="donation in donations"-->
+                    <!--ng-click="linkToDonation(donation)">-->
+                    <!--<td>$ {{donation.dollarAmount}}</td>-->
+                   <!--&lt;!&ndash; <td>{{donation.paymentType}}</td>&ndash;&gt;-->
+                    <!--<td>{{donation.created}}</td>-->
+
+                <!--</tr>-->
+                <!--</tbody>-->
+            <!--</table>-->
+        <!--</div>-->
 
     <div class="modal-footer">
 
