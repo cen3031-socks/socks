@@ -30,6 +30,10 @@
     padding-right:.5em;
 }
 
+.pad_left {
+    padding-left: 1em;
+}
+
 .contact_input {
     width: 100%;
 }
