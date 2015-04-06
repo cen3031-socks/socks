@@ -27,8 +27,8 @@ var validateLocalStrategyPassword = function(password) {
 var UserSchema = new Schema({
 	username: {
 		type: String,
-		unique: 'Username already exists',
-		required: 'Please fill in a username',
+		unique: 'Email already exists',
+		required: 'Please fill in an email',
 		trim: true
 	},
 	password: {
