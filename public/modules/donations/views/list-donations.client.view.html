@@ -48,24 +48,37 @@
 
 
    <div class="list-group" infinite-scroll='loadMore()'>
-        <a data-ng-repeat="donation in donations | filter:searchText" data-ng-href="#!/donations/{{donation._id}}" class="list-group-item">
-			<small class="list-group-item-text">
-                <!--donor name-->
-				<span data-ng-bind="donation.donor.firstName" style='font-size:2.0em;'></span>
-                <span data-ng-bind="donation.donor.surname" style='font-size:2.0em;'></span>
-                <br>
-                <span data-ng-bind="donation.created | date:'medium'"></span>
-              <!--  <span style='float:right; font-size:2.0em;' data-ng-bind="donation.dollarAmount"></span><span style='float:right; font-size:2.0em;'>$</span> -->
-            </small>
+        <a data-ng-repeat="donation in donations | filter:searchText" ng-click="expandItems(donation)" class="list-group-item">
+            <span>
+    			<small class="list-group-item-text">
+                    <!--donor name-->
+    				<span data-ng-bind="donation.donor.firstName" style='font-size:2.0em;'></span>
+                    <span data-ng-bind="donation.donor.surname" style='font-size:2.0em;'></span>
+                    <br>
+                    <span data-ng-bind="donation.created | date:'medium'"></span>
+                  <!--  <span style='float:right; font-size:2.0em;' data-ng-bind="donation.dollarAmount"></span><span style='float:right; font-size:2.0em;'>$</span> -->
+                </small>
 
-            <ul class="items" style='float:right; list-style-type: none;'>
-                <li style="float:right; margin:0.2em;" data-ng-repeat="item in donation.items | unique:'icon'">
+                <ul class="itemsIcons" style='float:right; list-style-type: none;'>
+                    <li style="float:right; margin:0.2em;" data-ng-repeat="item in donation.items | unique:'icon'">
+                        <i style='font-size:1.5em;' class="{{item.icon}}"></i>
+                    </li>
+                </ul>
+
+    			<h4 class="list-group-item-heading" data-ng-bind="donation.name"></h4>
+            </span>
+        
+            <ul ng-show="donation.isExpanded" class="itemsSublist" style='list-style-type: none;'>
+                <li  data-ng-repeat="item in donation.items">
+                    <span data-ng-bind="item.name" style='font-size:1.5em;'></span>
+                    <span data-ng-bind="item.value.amount" style='font-size:1.5em;'></span>
+                    <span data-ng-bind="item.value.units" style='font-size:1.5em;'></span>
                     <i style='font-size:1.5em;' class="{{item.icon}}"></i>
                 </li>
             </ul>
 
-			<h4 class="list-group-item-heading" data-ng-bind="donation.name"></h4>
         </a>
+
     </div>
 
 

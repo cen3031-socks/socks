@@ -37,7 +37,7 @@ MongoClient.connect('mongodb://localhost/mean-dev', function(err, db) {
 				for(var j=0; j<numberOfItems; j++)
 				{
 					//console.log('second for loop');
-					var randomItemIndex=Math.floor(Math.random()*4);
+					var randomItemIndex=Math.floor(Math.random()*3);
 
 					itemsArr.push({
 						name:names[randomItemIndex],
