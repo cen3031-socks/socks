@@ -7,6 +7,25 @@ var mongoose = require('mongoose'),
 	Schema = mongoose.Schema;
 
 
+var validateItemName= function(name) {
+    var possible = ['Food', 'Monetary', 'Supplies'];
+    var inList = false;
+    for(var i = 0; possible.length; i++){
+        if(possible[i] == name){
+            inList = true;
+        }
+    }
+    return inList;
+};
+var amountAndUnitsChecker= function(items) {
+    if((items.amount == null && items.units == null) || (items.amount != null && items.units != null)){
+        return true;
+    }
+    else{
+        return false;
+    }
+};
+
 /**
  * Donation Schema
  */
@@ -19,7 +38,8 @@ var DonationSchema = new Schema({
 
     created: {
 		type: Date,
-		default: Date.now
+		default: Date.now,
+        required: 'must have a date'
 	},
 
  /*   totalAmount: {                //an automatic statistic that gets calculated and appears
@@ -31,15 +51,19 @@ var DonationSchema = new Schema({
 
     items: [
         {
-            type: String,                                               //food/monetary/cleaning supplies/etc..      
+            name: {
+                type: String,
+                required: 'name must be present',
+                validate: [validateItemName, 'not a valid item name']
+            },                                              //food/monetary/cleaning supplies/etc..      
             _id: Schema.Types.ObjectId,                                 //an id to delete/edit later
             icon: String,                                                //icon representing type
             description: String,
             value: {
-                type: Number,
-                default: null,
+                amount: Number,
                 trim: true,
-                units: String
+                units: String,
+                validate:[amountAndUnitsChecker, 'if amount is present units must be present']
             }
         }
     ]
