@@ -17,7 +17,6 @@ var user, user2;
  */
 describe('User Model Unit Tests:', function() {
 	before(function(done) {
-		Contact
 
 		user = new User({
 			username: 'aaroniey',

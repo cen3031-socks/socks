@@ -28,8 +28,8 @@ var amountAndUnitsChecker= function(items) {
         return false;
     }
 };
-var oneItemPresent = function(size){
-    if(size.length >= 1){
+var oneItemPresent = function(items){
+    if(items.length >= 1){
         return true;
     } else {
         return false;

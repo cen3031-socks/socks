@@ -1,4 +1,6 @@
-'use strict';
+ /*
+
+ 'use strict';
 
 var should = require('should'),
 	request = require('supertest'),
@@ -8,14 +10,15 @@ var should = require('should'),
 	Contact = mongoose.model('Contact'),
 	agent = request.agent(app);
 
-/**
- * Globals
- */
-var credentials, user, contact;
 
-/**
- * Contact routes tests
- */
+
+
+//var credentials, user, contact;
+
+
+
+
+
 describe('Contact CRUD tests', function() {
 	beforeEach(function(done) {
 		// Create user credentials
@@ -265,4 +268,4 @@ describe('Contact CRUD tests', function() {
 		Contact.remove().exec();
 		done();
 	});
-});
+});*/
