@@ -79,5 +79,10 @@ angular.module('donations').controller('DonationsController', ['$scope', '$state
 				donationId: $stateParams.donationId
 			});
 		};
+
+		//
+		$scope.expandItems=function($thisDonation) {
+			$thisDonation.isExpanded=!$thisDonation.isExpanded;
+		}
 	}
 ]);
