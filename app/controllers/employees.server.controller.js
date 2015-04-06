@@ -14,6 +14,7 @@ var generatePassword = function(length) {
     return crypto.randomBytes(length).toString('hex');
 };
 
+//function Ben created for editing purposes
 var hardcodePassword = function() {
     return 'test_test_test_test';
 }
@@ -23,7 +24,7 @@ var hardcodePassword = function() {
  */
 exports.create = function(req, res) {
     var contact = new Contact(req.body);
-    var password = hardcodePassword(); //generatePassword(24)
+    var password = generatePassword(24); //hardcodePassword() use this function for editing purposes
 	var user = new User(req.body);
     user.username = contact.email;
     user.password = password;
