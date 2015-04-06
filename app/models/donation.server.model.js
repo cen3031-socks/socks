@@ -78,39 +78,6 @@ var DonationSchema = new Schema({
         validate:[oneItemPresent, 'must have one item present in list']
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    /*paymentType: {
-        type: String,
-        default: '',
-        trim: true
-    },*/
-
-
 });
 
 mongoose.model('Donation', DonationSchema);
