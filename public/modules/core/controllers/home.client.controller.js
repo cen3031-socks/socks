@@ -34,7 +34,7 @@ angular.module('core').controller('HomeController', ['$scope', '$location', 'Aut
 
 			$scope.create = function() {
                 if (this.originPerson.length !== 1) {
-                    $scope.error = "You must select an origin person";
+                    $scope.error = 'You must select an origin person';
                 }
 				var cat = new Cats({
 					dateOfBirth: this.dateOfBirth,

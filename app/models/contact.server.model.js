@@ -10,19 +10,19 @@ var mongoose = require('mongoose'),
  * A Validation function to make sure phone number is 10-12 digits long
  */
 var validatePhoneNumber= function(phoneNumber) {
-    return ( ( (phoneNumber.length >9) && (phoneNumber.length <13) ) || (phoneNumber.length == 0) );
+    return ( ( (phoneNumber.length >9) && (phoneNumber.length <13) ) || (phoneNumber.length === 0) );
 };
 
 /**
  * A Validation function to make sure phone number is 5 or 9 digits long
  */
 var validateZipCode= function(zipCode) { 
-    if(zipCode == ''){
+    if (zipCode === '') {
         return true;
     }
-    if( (zipCode.length == 0) || (zipCode.length == 5) || (zipCode.length == 9) ){
+    if ((zipCode.length === 0) || (zipCode.length === 5) || (zipCode.length === 9) ) {
         for(var i = 0; i < zipCode.length; i++){
-            if(isNaN(zipCode.charAt(i))){
+            if (isNaN(zipCode.charAt(i))) {
                 return false;
             }
         }
@@ -35,7 +35,7 @@ var validateZipCode= function(zipCode) {
 * Ensures that the state variable will be a two letter code that matches to a real state
 */
 var validateStateCode= function(state){
-    if (state == ''){
+    if (state === ''){
         return true;
     }
     var stateCodes = ['AK', 'AL', 'AR', 'AZ', 'CA', 'CO', 'CT', 'DC', 'DE', 'FL', 'GA', 'HI', 
@@ -43,15 +43,15 @@ var validateStateCode= function(state){
     'NC', 'ND', 'NE', 'NH', 'NJ', 'NM', 'NV', 'NY', 'OH', 'OK', 'OR', 'PA', 'RI', 'SC', 'SD', 
     'TN', 'TX', 'UT', 'VA', 'VT', 'WA', 'WI', 'WV', 'WY'];
     for(var i = 0; i < stateCodes.length; i++){
-        if (state == stateCodes[i]){
+        if (state === stateCodes[i]){
             return true;
         }
     }
     return false;
-}
+};
 
 var validateEmail= function(email){
-    if(email == ''){
+    if(email === ''){
         return true;
     }
     var testresults = false;
@@ -60,7 +60,7 @@ var validateEmail= function(email){
         testresults=true;
     }
     return testresults;
-}
+};
 
 
 /**

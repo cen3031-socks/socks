@@ -192,8 +192,8 @@
                     </button>
                 <!--</a>-->
             </div>
-            <button class="btn btn-success btn-lg" ng-click="update(contact); ok()" ng-disabled="updateContactForm.$invalid">Update & Close</button>
-            <button class="btn btn-warning btn-lg" ng-click="cancel()">Cancel</button>
+            <button class="btn btn-success btn-lg" ng-click="update(contact); $close('Okay')" ng-disabled="updateContactForm.$invalid">Update & Close</button>
+            <button class="btn btn-warning btn-lg" ng-click="$dismiss()">Cancel</button>
         </div>
     </div>
 
