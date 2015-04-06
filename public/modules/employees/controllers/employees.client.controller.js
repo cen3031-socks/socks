@@ -11,7 +11,7 @@ angular.module('employees').controller('EmployeesController', ['$scope', '$state
 			//console.log(this.password);
 			var employee = new Employees ({
 				firstName: this.firstName,
-				lastName: this.lastName,
+				surname: this.surname,
 				email: this.email,
 				phone: this.phone,
 				isAdmin: this.isAdmin,
@@ -26,7 +26,7 @@ angular.module('employees').controller('EmployeesController', ['$scope', '$state
 
 				// Clear form fields
 				$scope.firstName = '';
-				$scope.lastName = '';
+				$scope.surname = '';
 				$scope.email = '';
 				$scope.phone = '';
 				$scope.isAdmin = '';

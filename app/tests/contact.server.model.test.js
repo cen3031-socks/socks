@@ -18,7 +18,6 @@ var user, contact;
  */
 describe('Contact Model Unit Tests:', function() {
 	beforeEach(function(done) {
-
 		contact = new Contact({
 			firstName: 'Contact Name',
 			surname: 'lastName'
