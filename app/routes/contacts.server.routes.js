@@ -17,8 +17,20 @@ module.exports = function(app) {
     app.route('/contacts/:contactId/adoptions')
         .get(contacts.findAdoptedCats);
 
+    app.route('/contacts/:contactId/vets')
+        .get(contacts.findCatsWithVets);
+
+    app.route('contacts/:contactId/donations')
+        .get(contacts.findDonations);
+
+    app.route('/contacts/:contactId')
     app.route('/adopters')
         .get(contacts.getAllAdopters);
+
+    app.route('/contacts/:contactId/notes')
+        .put(contacts.addNote);
+    app.route('/contacts/:contactId/notes/:noteId')
+        .delete(contacts.deleteNote);
 
     // Finish by binding the Contact middleware
     app.param('contactId', contacts.contactByID);
