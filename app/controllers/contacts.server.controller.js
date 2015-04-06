@@ -45,7 +45,7 @@ exports.findCatsWithVets = function(req, res) {
 }
 
 exports.findDonations = function(req, res) {
-    Donation.find({donation: req.contact._id}).exec(function(err, donations) {
+    Donation.find({donor: req.contact._id}).exec(function(err, donations) {
         if (err) {
             return res.status(400);
         }
@@ -142,6 +142,7 @@ exports.delete = function(req, res) {
 };
 
 exports.getAllAdopters = function(req, res) {
+    console.log("ADOPTERSSSSS");
     Adoption.find().populate('adopter').exec(function(err, adoptions) {
         if (err) {
             return res.status(400).send({

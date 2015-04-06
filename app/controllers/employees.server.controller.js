@@ -19,12 +19,14 @@ var generatePassword = function(length) {
  */
 exports.create = function(req, res) {
     var contact = new Contact(req.body);
-    var password = generatePassword(24);
+    var password = generatePassword(24); //hardcodePassword() use this function for editing purposes
 	var user = new User(req.body);
     user.username = contact.email;
     user.password = password;
     user.provider = 'local';
     user.contact = contact._id;
+
+    console.log(user.password);
 
     contact.save(function(err) {
         if (err) {
