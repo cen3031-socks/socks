@@ -18,6 +18,9 @@ var validateItemName= function(name) {
     return inList;
 };
 var amountAndUnitsChecker= function(items) {
+    if(items == null){
+        return true;
+    }
     if((items.amount == null && items.units == null) || (items.amount != null && items.units != null)){
         return true;
     }
