@@ -18,8 +18,6 @@ var user, contact;
  */
 describe('Contact Model Unit Tests:', function() {
 	beforeEach(function(done) {
-<<<<<<< HEAD
-=======
 		user = new User({
 			firstName: 'Full',
 			lastName: 'Name',
@@ -34,8 +32,6 @@ describe('Contact Model Unit Tests:', function() {
 				firstName: 'Contact Name',
 				surname: 'lastName'
 			});
->>>>>>> master
-
 		contact = new Contact({
 			name: 'Contact Name',
 		});
