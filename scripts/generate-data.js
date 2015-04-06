@@ -44,5 +44,4 @@ MongoClient.connect('mongodb://localhost/mean-dev', function(err, db) {
 		console.log('Inserting cat data.');
 		db.collection('cats').insert(cats.slice(0, 20), throwIfExists);
 
-
 });
