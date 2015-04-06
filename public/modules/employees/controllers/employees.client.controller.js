@@ -7,7 +7,8 @@ angular.module('employees').controller('EmployeesController', ['$scope', '$state
 
 		// Create new Create
 		$scope.create = function() {
-			// Create new Create object
+			// Create new employee object
+			//console.log(this.password);
 			var employee = new Employees ({
 				firstName: this.firstName,
 				lastName: this.lastName,
@@ -18,6 +19,7 @@ angular.module('employees').controller('EmployeesController', ['$scope', '$state
 				password: this.password
 			});
 
+			//console.log(employee.password);
 			// Redirec after save
 			employee.$save(function(response) {
 				$location.path('/');

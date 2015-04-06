@@ -142,6 +142,7 @@ exports.delete = function(req, res) {
 };
 
 exports.getAllAdopters = function(req, res) {
+    console.log("ADOPTERSSSSS");
     Adoption.find().populate('adopter').exec(function(err, adoptions) {
         if (err) {
             return res.status(400).send({

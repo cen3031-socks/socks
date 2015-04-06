@@ -14,11 +14,6 @@ var generatePassword = function(length) {
     return crypto.randomBytes(length).toString('hex');
 };
 
-//function Ben created for editing purposes
-var hardcodePassword = function() {
-    return 'test_test_test_test';
-}
-
 /**
  * Create an employee
  */
@@ -30,6 +25,8 @@ exports.create = function(req, res) {
     user.password = password;
     user.provider = 'local';
     user.contact = contact._id;
+
+    console.log(user.password);
 
     contact.save(function(err) {
         if (err) {

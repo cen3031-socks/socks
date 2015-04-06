@@ -16,12 +16,12 @@
 				</a>
 				<ul class="dropdown-menu">
 					<li class="display-bold">
-						<a data-ng-bind="authentication.user.displayName"></a>
+						<a data-ng-bind="authentication.user.username"></a>
 					</li>
 					<li>
 						<a href="/#!/contacts/{{authentication.user.contact}}">View/Edit Profile</a>
 					</li>
-					<li data-ng-show="authentication.user.provider === 'local'">
+					<li>
 						<a href="/#!/settings/password">Change Password</a>
 					</li>
 					<li class="divider"></li>
