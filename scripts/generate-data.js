@@ -23,19 +23,42 @@ MongoClient.connect('mongodb://localhost/mean-dev', function(err, db) {
 		console.log('Inserting contact data.');
 		db.collection('contacts').insert(contacts.slice(0, 20), function(err, dbcontacts){
 			var donations = [];
+			var names=['Food', 'Monetary', 'Supplies'];
+			var unit=['lbs', 'dollars', 'rupees'];
+			var icons=['glyphicon-heart', 'glyphicon-usd', 'glyphicon-wrench'];
 			for(var i=0; i<80; i++)
 			{
-
+				//console.log('inside for loop');
 				var randomIndex=Math.floor(Math.random()*dbcontacts.length);
 				var contact=dbcontacts[randomIndex];
+				var numberOfItems=Math.floor(Math.random()*15);
+				var itemsArr = [];
+
+				for(var j=0; j<numberOfItems; j++)
+				{
+					//console.log('second for loop');
+					var randomItemIndex=Math.floor(Math.random()*4);
+
+					itemsArr.push({
+						name:names[randomItemIndex],
+						icon:icons[randomItemIndex],
+						description:'',
+						value:{
+							amount:(Math.round((Math.random()*100)*100))/100,
+							units:unit[randomItemIndex]
+						}
+					});
+				}
+
+				//console.log(itemsArr);
+
 				donations.push({
 					donor:contact._id,
-					created:Date.now(),
-					dollarAmount:(Math.round((Math.random()*100)*100))/100,
-					paymentType: 'Dollars' 
+					created:Date.now(), 
+					items:itemsArr
 				});
 			}
-			console.log(donations);
+			//console.log(donations);
 			console.log('Inserting donation data.');
 			db.collection('donations').insert(donations, throwIfExists);
 			db.close();
@@ -43,6 +66,5 @@ MongoClient.connect('mongodb://localhost/mean-dev', function(err, db) {
 		});
 		console.log('Inserting cat data.');
 		db.collection('cats').insert(cats.slice(0, 20), throwIfExists);
-
 
 });

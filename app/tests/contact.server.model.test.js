@@ -32,9 +32,6 @@ describe('Contact Model Unit Tests:', function() {
 				firstName: 'Contact Name',
 				surname: 'lastName'
 			});
-
-			done();
-		});
 	});
 
 	describe('Method Save', function() {
