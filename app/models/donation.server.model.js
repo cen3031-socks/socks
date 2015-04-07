@@ -10,7 +10,7 @@ var mongoose = require('mongoose'),
 var validateItemName= function(name) {
     var possible = ['Food', 'Monetary', 'Supplies'];
     var inList = false;
-    for(var i = 0; possible.length; i++){
+    for(var i = 0; i < possible.length; i++){
         if(possible[i] == name){
             inList = true;
         }
@@ -29,12 +29,12 @@ var amountAndUnitsChecker= function(items) {
     }
 };
 var oneItemPresent = function(items){
-    if(items.length >= 1){
+    if(items.length >= 0){
         return true;
     } else {
         return false;
     }
-}
+};
 
 /**
  * Donation Schema
@@ -66,9 +66,9 @@ var DonationSchema = new Schema({
                 required: 'name must be present',
                 validate: [validateItemName, 'not a valid item name']
             },                                              //food/monetary/cleaning supplies/etc..      
-            _id: Schema.Types.ObjectId,                                 //an id to delete/edit later
-            icon: String,                                                //icon representing type
-            description: String,
+            //_id: Schema.Types.ObjectId,                                 //an id to delete/edit later
+            //icon: String,                                                //icon representing type
+            //description: String,
             value: {
                 amount: Number,
                 units: String,

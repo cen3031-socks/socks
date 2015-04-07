@@ -24,15 +24,9 @@ describe('Donation Model Unit Tests:', function() {
 		});
 		contact.save(function(){ 
 			donation = new Donation({
-				donor: contact,
-				items: {
-					name: 'aaron',
-					value: {
-						amount: 55,
-						units: 'roofies'
-					}
-				}
+				donor: contact
 			});
+			donation.items.push({name: 'Food'})
 			done();
 		});
 
@@ -41,7 +35,7 @@ describe('Donation Model Unit Tests:', function() {
 	describe('Method Save', function() {
 		it('should be able to save without problems', function(done) {
 			return donation.save(function(err) {
-				should.exist(err);
+				should.not.exist(err);
 				done();
 			});
 		});
