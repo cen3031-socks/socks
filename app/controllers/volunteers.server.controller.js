@@ -86,12 +86,12 @@ exports.getVolunteerByName = function(req, res) {
 *Get hours worked by a volunteer
  */
 
- exports.minutesWorked = function(req, res, firstDate, lastDate) {
+ exports.minutesWorked = function(req, res) {
      var minutes = 0;
-     var vols = Volunteer.find({contact:req.params.contactID});
+     var vols = Volunteer.find({contact:req.params.contactId});
      for (var i = 0; i < vols.length; ++i) {
          //if session is from before desired range
-         if ((vols[i].timeIn - firstDate < 0) || (vols[i].timeOut - lastDate > 0)) {
+         if ((vols[i].timeIn - req.params.startDate < 0) || (vols[i].timeOut - req.params.endDate > 0)) {
              //this session is not in the requested range
          }
          else {

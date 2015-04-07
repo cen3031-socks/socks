@@ -1,19 +1,21 @@
 .volunteer-bg {
 
-    /*background-color: #0071bc;*/
-    background-size: 400% 400%;
-    background: -webkit-linear-gradient(#0071bc, darkgray); /* For Safari 5.1 to 6.0 */
-    background: -o-linear-gradient(#0071bc, darkgray); /* For Opera 11.1 to 12.0 */
-    background: -moz-linear-gradient(#0071bc, darkgray); /* For Firefox 3.6 to 15 */
-    background: linear-gradient(#0071bc, darkgray); /* Standard syntax */
+    background-color: #0071bc;
+    /*background-size: 400% 400%;
+    background: -webkit-linear-gradient(#0071bc, darkgray);
+    background: -o-linear-gradient(#0071bc, darkgray);
+    background: -moz-linear-gradient(#0071bc, darkgray);
+    background: linear-gradient(#0071bc, darkgray);*/
 }
 
 .white-text{
     color: #FFFFFF;
 }
 .volunteer-pad{
-    padding-left: 50px;
-    padding-right: 50px;
+    width: 716px;
+    padding-left: 15px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .vertPad{
@@ -21,8 +23,9 @@
 }
 
 .centButton{
-    margin-left: auto;
     margin-right: auto;
+    margin-left: auto;
+    width: 716px;
 }
 
 .volinstlist{
@@ -33,9 +36,7 @@
 }
 
 .volunteerSelector {
-    width: 300px;
-    margin-left: auto;
-    margin-right: auto;
+    /*width: 300px;*/
 }
 
 html,body { height:100%; }
