@@ -7,7 +7,6 @@ module.exports = function(app) {
 
     var requireEmployee = employees.permissionLevel(users.EMPLOYEE);
 
-    // Contacts Routes
     app.route('/contacts')
         .get(contacts.list)
         .post(requireEmployee, contacts.create);
@@ -26,15 +25,12 @@ module.exports = function(app) {
     app.route('/contacts/:contactId/donations')
         .get(contacts.findDonations);
 
+    app.route('/contacts/:contactId/volunteers')
+        .get(contacts.findVolunteerHours);
+
     app.route('/contacts/:contactId')
     app.route('/adopters')
         .get(contacts.getAllAdopters);
 
-    app.route('/contacts/:contactId/notes')
-        .put(requireEmployee, contacts.addNote);
-    app.route('/contacts/:contactId/notes/:noteId')
-        .delete(requireEmployee, contacts.deleteNote);
-
-    // Finish by binding the Contact middleware
     app.param('contactId', contacts.contactByID);
 };
