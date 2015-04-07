@@ -29,24 +29,31 @@
             </div>
         </div>
         <div class="row">
-            <div ng-show="contact.isAdopter" class = "col-xs-12 col-sm-6 col-md-1">
+            <div ng-show="contact.isAdopter" class = "col-xs-12 col-sm-6 col-md-2">
                 <a ng-click="contactViewCtrl.modalAdoptedCatsView('lg', contact)">
                     <button type="button" class="btn btn-default btn-md btn-danger">
                         <span class="glyphicon glyphicon-heart" aria-hidden="true"></span> Adopter
                     </button>
                 </a>
             </div>
-            <div ng-show="contact.isVet" class = "col-xs-12 col-sm-6 col-md-1 padding-left">
+            <div ng-show="contact.isVet" class = "col-xs-12 col-sm-6 col-md-2">
                 <a ng-click="contactViewCtrl.modalAdoptedCatsView('lg', contact)">
                     <button type="button" class="btn btn-default btn-md background-pink">
                         <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Veterinarian
                     </button>
                 </a>
             </div>
-            <div ng-show="contact.isDonator" class = "col-xs-12 col-sm-6 col-md-1 padding-left">
+            <div ng-show="contact.isDonator" class = "col-xs-12 col-sm-6 col-md-2">
                 <a ng-click="contactViewCtrl.modalDonationsView('lg', contact)">
                     <button type="button" class="btn btn-default btn-md btn-success">
                         <span class="glyphicon glyphicon-usd" aria-hidden="true"></span> Donator
+                    </button>
+                </a>
+            </div>
+            <div ng-show="contact.isVolunteer" class = "col-xs-12 col-sm-6 col-md-2">
+                <a ng-click="contactViewCtrl.modalVolunteerHoursView('lg', contact)">
+                    <button type="button" class="btn btn-default btn-md btn-warning">
+                        <span class="glyphicon glyphicon-user" aria-hidden="true"></span> Volunteer
                     </button>
                 </a>
             </div>

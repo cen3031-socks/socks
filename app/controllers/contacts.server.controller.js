@@ -6,7 +6,7 @@
 var mongoose = require('mongoose'),
 	errorHandler = require('./errors.server.controller'),
 	Contact = mongoose.model('Contact'), Adoption = mongoose.model('Adoption'), Cat = mongoose.model('Cat'),
-    Donation = mongoose.model('Donation'),
+    Donation = mongoose.model('Donation'), Volunteer = mongoose.model('Volunteer'),
 	_ = require('lodash');
 
 /**
@@ -52,6 +52,16 @@ exports.findDonations = function(req, res) {
         else return res.jsonp(donations);
     });
 }
+
+exports.findVolunteerHours = function(req, res) {
+    Volunteer.find({contact: req.contact._id}).exec(function(err, volunteers) {
+        if (err) {
+            return res.status(400);
+        }
+        else return res.jsonp(volunteers);
+    });
+}
+
 
 /**
  * Create a Contact
