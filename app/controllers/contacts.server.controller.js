@@ -6,7 +6,7 @@
 var mongoose = require('mongoose'),
 	errorHandler = require('./errors.server.controller'),
 	Contact = mongoose.model('Contact'), Adoption = mongoose.model('Adoption'), Cat = mongoose.model('Cat'),
-    Donation = mongoose.model('Donation'),
+    Donation = mongoose.model('Donation'), Volunteer = mongoose.model('Volunteer'),
 	_ = require('lodash');
 
 /**
@@ -45,13 +45,23 @@ exports.findCatsWithVets = function(req, res) {
 }
 
 exports.findDonations = function(req, res) {
-    Donation.find({donation: req.contact._id}).exec(function(err, donations) {
+    Donation.find({donor: req.contact._id}).exec(function(err, donations) {
         if (err) {
             return res.status(400);
         }
         else return res.jsonp(donations);
     });
 }
+
+exports.findVolunteerHours = function(req, res) {
+    Volunteer.find({contact: req.contact._id}).exec(function(err, volunteers) {
+        if (err) {
+            return res.status(400);
+        }
+        else return res.jsonp(volunteers);
+    });
+}
+
 
 /**
  * Create a Contact
@@ -196,48 +206,3 @@ exports.hasAuthorization = function(req, res, next) {
 };
 
 
-exports.deleteNote = function(req, res) {
-    var contact = req.contact;
-    var note = req.body;
-    note._id = mongoose.Types.ObjectId();
-
-    var index = -1;
-    for (var i in contact.notes) {
-        if (contact.notes[i]._id.toString() === req.params.noteId) {
-            index = i;
-            break;
-        }
-    }
-    if (index === -1) {
-        return res.status(404).send({
-            message: 'That note does not exist with this contact.'
-        });
-    }
-
-    contact.notes.splice(index, 1);
-    contact.save(function(err) {
-        if (err) {
-            return res.status(400).send({
-                message: errorHandler.getErrorMessage(err)
-            });
-        } else {
-            res.json({message: "Succesfully deleted."});
-        }
-    });
-};
-
-exports.addNote = function(req, res) {
-    var contact = req.contact;
-    var note = req.body;
-    note._id = mongoose.Types.ObjectId();
-    contact.notes.push(req.body);
-    contact.save(function(err) {
-        if (err) {
-            return res.status(400).send({
-                message: errorHandler.getErrorMessage(err)
-            });
-        } else {
-            res.json(contact.notes[contact.notes.length - 1]);
-        }
-    });
-};

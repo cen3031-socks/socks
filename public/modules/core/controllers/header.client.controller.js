@@ -6,10 +6,6 @@ angular.module('core').controller('HeaderController', ['$scope', 'Authentication
 		$scope.isCollapsed = false;
 		$scope.menu = Menus.getMenu('topbar');
 
-        $scope.getDetails = function(contact) {
-            $location.path('contacts/' + contact._id + '/editNotModal');
-        }
-
 		$scope.toggleCollapsibleMenu = function() {
 			$scope.isCollapsed = !$scope.isCollapsed;
 		};

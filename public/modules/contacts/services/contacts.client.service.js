@@ -27,6 +27,11 @@ angular.module('contacts').factory('Contacts', ['$resource',
                 url: 'contacts/:contactId/donations',
                 isArray: true
             },
+            findVolunteerHours: {
+                method: 'GET',
+                url: 'contacts/:contactId/volunteers',
+                isArray: true
+            },
             addNote: {
                 method: 'PUT',
                 url: 'contacts/:contactId/notes'

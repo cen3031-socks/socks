@@ -1,8 +1,5 @@
 'use strict';
 
-/**
- * Module dependencies.
- */
 var users = require('../../app/controllers/users.server.controller'),
 	cats = require('../../app/controllers/cats.server.controller');
 

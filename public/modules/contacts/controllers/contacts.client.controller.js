@@ -105,8 +105,11 @@ contactsApp.controller('ContactsUpdateController', ['$scope', 'Contacts', '$stat
 
 
 
-contactsApp.controller('ContactsViewController', [ '$scope', 'Contacts', '$stateParams', '$modal',
-function ($scope, Contacts, $stateParams, $modal) {
+contactsApp.controller('ContactsViewController', [ '$scope', 'Contacts', '$stateParams', '$modal', 'Authentication', '$location',
+function ($scope, Contacts, $stateParams, $modal, Authentication, $location) {
+
+    $scope.authentication = Authentication;
+
     // Find existing Contact
     $scope.findOne = function () {
         $scope.contact = Contacts.get({
@@ -115,6 +118,16 @@ function ($scope, Contacts, $stateParams, $modal) {
         var adoptions = Contacts.findAdoptedCats({contactId: $stateParams.contactId}, function() {
             $scope.contact.isAdopter = adoptions.length > 0;
         });
+        var vets = Contacts.findCatsWithVets({contactId: $stateParams.contactId}, function() {
+            $scope.contact.isVet = vets.length > 0;
+        });
+        var donations = Contacts.findDonations({contactId: $stateParams.contactId}, function() {
+            $scope.contact.isDonator = donations.length > 0;
+        });
+        var volunteers = Contacts.findVolunteerHours({contactId: $stateParams.contactId}, function() {
+            $scope.contact.isVolunteer = volunteers.length > 0;
+        });
+
         console.log($scope.contact);
     };
 
@@ -160,7 +173,7 @@ function ($scope, Contacts, $stateParams, $modal) {
             .confirm('Are you sure you want to delete this note?')
             .then(function(result) {
                 if (result) {
-                    Contacts.deleteNote({contactId: $scope.contact._id, noteId: note._id}, $scope.getContact);
+                    Contacts.deleteNote({contactId: $scope.contact._id, noteId: note._id}, $scope.findOne);
                 }
             });
     };
@@ -170,14 +183,13 @@ function ($scope, Contacts, $stateParams, $modal) {
     };
 
     $scope.addNote = function() {
-        $scope.authentication = { user: { contact:$scope.contacts[0] } }
         if (!$scope.canAddNote()) return;
         Contacts.addNote({contactId: $scope.contact._id}, {
             message: $scope.newNote,
             date: Date.now(),
             sender: $scope.authentication.user.contact._id
         }, function() {
-            $scope.getContact();
+            $scope.findOne();
             $scope.newNote = '';
         });
     };
@@ -290,6 +302,68 @@ function ($scope, Contacts, $stateParams, $modal) {
         });
     };
 
+    // Open a modal window to view a contact's donations
+    this.modalDonationsView = function (size, selectedContact) {
+
+        var modalInstance = $modal.open({
+            templateUrl: 'modules/contacts/views/donations-per-contact.view.html',
+            controller: function($scope, $modalInstance, contact){
+                $scope.contact = contact;
+
+                $scope.donations = Contacts.findDonations({contactId:contact._id});
+
+                $scope.cancel = function () {
+                    $modalInstance.dismiss('cancel');
+                };
+
+                $scope.linkToDonation = function(donation) {
+                    $location.path('donations/' + donation._id)
+                }
+
+            },
+            size: size,
+            resolve: {
+                contact: function () {
+                    return selectedContact;
+                }
+            }
+        });
+
+        modalInstance.result.then(function (selectedItem) {
+            $scope.selected = selectedItem;
+        }, function () {
+            $log.info('Modal dismissed at: ' + new Date());
+        });
+    };
+
+    // Open a modal window to view a contact's volunteer hours
+    this.modalVolunteerHoursView = function (size, selectedContact) {
+
+        var modalInstance = $modal.open({
+            templateUrl: 'modules/contacts/views/volunteer-modal.client.view.html',
+            controller: function($scope, $modalInstance, contact){
+                $scope.contact = contact;
+
+                $scope.volunteers = Contacts.findVolunteerHours({contactId:contact._id});
+
+                $scope.cancel = function () {
+                    $modalInstance.dismiss('cancel');
+                };
+            },
+            size: size,
+            resolve: {
+                contact: function () {
+                    return selectedContact;
+                }
+            }
+        });
+
+        modalInstance.result.then(function (selectedItem) {
+            $scope.selected = selectedItem;
+        }, function () {
+            $log.info('Modal dismissed at: ' + new Date());
+        });
+    };
 }]);
 
 
