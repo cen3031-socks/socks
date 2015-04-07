@@ -52,7 +52,6 @@ angular.module('volunteers').controller('VolunteersController', ['$scope', '$sta
                 } else {
 
                     console.log("Ending existing volunteer session");
-                    //you probably can't do this
                     correctVolunteer[0].timeOut = Date.now();
                     correctVolunteer[0].$update(function(response) {
 
@@ -66,9 +65,6 @@ angular.module('volunteers').controller('VolunteersController', ['$scope', '$sta
                     });
                 }
 
-
-
-                //$scope.name = '';
 
 
 
