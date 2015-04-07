@@ -146,8 +146,9 @@ function ($scope, Contacts, $stateParams, $modal, Authentication, $location, Vol
         var donations = Contacts.findDonations({contactId: $stateParams.contactId}, function() {
             $scope.contact.isDonator = donations.length > 0;
         });
-        //$scope.isVolunteer();
-
+        var volunteers = Contacts.findVolunteerHours({contactId: $stateParams.contactId}, function() {
+            $scope.contact.isVolunteer = volunteers.length > 0;
+        });
         console.log($scope.contact);
     };
 
@@ -340,6 +341,35 @@ function ($scope, Contacts, $stateParams, $modal, Authentication, $location, Vol
                     $location.path('donations/' + donation._id)
                 }
 
+            },
+            size: size,
+            resolve: {
+                contact: function () {
+                    return selectedContact;
+                }
+            }
+        });
+
+        modalInstance.result.then(function (selectedItem) {
+            $scope.selected = selectedItem;
+        }, function () {
+            $log.info('Modal dismissed at: ' + new Date());
+        });
+    };
+
+    // Open a modal window to view a contact's volunteer hours
+    this.modalVolunteerHoursView = function (size, selectedContact) {
+
+        var modalInstance = $modal.open({
+            templateUrl: 'modules/contacts/views/volunteer-modal.client.view.html',
+            controller: function($scope, $modalInstance, contact){
+                $scope.contact = contact;
+
+                $scope.volunteers = Contacts.findVolunteerHours({contactId:contact._id});
+
+                $scope.cancel = function () {
+                    $modalInstance.dismiss('cancel');
+                };
             },
             size: size,
             resolve: {

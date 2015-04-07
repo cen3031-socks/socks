@@ -40,3 +40,37 @@ exports.getErrorMessage = function(err) {
 
 	return message;
 };
+
+/**
+ * Check if there's an error and send the error response if there was one
+ *
+ * @param {Object}   res            the response object
+ * @param {Object}   err            the error to check for
+ * @param {int}     [statusCode]    the status code to send, defaults to 400
+ * @returns {Boolean}  true if there was an error, false if there wasn't
+ */
+exports.sendErrorResponse = function(res, err, statusCode) {
+    if (err) {
+        var status = statusCode || 400;
+        res.status(status).send({message: exports.getErrorMessage(err)});
+        return true;
+    }
+    return false;
+}
+
+/**
+ * Wraps up a callback function whose first parameter is the error;
+ * only invokes the callback if there's no error and removes the
+ * error parameter if it does
+ *
+ * @param res
+ * @param callback
+ * @returns {Function}
+ */
+exports.wrap = function(res, callback) {
+    return function(err) {
+        if (!exports.sendErrorResponse(res, err)) {
+            callback.apply(this, [].slice.call(arguments, 1));
+        }
+    };
+};
