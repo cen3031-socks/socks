@@ -3,11 +3,14 @@
 module.exports = function(app) {
 	var users = require('../../app/controllers/users.server.controller');
 	var volunteers = require('../../app/controllers/volunteers.server.controller');
+    var employees = require('../../app/controllers/employees.server.controller');
+
+    var requireEmployee = employees.permissionLevel(users.EMPLOYEE);
 
 	// Volunteers Routes
 	app.route('/volunteers')
         .get(volunteers.list)
-		.post(volunteers.create);
+		.post(requireEmployee, volunteers.create);
 
 
     app.route('/volunteers/by-name/:contactId')
@@ -15,8 +18,8 @@ module.exports = function(app) {
 
 	app.route('/volunteers/:volunteerId')
 		.get(volunteers.read)
-		.put(volunteers.update)
-		.delete(volunteers.delete);
+		.put(requireEmployee, volunteers.update)
+		.delete(requireEmployee, volunteers.delete);
 
 	// Finish by binding the Volunteer middleware
 	app.param('volunteerId', volunteers.volunteerByID);
