@@ -13,6 +13,9 @@ module.exports = function(app) {
     app.route('/volunteers/by-name/:contactId')
         .get(volunteers.getVolunteerByName);
 
+    app.route('/volunteers/get-minutes/:contactId/:startDate_:endDate')
+        .get(volunteers.minutesWorked);
+
 	app.route('/volunteers/:volunteerId')
 		.get(volunteers.read)
 		.put(volunteers.update)

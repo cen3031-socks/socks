@@ -13,49 +13,57 @@ contactsApp.controller('ContactsController', ['$scope', '$stateParams', 'Authent
         //    $location.path('contacts/' + response._id);
         //}
 
-        $scope.getDetails = function(contact) {
+        $scope.getDetails = function (contact) {
             $location.path('contacts/' + contact._id);
         }
         //find a list of Contacts
-        $scope.find = function() {
+        $scope.find = function () {
             $scope.contacts = Contacts.query();
         }
-            // Open a modal window to Update a single contact record
-            this.modalUpdate = function (size, selectedContact) {
+        // Open a modal window to Update a single contact record
+        this.modalUpdate = function (size, selectedContact) {
 
-                var modalInstance = $modal.open({
-                    templateUrl: 'modules/contacts/views/edit-contacts.client.view.html',
-                    controller: function($scope, $modalInstance, contact){
-                        $scope.contact = contact;
+            var modalInstance = $modal.open({
+                templateUrl: 'modules/contacts/views/edit-contacts.client.view.html',
+                controller: function ($scope, $modalInstance, contact) {
+                    $scope.contact = contact;
 
-                        $scope.ok = function () {
+                    $scope.ok = function () {
 
-                            if (document.updateContactForm.$valid){
-								$modalInstance.close($scope.contact);
-                            }
-                            $modalInstance.dismiss('cancel');
-                        };
-
-                        $scope.cancel = function () {
-                            $modalInstance.dismiss('cancel');
-                        };
-                    },
-                    size: size,
-                    resolve: {
-                        contact: function () {
-                            return selectedContact;
+                        if (document.updateContactForm.$valid) {
+                            $modalInstance.close($scope.contact);
                         }
-                    }
-                });
+                        $modalInstance.dismiss('cancel');
+                    };
 
-                modalInstance.result.then(function (selectedItem) {
-                    $scope.selected = selectedItem;
-                }, function () {
-                    $log.info('Modal dismissed at: ' + new Date());
-                });
-            };
+                    $scope.cancel = function () {
+                        $modalInstance.dismiss('cancel');
+                    };
+                },
+                size: size,
+                resolve: {
+                    contact: function () {
+                        return selectedContact;
+                    }
+                }
+            });
+
+            modalInstance.result.then(function (selectedItem) {
+                $scope.selected = selectedItem;
+            }, function () {
+                $log.info('Modal dismissed at: ' + new Date());
+            });
+        };
+
+
+
+        $scope.getMinutes = function (date1, date2) {
+            minutesWorked()
+        }
     }
 ]);
+
+
 
 contactsApp.controller('ContactsCreateController', ['$scope', 'Contacts', '$location',
     function($scope, Contacts, $location) {
@@ -105,8 +113,22 @@ contactsApp.controller('ContactsUpdateController', ['$scope', 'Contacts', '$stat
 
 
 
-contactsApp.controller('ContactsViewController', [ '$scope', 'Contacts', '$stateParams', '$modal', 'Authentication', '$location',
-function ($scope, Contacts, $stateParams, $modal, Authentication, $location) {
+contactsApp.controller('ContactsViewController', [ '$scope', 'Contacts', '$stateParams', '$modal', 'Authentication', '$location', 'Volunteers',
+function ($scope, Contacts, $stateParams, $modal, Authentication, $location, Volunteers) {
+
+    $scope.isVolunteer = function () {
+        var currDate = new Date();
+        var oldDate = new Date();
+        oldDate.setFullYear(2000);
+        //If statement should call minutes worked from volunteers.server.controller.js
+        var minutes_worked = Volunteers.minutesWorked({startDate: oldDate, endDate: currDate, contactId: $scope.contact._id}, function() {
+
+            $scope.contact.hasVolunteered = (minutes_worked > 0);
+
+
+        });
+        console.log("EVIDENCE!");
+    };
 
     $scope.authentication = Authentication;
 
@@ -127,7 +149,6 @@ function ($scope, Contacts, $stateParams, $modal, Authentication, $location) {
         var volunteers = Contacts.findVolunteerHours({contactId: $stateParams.contactId}, function() {
             $scope.contact.isVolunteer = volunteers.length > 0;
         });
-
         console.log($scope.contact);
     };
 
