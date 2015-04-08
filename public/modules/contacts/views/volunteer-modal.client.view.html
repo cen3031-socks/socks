@@ -6,10 +6,39 @@
         </div>
     </div>
     <div class="modal-body">
+            <label class="control-label" for="startDate">From</label>
+            <div class="controls">
+                <p class="input-group">
+                    <input type="text" class="form-control" datepicker-popup="dd MMM yyyy" ng-model="startDate"
+                           is-open="opened" ng-required="true" close-text="Close" />
+								<span class="input-group-btn">
+									<button type="button" class="form-control btn btn-default" ng-click="open($event)">
+                                        <i class="glyphicon glyphicon-calendar"></i>
+                                    </button>
+								</span>
+                </p>
+                <label class="control-label" for="endDate">To</label>
+                <div class="controls">
+                    <p class="input-group">
+                        <input type="text" class="form-control" datepicker-popup="dd MMM yyyy" ng-model="endDate"
+                               is-open="opened" ng-required="true" close-text="Close" />
+								<span class="input-group-btn">
+									<button type="button" class="form-control btn btn-default" ng-click="open($event)">
+                                        <i class="glyphicon glyphicon-calendar"></i>
+                                    </button>
+								</span>
+                    </p>
+
+
+                    <h1>{{contact.minutes_worked/60}} Hours</h1>
+
+
+
 
 
 
         <div class="modal-footer">
+
 
             <button class="btn btn-warning btn-lg" ng-click="cancel()">Close</button>
         </div>
