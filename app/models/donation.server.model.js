@@ -10,18 +10,18 @@ var mongoose = require('mongoose'),
 var validateItemName= function(name) {
     var possible = ['Food', 'Monetary', 'Supplies'];
     var inList = false;
-    for(var i = 0; possible.length; i++){
+    for(var i = 0; i < possible.length; i++){
         if(possible[i] == name){
             inList = true;
         }
     }
     return inList;
 };
-var amountAndUnitsChecker= function(items) {
-    if(items == null){
+var amountAndUnitsChecker= function(value) {
+    if(value == null){
         return true;
     }
-    if((items.amount == null && items.units == null) || (items.amount != null && items.units != null)){
+    if((value.amount == null && value.units == null) || (value.amount != null && value.units != null)){
         return true;
     }
     else{
@@ -34,7 +34,7 @@ var oneItemPresent = function(items){
     } else {
         return false;
     }
-}
+};
 
 /**
  * Donation Schema
@@ -70,12 +70,11 @@ var DonationSchema = new Schema({
             icon: String,                                                //icon representing type
             description: String,
             value: {
-                amount: Number,
-                units: String,
-                validate:[amountAndUnitsChecker, 'if amount is present units must be present']
+                type: {amount: Number, units: String},
+                validate: [amountAndUnitsChecker, 'if amount is present units must be present']
             }
         }],
-        validate:[oneItemPresent, 'must have one item present in list']
+        validate: [oneItemPresent, 'must have one item present in list']
     }
 
 });
