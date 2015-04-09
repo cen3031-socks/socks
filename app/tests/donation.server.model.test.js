@@ -20,7 +20,7 @@ describe('Donation Model Unit Tests:', function() {
 	beforeEach(function(done) {
 		contact = new Contact({
 			firstName: 'FirstName',
-			surname: "surname"
+			surname: 'surname'
 		});
 		contact.save(function(){ 
 			donation = new Donation({

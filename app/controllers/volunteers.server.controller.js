@@ -80,7 +80,7 @@ exports.getVolunteerByName = function(req, res) {
             res.jsonp(volunteers);
         }
     });
-}
+};
 
 /*
 *Get hours worked by a volunteer
