@@ -53,52 +53,6 @@ exports.addEvent = function(req, res) {
 	});
 };
 
-exports.deleteNote = function(req, res) {
-    var cat = req.cat;
-    var note = req.body;
-    note._id = mongoose.Types.ObjectId();
-
-    var index = -1;
-    for (var i in cat.notes) {
-        if (cat.notes[i]._id.toString() === req.params.noteId) {
-            index = i;
-            break;
-        }
-    }
-    if (index === -1) {
-        return res.status(404).send({
-            message: 'That note does not exist with this cat.'
-        });
-    }
-
-    cat.notes.splice(index, 1);
-    cat.save(function(err) {
-        if (err) {
-            return res.status(400).send({
-                message: errorHandler.getErrorMessage(err)
-            });
-        } else {
-            res.json({message: 'Succesfully deleted.'});
-        }
-    });
-};
-
-exports.addNote = function(req, res) {
-    var cat = req.cat;
-    var note = req.body;
-    note._id = mongoose.Types.ObjectId();
-    cat.notes.push(req.body);
-    cat.save(function(err) {
-        if (err) {
-            return res.status(400).send({
-                message: errorHandler.getErrorMessage(err)
-            });
-        } else {
-            res.json(cat.notes[cat.notes.length - 1]);
-        }
-    });
-};
-
 exports.adopt = function(req, res) {
 	if (req.cat.currentAdoption !== undefined) {
 		return res.status(400).send({
@@ -243,12 +197,12 @@ exports.catById = function(req, res, next, id) {
         });
     }
     Cat.findById(id).populate('adoptions currentAdoption')
-		.exec(function(err, cat) {
+		.exec(errorHandler.wrap(res, function(cat) {
 		// this is ugly....
 			Cat.populate(cat, { 
 				path: 'adoptions.adopter currentAdoption.adopter', 
 				model: Contact
-			}, function(err, cat) {
+			}, errorHandler.wrap(res, function(cat) {
 				Cat.populate(cat, { path: 'adoptions.donation currentAdoption.donation', model: Donation},
 					function(err, cat) {
 						if (err) return next(err);
@@ -260,24 +214,56 @@ exports.catById = function(req, res, next, id) {
 						req.cat = cat;
 						next();
 					});
-			});
-		});
+			}));
+		}));
 };
 
 exports.create = function(req, res) {
     console.log(req.body);
 	var cat = new Cat(req.body);
-	cat.save(function(err) {
-		if (err) {
-            console.log('There was an error');
-            console.log(err);
-			return res.status(400).send({
-				message: errorHandler.getErrorMessage(err)
-			});
-		} else {
-			res.json(cat);
-		}
-	});
+	cat.save(errorHandler.wrap(res, function(cat) {
+            res.json(cat);
+        }));
+};
+
+exports.getCatAge = function(cat) {
+    return Math.floor((Date.now() - cat.dateOfBirth) / (1000 * 86400 * 365));
+};
+
+exports.getAgeClassFromAge = function(age) {
+    if (age < 2) {
+        return 'Baby';
+    } else if (age < 5) {
+        return 'Kitten';
+    } else if (age < 10) {
+        return 'Adult';
+    } else {
+        return 'Senior';
+    }
+};
+
+/**
+ * Gets the cat status for PetFinder from the cat. The following are possible
+ * values and their meanings:
+ *
+ *      A      adoptable
+ *      H      hold -- kept in the shelter; not adoptable
+ *      X      adopted
+ *      P      pending
+ *
+ * Right now we only return A or X
+ *
+ * @param cat
+ * @returns {string}    one of 'A', 'H', 'X', or 'P'
+ */
+exports.getCatStatus = function(cat) {
+    if (cat.currentAdoption) {
+        // adopted
+        return 'X';
+    } else {
+        // adoptable
+        return 'A';
+    }
 };
 
 exports.generateCsv = function(req, res) {
@@ -286,12 +272,13 @@ exports.generateCsv = function(req, res) {
         'Internal': function() { return ''; },
         'AnimalName': 'name',
         'PrimaryBreed': 'breed',
+        'SecondaryBreed': '',
         'Sex': function(cat) { return cat.sex === 1 ? 'M' : 'F'; },
         'Size': function(cat) { return 'M'; },
-        'Age': function(cat) { return 'Adult'; },
+        'Age': function(cat) { return exports.getAgeClassFromAge(exports.getCatAge(cat)); },
         'Desc': 'description',
         'Type': function(cat) { return 'Cat'; },
-        'Status': function(cat) { return 'H'; },
+        'Status': exports.getCatStatus,
         'Shots': function(cat) { return '1'; },
         'Altered': function(cat) { return ''; },
         'NoDogs': function(cat) { return ''; },
@@ -303,7 +290,7 @@ exports.generateCsv = function(req, res) {
         'photo1': function(cat) { return ''; },
         'photo2': function(cat) { return ''; },
         'photo3': function(cat) { return ''; }
-    }
+    };
     Cat.find()
        .exec(errorHandler.wrap(res, function(cats) {
             res.set('Content-Type', 'text/csv');

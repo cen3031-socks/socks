@@ -66,12 +66,13 @@ exports.convertToCsv = function(items, properties, separator, excludeHeaders) {
 
     // print the header
     if (!excludeHeaders) {
-        for (var i = 0; i < properties.length; ++i) {
-            csv += '"' + properties[i].columnName + '"';
-            if (i != properties.length - 1) {
+        for (var i = 0; i < props.length; ++i) {
+            csv += '"' + props[i].columnName + '"';
+            if (i != props.length - 1) {
                 csv += separator;
             }
         }
+        csv += '\n';
     }
 
     for (var i = 0; i < items.length; ++i) {
