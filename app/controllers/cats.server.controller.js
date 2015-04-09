@@ -279,3 +279,36 @@ exports.create = function(req, res) {
 		}
 	});
 };
+
+
+exports.generateCsv = function(req, res) {
+    var csvFields = {
+        'ID' : '_id',
+        'Internal': function() { return ''; },
+        'AnimalName': 'name',
+        'PrimaryBreed': 'breed',
+        'Sex': function(cat) { return cat.sex === 1 ? 'M' : 'F'; },
+        'Size': function(cat) { return 'M'; },
+        'Age': function(cat) { return 'Adult'; },
+        'Desc': 'description',
+        'Type': function(cat) { return 'Cat'; },
+        'Status': function(cat) { return 'H'; },
+        'Shots': function(cat) { return '1'; },
+        'Altered': function(cat) { return ''; },
+        'NoDogs': function(cat) { return ''; },
+        'NoKids': function(cat) { return ''; },
+        'Housetrained': function(cat) { return ''; },
+        'Declawed': function(cat) { return ''; },
+        'specialNeeds': function(cat) { return ''; },
+        'Mix': function(cat) { return ''; },
+        'photo1': function(cat) { return ''; },
+        'photo2': function(cat) { return ''; },
+        'photo3': function(cat) { return ''; }
+    }
+    Cat.find()
+       .exec(errorHandler.wrap(res, function(cats) {
+            res.set('Content-Type', 'text/csv');
+            var csv = require('./csv.js');
+            res.send(csv.convertToCsv(cats, csvFields));
+        }));
+};
