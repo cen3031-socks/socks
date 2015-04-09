@@ -23,6 +23,9 @@ module.exports = function(app) {
         .get(contacts.findDonations);
 
     app.route('/contacts/:contactId');
+    app.route('/contacts/:contactId/volunteers')
+        .get(contacts.findVolunteerHours);
+
     app.route('/adopters')
         .get(contacts.getAllAdopters);
 

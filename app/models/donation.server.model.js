@@ -17,6 +17,7 @@ var validateItemName = function(name) {
     }
     return inList;
 };
+
 var amountAndUnitsChecker = function(items) {
     if (items === null) {
         return true;
@@ -70,12 +71,11 @@ var DonationSchema = new Schema({
             icon: String,                                                //icon representing type
             description: String,
             value: {
-                amount: Number,
-                units: String,
-                validate:[amountAndUnitsChecker, 'if amount is present units must be present']
+                type: {amount: Number, units: String},
+                validate: [amountAndUnitsChecker, 'if amount is present units must be present']
             }
         }],
-        validate:[oneItemPresent, 'must have one item present in list']
+        validate: [oneItemPresent, 'must have one item present in list']
     }
 });
 
