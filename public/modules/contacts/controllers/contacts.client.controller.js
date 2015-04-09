@@ -124,6 +124,9 @@ function ($scope, Contacts, $stateParams, $modal, Authentication, $location, Vol
         var minutes_worked = Volunteers.minutesWorked({startDate: oldDate, endDate: currDate, contactId: $scope.contact._id}, function() {
 
             $scope.contact.hasVolunteered = (minutes_worked > 0);
+            if (isNaN(minutes_worked)) {
+                minutes_worked = 0;
+            }
             $scope.contact.minutes_worked = minutes_worked;
 
 

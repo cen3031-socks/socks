@@ -1,13 +1,14 @@
-<section class="cat-grid">
+
 
     <div class="modal-header">
-        <div class="row">
-            <h3 class="modal-title">{{contact.firstName}} {{contact.surname}}'s Volunteer Hours(s):</h3>
-        </div>
+            <h3 class="modal-title">{{contact.firstName}} {{contact.surname}}'s Volunteer Hours:</h3>
+
     </div>
-    <div class="modal-body">
-            <label class="control-label" for="startDate">From</label>
-            <div class="controls">
+            <div class="controls col-md-6">
+                </br>
+                </br>
+
+                <label class="control-label" for="startDate">From</label>
                 <p class="input-group">
                     <input type="text" class="form-control" datepicker-popup="dd MMM yyyy" ng-model="startDate"
                            is-open="opened" ng-required="true" close-text="Close" />
@@ -17,8 +18,12 @@
                                     </button>
 								</span>
                 </p>
-                <label class="control-label" for="endDate">To</label>
-                <div class="controls">
+                </div>
+                <div class="controls col-md-6">
+                    </br>
+                    </br>
+
+                    <label class="control-label" for="endDate">Until</label>
                     <p class="input-group">
                         <input type="text" class="form-control" datepicker-popup="dd MMM yyyy" ng-model="endDate"
                                is-open="opened" ng-required="true" close-text="Close" />
@@ -31,9 +36,7 @@
 
 
                     <h1>{{contact.minutes_worked/60}} Hours</h1>
-
-
-
+                    </div>
 
 
 
