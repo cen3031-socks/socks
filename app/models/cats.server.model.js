@@ -56,7 +56,11 @@ var CatSchema = new Schema({
 		required: 'Cats must have a breed.'
 	},
 	color: String,
-	description: String,
+	description: {
+        type: String,
+        required: true,
+        default: ''
+    },
 	temperament: String,
 	imageUrl: String,
 	origin: {

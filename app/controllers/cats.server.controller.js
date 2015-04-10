@@ -272,7 +272,7 @@ exports.generateCsv = function(req, res) {
         'Internal': function() { return ''; },
         'AnimalName': 'name',
         'PrimaryBreed': 'breed',
-        'SecondaryBreed': '',
+        'SecondaryBreed': function() { return ''; },
         'Sex': function(cat) { return cat.sex === 1 ? 'M' : 'F'; },
         'Size': function(cat) { return 'M'; },
         'Age': function(cat) { return exports.getAgeClassFromAge(exports.getCatAge(cat)); },
