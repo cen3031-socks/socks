@@ -4,6 +4,8 @@
 angular.module('donations').controller('DonationsController', ['$scope', '$stateParams', '$location', 'Authentication', 'Donations',
 	function($scope, $stateParams, $location, Authentication, Donations) {
 		$scope.authentication = Authentication;
+		$scope.items=[{}];
+
 
 		// Create new Donation
 		$scope.create = function() {
@@ -83,6 +85,12 @@ angular.module('donations').controller('DonationsController', ['$scope', '$state
 		//
 		$scope.expandItems=function($thisDonation) {
 			$thisDonation.isExpanded=!$thisDonation.isExpanded;
-		}
+		};
+
+		$scope.open = function($event) {
+        $event.preventDefault();
+        $event.stopPropagation();
+        $scope.opened = true;
+    	};
 	}
 ]);
