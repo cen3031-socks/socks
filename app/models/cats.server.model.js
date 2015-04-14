@@ -1,4 +1,5 @@
 'use strict';
+var breeds = require('../../petfinder-breed-list.js');
 /**
  * Module dependencies.
  */
@@ -25,6 +26,9 @@ var validateSex = function(sex){
 	return false;
 }
 
+var validateBreed = function(breed){
+	
+}
 /**
  * Cat Schema
  */
@@ -55,13 +59,14 @@ var CatSchema = new Schema({
 	vet: { type: Schema.Types.ObjectId, ref: 'Contact' },
 	dateOfArrival: {
 		type: Date,
-		default: Date.now 
+		default: Date.now,
+		required: 'must have an arrival date' 
 	},
 	breed: {
 		type: String,
-		default: 'Unknown',
 		trim: true,
-		required: 'Cats must have a breed.'
+		required: 'Cats must have a breed.',
+		validate: [validateBreed, 'should be a valid breed']
 	},
 	color: String,
 	description: String,
@@ -91,9 +96,7 @@ var CatSchema = new Schema({
 				type: String,
 				required: 'must have a event type'
 			},
-			icon: String,
-            /* arbitrary data custom based on event */
-            data: {}
+			icon: String
 		}
 	],
 	adoptions: [{type: Schema.Types.ObjectId, ref: 'Adoption'}],
