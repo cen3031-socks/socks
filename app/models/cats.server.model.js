@@ -83,7 +83,9 @@ var CatSchema = new Schema({
 				type: String,
 				required: 'must have a event type'
 			},
-			icon: String
+			icon: String,
+            /* arbitrary data custom based on event */
+            data: {}
 		}
 	],
 	adoptions: [{type: Schema.Types.ObjectId, ref: 'Adoption'}],
