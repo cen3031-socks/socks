@@ -19,10 +19,8 @@ module.exports = function(app) {
 	app.route('/cats/:catId/adoptions/:adoptionId')
 		.put(cats.unadopt);
 
-    app.route('/cats/:catId/notes')
-        .put(cats.addNote);
-    app.route('/cats/:catId/notes/:noteId')
-        .delete(cats.deleteNote);
+    app.route('/cat-csv')
+        .get(cats.generateCsv);
 
 	// Finish by binding the cat middleware
 	app.param('catId', cats.catById);
