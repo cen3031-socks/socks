@@ -10,7 +10,7 @@ var mongoose = require('mongoose'),
 var validateItemName = function(name) {
     var possible = ['Food', 'Monetary', 'Supplies'];
     var inList = false;
-    for (var i = 0; possible.length; i++) {
+    for (var i = 0; i < possible.length; i++) {
         if (possible[i] === name){
             inList = true;
         }
@@ -19,10 +19,10 @@ var validateItemName = function(name) {
 };
 
 var amountAndUnitsChecker = function(items) {
-    if (items === null) {
+    if (items == null) {
         return true;
     }
-    if ((items.amount === null && items.units === null) || (items.amount !== null && items.units !== null)) {
+    if ((items.amount == null && items.units == null) || (items.amount != null && items.units != null)) {
         return true;
     }
     else {
