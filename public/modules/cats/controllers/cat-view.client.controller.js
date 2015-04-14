@@ -1,5 +1,30 @@
 'use strict';
 
+var adoptionController = function(cat, Cats, $scope, $modalInstance) {
+    $scope.adoptCat = function() {
+        Cats.adopt({catId: cat._id}, {
+            adopter: $scope.adopter[0]._id,
+            donation: $scope.donationId,
+            date: $scope.adoptionDate
+        }, function() {
+            $modalInstance.close(true);
+        });
+    };
+    $scope.unadoptCat = function() {
+        Cats.unadopt({catId: cat._id, adoptionId: cat.currentAdoption._id}, {
+            endDate: $scope.returnDate,
+            reason: $scope.reason
+        }, function() {
+            $modalInstance.close(true);
+        });
+    };
+    $scope.open = function($event) {
+        $event.preventDefault();
+        $event.stopPropagation();
+        $scope.opened = true;
+    };
+};
+
 angular.module('core').controller('CatViewController',
     ['$scope', '$stateParams', 'Authentication', 'Cats', '$modal', '$location', '$rootScope', 'Contacts', 'Dialogs',
 		function($scope, $stateParams, Authentication, Cats, $modal, $location, $rootScope, Contacts, Dialogs) {
@@ -83,7 +108,7 @@ angular.module('core').controller('CatViewController',
 			};
 
 			$scope.onRouteChangeOff = $scope.$on('$locationChangeStart', function(event, newState, oldState) {
-				if (($scope.newNote || '') != '') {
+				if (($scope.newNote || '') !== '') {
                     Dialogs
                         .confirm('You have unsaved data entered on this page. Do you want to leave without saving?')
                         .then(function(result) {
@@ -96,7 +121,6 @@ angular.module('core').controller('CatViewController',
 				}
 			});
 
-
 			$scope.deleteEvent = function(event) {
                 Dialogs
                     .confirm('Are you sure you want to delete this event?')
@@ -108,7 +132,6 @@ angular.module('core').controller('CatViewController',
 			};
 
             $scope.contacts = Contacts.query();
-
 
 			$scope.convertSex = function(sexNumber) {
 				if (sexNumber === 0) {
@@ -127,27 +150,3 @@ angular.module('core').controller('CatViewController',
 		}]
 );
 
-var adoptionController = function(cat, Cats, $scope, $modalInstance) {
-	$scope.adoptCat = function() {
-		Cats.adopt({catId: cat._id}, {
-			adopter: $scope.adopter[0]._id,
-			donation: $scope.donationId,
-			date: $scope.adoptionDate
-		}, function() {
-			$modalInstance.close(true);
-		});
-	};
-	$scope.unadoptCat = function() {
-		Cats.unadopt({catId: cat._id, adoptionId: cat.currentAdoption._id}, {
-			endDate: $scope.returnDate,
-			reason: $scope.reason
-		}, function() {
-			$modalInstance.close(true);
-		});
-	};
-	$scope.open = function($event) {
-		$event.preventDefault();
-		$event.stopPropagation();
-		$scope.opened = true;
-	};
-}

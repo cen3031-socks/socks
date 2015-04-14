@@ -205,7 +205,7 @@
 
 			// Run controller functionality
 			spyOn(console, 'log');
-			spyOn($location, "path");
+			spyOn($location, 'path');
 			this.scope.create();
 			$httpBackend.flush();
 

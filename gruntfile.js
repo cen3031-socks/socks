@@ -261,10 +261,10 @@ module.exports = function(grunt) {
         });
 		if (mongoose.connection.readyState !== 0) {
 			mongoose.connection.close(function() {
-				mongoose.connect("mongodb://localhost/mean-dev");
+				mongoose.connect('mongodb://localhost/mean-dev');
 			});
 		} else { 
-			mongoose.connect("mongodb://localhost/mean-dev");
+			mongoose.connect('mongodb://localhost/mean-dev');
 		}
     });
 };

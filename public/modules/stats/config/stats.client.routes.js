@@ -3,7 +3,6 @@
 //Setting up route
 angular.module('stats').config(['$stateProvider',
 	function($stateProvider) {
-		console.log("a");
 		$stateProvider.
 		state('listStats', {
 			url: '/stats',

@@ -1,4 +1,4 @@
- 'use strict';
+/* 'use strict';
 
 var should = require('should'),
 	request = require('supertest'),
@@ -268,4 +268,4 @@ describe('Donation CRUD tests', function() {
 		Donation.remove().exec();
 		done();
 	});
-});
+});*/
