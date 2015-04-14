@@ -18,6 +18,13 @@ var AdoptionSchema = new Schema({
 	returnReason: String
 });
 
+var validateSex = function(sex){
+	if(sex == 1 || sex == 2 || sex == 9 || sex == 0){
+		return true;
+	}
+	return false;
+}
+
 /**
  * Cat Schema
  */
@@ -41,7 +48,8 @@ var CatSchema = new Schema({
 	 */
 	sex: {
 		type: Number,
-		default: 0
+		default: 0,
+		validate: [validateSex, 'Must have a valid sex']
 	},
 	hairLength: String,
 	vet: { type: Schema.Types.ObjectId, ref: 'Contact' },
