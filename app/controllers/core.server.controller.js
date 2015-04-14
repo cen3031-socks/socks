@@ -20,8 +20,8 @@ exports.volunteers = function(req, res) {
 var mongoose = require('mongoose'),
     errorHandler = require('./errors.server.controller'),
     Contact = mongoose.model('Contact'),
-    User = mongoose.model('User');
-
+    User = mongoose.model('User'),
+    users = require('./users.server.controller.js');
 
 /**
  * Calls the first callback only if there was no admin created.
@@ -53,6 +53,7 @@ exports.createAdmin = function(req, res) {
     exports.ifNoAdmin(function() {
         var contact = new Contact(req.body);
         var user = new User(req.body);
+        user.permissionLevel = users.ADMIN;
 
         contact.save(function(err, dbContact) {
             if (err) {
