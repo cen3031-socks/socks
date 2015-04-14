@@ -27,7 +27,7 @@ angular.module('core').service('Dialogs', [ '$modal', '$rootScope',
          * @returns a promise, with the value when resolved true iff the user clicks the 'Yes' button
          */
         this.confirm = function(message, options) {
-            var options = options || {};
+            options = options || {};
             var modalScope = $rootScope.$new();
             modalScope.trueText = options.trueText || 'Yes';
             modalScope.falseText = options.falseText || 'No';
@@ -42,7 +42,7 @@ angular.module('core').service('Dialogs', [ '$modal', '$rootScope',
         };
 
         this.notify = function(message, options) {
-            var options = options || {};
+            options = options || {};
             var modalScope = $rootScope.$new();
             modalScope.title = options.title || 'Notification';
             modalScope.message = message;

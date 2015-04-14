@@ -33,7 +33,7 @@ exports.ifNoAdmin = function(noAdminCallback, adminExistsCallback) {
             throw err;
         }
 
-        if (result.length == 0) {
+        if (result.length === 0) {
             if (noAdminCallback) { noAdminCallback(); }
         } else {
             if (adminExistsCallback) { adminExistsCallback(); }
@@ -64,7 +64,7 @@ exports.createAdmin = function(req, res) {
                     return res.status(400).json({message: errorHandler.getErrorMessage(err)});
                 }
                 return res.jsonp(dbUser);
-            })
+            });
         });
     }, function() {
         res.status(403).json({message: 'Cannot create an admin when one has already been created.'});
