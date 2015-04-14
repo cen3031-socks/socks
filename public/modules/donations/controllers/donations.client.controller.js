@@ -32,9 +32,9 @@ angular.module('donations').controller('DonationsController', ['$scope', '$state
 			var nextEnd = $scope.donations.length+10;
 			for(var i=$scope.donations.length; i<nextEnd; i++)
 			{
-				$scope.donations.push($scope.allDonations[i])
+				$scope.donations.push($scope.allDonations[i]);
 			}
-		}
+		};
 
 		// Remove existing Donation
 		$scope.remove = function(donation) {
@@ -80,9 +80,8 @@ angular.module('donations').controller('DonationsController', ['$scope', '$state
 			});
 		};
 
-		//
 		$scope.expandItems=function($thisDonation) {
 			$thisDonation.isExpanded=!$thisDonation.isExpanded;
-		}
+		};
 	}
 ]);

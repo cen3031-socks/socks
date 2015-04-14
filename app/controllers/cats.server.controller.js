@@ -78,7 +78,7 @@ exports.deleteNote = function(req, res) {
                 message: errorHandler.getErrorMessage(err)
             });
         } else {
-            res.json({message: "Succesfully deleted."});
+            res.json({message: 'Succesfully deleted.'});
         }
     });
 };
@@ -269,7 +269,7 @@ exports.create = function(req, res) {
 	var cat = new Cat(req.body);
 	cat.save(function(err) {
 		if (err) {
-            console.log("There was an error");
+            console.log('There was an error');
             console.log(err);
 			return res.status(400).send({
 				message: errorHandler.getErrorMessage(err)

@@ -35,8 +35,8 @@ angular.module('volunteers').controller('VolunteersController', ['$scope', '$sta
             var correctVolunteer = Volunteers.getByName({contactId:$scope.contact[0]._id}, function(){
                 console.log(correctVolunteer);
 
-                if (correctVolunteer.length==0) {
-                    console.log("Creating new volunteer session");
+                if (correctVolunteer.length === 0) {
+                    console.log('Creating new volunteer session');
                     //create new volunteer
                     var volunteer = new Volunteers( {
                         contact: $scope.contact[0]._id,
@@ -51,7 +51,12 @@ angular.module('volunteers').controller('VolunteersController', ['$scope', '$sta
                     });
                 } else {
 
+<<<<<<< HEAD
                     console.log("Ending existing volunteer session");
+=======
+                    console.log('Ending existing volunteer session');
+                    //you probably can't do this
+>>>>>>> master
                     correctVolunteer[0].timeOut = Date.now();
                     correctVolunteer[0].$update(function(response) {
 
