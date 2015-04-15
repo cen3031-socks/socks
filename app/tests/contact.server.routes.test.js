@@ -1,5 +1,4 @@
- /*
-
+ 
  'use strict';
 
 var should = require('should'),
@@ -14,8 +13,7 @@ var should = require('should'),
 
 
 //var credentials, user, contact;
-
-
+var credentials, user, contact1, contact2;
 
 
 
@@ -26,25 +24,26 @@ describe('Contact CRUD tests', function() {
 			username: 'username',
 			password: 'password'
 		};
-
-		// Create a new user
-		user = new User({
-			firstName: 'Full',
-			lastName: 'Name',
-			displayName: 'Full Name',
-			email: 'test@test.com',
-			username: credentials.username,
-			password: credentials.password,
-			provider: 'local'
-		});
-
 		// Save a user to the test db and create new Contact
-		user.save(function() {
-			contact = {
-				name: 'Contact Name'
-			};
-
-			done();
+		contact1 = new Contact({
+			firstName: 'Aaron',
+			surname: 'Silcott'
+		});
+		contact1.save(function(){
+			// Create a new user
+			user = new User({
+				username: credentials.username,
+				password: credentials.password,
+				contact: contact1,
+				permissionLevel: 0
+			});
+			user.save(function(){
+				contact2 = new Contact({
+					firstName: 'tom',
+					surname: 'sawyer'
+				})
+				done();
+			});
 		});
 	});
 
@@ -61,7 +60,7 @@ describe('Contact CRUD tests', function() {
 
 				// Save a new Contact
 				agent.post('/contacts')
-					.send(contact)
+					.send(contact2)
 					.expect(200)
 					.end(function(contactSaveErr, contactSaveRes) {
 						// Handle Contact save error
@@ -77,8 +76,9 @@ describe('Contact CRUD tests', function() {
 								var contacts = contactsGetRes.body;
 
 								// Set assertions
-								(contacts[0].user._id).should.equal(userId);
-								(contacts[0].name).should.match('Contact Name');
+								//(contacts[0].user._id).should.equal(userId);
+								
+								(contacts[0].firstName).should.match('tom');
 
 								// Call the assertion callback
 								done();
@@ -86,7 +86,7 @@ describe('Contact CRUD tests', function() {
 					});
 			});
 	});
-
+/*
 	it('should not be able to save Contact instance if not logged in', function(done) {
 		agent.post('/contacts')
 			.send(contact)
@@ -262,10 +262,11 @@ describe('Contact CRUD tests', function() {
 
 		});
 	});
+ */
 
 	afterEach(function(done) {
 		User.remove().exec();
 		Contact.remove().exec();
 		done();
 	});
-});*/
+});
