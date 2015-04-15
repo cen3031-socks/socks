@@ -54,6 +54,7 @@ exports.addEvent = function(req, res) {
 };
 
 exports.adopt = function(req, res) {
+    console.log(req.body);
 	if (req.cat.currentAdoption !== undefined) {
 		return res.status(400).send({
 			message: 'Cannot adopt cat with current adopter.'
@@ -297,4 +298,40 @@ exports.generateCsv = function(req, res) {
             var csv = require('./csv.js');
             res.send(csv.convertToCsv(cats, csvFields));
         }));
+};
+
+exports.filters = {
+    'Adopted': function(filter, cat) {
+        console.log(cat);
+        console.log(filter.endDate);
+        console.log(cat.currentAdoption
+                    && !cat.currentAdoption.endDate
+                    && cat.currentAdoption.type === 'adoption'
+                    && (!filter.endDate   || cat.currentAdoption.date <= filter.endDate));
+        return cat.currentAdoption
+                    && !cat.currentAdoption.endDate
+                    && cat.currentAdoption.adoptionType === 'adoption'
+                    && (!filter.startDate || cat.currentAdoption.date >= filter.startDate)
+                    && (!filter.endDate   || cat.currentAdoption.date <= filter.endDate);
+    }
+};
+
+
+exports.searchCats = function(req, res) {
+    Cat.find().populate('currentAdoption').exec(errorHandler.wrap(res, function(cats) {
+        console.log(req.body.filters);
+        var filtered = [];
+        for (var i = 0; i < cats.length; ++i) {
+            var cat = cats[i];
+            var shouldInclude = true;
+            for (var j = 0; j < req.body.filters.length; ++j) {
+                var filter = req.body.filters[j];
+                shouldInclude = shouldInclude && exports.filters[filter.type](filter, cat);
+            }
+            if (shouldInclude) {
+                filtered.push(cat);
+            }
+        }
+        res.send(filtered);
+    }));
 };

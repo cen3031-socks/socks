@@ -1,0 +1,36 @@
+<section data-ng-controller="CatSearchController">
+    <div class="page-header">
+        <h1>Search Cats</h1>
+    </div>
+    <ul class="search-filters">
+        <li ng-repeat="filter in filters">
+            {{filter.type}}
+            <select class="form-control" ng-model="filter.type">
+                <option selected disabled value="">Select a filter type...</option>
+                <option value="Adopted">Adopted</option>
+            </select>
+            <ng-switch on="filter.type">
+                <div ng-switch-when="Adopted">
+                    <label>After Date</label>
+                    <custom-datepicker ng-model="filter.startDate"></custom-datepicker>
+                    <label>Before Date</label>
+                    <custom-datepicker ng-model="filter.endDate"></custom-datepicker>
+                </div>
+            </ng-switch>
+            <button type="button" class="delete-filter btn btn-danger" ng-click="filters.splice($index, 1)">
+                <i class="glyphicon glyphicon-trash"></i>
+            </button>
+        </li>
+        <li class="add-filter">
+            <button type="button" class="btn btn-default" ng-click="filters.push({})">Add Filter</button>
+        </li>
+    </ul>
+    <button type="button" class="btn btn-lg btn-primary" ng-click="search()">Search</button>
+    <button type="button" class="btn btn-lg btn-success" ng-click="save()">Save search...</button>
+    <button type="button" class="btn btn-lg btn-warning" ng-click="export()">Export results</button>
+
+    <h2>Results</h2>
+    <ul>
+        <li ng-repeat="cat in searchResults">{{cat.name}}</li>
+    </ul>
+</section>

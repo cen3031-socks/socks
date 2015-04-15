@@ -78,7 +78,7 @@
 				</a>
 				<div class="timeline-event" ng-show="cat.currentAdoption !== undefined">
 					<i class="glyphicon glyphicon-briefcase"></i>
-					<span class="timeline-label">Adopted</span>
+					<span class="timeline-label">{{cat.currentAdoption.adoptionType === 'adoption' ? 'Adopted' : 'Fostered'}}</span>
 					<span class="timeline-detail" id="owner">
 						Adopted by 
 						<contact-link contact-id="cat.currentAdoption.adopter._id"></contact-link>
@@ -90,7 +90,7 @@
 					 ng-switch="event.eventType">
 					<div class="timeline-event" ng-switch-when="adoption" ng-show="event.endDate !== undefined">
 						<i class="glyphicon glyphicon-briefcase"></i>
-						<span class="timeline-label">Adopted and Returned</span>
+						<span class="timeline-label">{{event.adoptionType === 'adoption' ? 'Adopted' : 'Fostered'}} and Returned</span>
 						<span class="timeline-detail">
 							Adopted by 
 								<contact-link contact-id="event.adopter._id"></contact-link>
