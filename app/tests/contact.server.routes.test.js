@@ -1,4 +1,3 @@
- 
  'use strict';
 
 var should = require('should'),
@@ -8,9 +7,6 @@ var should = require('should'),
 	User = mongoose.model('User'),
 	Contact = mongoose.model('Contact'),
 	agent = request.agent(app);
-
-
-
 
 //var credentials, user, contact;
 var credentials, user, contact1, contact2;
