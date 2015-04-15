@@ -1,5 +1,5 @@
- /*
-
+ 
+/*
  'use strict';
 
 var should = require('should'),
@@ -13,7 +13,7 @@ var should = require('should'),
 
 
 
-//var credentials, user, contact;
+var credentials, user, contact;
 
 
 
@@ -22,29 +22,19 @@ var should = require('should'),
 describe('Contact CRUD tests', function() {
 	beforeEach(function(done) {
 		// Create user credentials
-		credentials = {
-			username: 'username',
-			password: 'password'
-		};
-
-		// Create a new user
-		user = new User({
-			firstName: 'Full',
-			lastName: 'Name',
-			displayName: 'Full Name',
-			email: 'test@test.com',
-			username: credentials.username,
-			password: credentials.password,
-			provider: 'local'
+		contact = new Contact({
+			firstName: 'Contact Name',
+			surname: 'lastName'
 		});
-
-		// Save a user to the test db and create new Contact
-		user.save(function() {
-			contact = {
-				name: 'Contact Name'
-			};
-
-			done();
+		contact.save(function(){
+			user = new User({
+				username: 'aaroniey',
+				password: 'password',
+				contact: contact
+			});
+			user.save(function() {
+				done();
+			});
 		});
 	});
 
