@@ -5,7 +5,7 @@ angular.module('donations').controller('DonationsController', ['$scope', '$state
 	function($scope, $stateParams, $location, Authentication, Donations) {
 		$scope.authentication = Authentication;
 		$scope.items=[{}];
-
+        $scope.donations=[];
 
 		// Create new Donation
 		$scope.create = function() {
