@@ -4,19 +4,20 @@
 angular.module('donations').controller('DonationsController', ['$scope', '$stateParams', '$location', 'Authentication', 'Donations',
 	function($scope, $stateParams, $location, Authentication, Donations) {
 		$scope.authentication = Authentication;
-		/*$scope.items=[{}];
+		$scope.items=[{}];
         $scope.donations=[];
-*/
+
 		// Create new Donation
 		$scope.create = function() {
 			// Create new Donation object
 			var donation = new Donations ({
 				//donor: this.contacts[0]._id,
-                donor: $scope.donor,                //this.donor?
-                created: $scope.created,    
-                items: $scope.items
+                donor: this.donor,                //this.donor?
+                created: this.created,    
+                items: this.items
 			});
 
+            console.log('inside create');
 			// Redirect after save
 			donation.$save(function(response) {
 				$location.path('donations/' + response._id);
@@ -27,6 +28,7 @@ angular.module('donations').controller('DonationsController', ['$scope', '$state
                 $scope.donationType = '';
 			}, function(errorResponse) {
 				$scope.error = errorResponse.data.message;
+                console.log($scope.error);
 			});
 		};
 

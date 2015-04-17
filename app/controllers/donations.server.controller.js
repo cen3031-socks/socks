@@ -15,13 +15,13 @@ exports.create = function(req, res) {
 	var donation = new Donation(req.body);
 	donation.user = req.user;
 
-	donation.save(function(err) {
+	donation.save(function(err, donation) {
 		if (err) {
 			return res.status(400).send({
 				message: errorHandler.getErrorMessage(err)
 			});
 		} else {
-			res.jsonp(donation);
+			return res.json(donation);
 		}
 	});
 };
