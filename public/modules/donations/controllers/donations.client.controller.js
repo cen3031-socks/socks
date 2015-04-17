@@ -4,16 +4,17 @@
 angular.module('donations').controller('DonationsController', ['$scope', '$stateParams', '$location', 'Authentication', 'Donations',
 	function($scope, $stateParams, $location, Authentication, Donations) {
 		$scope.authentication = Authentication;
-		$scope.items=[{}];
+		/*$scope.items=[{}];
         $scope.donations=[];
-
+*/
 		// Create new Donation
 		$scope.create = function() {
 			// Create new Donation object
 			var donation = new Donations ({
-				donor: this.contacts[0]._id,
-                dollarAmount: this.dollarAmount,
-                donationType: this.donationType
+				//donor: this.contacts[0]._id,
+                donor: $scope.donor,                //this.donor?
+                created: $scope.created,    
+                items: $scope.items
 			});
 
 			// Redirect after save
