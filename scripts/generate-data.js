@@ -24,23 +24,14 @@ MongoClient.connect('mongodb://localhost/mean-dev', function(err, db) {
 		db.collection('contacts').insert(contacts.slice(0, 20), function(err, dbcontacts){
 			var donations = [];
 			var names=['Food', 'Monetary', 'Supplies'];
-<<<<<<< Updated upstream
 			var unit=['lbs', 'dollars', 'supplies'];
 			var icons=['glyphicon glyphicon-heart', 'glyphicon glyphicon-usd', 'glyphicon glyphicon-wrench'];
-=======
-			var unit=['lbs', 'dollars', null];
-			var icons=['glyphicon-heart', 'glyphicon-usd', 'glyphicon-wrench'];
->>>>>>> Stashed changes
 			for(var i=0; i<80; i++)
 			{
 				//console.log('inside for loop');
 				var randomIndex=Math.floor(Math.random()*dbcontacts.length);
 				var contact=dbcontacts[randomIndex];
-<<<<<<< Updated upstream
 				var numberOfItems=Math.floor(Math.random()*15)+1;
-=======
-				var numberOfItems=Math.floor(Math.random()*15);
->>>>>>> Stashed changes
 				var itemsArr = [];
 
 				for(var j=0; j<numberOfItems; j++)
