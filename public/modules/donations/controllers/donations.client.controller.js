@@ -12,8 +12,9 @@ angular.module('donations').controller('DonationsController', ['$scope', '$state
 			// Create new Donation object
 			var donation = new Donations ({
 				//donor: this.contacts[0]._id,
-                donor: this.donor,                //this.donor?
-                created: this.created,    
+                donor: $scope.donors[0]._id,                //this.donor?
+                created: this.created,
+                icon: $scope.icon,
                 items: this.items
 			});
 

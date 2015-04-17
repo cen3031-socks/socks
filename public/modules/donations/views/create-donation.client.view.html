@@ -34,7 +34,7 @@
                     <div class="form-group">
                         <label class="control-label" for="name">Name</label>
                         <div class="controls">
-                            <contacts-selector max=1 ng-model="donor"> Select donor from contacts list: </contacts-selector>
+                            <contacts-selector max=1 ng-model="donors"> Select donor from contacts list: </contacts-selector>
                         </div>
                     </div>
                 </div>
@@ -89,7 +89,7 @@
                         </div>
 
                         <div class="form-group col-md-2">
-                            <ng-switch on="item.name">
+                            <ng-switch on="item.name" ng-model="icon">
                                 <i ng-switch-default class="glyphicon glyphicon-briefcase" style="font-size:2.0em;"> </i>
                                 <i ng-switch-when="Monetary" class="glyphicon glyphicon-usd" style="font-size:2.0em;"> </i>
                                 <i ng-switch-when="Food" class="glyphicon glyphicon-heart" style="font-size:2.0em;"> </i>
