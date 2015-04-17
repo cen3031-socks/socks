@@ -34,7 +34,7 @@
                     <div class="form-group">
                         <label class="control-label" for="name">Name</label>
                         <div class="controls">
-                            <contacts-selector max=1 ng-model=contacts> Select donor from contacts list: </contacts-selector>
+                            <contacts-selector max=1 ng-model="donor"> Select donor from contacts list: </contacts-selector>
                         </div>
                     </div>
                 </div>
@@ -44,7 +44,7 @@
                             <label class="control-label" for="dob">Date of Donation</label>
                             <div class="controls">
                                 <p class="input-group">
-                                    <input type="text" class="form-control" datepicker-popup="dd MMM yyyy" ng-model="dateOfBirth"
+                                    <input type="text" class="form-control" datepicker-popup="dd MMM yyyy" ng-model="created"
                                            is-open="opened" ng-required="true" close-text="Close" />
                                     <span class="input-group-btn">
                                         <button type="button" class="form-control btn btn-default" ng-click="open($event)">
@@ -74,7 +74,7 @@
                         <div class="form-group col-md-2">
                             <label class="control-label" for="item">Value</label>
                             <div class="controls">
-                                <input type="text" class="form-control">
+                                <input type="text" ng-model="item.value.amount" class="form-control">
                             </div>
                         </div>
 
@@ -82,7 +82,7 @@
                             <label class="control-label" for="item">Description</label>
                             <div class="controls">
                                <!-- <input type="text" class="form-control"> -->
-                                    <TEXTAREA NAME="Address" ROWS=4 COLS=30 >
+                                    <TEXTAREA NAME="Address" ng-model="item.description" ROWS=4 COLS=30 >
                                     </TEXTAREA>
                                 
                             </div>
@@ -110,7 +110,7 @@
                     </div>
 
                 <div class="form-group" style="text-align:center;">
-                    <input type="submit" class="myButton">
+                    <button type="submit" class="myButton">Submit</button>
                 </div>
 
 				<div data-ng-show="error" class="text-danger">
