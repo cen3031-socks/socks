@@ -3,7 +3,7 @@
 var contacts = angular.module('contacts');
 contacts.controller('ContactsSelectorController', ['$stateParams', 'Contacts', '$modal', '$scope', '$rootScope',
     function($stateParams, Contacts, $modal, $scope, $rootScope) {
-        $scope.selectedContacts = [];
+        $scope.selectedContacts = $scope.selectedContacts || [];
 
         $scope.showModal = function() {
             if ($scope.max === undefined) {
