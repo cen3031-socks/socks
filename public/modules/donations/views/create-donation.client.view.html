@@ -88,14 +88,7 @@
                             </div>
                         </div>
 
-                        <div class="form-group col-md-2">
-                            <ng-switch on="item.name" ng-model="icon">
-                                <i ng-switch-default class="glyphicon glyphicon-briefcase" style="font-size:2.0em;"> </i>
-                                <i ng-switch-when="Monetary" class="glyphicon glyphicon-usd" style="font-size:2.0em;"> </i>
-                                <i ng-switch-when="Food" class="glyphicon glyphicon-heart" style="font-size:2.0em;"> </i>
-                                <i ng-switch-when="Supplies" class="glyphicon glyphicon-wrench" style="font-size:2.0em;"> </i>
-                            </ng-switch>
-                        </div>
+                        <i class="glyphicon" ng-class="getIcon(item)"></i>
 
                     </div>
 

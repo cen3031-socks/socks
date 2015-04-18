@@ -95,5 +95,29 @@ angular.module('donations').controller('DonationsController', ['$scope', '$state
         $event.stopPropagation();
         $scope.opened = true;
     	};
-	}
+        
+        $scope.getIcon=function(item) {
+            if(item.name === 'Monetary')
+            {
+                item.icon='glyphicon glyphicon-usd';
+                return 'glyphicon-usd';
+            }
+            else if(item.name === 'Food')
+            {
+                item.icon='glyphicon glyphicon-heart';
+                return 'glyphicon-heart';
+            }
+            else if(item.name === 'Supplies')
+            {
+                item.icon='glyphicon glyphicon-wrench';
+                return 'glyphicon-wrench';
+            }
+            else
+            {
+                item.icon='glyphicon glyphicon-briefcase';
+                return 'glyphicon-briefcase';
+            }
+                
+	   };
+    }
 ]);
