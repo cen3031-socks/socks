@@ -17,7 +17,11 @@ var AdoptionSchema = new Schema({
 	},
 	endDate: Date, 
 	catId: { type: Schema.Types.ObjectId, ref: 'Cat', required: 'must adopt a cat' },
-	returnReason: String
+	returnReason: String,
+    adoptionType: {
+        type: String,
+        enum: ['adoption', 'foster']
+    }
 });
 
 var validateSex = function(sex){
