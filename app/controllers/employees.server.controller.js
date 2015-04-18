@@ -23,7 +23,7 @@ exports.permissionLevel = function(level) {
             });
         }
 
-        if (!req.user || req.user.permissionLevel < level) {
+        if (!req.user || req.user.permissionLevel > level) {
             return res.status(403).send({ message: 'You do not have permission to view this page.' });
         } else {
             next();
