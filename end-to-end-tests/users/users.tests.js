@@ -3,6 +3,8 @@ var request = require('request'),
 
 describe('employees listing', function() {
 	it('should have a title', function() {
+		browser.get('/#!/signin');
+		
 		browser.get('/');
 		expect(browser.getTitle()).toEqual('SOCKS (Save Our Cats and Kittens)');
 	});
@@ -11,8 +13,8 @@ describe('employees listing', function() {
 		browser.get('/#!/employees');
 		element(by.css('.myButton')).click();
 		var user = {
-			firstName: "Test",
-			lastName:"Test",
+			firstName: "TestUnique",
+			surname:"Test",
 			email: "email@email.com",
 			permissionLevel: "0"
 		};
@@ -24,17 +26,14 @@ describe('employees listing', function() {
 
 		/* Home page */
 		expect(browser.getCurrentUrl()).toMatch();
-
-		/* check that all the fields have the right values. (need edit profile to work) */
-		// for (var i in user) {
-		// 	if (i === 'firstName' || i === 'surname') {
-		// 		expect(element(by.binding(i)).getText()).toBe(
-		// 				contact['firstName'] + ' ' + contact['surname']
-		// 			);
-		// 	}
-		// 	else {
-		// 		expect(element(by.binding(i)).getText()).toBe(contact[i]);
-		// 	}
-		// }
+		browser.get('/#!/contacts');
+		this.searchBar = element(by.model('searchText'));
+		this.rows = element.all(by.css('tr[data-ng-repeat*=contact]'));
+		this.searchBar.sendKeys('TestUnique');
+		expect(this.rows.count()).toBe(1);
+		var rowElems = this.rows.$$('td');
+		for (var i in user) {
+            expect(rowElems.get(i).getText()).toMatch(user[i]);
+        }
 	});
 });

@@ -72,21 +72,7 @@ UserSchema.pre('save', function(next) {
 		this.salt = new Buffer(crypto.randomBytes(16).toString('base64'), 'base64');
 		this.password = this.hashPassword(this.password);
 	}
-	
-
-	//git hub code solution to multiple saving due to async nature.  now it is working.
-	var self = this;
-    mongoose.models["User"].findOne({username : self.username},function(err, user) {
-        //console.log(user);
-        if(err) {
-            next(err);
-        } else if(user) {
-            self.invalidate("username","username must be unique");
-            next(new Error("username must be unique"));
-        } else {
-            next();
-        }
-    });
+     next();
 });
 
 /**
