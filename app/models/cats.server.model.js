@@ -49,6 +49,10 @@ var CatSchema = new Schema({
 		type: Date,
 		default: Date.now
 	},
+    dateOfBirthEstimated: {
+        type: Boolean,
+        default: true
+    },
 	name: {
 		type: String,
 		default: '',

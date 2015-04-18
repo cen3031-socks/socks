@@ -197,7 +197,7 @@ exports.catById = function(req, res, next, id) {
             message: 'Cat is invalid'
         });
     }
-    Cat.findById(id).populate('adoptions currentAdoption')
+    Cat.findById(id).populate('adoptions currentAdoption vet origin.person')
 		.exec(errorHandler.wrap(res, function(cat) {
 		// this is ugly....
 			Cat.populate(cat, { 
@@ -394,4 +394,10 @@ exports.searchCats = function(req, res) {
         filtered = _.uniq(filtered);
         res.send(filtered);
     }));
+};
+
+exports.update = function(req, res) {
+    var cat = _.extend(req.cat, req.body);
+    console.log(cat);
+    cat.save(errorHandler.wrap(res, function(cat) { res.json(cat) }));
 };
