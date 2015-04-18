@@ -4,6 +4,7 @@ var request = require('request'),
 describe('employees listing', function() {
 	it('should have a title', function() {
 		browser.get('/#!/signin');
+		
 		browser.get('/');
 		expect(browser.getTitle()).toEqual('SOCKS (Save Our Cats and Kittens)');
 	});

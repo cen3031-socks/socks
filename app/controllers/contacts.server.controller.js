@@ -4,10 +4,11 @@
  * Module dependencies.
  */
 var mongoose = require('mongoose'),
-	errorHandler = require('./errors.server.controller'),
+    errorHandler = require('./errors.server.controller'),
+    users = require('./users.server.controller'),
 	Contact = mongoose.model('Contact'), Adoption = mongoose.model('Adoption'), Cat = mongoose.model('Cat'),
-    Donation = mongoose.model('Donation'), Volunteer = mongoose.model('Volunteer'),
-	_ = require('lodash');
+    Donation = mongoose.model('Donation'), Volunteer = mongoose.model('Volunteer'), User = mongoose.model('User'),
+    _ = require('lodash');
 
 /**
  * Find adopted cats
@@ -75,8 +76,27 @@ exports.findVolunteerHours = function(req, res) {
     });
 }
 
+exports.findEmployees = function(req, res) {
+    User.find({contact: req.contact._id, permissionLevel: users.EMPLOYEE}).exec(function(err, users) {
+        if (err) {
+            return res.status(400);
+        }
+        else return res.jsonp(users);
+    });
+}
 
-/**
+exports.findAdmins = function(req, res) {
+    User.find({contact: req.contact._id, permissionLevel: users.ADMIN}).exec(function(err, users) {
+        if (err) {
+            return res.status(400);
+        }
+        else return res.jsonp(users);
+    });
+}
+
+
+
+ /**
  * Create a Contact
  */
 exports.create = function(req, res) {
