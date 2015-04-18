@@ -128,7 +128,7 @@ var DonationSchema = new Schema({
                 type: String,
                 required: 'name must be present',
                 validate: [validateItemName, 'not a valid item name']
-            },                                              //food/monetary/cleaning supplies/etc..      
+            },                                              //food/monetary/cleaning supplies/etc..    
             _id: Schema.Types.ObjectId,                                 //an id to delete/edit later
             icon: {
                 type: String,
