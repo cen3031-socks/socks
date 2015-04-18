@@ -3,16 +3,18 @@
 module.exports = function(app) {
     var users = require('../../app/controllers/users.server.controller');
     var contacts = require('../../app/controllers/contacts.server.controller');
+    var employees = require('../../app/controllers/employees.server.controller');
 
-    // Contacts Routes
+    var requireEmployee = employees.permissionLevel(users.EMPLOYEE);
+
     app.route('/contacts')
         .get(contacts.list)
-        .post(contacts.create);
+        .post(requireEmployee, contacts.create);
 
     app.route('/contacts/:contactId')
         .get(contacts.read)
-        .put(contacts.update)
-        .delete(contacts.delete);
+        .put(requireEmployee, contacts.update)
+        .delete(requireEmployee, contacts.delete);
 
     app.route('/contacts/:contactId/adoptions')
         .get(contacts.findAdoptedCats);
@@ -20,18 +22,15 @@ module.exports = function(app) {
     app.route('/contacts/:contactId/vets')
         .get(contacts.findCatsWithVets);
 
-    app.route('contacts/:contactId/donations')
+    app.route('/contacts/:contactId/donations')
         .get(contacts.findDonations);
 
-    app.route('/contacts/:contactId')
+    app.route('/contacts/:contactId');
+    app.route('/contacts/:contactId/volunteers')
+        .get(contacts.findVolunteerHours);
+
     app.route('/adopters')
         .get(contacts.getAllAdopters);
 
-    app.route('/contacts/:contactId/notes')
-        .put(contacts.addNote);
-    app.route('/contacts/:contactId/notes/:noteId')
-        .delete(contacts.deleteNote);
-
-    // Finish by binding the Contact middleware
     app.param('contactId', contacts.contactByID);
 };

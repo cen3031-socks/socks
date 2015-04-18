@@ -31,7 +31,7 @@
         <div class="row">
             <div ng-show="contact.isAdopter" class = "col-xs-12 col-sm-6 col-md-2">
                 <a ng-click="contactViewCtrl.modalAdoptedCatsView('lg', contact)">
-                    <button type="button" class="btn btn-default btn-md background-pink">
+                    <button type="button" class="btn btn-default btn-md btn-danger">
                         <span class="glyphicon glyphicon-heart" aria-hidden="true"></span> Adopter
                     </button>
                 </a>
@@ -39,14 +39,21 @@
             <div ng-show="contact.isVet" class = "col-xs-12 col-sm-6 col-md-2">
                 <a ng-click="contactViewCtrl.modalAdoptedCatsView('lg', contact)">
                     <button type="button" class="btn btn-default btn-md background-pink">
-                        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Adopter
+                        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Veterinarian
                     </button>
                 </a>
             </div>
             <div ng-show="contact.isDonator" class = "col-xs-12 col-sm-6 col-md-2">
-                <a ng-click="contactViewCtrl.modalAdoptedCatsView('lg', contact)">
-                    <button type="button" class="btn btn-default btn-md background-pink">
-                        <span class="glyphicon glyphicon-usd" aria-hidden="true"></span> Adopter
+                <a ng-click="contactViewCtrl.modalDonationsView('lg', contact)">
+                    <button type="button" class="btn btn-default btn-md btn-success">
+                        <span class="glyphicon glyphicon-usd" aria-hidden="true"></span> Donator
+                    </button>
+                </a>
+            </div>
+            <div ng-show="contact.isVolunteer" class = "col-xs-12 col-sm-6 col-md-2">
+                <a ng-click="contactViewCtrl.modalVolunteerHoursView('lg', contact)">
+                    <button type="button" class="btn btn-default btn-md btn-warning">
+                        <span class="glyphicon glyphicon-user" aria-hidden="true"></span> Volunteer
                     </button>
                 </a>
             </div>
@@ -85,27 +92,37 @@
         <div class="profile-group notes">
             <div class="profile-attribute">Notes</div>
             <div class="profile-value">
-                <table style="width:100%">
-                    <tr ng-repeat="note in contact.notes" class="note">
-                        <td class="note-message">{{note.message}}</td>
-                        <td class="note-date">{{note.date|date}}</td>
-                        <td class="note-person"><contact-link contact-id="note.sender"></contact-link></td>
-                        <td class="note-delete">
-                            <button class="btn btn-danger" ng-click="deleteNote(note, $index)">
-                                <i class="glyphicon glyphicon-remove"></i>
-                            </button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <form>
-                            <td><input name="note-message" ng-model="newNote" class="new-note" id="new-note" placeholder="Leave a new note..." /></td>
-                            <td></td>
-                            <td class="note-person"><button class="btn btn-default" ng-click="addNote()" type="submit" id="add-note">+</button></td>
-                            <td></td>
-                        </form>
-                    </tr>
-                </table>
+                <notes about="contact._id"></notes>
             </div>
+        </div>
+
+        <div class="profile-group" ng-show="contact.hasVolunteer">
+            <span class="profile-attribute">Hours Volunteered</span>
+            <span class="profile-value" id="hours">Between
+                <div class="controls">
+                    <p class="input-group">
+                        <input type="text" class="form-control" datepicker-popup="dd MMM yyyy" ng-model="firstDate"
+                               is-open="opened" ng-required="true" close-text="Close" />
+								<span class="input-group-btn">
+									<button type="button" class="form-control btn btn-default" ng-click="open($event)">
+                                        <i class="glyphicon glyphicon-calendar"></i>
+                                    </button>
+								</span>
+                    </p>
+                    and
+                    <p class="input-group">
+                        <input type="text" class="form-control" datepicker-popup="dd MMM yyyy" ng-model="lastDate"
+                               is-open="opened" ng-required="true" close-text="Close" />
+								<span class="input-group-btn">
+									<button type="button" class="form-control btn btn-default" ng-click="open($event)">
+                                        <i class="glyphicon glyphicon-calendar"></i>
+                                    </button>
+								</span>
+                    </p>
+
+                </div>
+                <!--should call the minutesWorked function from the volunteer server controller -->
+                are {{(minutesWorked(firstDate, lastDate))/60}}</span>
         </div>
 
     </fieldset>

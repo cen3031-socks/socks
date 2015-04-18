@@ -20,8 +20,8 @@ exports.volunteers = function(req, res) {
 var mongoose = require('mongoose'),
     errorHandler = require('./errors.server.controller'),
     Contact = mongoose.model('Contact'),
-    User = mongoose.model('User');
-
+    User = mongoose.model('User'),
+    users = require('./users.server.controller.js');
 
 /**
  * Calls the first callback only if there was no admin created.
@@ -33,7 +33,7 @@ exports.ifNoAdmin = function(noAdminCallback, adminExistsCallback) {
             throw err;
         }
 
-        if (result.length == 0) {
+        if (result.length === 0) {
             if (noAdminCallback) { noAdminCallback(); }
         } else {
             if (adminExistsCallback) { adminExistsCallback(); }
@@ -53,6 +53,7 @@ exports.createAdmin = function(req, res) {
     exports.ifNoAdmin(function() {
         var contact = new Contact(req.body);
         var user = new User(req.body);
+        user.permissionLevel = users.ADMIN;
 
         contact.save(function(err, dbContact) {
             if (err) {
@@ -64,7 +65,7 @@ exports.createAdmin = function(req, res) {
                     return res.status(400).json({message: errorHandler.getErrorMessage(err)});
                 }
                 return res.jsonp(dbUser);
-            })
+            });
         });
     }, function() {
         res.status(403).json({message: 'Cannot create an admin when one has already been created.'});

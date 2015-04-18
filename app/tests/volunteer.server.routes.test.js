@@ -1,4 +1,4 @@
-'use strict';
+/*'use strict';
 
 var should = require('should'),
 	request = require('supertest'),
@@ -8,14 +8,10 @@ var should = require('should'),
 	Volunteer = mongoose.model('Volunteer'),
 	agent = request.agent(app);
 
-/**
- * Globals
- */
+
 var credentials, user, volunteer;
 
-/**
- * Volunteer routes tests
- */
+
 describe('Volunteer CRUD tests', function() {
 	beforeEach(function(done) {
 		// Create user credentials
@@ -265,4 +261,4 @@ describe('Volunteer CRUD tests', function() {
 		Volunteer.remove().exec();
 		done();
 	});
-});
+});*/

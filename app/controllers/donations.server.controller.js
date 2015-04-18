@@ -161,7 +161,7 @@ exports.deleteItem = function(req, res) {
                 message: errorHandler.getErrorMessage(err)
             });
         } else {
-            res.json({message: "Succesfully deleted."});
+            res.json({message: 'Succesfully deleted.'});
         }
     });
 };
