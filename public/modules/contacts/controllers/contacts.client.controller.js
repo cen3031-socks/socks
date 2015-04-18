@@ -120,6 +120,15 @@ function ($scope, Contacts, $stateParams, $modal, Authentication, $location, Vol
         var donations = Contacts.findDonations({contactId: $stateParams.contactId}, function() {
             $scope.contact.isDonator = donations.length > 0;
         });
+        var volunteers = Contacts.findVolunteerHours({contactId: $stateParams.contactId}, function() {
+            $scope.contact.isVolunteer2 = volunteers.length > 0;
+        });
+        var employees = Contacts.findEmployees({contactId: $stateParams.contactId}, function() {
+            $scope.contact.isEmployee = employees.length > 0;
+        });
+        var admins = Contacts.findAdmins({contactId: $stateParams.contactId}, function() {
+            $scope.contact.isAdministrator = admins.length > 0;
+        });
     };
 
     $scope.formatPhoneNumber = function (phone) {
@@ -211,6 +220,20 @@ function ($scope, Contacts, $stateParams, $modal, Authentication, $location, Vol
                         $scope.error = errorResponse.data.message;
                     });
                 };
+                //$scope.deleteContact = function(contact) {
+                //    if (contact) { contact.$remove();
+                //
+                //        for (var i in this.contacts ) {
+                //            if (this.contacts [i] === contact ) {
+                //                this.contacts.splice(i, 1);
+                //            }
+                //        }
+                //    } else {
+                //        this.contact.$remove(function() {
+                //            $location.path('/contacts');
+                //        });
+                //    }
+                //};
                 $scope.deleteContact = function(contact, index) {
                     Dialogs
                         .confirm('Delete Contact?')

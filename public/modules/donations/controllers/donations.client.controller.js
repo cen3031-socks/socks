@@ -4,16 +4,21 @@
 angular.module('donations').controller('DonationsController', ['$scope', '$stateParams', '$location', 'Authentication', 'Donations',
 	function($scope, $stateParams, $location, Authentication, Donations) {
 		$scope.authentication = Authentication;
+		$scope.items=[{}];
+        $scope.donations=[];
 
 		// Create new Donation
 		$scope.create = function() {
 			// Create new Donation object
 			var donation = new Donations ({
-				donor: this.contacts[0]._id,
-                dollarAmount: this.dollarAmount,
-                donationType: this.donationType
+				//donor: this.contacts[0]._id,
+                donor: $scope.donors[0]._id,                //this.donor?
+                created: this.created,
+                icon: $scope.icon,
+                items: this.items
 			});
 
+            console.log('inside create');
 			// Redirect after save
 			donation.$save(function(response) {
 				$location.path('donations/' + response._id);
@@ -24,6 +29,7 @@ angular.module('donations').controller('DonationsController', ['$scope', '$state
                 $scope.donationType = '';
 			}, function(errorResponse) {
 				$scope.error = errorResponse.data.message;
+                console.log($scope.error);
 			});
 		};
 
@@ -83,5 +89,10 @@ angular.module('donations').controller('DonationsController', ['$scope', '$state
 		$scope.expandItems=function($thisDonation) {
 			$thisDonation.isExpanded=!$thisDonation.isExpanded;
 		};
+		$scope.open = function($event) {
+			$event.preventDefault();
+			$event.stopPropagation();
+			$scope.opened = true;
+    	};
 	}
 ]);

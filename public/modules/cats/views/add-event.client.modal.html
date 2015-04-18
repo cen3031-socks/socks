@@ -15,13 +15,35 @@
 		<div class="form-group">
 			<label for="label">Label</label>
 			<input type="text"   class="form-control"
-                   name="label"  ng-model="label"
+                   id="label" name="label"  ng-model="label"
                    placeholder="Type a label..." required/>
 		</div>
+        <div class="form-group"  ng-show="eventType === 'vet'">
+            <label>Operations</label>
+            <div>
+                <div ng-repeat="operation in operations">
+                    <div class="operation">
+                        <h5>Operation {{$index + 1}}</h5>
+                        <select class="form-control" ng-model="operation.type">
+                            <option value="Spay/Neuter">Spay/Neuter</option>
+                            <option ng-repeat="shot in possibleShots" value="{{shot}}">{{shot}}</option>
+                            <option value="Microchip">Microchip</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
+                    <ng-switch on="operation.type">
+                        <input class="form-control" type="text" ng-switch-when="Microchip" placeholder="Microchip ID" ng-model="operation.microchipId"/>
+                        <input class="form-control" type="text" ng-switch-when="Other" placeholder="Other details" ng-model="operation.otherDetails" />
+                    </ng-switch>
+                    <button class="btn btn-sm btn-danger" type="button" ng-click="operations.splice($index, 1)">Remove</button>
+                </div>
+                <button class="btn btn-md btn-default" type="button" ng-click="operations.push({})">Add Operation</button>
+            </div>
+        </div>
 		<div class="form-group">
 			<label for="detail">Details</label>
 			<textarea class="form-control"
-				name="detail" ng-model="detail" 
+				id="detail" name="detail" ng-model="detail"
 				placeholder="Type more details..." 
 				rows=8>
 			</textarea>

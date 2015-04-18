@@ -16,7 +16,11 @@ var NoteSchema = new Schema({
         default: Date.now,
         required: 'date is required'
     },
-    sender: { type: Schema.Types.ObjectId, ref: 'User', required: 'needs user' }
+    sender: { 
+        type: Schema.Types.ObjectId,  
+        ref: 'User',
+        required: 'needs user'
+    }
 });
 
 mongoose.model('Note', NoteSchema);
