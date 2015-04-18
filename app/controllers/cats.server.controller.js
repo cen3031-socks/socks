@@ -300,38 +300,98 @@ exports.generateCsv = function(req, res) {
         }));
 };
 
+exports.getMostRecentOperationOfType = function(cat, shotType) {
+    var operation = undefined;
+    var date = undefined;
+    for (var i = 0; i < cat.events.length; ++i) {
+        var thisEvent = cat.events[i];
+        if (thisEvent && thisEvent.eventType === 'vet') {
+            var operations = thisEvent.data.operations;
+            console.log(operations);
+            for (var j = 0; j < operations.length; ++j) {
+                if (operations[j].type === shotType) {
+                    if (!date || thisEvent.date > date) {
+                        operation = operations[j];
+                        date = thisEvent.date;
+                    }
+                }
+            }
+        }
+    }
+    if (operation) operation.date = date;
+    return operation;
+};
+
 exports.filters = {
     'Adopted': function(filter, cat) {
-        console.log(cat);
-        console.log(filter.endDate);
-        console.log(cat.currentAdoption
-                    && !cat.currentAdoption.endDate
-                    && cat.currentAdoption.type === 'adoption'
-                    && (!filter.endDate   || cat.currentAdoption.date <= filter.endDate));
+        if (cat.currentAdoption) console.log(cat.currentAdoption.date);
         return cat.currentAdoption
                     && !cat.currentAdoption.endDate
                     && cat.currentAdoption.adoptionType === 'adoption'
-                    && (!filter.startDate || cat.currentAdoption.date >= filter.startDate)
-                    && (!filter.endDate   || cat.currentAdoption.date <= filter.endDate);
+                    && (!filter.startDate || cat.currentAdoption.date >= new Date(filter.startDate))
+                    && (!filter.endDate   || cat.currentAdoption.date <= new Date(filter.endDate));
+    },
+    'Breed': function(filter, cat) {
+        if (!filter.breeds) { return false; }
+        for (var i = 0; i < filter.breeds.length; ++i) {
+            console.log(filter.breeds[i]);
+            if (filter.breeds[i] === cat.breed) {
+                return true;
+            }
+        }
+        return false;
+    },
+    'Sex': function(filter, cat) {
+        return filter.sex === cat.sex;
+    },
+    'Age': function(filter, cat) {
+        var catAge = exports.getCatAge(cat);
+        return (!filter.minAge || filter.minAge <= catAge) && (!filter.maxAge || filter.maxAge >= catAge);
+    },
+    /**
+     * Checks if a cat has had a shot of a given type since a given date
+     * @param filter
+     * @param cat
+     * @returns {boolean}
+     */
+    'HasHadOperation': function(filter, cat) {
+        var shotType = filter.operation;
+        var date = filter.date;
+        var operation = exports.getMostRecentOperationOfType(cat, shotType);
+        return (operation && (!date || shot.date >= new Date(date)));
     }
 };
 
-
 exports.searchCats = function(req, res) {
     Cat.find().populate('currentAdoption').exec(errorHandler.wrap(res, function(cats) {
-        console.log(req.body.filters);
+        var matchType = req.body.matchType;
         var filtered = [];
         for (var i = 0; i < cats.length; ++i) {
             var cat = cats[i];
-            var shouldInclude = true;
+            var matchesFilter = true;
             for (var j = 0; j < req.body.filters.length; ++j) {
                 var filter = req.body.filters[j];
-                shouldInclude = shouldInclude && exports.filters[filter.type](filter, cat);
+                var filterResult = exports.filters[filter.type](filter, cat);
+                if (matchType === 'all') {
+                    if (filter.invert) {
+                        matchesFilter = matchesFilter && !filterResult;
+                    } else {
+                        matchesFilter = matchesFilter && filterResult;
+                    }
+                } else if (matchType === 'any' || matchType === 'none') {
+                    if (filter.invert !== filterResult) {
+                        filtered.push(cat);
+                    }
+                }
             }
-            if (shouldInclude) {
+            if (matchType === 'all' && matchesFilter) {
                 filtered.push(cat);
             }
         }
+        if (matchType === 'none') {
+            filtered = _.difference(cats, filtered);
+        }
+        filtered = _.uniq(filtered);
         res.send(filtered);
     }));
 };

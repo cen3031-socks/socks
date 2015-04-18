@@ -10,6 +10,10 @@ angular.module('core').directive('customDatepicker', function() {
             }
         },
         templateUrl: '/modules/core/views/datepicker-popup-easy.html',
-        scope: {selectedDate: '=?ngModel'}
+        scope: {
+            selectedDate: '=?ngModel',
+            unselectedText:'=?unselectedText',
+            inline: '=?inline'
+        }
     };
 })
