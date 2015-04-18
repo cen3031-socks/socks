@@ -24,17 +24,5 @@ describe('employees listing', function() {
 
 		/* Home page */
 		expect(browser.getCurrentUrl()).toMatch();
-
-		/* check that all the fields have the right values. (need edit profile to work) */
-		// for (var i in user) {
-		// 	if (i === 'firstName' || i === 'surname') {
-		// 		expect(element(by.binding(i)).getText()).toBe(
-		// 				contact['firstName'] + ' ' + contact['surname']
-		// 			);
-		// 	}
-		// 	else {
-		// 		expect(element(by.binding(i)).getText()).toBe(contact[i]);
-		// 	}
-		// }
 	});
 });
