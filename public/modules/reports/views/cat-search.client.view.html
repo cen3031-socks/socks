@@ -26,6 +26,7 @@
                         <option value="Sex">Sex</option>
                         <option value="Age">Age</option>
                         <option value="HasHadOperation">Has Had Operation</option>
+                        <option value="Origin">Origin</option>
                     </select>
                 </div>
             </div>
@@ -99,21 +100,44 @@
                         .
                     </div>
                     <div ng-switch-when="HasHadOperation">
-                        <label>Operation</label>
-                        <select ng-model="filter.operation" class="form-control">
-                            <option selected disabled value="">Select an operation type...</option>
-                            <option value="Spay/Neuter">Spay/Neuter</option>
-                            <option ng-repeat="shot in possibleShots" value="{{shot}}">{{shot}}</option>
-                            <option value="Microchip">Microchip</option>
-                        </select>
-                        <div class="col-md-6">
-                            <label>After Date</label>
-                            <custom-datepicker ng-model="filter.startDate"></custom-datepicker>
+                        <span class="inline-input-container">
+                            <select ng-model="filter.invert" class="form-control"
+                                    ng-options="o.value as o.text for o in invertValues">
+                            </select>
+                        </span>
+                        <span>cats who have had an operation of type</span>
+                        <div class="inline-input-container">
+                            <select ng-model="filter.operation" class="form-control">
+                                <option selected disabled value=""></option>
+                                <option value="Spay/Neuter">Spay/Neuter</option>
+                                <option ng-repeat="shot in possibleShots" value="{{shot}}">{{shot}}</option>
+                                <option value="Microchip">Microchip</option>
+                            </select>
                         </div>
-                        <div class="col-md-6">
-                            <label>Before Date</label>
-                            <custom-datepicker ng-model="filter.endDate"></custom-datepicker>
+                        <span>between</span>
+                        <div class="inline-input-container">
+                            <custom-datepicker ng-model="filter.startDate" unselected-text="'the beginning of time'" inline="true"></custom-datepicker>
                         </div>
+                        <span>and</span>
+                        <div class="inline-input-container">
+                            <custom-datepicker ng-model="filter.endDate" unselected-text="'the end of time'" inline="true"></custom-datepicker>
+                        </div>
+                    </div>
+                    <div ng-switch-when="Origin">
+                        <span class="inline-input-container">
+                            <select ng-model="filter.invert" class="form-control"
+                                    ng-options="o.value as o.text for o in invertValues">
+                            </select>
+                        </span>
+                        <span>cats whose origin</span>
+                        <span class="inline-input-container">
+                            <select ng-model="filter.originType" class="form-control">
+                                <option value="Person">Person</option>
+                                <option value="Organization">Organization</option>
+                            </select>
+                        </span>
+                        is
+
                     </div>
                 </ng-switch>
             </div>

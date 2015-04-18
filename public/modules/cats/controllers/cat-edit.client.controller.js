@@ -26,7 +26,6 @@ angular.module('core').controller('CatEditController',
                         for (var i in self.cat.adoptions) {
                             self.cat.adoptions[i].eventType = 'adoption';
                         }
-                        self.cat.events = self.cat.events.concat(self.cat.adoptions);
                         var cat = self.cat;
 
                         self.dateOfBirth = cat.dateOfBirth;

@@ -100,17 +100,17 @@ var CatSchema = new Schema({
 			detail: String,
 			label: {
 				type: String,
-				required: 'must have a label'
+				required: 'Event must have a label'
 			},
 			date: {
 				type: Date,
-				required: 'must have a date'
+				required: 'Event must have a date'
 			},
 			/* for events that have a duration, like trips to vet */
 			endDate: Date,
 			eventType: {
 				type: String,
-				required: 'must have a event type'
+				required: 'Event must have a event type'
 			},
 			icon: {
 				type: String,
