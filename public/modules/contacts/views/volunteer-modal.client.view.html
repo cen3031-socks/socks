@@ -15,11 +15,17 @@
 
 
 
-        <div class="modal-footer">
+        <div class="modal-footer" data-ng-controller="VolunteersController">
 
-            <h3 data-ng-controller="VolunteersController">In this time frame, {{contact.firstName}} has worked
+            <h5>
+                <span data-ng-show="minutesWorked.startEntered && minutesWorked.endEntered" >From {{startDate.toLocaleDateString()}} until {{endDate.toLocaleDateString()}}, </span>
+                <span data-ng-show="minutesWorked.startEntered && !minutesWorked.endEntered" >From {{startDate.toLocaleDateString()}} until the end of time, </span>
+                <span data-ng-show="!minutesWorked.startEntered && minutesWorked.endEntered" >From the start of time until {{endDate.toLocaleDateString()}}, </span>
+                <span data-ng-show="!minutesWorked.startEntered && !minutesWorked.endEntered" >From the beginning of time until the end of time, </span>
+                {{contact.firstName}} has volunteered for
                 {{getHours(minutesWorked.minutes)}} hours and
-                {{getMinutes(minutesWorked.minutes)}} minutes.</h3>
+                {{getMinutes(minutesWorked.minutes)}} minutes.</h5>
+            <h5 data-ng-show="minutesWorked.isVolunteeringNow" class="light-green-text">This person is currently volunteering.</h5>
             <button class="btn btn-warning btn-lg" ng-click="cancel()">Close</button>
         </div>
 

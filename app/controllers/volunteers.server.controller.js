@@ -87,13 +87,17 @@ exports.getVolunteerByName = function(req, res) {
  */
 
  exports.minutesWorked = function(req, res) {
-	 if (req.params.startDate === 'undefined') {
+	 var startEntered = true;
+	 var endEntered = true;
+	 if (isNaN(req.params.startDate)) {
 		 req.params.startDate = new Date();
 		 req.params.startDate.setYear(2000);
+		 startEntered = false;
 	 }
-	 if (req.params.endDate === 'undefined') {
+	 if (isNaN(req.params.endDate)) {
 		 req.params.endDate = new Date();
 		 req.params.endDate.setYear(2500);
+		 endEntered = false;
 	 }
      var minutes = 0;
      Volunteer.find({contact:req.params.contactId})
@@ -110,7 +114,12 @@ exports.getVolunteerByName = function(req, res) {
 				 minutes += ((timeOut - vols[i].timeIn)/60000);
 			 }
 		 }
-		 res.jsonp({minutes: minutes});
+
+		var isVolunteeringNow = false;
+		if (vols[vols.length-1].timeOut == null) {
+			isVolunteeringNow = true;
+		}
+		 res.jsonp({minutes: minutes, startEntered:startEntered, endEntered:endEntered, isVolunteeringNow:isVolunteeringNow});
 	 }));
  }
 
