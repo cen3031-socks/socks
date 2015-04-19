@@ -87,26 +87,40 @@ exports.getVolunteerByName = function(req, res) {
  */
 
  exports.minutesWorked = function(req, res) {
+	 var startEntered = true;
+	 var endEntered = true;
+	 if (isNaN(req.params.startDate)) {
+		 req.params.startDate = new Date();
+		 req.params.startDate.setYear(2000);
+		 startEntered = false;
+	 }
+	 if (isNaN(req.params.endDate)) {
+		 req.params.endDate = new Date();
+		 req.params.endDate.setYear(2500);
+		 endEntered = false;
+	 }
      var minutes = 0;
-     var vols = Volunteer.find({contact:req.params.contactId});
-     for (var i = 0; i < vols.length; ++i) {
-         //if session is from before desired range
-         if ((vols[i].timeIn - req.params.startDate < 0) || (vols[i].timeOut - req.params.endDate > 0)) {
-             //this session is not in the requested range
-         }
-         else {
-             //this volunteer session is in the range
-             minutes += ((vols[i].timeOut - vols[i].timeIn)/60000)
-         }
-     }
-     if (err) {
-         return res.status(400).send({
-             message: errorHandler.getErrorMessage(err)
-         });
-     }
-     else {
-         res.jsonp(minutes);
-     }
+     Volunteer.find({contact:req.params.contactId})
+		 .exec(errorHandler.wrap(res, function(vols) {
+		 for (var i = 0; i < vols.length; ++i) {
+
+			 var timeOut = vols[i].timeOut || Date.now();
+			 //if session is from before desired range
+			 if ((vols[i].timeIn - req.params.startDate < 0) || (timeOut - req.params.endDate > 0)) {
+				 //this session is not in the requested ranpge
+			 }
+			 else {
+				 //this volunteer session is in the range
+				 minutes += ((timeOut - vols[i].timeIn)/60000);
+			 }
+		 }
+
+		var isVolunteeringNow = false;
+		if (vols[vols.length-1].timeOut == null) {
+			isVolunteeringNow = true;
+		}
+		 res.jsonp({minutes: minutes, startEntered:startEntered, endEntered:endEntered, isVolunteeringNow:isVolunteeringNow});
+	 }));
  }
 
 
