@@ -15,9 +15,6 @@ var _ = require('lodash'),
 	
 var smtpTransport = nodemailer.createTransport(config.mailer.options);
 
-/**
- * Forgot for reset password (forgot POST)
- */
 exports.forgot = function(req, res, next) {
 	async.waterfall([
 		// Generate random token

@@ -33,7 +33,6 @@ module.exports = function(app) {
 
     app.route('/search/cats').post(cats.searchCats);
 
-	// Finish by binding the cat middleware
 	app.param('catId', cats.catById);
 	app.param('adoptionId', cats.adoptionById);
 };
