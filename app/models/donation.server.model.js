@@ -10,11 +10,7 @@ var mongoose = require('mongoose'),
 var validateItemName = function(name) {
     var possible = ['Food', 'Monetary', 'Supplies'];
     var inList = false;
-<<<<<<< HEAD
     for (var i = 0; i<possible.length; i++) {
-=======
-    for (var i = 0; i < possible.length; i++) {
->>>>>>> c094e2619a4e7d78ffb0d0720329f64e52859c8e
         if (possible[i] === name){
             inList = true;
         }

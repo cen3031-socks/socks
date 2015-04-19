@@ -89,7 +89,6 @@ angular.module('donations').controller('DonationsController', ['$scope', '$state
 		$scope.expandItems=function($thisDonation) {
 			$thisDonation.isExpanded=!$thisDonation.isExpanded;
 		};
-<<<<<<< HEAD
 
 		$scope.open = function($event) {
         $event.preventDefault();
@@ -121,12 +120,4 @@ angular.module('donations').controller('DonationsController', ['$scope', '$state
                 
 	   };
     }
-=======
-		$scope.open = function($event) {
-			$event.preventDefault();
-			$event.stopPropagation();
-			$scope.opened = true;
-    	};
-	}
->>>>>>> c094e2619a4e7d78ffb0d0720329f64e52859c8e
 ]);

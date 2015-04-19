@@ -17,7 +17,7 @@ var ImageSchema = new Schema({
     deleted: {
         type: Boolean,  
         default: false
-    }
+    },
     
 	thumbNail: {
         type: String
@@ -29,7 +29,7 @@ var ImageSchema = new Schema({
 
     tags:{
         type: [{
-            Schema.Types.ObjectId
+            type: Schema.Types.ObjectId
         }],
     }
     

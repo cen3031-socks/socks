@@ -1,6 +1,6 @@
 'use strict';
 
-var images = require('../../app/controller/images.server.controller');
+var images = require('../../app/controllers/images.server.controller');
 var users = require('../../app/controllers/users.server.controller');
 var donations = require('../../app/controllers/donations.server.controller');
 
