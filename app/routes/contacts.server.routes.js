@@ -29,6 +29,11 @@ module.exports = function(app) {
     app.route('/contacts/:contactId/volunteers')
         .get(requireEmployee, contacts.findVolunteerHours);
 
+    app.route('/contacts/:contactId/employees')
+        .get(contacts.findEmployees);
+    app.route('/contacts/:contactId/admins')
+        .get(contacts.findAdmins);
+
     app.route('/adopters')
         .get(requireEmployee, contacts.getAllAdopters);
 

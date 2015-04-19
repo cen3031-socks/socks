@@ -17,7 +17,11 @@ var AdoptionSchema = new Schema({
 	},
 	endDate: Date, 
 	catId: { type: Schema.Types.ObjectId, ref: 'Cat', required: 'must adopt a cat' },
-	returnReason: String
+	returnReason: String,
+    adoptionType: {
+        type: String,
+        enum: ['adoption', 'foster']
+    }
 });
 
 var validateSex = function(sex){
@@ -45,6 +49,10 @@ var CatSchema = new Schema({
 		type: Date,
 		default: Date.now
 	},
+    dateOfBirthEstimated: {
+        type: Boolean,
+        default: true
+    },
 	name: {
 		type: String,
 		default: '',
@@ -92,17 +100,17 @@ var CatSchema = new Schema({
 			detail: String,
 			label: {
 				type: String,
-				required: 'must have a label'
+				required: 'Event must have a label'
 			},
 			date: {
 				type: Date,
-				required: 'must have a date'
+				required: 'Event must have a date'
 			},
 			/* for events that have a duration, like trips to vet */
 			endDate: Date,
 			eventType: {
 				type: String,
-				required: 'must have a event type'
+				required: 'Event must have a event type'
 			},
 			icon: {
 				type: String,

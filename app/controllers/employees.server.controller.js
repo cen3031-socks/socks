@@ -43,8 +43,6 @@ exports.create = function(req, res) {
     user.provider = 'local';
     user.contact = contact._id;
 
-    console.log(user.password);
-
     contact.save(function(err) {
         if (err) {
             return res.status(400).send({
