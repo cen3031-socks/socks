@@ -6,6 +6,7 @@ var _ = require('lodash');
 
 
 exports.Uploader = function(path, useImageMagick) {
+
     var ImageMagick = gm;
     if (useImageMagick) {
         ImageMagick = ImageMagick.subClass({imageMagick: true});

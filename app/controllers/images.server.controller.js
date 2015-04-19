@@ -54,12 +54,13 @@ exports.list = function(req, res) {
 };
 
 exports.imageByID = function(req, res, next, id) {
-	Image.findById(id).populate('image').exec(function(err, image) {
-		if (err) return next(err);
-		if (!image) return next(new Error('Failed to load Image ' + id));
-		req.image = image;
-		next();
-	});
+    Image.findById(id).populate('tags')
+        .exec(function(err, image) {
+            if (err) return next(err);
+            if (!image) return next(new Error('Failed to load Image ' + id));
+            req.image = image;
+            next();
+        });
 };
 
 exports.getVersion = function(version, req, res) {
@@ -96,4 +97,8 @@ exports.upload = function(req, res) {
             }));
         }).
         fail(function(err) { console.log(err); errorHandler.sendErrorResponse(res, err) });
+};
+
+exports.forCat = function(req, res) {
+
 };

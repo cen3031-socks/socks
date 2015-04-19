@@ -1,0 +1,11 @@
+<section class="select-cat-list">
+    <h1>{{title}}</h1>
+    <input type="text" class="form-control" ng-model="searchText" placeholder="Search...">
+    <ul >
+        <li ng-show="hideUntil <= searchText.length"
+            data-ng-repeat="cat in cats | filter:searchText | orderBy:'surname'"
+            ng-click="select(cat)"
+            ng-class="{selected: isSelected(cat)}">{{cat.name}}</li>
+		<li ng-click="createCat()" class="btn btn-default">+ Create New</li>
+    </ul>
+</section>

@@ -23,7 +23,8 @@ var ImageSchema = new Schema({
 	},
     tags: {
         type: [{
-            type: Schema.Types.ObjectId
+            type: Schema.Types.ObjectId,
+            ref: 'Cat'
         }]
     }
 });

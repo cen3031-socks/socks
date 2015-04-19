@@ -1,8 +1,9 @@
 <section>
-    {{images}}
-    <ul class="images">
+    <ul class="image-gallery">
         <li ng-repeat="image in images">
-            <img ng-src="{{image.thumbnailSrc}}" />
+            <a ng-href="/#!/images/{{image._id}}">
+                <img ng-src="{{image.thumbnailSrc}}" />
+            </a>
         </li>
     </ul>
 </section>

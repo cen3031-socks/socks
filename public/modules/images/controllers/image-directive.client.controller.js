@@ -3,24 +3,19 @@ var images = angular.module('images');
 images.controller('ImageGalleryController', [
     '$scope', 'Images',
     function($scope, Images) {
-        console.log('initializd controller');
-
         if ($scope.imageId) {
-            console.log('loading images by id');
             Images.find($scope.imageId).then(function(response) {
                 // if given a single image id then just show that id
                 $scope.images = [response.data];
                 $scope.addSources();
             });
         } else if ($scope.catId) {
-            console.log('loading images for cat');
             Images.forCat($scope.catId).then(function(response) {
                 // if given a cat ID only show images for that cat
                 $scope.images = response.data;
                 $scope.addSources();
             });
         } else {
-            console.log('loading all images');
             // if no parameters, show all images
             Images.list().then(function(response) {
                 $scope.images = response.data;

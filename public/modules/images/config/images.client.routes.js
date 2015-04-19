@@ -10,8 +10,12 @@ angular.module('images', ['ui.router']).config(['$stateProvider',
                 templateUrl: 'modules/images/views/image-gallery.client.view.html'
             }).
             state('uploadImage', {
-                url: '/images/upload',
+                url: '/image-upload',
                 templateUrl: 'modules/images/views/upload-image.client.view.html'
+            }).
+            state('editImage', {
+                url: '/images/:imageId',
+                templateUrl: 'modules/images/views/edit-image.client.view.html'
             });
 	}
 ]);
