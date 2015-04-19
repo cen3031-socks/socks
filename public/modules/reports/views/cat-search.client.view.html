@@ -1,0 +1,159 @@
+<style>
+    .filter-item { border-bottom: 1px solid #bcd; margin-bottom: 1em; padding:1em;}
+    .inline-input-container { display:inline-block; }
+</style>
+<section data-ng-controller="CatSearchController">
+    <div class="page-header">
+        <h1>Search Cats</h1>
+    </div>
+    <span>Select cats who match</span>
+    <div class="inline-input-container">
+        <select class="form-control" ng-model="matchType">
+            <option value="all">all</option>
+            <option value="any">any</option>
+            <option value="none">none</option>
+        </select>
+    </div>
+    <span>of the following filters.</span>
+    <ul class="search-filters">
+        <li ng-repeat="filter in filters" class="filter-item">
+            <div class="row">
+                <div class="inline-input-container">
+                    <select class="form-control" ng-model="filter.type">
+                        <option selected disabled value="">Select a filter type...</option>
+                        <option value="Adopted">Adopted</option>
+                        <option value="Breed">Breed</option>
+                        <option value="Sex">Sex</option>
+                        <option value="Age">Age</option>
+                        <option value="HasHadOperation">Has Had Operation</option>
+                        <option value="Origin">Origin</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <ng-switch on="filter.type">
+                    <div ng-switch-when="Adopted">
+                        <span class="inline-input-container">
+                            <select ng-model="filter.invert" class="form-control"
+                                    ng-options="o.value as o.text for o in invertValues">
+                            </select>
+                        </span>
+                        <span>cats which were adopted between</span>
+                        <custom-datepicker ng-model="filter.startDate"
+                                           unselected-text="'the beginning of time'"
+                                           inline="true">
+                        </custom-datepicker>
+                        <span>and</span>
+                        <custom-datepicker ng-model="filter.endDate" unselected-text="'the end of time'" inline="true"></custom-datepicker>
+                        <span>.</span>
+                    </div>
+                    <div ng-switch-when="Breed">
+                        <span class="inline-input-container">
+                            <select ng-model="filter.invert" class="form-control"
+                                    ng-options="o.value as o.text for o in invertValues">
+                            </select>
+                        </span>
+                        <span>cats whose breed is one of the following:</span>
+                        <ul>
+                            <li ng-repeat="breed in filter.breeds track by $index">
+                                <input type="text" class="form-control" ng-model="filter.breeds[$index]" />
+                                <button class="btn btn-sm btn-danger" type="button" ng-click="filter.breeds.splice($index, 1)">
+                                    <i class="glyphicon glyphicon-trash"></i>
+                                </button>
+                            </li>
+                            <li>
+                                <button class="btn btn-md btn-default"
+                                        ng-click="(filter.breeds || (filter.breeds = [])).push('')">
+                                    Add Breed
+                                </button>
+                            </li>
+                        </ul>
+                    </div>
+                    <div ng-switch-when="Sex" class="row">
+                        <span class="inline-input-container">
+                            <select ng-model="filter.invert" class="form-control"
+                                    ng-options="o.value as o.text for o in invertValues">
+                            </select>
+                        </span>
+                        <span>cats whose sex is</span>
+                        <span class="inline-input-container">
+                            <select ng-model="filter.sex" class="form-control">
+                                <option value="1">Male</option>
+                                <option value="2">Female</option>
+                            </select>
+                        </span>
+                    </div>
+                    <div ng-switch-when="Age">
+                        <span class="inline-input-container">
+                            <select ng-model="filter.invert" class="form-control"
+                                    ng-options="o.value as o.text for o in invertValues">
+                            </select>
+                        </span>
+                        <span>cats whose age is between</span>
+                        <div class="inline-input-container">
+                            <input type="text" class="form-control" placeholder="0" ng-model="filter.minAge" />
+                        </div>
+                        <span>and</span>
+                        <div class="inline-input-container">
+                            <input type="text" class="form-control" placeholder="infinity" ng-model="filter.maxAge" />
+                        </div>
+                        .
+                    </div>
+                    <div ng-switch-when="HasHadOperation">
+                        <span class="inline-input-container">
+                            <select ng-model="filter.invert" class="form-control"
+                                    ng-options="o.value as o.text for o in invertValues">
+                            </select>
+                        </span>
+                        <span>cats who have had an operation of type</span>
+                        <div class="inline-input-container">
+                            <select ng-model="filter.operation" class="form-control">
+                                <option selected disabled value=""></option>
+                                <option value="Spay/Neuter">Spay/Neuter</option>
+                                <option ng-repeat="shot in possibleShots" value="{{shot}}">{{shot}}</option>
+                                <option value="Microchip">Microchip</option>
+                            </select>
+                        </div>
+                        <span>between</span>
+                        <div class="inline-input-container">
+                            <custom-datepicker ng-model="filter.startDate" unselected-text="'the beginning of time'" inline="true"></custom-datepicker>
+                        </div>
+                        <span>and</span>
+                        <div class="inline-input-container">
+                            <custom-datepicker ng-model="filter.endDate" unselected-text="'the end of time'" inline="true"></custom-datepicker>
+                        </div>
+                    </div>
+                    <div ng-switch-when="Origin">
+                        <span class="inline-input-container">
+                            <select ng-model="filter.invert" class="form-control"
+                                    ng-options="o.value as o.text for o in invertValues">
+                            </select>
+                        </span>
+                        <span>cats whose origin</span>
+                        <span class="inline-input-container">
+                            <select ng-model="filter.originType" class="form-control">
+                                <option value="Person">Person</option>
+                                <option value="Organization">Organization</option>
+                            </select>
+                        </span>
+                        is
+
+                    </div>
+                </ng-switch>
+            </div>
+            <button type="button" class="delete-filter btn btn-danger" ng-click="filters.splice($index, 1)">
+                <i class="glyphicon glyphicon-trash"></i>
+            </button>
+        </li>
+        <li class="add-filter">
+            <button type="button" class="btn btn-default" ng-click="filters.push({invert: false})">Add Filter</button>
+        </li>
+    </ul>
+    <button type="button" class="btn btn-lg btn-primary" ng-click="search()">Search</button>
+    <button type="button" class="btn btn-lg btn-success" ng-click="save()">Save search...</button>
+    <button type="button" class="btn btn-lg btn-warning" ng-click="export()">Export results</button>
+    <h2>Results</h2>
+    <ul>
+        <li ng-repeat="cat in searchResults">{{cat.name}}</li>
+    </ul>
+</section>
