@@ -6,9 +6,7 @@ core.directive('notes', function() {
         controller: 'NotesController',
         scope: { about: '=about' },
         templateUrl: '/modules/core/views/notes.client.directive.html',
-        link: function(scope, element, attrs, ctrl) {
-            ctrl.init();
-        }
+        link: function(scope, element, attrs, ctrl) { }
     };
 });
 

@@ -1,14 +1,14 @@
 'use strict';
-(function(google) {
-    angular.module('stats').directive('adopterMap', function(Contacts) {
-        var addresses = [];
-        var latlong = [];
-        var adopterWithAddress = [];
-        var geocoder= new google.maps.Geocoder();
-        var streets = [];
-        var citiesStatesZipCodes = [];
-        // directive link function
-        var link = function(scope, element, attrs) {
+angular.module('stats').directive('adopterMap', function(Contacts, googleService) {
+    var addresses = [];
+    var latlong = [];
+    var adopterWithAddress = [];
+    var streets = [];
+    var citiesStatesZipCodes = [];
+    // directive link function
+    var link = function(scope, element, attrs) {
+        googleService.google().then(function(google) {
+            var geocoder = new google.maps.Geocoder();
             var map, infoWindow;
             var markers = [];
 
@@ -46,32 +46,33 @@
 
             // place a marker
             function setMarker(map, position, title, content) {
-                var marker;
-                var markerOptions = {
-                    position: position,
-                    map: map,
-                    title: title,
-                    icon: 'https://maps.google.com/mapfiles/ms/icons/blue-dot.png'
-                };
-
-                marker = new google.maps.Marker(markerOptions);
-                markers.push(marker); // add marker to array
-
-                google.maps.event.addListener(marker, 'click', function () {
-                    // close window if not undefined
-                    if (infoWindow !== void 0) {
-                        infoWindow.close();
-                    }
-                    // create new window
-                    var infoWindowOptions = {
-                        content: content
+                googleService.google().then(function(google) {
+                    var marker;
+                    var markerOptions = {
+                        position: position,
+                        map: map,
+                        title: title,
+                        icon: 'https://maps.google.com/mapfiles/ms/icons/blue-dot.png'
                     };
-                    infoWindow = new google.maps.InfoWindow(infoWindowOptions);
-                    infoWindow.open(map, marker);
+
+                    marker = new google.maps.Marker(markerOptions);
+                    markers.push(marker); // add marker to array
+
+                    google.maps.event.addListener(marker, 'click', function () {
+                        // close window if not undefined
+                        if (infoWindow !== void 0) {
+                            infoWindow.close();
+                        }
+                        // create new window
+                        var infoWindowOptions = {
+                            content: content
+                        };
+                        infoWindow = new google.maps.InfoWindow(infoWindowOptions);
+                        infoWindow.open(map, marker);
+                    });
                 });
             }
             function codeAddress(address, i) {
-
                 geocoder.geocode( { 'address': address}, function(results, status) {
                     if (status === google.maps.GeocoderStatus.OK) {
                         var p = results[0].geometry.location;
@@ -84,25 +85,27 @@
 
             // show the map and place some markers
             initMap();
-        };
+        });
+    };
 
-        return {
-            restrict: 'A',
-            template: '<div id="gmaps"></div>',
-            replace: true,
-            link: link
-        };
-    });
+    return {
+        restrict: 'A',
+        template: '<div id="gmaps"></div>',
+        replace: true,
+        link: link
+    };
+});
 
-    angular.module('stats').directive('originsMap', function(Cats) {
-        var addresses = [];
-        var latlong = [];
-        var catWithAddress = [];
-        var geocoder= new google.maps.Geocoder();
-        // directive link function
-        var link = function(scope, element, attrs) {
-            var map, infoWindow;
-            var markers = [];
+angular.module('stats').directive('originsMap', function(Cats, googleService) {
+    var addresses = [];
+    var latlong = [];
+    var catWithAddress = [];
+    // directive link function
+    var link = function(scope, element, attrs) {
+        var map, infoWindow;
+        var markers = [];
+
+        googleService.then(function(google) {
 
             // map config
             var mapOptions = {
@@ -136,6 +139,7 @@
 
             // place a marker
             function setMarker(map, position, title, content) {
+
                 var marker;
                 var markerOptions = {
                     position: position,
@@ -161,7 +165,6 @@
                 });
             }
             function codeAddress(address, i) {
-
                 geocoder.geocode( { 'address': address}, function(results, status) {
                     if (status === google.maps.GeocoderStatus.OK) {
                         var p = results[0].geometry.location;
@@ -174,13 +177,13 @@
 
             // show the map and place some markers
             initMap();
-        };
+        });
+    };
 
-        return {
-            restrict: 'A',
-            template: '<div id="gmaps"></div>',
-            replace: true,
-            link: link
-        };
-    });
-}(google));
+    return {
+        restrict: 'A',
+        template: '<div id="gmaps"></div>',
+        replace: true,
+        link: link
+    };
+});

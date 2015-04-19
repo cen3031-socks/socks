@@ -38,15 +38,17 @@
 .profile {
 	/* to make controlling space between inline elements possible */
 	font-size:0;
+    vertical-align:top;
 }
 .profile-group {
 	display:inline-block;
 	width:50%;
 	margin:0;
 	padding:0.5em;
+    vertical-align:top;
 }
 
-.profile .basic-info .profile-group {
+.profile .basic-info .profile-group, .profile .quarter-width .profile-group {
     width:25%;
 }
 
@@ -56,6 +58,7 @@
 	display:inline-block;
 	position:relative;
 }
+
 .profile .basic-info .profile-group.description { width: 75%; }
 @media (max-width: 520px) {
 	.profile .profile-group {
