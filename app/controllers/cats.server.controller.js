@@ -9,7 +9,9 @@ var mongoose = require('mongoose'),
 	Adoption = mongoose.model('Adoption'),
 	Donation = mongoose.model('Donation'),
 	Contact = mongoose.model('Contact'),
-	_ = require('lodash');
+    Report = mongoose.model('Report'),
+	_ = require('lodash'),
+    async = require('async');
 
 exports.list = function(req, res) {
 	Cat.find().sort('name').exec(function(err, cats) {
@@ -334,7 +336,6 @@ exports.filters = {
     'Breed': function(filter, cat) {
         if (!filter.breeds) { return false; }
         for (var i = 0; i < filter.breeds.length; ++i) {
-            console.log(filter.breeds[i]);
             if (filter.breeds[i] === cat.breed) {
                 return true;
             }
@@ -363,37 +364,43 @@ exports.filters = {
 };
 
 exports.searchCats = function(req, res) {
-    Cat.find().populate('currentAdoption').exec(errorHandler.wrap(res, function(cats) {
-        var matchType = req.body.matchType;
-        var filtered = [];
-        for (var i = 0; i < cats.length; ++i) {
-            var cat = cats[i];
-            var matchesFilter = true;
-            for (var j = 0; j < req.body.filters.length; ++j) {
-                var filter = req.body.filters[j];
-                var filterResult = exports.filters[filter.type](filter, cat);
-                if (matchType === 'all') {
-                    if (filter.invert) {
-                        matchesFilter = matchesFilter && !filterResult;
-                    } else {
-                        matchesFilter = matchesFilter && filterResult;
-                    }
-                } else if (matchType === 'any' || matchType === 'none') {
-                    if (filter.invert !== filterResult) {
-                        filtered.push(cat);
+    var report = req.report;
+    if (_.any(report.filters, function(f) { return !exports.filters[f.type]; })) {
+        return res.status(400).json({ message: 'Unknown filter type'});
+    }
+    Cat.find().populate('currentAdoption')
+        .exec(errorHandler.wrap(res, function(cats) {
+            var matchType = report.matchType;
+            var filtered = [];
+            for (var i = 0; i < cats.length; ++i) {
+                var cat = cats[i];
+                var matchesFilter = true;
+                for (var j = 0; j < report.filters.length; ++j) {
+                    var filter = report.filters[j];
+                    var filterResult = exports.filters[filter.type](filter, cat);
+                    if (matchType === 'all') {
+                        if (filter.invert) {
+                            matchesFilter = matchesFilter && !filterResult;
+                        } else {
+                            matchesFilter = matchesFilter && filterResult;
+                        }
+                    } else if (matchType === 'any' || matchType === 'none') {
+                        if (filter.invert !== filterResult) {
+                            filtered.push(cat);
+                        }
                     }
                 }
+                if (matchType === 'all' && matchesFilter) {
+                    filtered.push(cat);
+                }
             }
-            if (matchType === 'all' && matchesFilter) {
-                filtered.push(cat);
+            if (matchType === 'none') {
+                filtered = _.difference(cats, filtered);
             }
-        }
-        if (matchType === 'none') {
-            filtered = _.difference(cats, filtered);
-        }
-        filtered = _.uniq(filtered);
-        res.send(filtered);
-    }));
+            filtered = _.uniq(filtered);
+            res.send(filtered);
+        }));
+
 };
 
 exports.update = function(req, res) {

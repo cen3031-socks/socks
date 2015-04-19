@@ -1,12 +1,14 @@
 'use strict';
 
-/**
- * Module dependencies.
- */
 var mongoose = require('mongoose'),
 	errorHandler = require('./errors.server.controller'),
+    Cats = require('./cats.server.controller'),
 	Report = mongoose.model('Report'),
 	_ = require('lodash');
+
+exports.get = function(req, res) {
+    res.json(req.report);
+}
 
 exports.list = function(req, res) {
     Report.find().exec(errorHandler.wrap(res, function(reports) {
@@ -29,7 +31,15 @@ exports.update = function(req, res) {
 }
 
 exports.getResult = function(req, res) {
+    switch (req.report.resultType) {
+        case 'Cat': Cats.searchCats(req, res); break;
+        default: res.status(400).json({ message: 'Unknown report type.' }); break;
+    }
+};
 
+exports.temporary = function(req, res, next) {
+    req.report = new Report(req.body);
+    next();
 };
 
 exports.reportById = function(req, res, next, id) {

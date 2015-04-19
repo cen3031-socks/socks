@@ -12,5 +12,9 @@ angular.module('reports', ['ui.router']).config(['$stateProvider',
             url: '/search/cats',
             templateUrl: 'modules/reports/views/cat-search.client.view.html'
         });
+        $stateProvider.state('savedCatSearch', {
+            url: '/search/cats/:reportId',
+            templateUrl: 'modules/reports/views/cat-search.client.view.html'
+        });
 	}
 ]);

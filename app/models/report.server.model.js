@@ -31,7 +31,13 @@ var ReportSchema = new Schema({
     resultType: {
         type: String,
         enum: ['Cat', 'Volunteer', 'Donation', 'Contact']
+    },
+
+    name: {
+        type: String,
+        required: 'Report must have a name'
     }
+
 });
 
 mongoose.model('Report', ReportSchema);

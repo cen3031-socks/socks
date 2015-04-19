@@ -32,8 +32,6 @@ module.exports = function(app) {
     app.route('/cat-csv.csv')
         .get(cats.generateCsv);
 
-    app.route('/search/cats').post(cats.searchCats);
-
 	app.param('catId', cats.catById);
 	app.param('adoptionId', cats.adoptionById);
 };

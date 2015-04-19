@@ -8,7 +8,7 @@
     </div>
     <span>Select cats who match</span>
     <div class="inline-input-container">
-        <select class="form-control" ng-model="matchType">
+        <select class="form-control" ng-model="search.matchType">
             <option value="all">all</option>
             <option value="any">any</option>
             <option value="none">none</option>
@@ -16,7 +16,7 @@
     </div>
     <span>of the following filters.</span>
     <ul class="search-filters">
-        <li ng-repeat="filter in filters" class="filter-item">
+        <li ng-repeat="filter in search.filters" class="filter-item">
             <div class="row">
                 <div class="inline-input-container">
                     <select class="form-control" ng-model="filter.type">
@@ -141,16 +141,16 @@
                     </div>
                 </ng-switch>
             </div>
-            <button type="button" class="delete-filter btn btn-danger" ng-click="filters.splice($index, 1)">
+            <button type="button" class="delete-filter btn btn-danger" ng-click="search.filters.splice($index, 1)">
                 <i class="glyphicon glyphicon-trash"></i>
             </button>
         </li>
         <li class="add-filter">
-            <button type="button" class="btn btn-default" ng-click="filters.push({invert: false})">Add Filter</button>
+            <button type="button" class="btn btn-default" ng-click="search.filters.push({invert: false})">Add Filter</button>
         </li>
     </ul>
-    <button type="button" class="btn btn-lg btn-primary" ng-click="search()">Search</button>
-    <button type="button" class="btn btn-lg btn-success" ng-click="save()">Save search...</button>
+    <button type="button" class="btn btn-lg btn-primary" ng-click="getResult()">Search</button>
+    <button type="button" class="btn btn-lg btn-success" ng-click="saveDialog()">Save search...</button>
     <button type="button" class="btn btn-lg btn-warning" ng-click="export()">Export results</button>
     <h2>Results</h2>
     <ul>
