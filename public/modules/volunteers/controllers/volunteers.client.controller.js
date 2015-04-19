@@ -2,6 +2,7 @@
 angular.module('volunteers').controller('VolunteersController', ['$scope', '$stateParams', '$location', 'Authentication', 'Volunteers', '$modal', '$log' ,
     function($scope, $stateParams, $location, Authentication, Volunteers, $modal, $log) {
         $scope.authentication = Authentication;
+        $scope.Math = Math;
         $scope.modalUpdate = function (size, selectedVolunteer) {
             $scope.selectedVolunteer = selectedVolunteer;
             var modalInstance = $modal.open({

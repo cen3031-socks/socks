@@ -16,7 +16,7 @@ module.exports = function(app) {
     app.route('/volunteers/by-name/:contactId')
         .get(volunteers.getVolunteerByName);
 
-    app.route('/volunteers/get-minutes/:contactId/:startDate_:endDate')
+    app.route('/volunteers/get-minutes/:contactId/:startDate/:endDate')
         .get(volunteers.minutesWorked);
 
 	app.route('/volunteers/:volunteerId')
