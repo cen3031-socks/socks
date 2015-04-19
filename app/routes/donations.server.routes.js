@@ -10,7 +10,7 @@ module.exports = function(app) {
 
 	// Donations Routes
 	app.route('/donations')
-		.get(donations.list)
+		.get(requireEmployee, donations.list)
 		.post(requireEmployee, donations.create);
 
 	app.route('/donations/:donationId')
