@@ -112,6 +112,9 @@ function ($scope, Contacts, $stateParams, $modal, Authentication, $location, Vol
         var vets = Contacts.findCatsWithVets({contactId: $stateParams.contactId}, function() {
             $scope.contact.isVet = vets.length > 0;
         });
+        var fosterers = Contacts.findFosteredCats({contactId: $stateParams.contactId}, function() {
+            $scope.contact.isFosterer = fosterers.length > 0;
+        });
         var donations = Contacts.findDonations({contactId: $stateParams.contactId}, function() {
             $scope.contact.isDonator = donations.length > 0;
         });
@@ -215,32 +218,33 @@ function ($scope, Contacts, $stateParams, $modal, Authentication, $location, Vol
                         $scope.error = errorResponse.data.message;
                     });
                 };
-                //$scope.deleteContact = function(contact) {
-                //    if (contact) { contact.$remove();
-                //
-                //        for (var i in this.contacts ) {
-                //            if (this.contacts [i] === contact ) {
-                //                this.contacts.splice(i, 1);
-                //            }
-                //        }
-                //    } else {
-                //        this.contact.$remove(function() {
-                //            $location.path('/contacts');
-                //        });
-                //    }
-                //};
-                $scope.deleteContact = function(contact, index) {
+
+                $scope.deleteContact = function(contact) {
                     Dialogs
                         .confirm('Delete Contact?')
                         .then(function(result) {
-                            if (result) {
-                                contact.deleted_contact = true;
-                                $scope.update(contact);
-                                $modalInstance.dismiss('deleted');
-                                $location.path('/contacts');
+                            if (contact && result) {
+
+                                contact.$remove(function() {
+                                    $modalInstance.dismiss('deleted');
+                                    $location.path('/contacts');
+                                });
+
                             }
                         });
                 };
+                //$scope.deleteContact = function(contact, index) {
+                //    Dialogs
+                //        .confirm('Delete Contact?')
+                //        .then(function(result) {
+                //            if (result) {
+                //                contact.deleted_contact = true;
+                //                $scope.update(contact);
+                //                $modalInstance.dismiss('deleted');
+                //                $location.path('/contacts');
+                //            }
+                //        });
+                //};
                 $scope.addToDoNotAdoptList = function(contact, index) {
                     Dialogs
                         .confirm('Add contact to the "Do not adopt" list?')
@@ -309,6 +313,65 @@ function ($scope, Contacts, $stateParams, $modal, Authentication, $location, Vol
             $log.info('Modal dismissed at: ' + new Date());
         });
     };
+
+       // Open a modal window to view a contact's fostered cats
+    this.modalFosteredCatsView = function (size, selectedContact) {
+
+        var modalInstance = $modal.open({
+            templateUrl: 'modules/contacts/views/fostered-cats.client.view.html',
+            controller: function($scope, $modalInstance, contact){
+                $scope.contact = contact;
+
+                $scope.adoptions = Contacts.findFosteredCats({contactId:contact._id});
+
+                $scope.cancel = function () {
+                    $modalInstance.dismiss('cancel');
+                };
+            },
+            size: size,
+            resolve: {
+                contact: function () {
+                    return selectedContact;
+                }
+            }
+        });
+
+        modalInstance.result.then(function (selectedItem) {
+            $scope.selected = selectedItem;
+        }, function () {
+            $log.info('Modal dismissed at: ' + new Date());
+        });
+    };
+
+    // Open a modal window to view the cats of a certain vet
+    this.modalVetCatsView = function (size, selectedContact) {
+
+        var modalInstance = $modal.open({
+            templateUrl: 'modules/contacts/views/vet-cats.client.view.html',
+            controller: function($scope, $modalInstance, contact){
+                $scope.contact = contact;
+
+                $scope.vetcats = Contacts.findCatsWithVets({contactId:contact._id});
+
+                $scope.cancel = function () {
+                    $modalInstance.dismiss('cancel');
+                };
+            },
+            size: size,
+            resolve: {
+                contact: function () {
+                    return selectedContact;
+                }
+            }
+        });
+
+        modalInstance.result.then(function (selectedItem) {
+            $scope.selected = selectedItem;
+        }, function () {
+            $log.info('Modal dismissed at: ' + new Date());
+        });
+    };
+
 
     // Open a modal window to view a contact's donations
     this.modalDonationsView = function (size, selectedContact) {
