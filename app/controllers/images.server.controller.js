@@ -1,104 +1,99 @@
 'use strict';
 
-/**
- * Module dependencies.
- */
 var mongoose = require('mongoose'),
 	errorHandler = require('./errors.server.controller'),
 	Image = mongoose.model('Image'),
 	_ = require('lodash');
 
-/**
- * Create a Donation
- */
+var ImageManager = require('./ImageManager');
+var config = require('../../config/config');
+
+var uploader = new ImageManager.Uploader(config.fileUploadPath);
+uploader.version({
+    name: 'thumbnail',
+    width: '144',
+    height: '144'
+}).version({
+    name: 'large',
+    width: '600',
+    height: '480'
+}).version({
+    name: 'original'
+});
 
 exports.create = function(req, res) {
     console.log('Images.create');
 	var image = new Image(req.body);
 	image.user = req.user;
-
-	image.save(function(err, image) {
-		if (err) {
-            console.log(err);
-			return res.status(400).send({
-				message: errorHandler.getErrorMessage(err)
-			});
-		} else {
+	image.save(errorHandler.wrap(res, function(image) {
 			return res.json(image);
-		}
-	});
+	}));
 };
 
-/**
- * Show the current image? IDK copied from donations server controller..
- */
 exports.read = function(req, res) {
 	res.jsonp(req.image);
 };
 
-/**
- * Update an Image
- */
 exports.update = function(req, res) {
-	var image = req.image;
-
-	image = _.extend(image , req.body);
-
-	image.save(function(err) {
-		if (err) {
-			return res.status(400).send({
-				message: errorHandler.getErrorMessage(err)
-			});
-		} else {
-			res.jsonp(image);
-		}
-	});
+	var image = _.extend(req.image, req.body);
+	image.save(errorHandler.wrap(res, function() {
+        res.jsonp(image);
+    }));
 };
 
-/**
- * Delete an Image
- */
 exports.delete = function(req, res) {
 	var image = req.image;
-
-	/*donation.remove(function(err) {
-		if (err) {
-			return res.status(400).send({
-				message: errorHandler.getErrorMessage(err)
-			});
-		} else {
-			res.jsonp(donation);
-		}
-	});*/
-    
     image.deleted = true;
-                                //how do we delete the file??
     res.jsonp(image);
 };
 
-/**
- * List of Donations
- */
-exports.list = function(req, res) { 
-	Donation.find().sort('-created').populate('donor').exec(function(err, donations) {
-		if (err) {
-			return res.status(400).send({
-				message: errorHandler.getErrorMessage(err)
-			});
-		} else {
-			res.jsonp(donations);
-		}
-	});
+exports.list = function(req, res) {
+    Image.find().exec(errorHandler.wrap(res, function(images) {
+        res.json(images);
+    }));
 };
 
-/**
- * Donation middleware
- */
-exports.imageByID = function(req, res, next, id) { 
+exports.imageByID = function(req, res, next, id) {
 	Image.findById(id).populate('image').exec(function(err, image) {
 		if (err) return next(err);
-		if (! donation) return next(new Error('Failed to load Image ' + id));
+		if (!image) return next(new Error('Failed to load Image ' + id));
 		req.image = image;
 		next();
 	});
+};
+
+exports.getVersion = function(version, req, res) {
+    if (!req.image[version]) {
+        return res.status(400).json({message: 'Image version ' + version + ' does not exist.'});
+    } else {
+        return res.sendFile(req.image[version], { root: uploader.path });
+    }
+};
+
+exports.getOriginal = function(req, res) {
+    return exports.getVersion('original', req, res);
+};
+
+exports.getThumbnail = function(req, res) {
+    return exports.getVersion('thumbnail', req, res);
+};
+
+exports.getLarge = function(req, res) {
+    return exports.getVersion('large', res, res);
+};
+
+exports.upload = function(req, res) {
+    var image = new Image({});
+    uploader.
+        process(image._id, req.files.image.path).
+        then(function(images) {
+            image.thumbnail = images.thumbnail;
+            image.large = images.large;
+            image.original = images.original;
+            image.save(errorHandler.wrap(res, function(image) {
+                console.log(image);
+                res.json(image);
+            }));
+        }).
+        fail(function(err) { console.log(err); errorHandler.sendErrorResponse(res, err) });
 };

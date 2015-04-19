@@ -1,38 +1,31 @@
 'use strict';
 
-/**
- * Module dependencies.
- */
-
-
 var mongoose = require('mongoose'),
 	Schema = mongoose.Schema;
 
-/**
- * Images Schema
- */
-
 var ImageSchema = new Schema({
-    
     deleted: {
         type: Boolean,  
         default: false
     },
-    
-	thumbNail: {
+	thumbnail: {
         type: String
 	},
-
+    large: {
+        type: String
+    },
+    original: {
+        type: String
+    },
     created: {
-		type: String
+		type: Date,
+        default: Date.now
 	},
-
-    tags:{
+    tags: {
         type: [{
             type: Schema.Types.ObjectId
-        }],
+        }]
     }
-    
 });
 
 mongoose.model('Image', ImageSchema);
