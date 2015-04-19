@@ -27,45 +27,96 @@
 
     </style>
     <div class="col-md-12">
-        <form class="form-horizontal" data-ng-submit="create()" novalidate>
+        <form class="form-horizontal" novalidate>
             <fieldset>
-               <!--<div class="form-group">
-                    <label class="control-label" for="name">Name</label>
-                    <div class="controls">
-                        <input type="text" data-ng-model="name" id="name" class="form-control" placeholder="Name" required> -->
 
-                <div class="form-group">
-                    <label class="control-label" for="name">Name</label>
-                    <div class="controls">
-                        <contacts-selector max=1 ng-model=contacts> Select donor from contacts list: </contacts-selector>
+                <div class="row">
+                    <div class="form-group">
+                        <label class="control-label" for="name">Name</label>
+                        <div class="controls">
+                            <contacts-selector max=1 ng-model="donors"> Select donor from contacts list: </contacts-selector>
+                        </div>
                     </div>
                 </div>
-                <div class="form-group">
-                    <label class="control-label" for="dollarAmount">Dollar Amount</label>
-                    <div class="controls">
-                        <input type="text" data-ng-model="dollarAmount" id="dollarAmount" class="form-control" placeholder="$0.00" required>
+
+                <div class="row">
+                    <div class="form-group col-md-4">
+                            <label class="control-label" for="dob">Date of Donation</label>
+                            <div class="controls">
+                                <p class="input-group">
+                                    <input type="text" class="form-control" datepicker-popup="dd MMM yyyy" ng-model="created"
+                                           is-open="opened" ng-required="true" close-text="Close" />
+                                    <span class="input-group-btn">
+                                        <button type="button" class="form-control btn btn-default" ng-click="open($event)">
+                                            <i class="glyphicon glyphicon-calendar"></i>
+                                        </button>
+                                    </span>
+                                </p>
+                            </div>
+                        </div>
+                </div>
+
+                <div ng-repeat="item in items" class="row">
+                    <div class="itemFields">
+
+                        <div class="form-group col-md-2">
+                            <label class="control-label" for="item">New Item</label>
+                            <div class="controls">
+                                <select ng-model="item.name" name="name" class="form-control">
+                                    <option default disabled="disabled" selected="true">Item Name</option>
+                                    <option value="Monetary">Monetary</option>
+                                    <option value="Food">Food</option>
+                                    <option value= "Supplies">Supplies</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group col-md-2">
+                            <label class="control-label" for="item">Value</label>
+                            <div class="controls">
+                                <input type="text" ng-model="item.value.amount" class="form-control">
+                            </div>
+                        </div>
+
+                        <div class="form-group col-md-3">
+                            <label class="control-label" for="item">Description</label>
+                            <div class="controls">
+                               <!-- <input type="text" class="form-control"> -->
+                                    <TEXTAREA NAME="Address" ng-model="item.description" ROWS=4 COLS=30 >
+                                    </TEXTAREA>
+                                
+                            </div>
+                        </div>
+
+                        <div class="form-group col-md-2">
+                            <ng-switch on="item.name" ng-model="icon">
+                                <i ng-switch-default class="glyphicon glyphicon-briefcase" style="font-size:2.0em;"> </i>
+                                <i ng-switch-when="Monetary" class="glyphicon glyphicon-usd" style="font-size:2.0em;"> </i>
+                                <i ng-switch-when="Food" class="glyphicon glyphicon-heart" style="font-size:2.0em;"> </i>
+                                <i ng-switch-when="Supplies" class="glyphicon glyphicon-wrench" style="font-size:2.0em;"> </i>
+                            </ng-switch>
+                        </div>
+
                     </div>
-                </div>
-                <div class="form-group">
-                    <label class="control-label" for="paymentType">Payment Type</label>
-                    <div class="controls">
-                        <!--<input type="text" data-ng-model="name" id="name" class="form-control" placeholder="Name" required>-->
-                        <select data-ng-model="paymentType" id="paymentType" class="form-control" placeholder="CASH MONAY" required>
-                            <option value="" disabled selected>Select Payment Type</option>
-                            <option value="cash">Cash</option>
-                            <option value="credit">Credit</option>
-                            <option value="check">Check</option>
-                            <option value="rupees">Rupees</option>
-                            <option value="food">Food</option>
-                            </select>
+
+                    <div class="form-group">
+                        <button  ng-click="items.splice($index, 1)" id="addItem" type="button" class="myButton">Delete Item</button>
                     </div>
+
                 </div>
-                <div class="form-group">
-                    <input type="submit" class="myButton">
+
+                    <div class="form-group">
+                        <button  ng-click="items.push({})" id="addItem" type="button" class="myButton" style="text-align:center;">Add Item</button>
+                    </div>
+
+                <div class="form-group" style="text-align:center;">
+                    <button ng-click="create()" type="submit" class="myButton">Submit</button>
                 </div>
+
 				<div data-ng-show="error" class="text-danger">
 					<strong data-ng-bind="error"></strong>
 				</div>
+
             </fieldset>
         </form>
     </div>

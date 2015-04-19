@@ -12,16 +12,18 @@ var mongoose = require('mongoose'),
  * Create a Donation
  */
 exports.create = function(req, res) {
+    console.log('donations.create');
 	var donation = new Donation(req.body);
 	donation.user = req.user;
 
-	donation.save(function(err) {
+	donation.save(function(err, donation) {
 		if (err) {
+            console.log(err);
 			return res.status(400).send({
 				message: errorHandler.getErrorMessage(err)
 			});
 		} else {
-			res.jsonp(donation);
+			return res.json(donation);
 		}
 	});
 };

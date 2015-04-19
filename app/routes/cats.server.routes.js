@@ -13,7 +13,8 @@ module.exports = function(app) {
 		.post(requireEmployee, cats.create);
 
 	app.route('/cats/:catId')
-        .get(cats.view);
+        .get(cats.view)
+        .post(cats.update);
 
 	app.route('/cats/:catId/events')
 		.post(requireEmployee, cats.addEvent);
@@ -28,8 +29,10 @@ module.exports = function(app) {
 	app.route('/cats/:catId/adoptions/:adoptionId')
 		.put(requireEmployee, cats.unadopt);
 
-    app.route('/cat-csv')
+    app.route('/cat-csv.csv')
         .get(cats.generateCsv);
+
+    app.route('/search/cats').post(cats.searchCats);
 
 	// Finish by binding the cat middleware
 	app.param('catId', cats.catById);

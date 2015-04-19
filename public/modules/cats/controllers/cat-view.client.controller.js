@@ -16,7 +16,8 @@ var adoptionController = function(cat, Cats, $scope, $modalInstance) {
         Cats.adopt({catId: cat._id}, {
             adopter: $scope.adopter[0]._id,
             donation: $scope.donationId,
-            date: $scope.adoptionDate
+            date: $scope.adoptionDate,
+            adoptionType: $scope.adoptionType
         }, function() {
             $modalInstance.close(true);
         });
@@ -56,6 +57,7 @@ angular.module('core').controller('CatViewController', ['$scope', '$stateParams'
                             $scope.cat.adoptions[i].eventType = 'adoption';
                         }
                         $scope.cat.events = $scope.cat.events.concat($scope.cat.adoptions);
+                        console.log($scope.cat);
                     });
             };
 
@@ -168,7 +170,7 @@ angular.module('core').controller('CatViewController', ['$scope', '$stateParams'
                 if (cat.events === undefined) return;
                 for (var i = 0; i < cat.events.length; ++i) {
                     var thisEvent = cat.events[i];
-                    if (thisEvent.eventType === 'vet') {
+                    if (thisEvent && thisEvent.eventType === 'vet') {
                         var operations = thisEvent.data.operations;
                         for (var j = 0; j < operations.length; ++j) {
                             if (operations[j].type === 'Spay/Neuter') {
@@ -183,7 +185,7 @@ angular.module('core').controller('CatViewController', ['$scope', '$stateParams'
                 var dates = [];
                 for (var i = 0; i < cat.events.length; ++i) {
                     var thisEvent = cat.events[i];
-                    if (thisEvent.eventType === 'vet') {
+                    if (thisEvent && thisEvent.eventType === 'vet') {
                         var operations = thisEvent.data.operations;
                         for (var j = 0; j < operations.length; ++j) {
                             if (operations[j].type === type) {
@@ -195,6 +197,10 @@ angular.module('core').controller('CatViewController', ['$scope', '$stateParams'
                 }
                 return dates;
             }
+
+            $scope.edit = function() {
+                $location.path('/cats/' + $scope.cat._id + '/edit');
+            };
 
         }]
 );

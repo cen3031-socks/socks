@@ -2,7 +2,6 @@
 
 angular.module('core').controller('HomeController', ['$scope', '$location', 'Authentication', 'Cats',
 		function($scope, $location, Authentication, Cats) {
-			// This provides Authentication context.
 			$scope.authentication = Authentication;
 			$scope.dateOfArrival = Date.now();
 
@@ -37,22 +36,22 @@ angular.module('core').controller('HomeController', ['$scope', '$location', 'Aut
                     $scope.error = 'You must select an origin person';
                 }
 				var cat = new Cats({
-					dateOfBirth: this.dateOfBirth,
-					name: this.name,	
-					sex: this.sex,
-					vet: this.vet._id,
-					dateOfArrival: this.dateOfArrival,
-					breed: this.breed,
-					color: this.color,
-					description: this.description,
-					temperament: this.temperament,
+					dateOfBirth: $scope.dateOfBirth,
+                    dateOfBirthEstimated: $scope.dateOfBirthEstimated,
+					name: $scope.name,
+					sex: $scope.sex,
+					vet: $scope.vet._id,
+					dateOfArrival: $scope.dateOfArrival,
+					breed: $scope.breed,
+					color: $scope.color,
+					description: $scope.description,
+					temperament: $scope.temperament,
 					origin: {
-						address: this.originAddress,
-						person: this.originPerson[0]._id
+						address: $scope.originAddress,
+						person: $scope.originPerson.length === 1 ? $scope.originPerson[0]._id : undefined,
+                        organization: $scope.originOrg
 					},
-					currentLocation: this.location,
-					owner: this.owner,
-					notes: [this.notes]
+					currentLocation: $scope.location
 				});
 				return cat.$save(function(response) {
 					$location.path('cats/' + response._id);
