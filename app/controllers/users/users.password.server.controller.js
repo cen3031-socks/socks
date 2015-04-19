@@ -61,7 +61,7 @@ exports.forgot = function(req, res, next) {
 		// If valid email, send reset email using service
 		function(emailHTML, user, done) {
 			var mailOptions = {
-				to: user.email,
+				to: user.username,
 				from: config.mailer.from,
 				subject: 'Password Reset',
 				html: emailHTML
@@ -69,7 +69,7 @@ exports.forgot = function(req, res, next) {
 			smtpTransport.sendMail(mailOptions, function(err) {
 				if (!err) {
 					res.send({
-						message: 'An email has been sent to ' + user.email + ' with further instructions.'
+						message: 'An email has been sent to ' + user.username + ' with further instructions.'
 					});
 				} else {
 					return res.status(400).send({
@@ -166,7 +166,7 @@ exports.reset = function(req, res, next) {
 		// If valid email, send reset email using service
 		function(emailHTML, user, done) {
 			var mailOptions = {
-				to: user.email,
+				to: user.username,
 				from: config.mailer.from,
 				subject: 'Your password has been changed',
 				html: emailHTML

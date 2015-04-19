@@ -13,7 +13,8 @@ module.exports = function(app) {
 		.post(requireEmployee, cats.create);
 
 	app.route('/cats/:catId')
-        .get(cats.view);
+        .get(cats.view)
+        .post(cats.update);
 
 	app.route('/cats/:catId/events')
 		.post(requireEmployee, cats.addEvent);

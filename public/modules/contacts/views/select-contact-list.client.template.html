@@ -6,6 +6,6 @@
             data-ng-repeat="contact in contacts | filter:searchText | orderBy:'surname'"
             ng-click="select(contact)"
             ng-class="{selected: isSelected(contact)}">{{contact.firstName}} {{contact.surname}}</li>
-		<li ng-click="createContact()">+</li>
+		<li ng-click="createContact()" class="btn btn-default">+ Create New</li>
     </ul>
 </section>

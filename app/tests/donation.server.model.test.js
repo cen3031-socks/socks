@@ -129,7 +129,7 @@ describe('Donation Model Unit Tests:', function() {
 			while(donation.items.length >0){
 				donation.items.pop();
 			}
-			donation.items.push({name: "Food", value: {amount: 50}});
+			donation.items.push({name: "Food", value: {amount: 50, units:null}});
 			return donation.save(function(err) {
 				should.exist(err);
 				done();

@@ -58,6 +58,7 @@ angular.module('core').controller('CatViewController',
                             $scope.cat.adoptions[i].eventType = 'adoption';
                         }
                         $scope.cat.events = $scope.cat.events.concat($scope.cat.adoptions);
+                        console.log($scope.cat);
                     });
             };
 
@@ -199,6 +200,10 @@ angular.module('core').controller('CatViewController',
                 }
                 return dates;
             }
+
+            $scope.edit = function() {
+                $location.path('/cats/' + $scope.cat._id + '/edit');
+            };
 
         }]
 );
