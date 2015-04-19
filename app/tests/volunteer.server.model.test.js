@@ -49,7 +49,7 @@ describe('Volunteer Model Unit Tests:', function() {
 			volunteer.name = '';
 
 			return volunteer.save(function(err) {
-				should.exist(err);
+				should.not.exist(err);
 				done();
 			});
 		});

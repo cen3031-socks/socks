@@ -16,6 +16,7 @@ MongoClient.connect('mongodb://localhost/mean-dev', function(err, db) {
 		if (err) throw err;
 
 		console.log('cleaning old data from db');
+		db.collection('users').drop();
 		db.collection('contacts').drop();
 		db.collection('cats').drop();
 		db.collection('donations').drop();

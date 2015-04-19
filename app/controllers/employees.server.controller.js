@@ -8,10 +8,27 @@ var mongoose = require('mongoose'),
 	Contact = mongoose.model('Contact'),
 	User = mongoose.model('User'),
 	_ = require('lodash'),
-    crypto = require('crypto');
+    crypto = require('crypto'),
+    async = require('async');
 
 var generatePassword = function(length) {
     return crypto.randomBytes(length).toString('hex');
+};
+
+exports.permissionLevel = function(level) {
+    return function(req, res, next) {
+        if (!req.isAuthenticated()) {
+            return res.status(401).send({
+                message: 'User is not logged in'
+            });
+        }
+
+        if (!req.user || req.user.permissionLevel < level) {
+            return res.status(403).send({ message: 'You do not have permission to view this page.' });
+        } else {
+            next();
+        }
+    };
 };
 
 /**
@@ -25,8 +42,6 @@ exports.create = function(req, res) {
     user.password = password;
     user.provider = 'local';
     user.contact = contact._id;
-
-    console.log(user.password);
 
     contact.save(function(err) {
         if (err) {

@@ -32,6 +32,16 @@ angular.module('contacts').factory('Contacts', ['$resource',
                 url: 'contacts/:contactId/volunteers',
                 isArray: true
             },
+            findEmployees: {
+                method: 'GET',
+                url: 'contacts/:contactId/employees',
+                isArray: true
+            },
+            findAdmins: {
+                method: 'GET',
+                url: 'contacts/:contactId/admins',
+                isArray: true
+            },
             addNote: {
                 method: 'PUT',
                 url: 'contacts/:contactId/notes'

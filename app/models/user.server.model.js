@@ -1,5 +1,4 @@
 'use strict';
-
 /**
  * Module dependencies.
  */
@@ -73,8 +72,7 @@ UserSchema.pre('save', function(next) {
 		this.salt = new Buffer(crypto.randomBytes(16).toString('base64'), 'base64');
 		this.password = this.hashPassword(this.password);
 	}
-
-	next();
+     next();
 });
 
 /**
@@ -94,6 +92,7 @@ UserSchema.methods.hashPassword = function(password) {
 UserSchema.methods.authenticate = function(password) {
 	return this.password === this.hashPassword(password);
 };
+
 
 /**
  * Find possible not used username
