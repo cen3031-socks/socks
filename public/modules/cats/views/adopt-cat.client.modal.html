@@ -13,8 +13,17 @@
 			</span>
 			</p>
 		</div>
+
+        <div class="form-group">
+            <label>Type</label>
+            <select class="form-control" ng-model="adoptionType">
+                <option value="adoption">Adoption</option>
+                <option value="foster">Foster</option>
+            </select>
+        </div>
+
 		<div class="form-group">
-			<label for="Adopter">Adopter</label>
+			<label>Adopter/Fosterer</label>
 			<div>
 				<contacts-selector max=1 ng-model="adopter" />
 			</div>

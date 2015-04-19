@@ -28,8 +28,10 @@ module.exports = function(app) {
 	app.route('/cats/:catId/adoptions/:adoptionId')
 		.put(requireEmployee, cats.unadopt);
 
-    app.route('/cat-csv')
+    app.route('/cat-csv.csv')
         .get(cats.generateCsv);
+
+    app.route('/search/cats').post(cats.searchCats);
 
 	// Finish by binding the cat middleware
 	app.param('catId', cats.catById);

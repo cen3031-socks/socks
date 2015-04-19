@@ -1,0 +1,25 @@
+<style>
+    .inline-datepicker {
+        display:inline-block;
+        position:relative;
+        width:auto;
+        vertical-align:middle;
+        bottom:0.5em;
+    }
+    .inline-datepicker p.input-group { width:auto; display:inline; }
+    .inline-datepicker p.input-group input[type="text"] { width:auto; display:inline;}
+    .inline-datepicker p.input-group button { width:auto; display:inline;}
+    .inline-datepicker p.input-group .input-group-btn { width:auto; display:inline;}
+</style>
+<div ng-class="{'inline-datepicker': inline}">
+    <p class="input-group">
+        <input type="text" class="form-control" datepicker-popup="dd MMM yyyy" ng-model="selectedDate"
+               is-open="isOpen" ng-required="true" close-text="Close" placeholder="{{unselectedText}}" />
+            <span class="input-group-btn">
+            <button type="button" class="form-control btn btn-default" ng-click="toggle($event)">
+                <i class="glyphicon glyphicon-calendar"></i>
+            </button>
+            </span>
+    </p>
+</div>
+
