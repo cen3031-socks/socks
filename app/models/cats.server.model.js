@@ -78,6 +78,9 @@ var CatSchema = new Schema({
 		default: Date.now,
 		required: 'must have an arrival date' 
 	},
+    dateOfDeceased: {
+        type: Date
+    },
 	breed: {
 		type: String,
 		trim: true,
@@ -91,6 +94,7 @@ var CatSchema = new Schema({
 	origin: {
 		address: String,
 		person: { type: Schema.Types.ObjectId, ref: 'Contact' },
+        organization: String,
         notes: String
 	},
 	currentLocation: String,
