@@ -1,8 +1,8 @@
 var images = angular.module('images');
 
 images.controller('ImageUploadController',
-    ['$scope', 'Images', '$http',
-        function($scope, Images, $http) {
+    ['$scope', 'Images', '$http', '$location',
+        function($scope, Images, $http, $location) {
             $scope.setUploadFile = function(files) {
                 $scope.files = files;
             };
@@ -20,6 +20,7 @@ images.controller('ImageUploadController',
                 }).success(function(response) {
                     $scope.response = response;
                     $scope.isUploaded = true;
+                    $location.path('/images');
                 }).error(function() {
                     $scope.isUploaded = false;
                 });
