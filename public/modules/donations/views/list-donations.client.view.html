@@ -1,28 +1,5 @@
 <section data-ng-controller="DonationsController" data-ng-init="find()">
-    <style type="text/css">
-        .myButton {
-            background-color: black;
-            border-radius:20px;
-            border:1px solid black;
-            display:inline-block;
-            cursor:pointer;
-            color: #D4D4D4;
-            font-family:arial;
-            font-size:17px;
-            padding:16px 31px;
-            text-decoration:none;
-            text-shadow:0px 1px 0px #2f6627;
-        }
-        .myButton:hover {
-            color:#ffffff;
-            text-decoration: none;
-        }
-        .myButton:active {
-            position:relative;
-            top:1px;
-        }
-
-    </style>
+    
     <div class="page-header">
         <h1>Donations</h1>
     </div>
@@ -38,8 +15,6 @@
         <div class="col-xs-12 col-sm-4 text-center">
             <a href="/#!/donations/create">
                 <button class="btn btn-default" href="/#!/donations/create">
-
-                    <!--<i class="glyphicon glyphicon-user"></i> <br>-->
                     New Donation
                 </button>
             </a>
@@ -75,6 +50,7 @@
                     <span data-ng-bind="item.value.units" style='font-size:1.5em;'></span>
                     <i style='font-size:1.5em;' class="{{item.icon}}"></i>
                 </li>
+                <button ng-click="deleteDonation(donation)" class="btn btn-danger">Delete Donation</button>
             </ul>
 
         </a>
