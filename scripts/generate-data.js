@@ -24,9 +24,9 @@ MongoClient.connect('mongodb://localhost/mean-dev', function(err, db) {
 		console.log('Inserting contact data.');
 		db.collection('contacts').insert(contacts.slice(0, 20), function(err, dbcontacts){
 			var donations = [];
-			var names=['Food', 'Monetary', 'Supplies'];
-			var unit=['lbs', 'dollars', 'supplies'];
-			var icons=['glyphicon glyphicon-heart', 'glyphicon glyphicon-usd', 'glyphicon glyphicon-wrench'];
+			var names=['Food', 'Monetary', 'Supplies', 'Other'];
+			var unit=['lbs', 'dollars', 'supplies', 'supplies'];
+			var icons=['glyphicon glyphicon-heart', 'glyphicon glyphicon-usd', 'glyphicon glyphicon-wrench', 'glyphicon glyphicon-briefcase'];
 			for(var i=0; i<80; i++)
 			{
 				//console.log('inside for loop');
