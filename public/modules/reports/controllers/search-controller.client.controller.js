@@ -2,8 +2,6 @@ var app = angular.module('reports');
 
 app.controller('CatSearchController', ['$scope', 'Cats', 'Reports', 'Dialogs', '$stateParams',
     function($scope, Cats, Reports, Dialogs, $stateParams) {
-
-
         $scope.possibleShots = possibleShots;
         $scope.searchResults = [];
         $scope.search = {

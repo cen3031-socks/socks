@@ -91,6 +91,7 @@ var CatSchema = new Schema({
 	origin: {
 		address: String,
 		person: { type: Schema.Types.ObjectId, ref: 'Contact' },
+        organization: String,
         notes: String
 	},
 	currentLocation: String,

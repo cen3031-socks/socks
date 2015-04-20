@@ -340,6 +340,11 @@ exports.filters = {
                     && (!filter.startDate || cat.currentAdoption.date >= new Date(filter.startDate))
                     && (!filter.endDate   || cat.currentAdoption.date <= new Date(filter.endDate));
     },
+    'ArrivalDate': function(filter, cat) {
+        return cat.dateOfArrival
+            && (!filter.startDate || cat.dateOfArrival >= new Date(filter.startDate))
+            && (!filter.endDate   || cat.dateOfArrival <= new Date(filter.endDate));
+    },
     'Breed': function(filter, cat) {
         if (!filter.breeds) { return false; }
         for (var i = 0; i < filter.breeds.length; ++i) {
@@ -367,6 +372,14 @@ exports.filters = {
         var date = filter.date;
         var operation = exports.getMostRecentOperationOfType(cat, shotType);
         return (operation && (!date || shot.date >= new Date(date)));
+    },
+
+    'Origin': function(filter, cat) {
+        if (filter.originType === 'Organization') {
+            return cat.origin.organization === filter.originOrganization;
+        } else if (filter.originType === 'Person') {
+            return _.contains(_.map(filter.people, function(p) { return p._id; }), cat.origin.person);
+        }
     }
 };
 
@@ -411,6 +424,7 @@ exports.searchCats = function(req, res) {
 };
 
 exports.update = function(req, res) {
-    var cat = _.extend(req.cat, req.body);
+    var cat = _.assign(req.cat, req.body);
+    console.log(req.body);
     cat.save(errorHandler.wrap(res, function(cat) { res.json(cat) }));
 };

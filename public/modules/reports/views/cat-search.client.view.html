@@ -26,7 +26,9 @@
                         <option value="Sex">Sex</option>
                         <option value="Age">Age</option>
                         <option value="HasHadOperation">Has Had Operation</option>
+                        <option value="ArrivalDate">Arrival Date</option>
                         <option value="Origin">Origin</option>
+                        <option value="Deceased">Deceased</option>
                     </select>
                 </div>
             </div>
@@ -123,6 +125,21 @@
                             <custom-datepicker ng-model="filter.endDate" unselected-text="'the end of time'" inline="true"></custom-datepicker>
                         </div>
                     </div>
+                    <div ng-switch-when="ArrivalDate">
+                        <span class="inline-input-container">
+                            <select ng-model="filter.invert" class="form-control"
+                                    ng-options="o.value as o.text for o in invertValues">
+                            </select>
+                        </span>
+                        <span>cats whose arrival date is between</span>
+                        <div class="inline-input-container">
+                            <custom-datepicker ng-model="filter.startDate" unselected-text="'the beginning of time'" inline="true"></custom-datepicker>
+                        </div>
+                        <span>and</span>
+                        <div class="inline-input-container">
+                            <custom-datepicker ng-model="filter.endDate" unselected-text="'the end of time'" inline="true"></custom-datepicker>
+                        </div>
+                    </div>
                     <div ng-switch-when="Origin">
                         <span class="inline-input-container">
                             <select ng-model="filter.invert" class="form-control"
@@ -137,7 +154,19 @@
                             </select>
                         </span>
                         is
-
+                        <ng-switch on="filter.originType">
+                            <span ng-switch-when="Person">
+                                one of
+                                <span class="inline-input-container">
+                                    <contacts-selector ng-model="filter.originPerson"></contacts-selector>
+                                </span>
+                            </span>
+                            <span ng-switch-when="Organization">
+                                <span class="inline-input-container">
+                                    <input type="text" ng-model="filter.originOrganization" placeholder="Organization" class="form-control" />
+                                </span>
+                            </span>
+                        </ng-switch>
                     </div>
                 </ng-switch>
             </div>
@@ -152,7 +181,7 @@
     <button type="button" class="btn btn-lg btn-primary" ng-click="getResult()">Search</button>
     <button type="button" class="btn btn-lg btn-success" ng-click="saveDialog()">Save search...</button>
     <button type="button" class="btn btn-lg btn-warning" ng-click="export()">Export results</button>
-    <h2>Results</h2>
+    <h2>Results ({{searchResults.length || 0}} matches)</h2>
     <ul>
         <li ng-repeat="cat in searchResults">{{cat.name}}</li>
     </ul>
