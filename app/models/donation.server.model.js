@@ -10,7 +10,7 @@ var mongoose = require('mongoose'),
 var validateItemName = function(name) {
     var possible = ['Food', 'Monetary', 'Supplies'];
     var inList = false;
-    for (var i = 0; i < possible.length; i++) {
+    for (var i = 0; i<possible.length; i++) {
         if (possible[i] === name){
             inList = true;
         }
@@ -142,6 +142,7 @@ var DonationSchema = new Schema({
         }],
         validate: [oneItemPresent, 'must have one item present in list']
     }
+    
 });
 
 mongoose.model('Donation', DonationSchema);

@@ -1,0 +1,11 @@
+<section ng-controller="ImageUploadController">
+    <form action="/upload-image" method="POST">
+        <p>
+            <label>Select an image:</label>
+            <input type="file" name="image" onchange="angular.element(this).scope().setUploadFile(this.files)" />
+        </p>
+        <p>
+            <input type="button" class="btn" value="Submit" ng-disabled="$isUploading" ng-click="uploadFile($event)" />
+        </p>
+    </form>
+</section>

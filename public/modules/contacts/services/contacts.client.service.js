@@ -17,6 +17,11 @@ angular.module('contacts').factory('Contacts', ['$resource',
                 url: 'adopters',
                 isArray: true
             },
+            findFosteredCats: {
+                method: 'GET',
+                url: 'contacts/:contactId/fosters',
+                isArray: true
+            },
             findCatsWithVets: {
                 method: 'GET',
                 url: '/contacts/:contactId/vets',

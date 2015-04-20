@@ -4,20 +4,14 @@ googlejs.factory('googleService', ['$document', '$q', '$rootScope', '$window',
     function($document, $q, $rootScope, $window) {
         var d = $q.defer();
 
-        function onScriptLoad() {
-            $rootScope.$apply(function() { d.resolve($window.google); });
-        }
-
         var scriptTag = $document[0].createElement('script');
         scriptTag.type = 'text/javascript';
         scriptTag.async = true;
-        scriptTag.src = 'https://maps.googleapis.com/maps/api/js?sensor=false';
+        scriptTag.src = 'https://maps.googleapis.com/maps/api/js?sensor=false&callback=googleMapsCallback';
 
-        scriptTag.onreadystatechange = function () {
-            if (this.readyState == 'complete') onScriptLoad();
-        };
-
-        scriptTag.onload = onScriptLoad;
+        $window.googleMapsCallback = function() {
+            $rootScope.$apply(function() { d.resolve(google); });
+        }
 
         var s = $document[0].getElementsByTagName('body')[0];
         s.appendChild(scriptTag);

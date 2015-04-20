@@ -88,29 +88,22 @@
                             </div>
                         </div>
 
-                        <div class="form-group col-md-2">
-                            <ng-switch on="item.name" ng-model="icon">
-                                <i ng-switch-default class="glyphicon glyphicon-briefcase" style="font-size:2.0em;"> </i>
-                                <i ng-switch-when="Monetary" class="glyphicon glyphicon-usd" style="font-size:2.0em;"> </i>
-                                <i ng-switch-when="Food" class="glyphicon glyphicon-heart" style="font-size:2.0em;"> </i>
-                                <i ng-switch-when="Supplies" class="glyphicon glyphicon-wrench" style="font-size:2.0em;"> </i>
-                            </ng-switch>
-                        </div>
+                        <i style="font-size:2.0em;" class="glyphicon col-md-1" ng-class="getIcon(item)"></i>
 
                     </div>
 
                     <div class="form-group">
-                        <button  ng-click="items.splice($index, 1)" id="addItem" type="button" class="myButton">Delete Item</button>
+                        <button  ng-click="items.splice($index, 1)" id="addItem" type="button" class="btn btn-default">Delete Item</button>
                     </div>
 
                 </div>
 
                     <div class="form-group">
-                        <button  ng-click="items.push({})" id="addItem" type="button" class="myButton" style="text-align:center;">Add Item</button>
+                        <button  ng-click="items.push({})" id="addItem" type="button" class="btn btn-default" style="text-align:center;">Add Item</button>
                     </div>
 
                 <div class="form-group" style="text-align:center;">
-                    <button ng-click="create()" type="submit" class="myButton">Submit</button>
+                    <button ng-click="create()" type="submit" class="btn btn-success">Submit</button>
                 </div>
 
 				<div data-ng-show="error" class="text-danger">
