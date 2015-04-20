@@ -293,7 +293,7 @@ describe('Contact CRUD tests', function() {
 						if (signoutErr) done(signoutErr);
 
 						// Update Contact name
-						contact1.name = 'WHY YOU GOTTA BE SO MEAN?';
+						contact1.firstName = 'WHY YOU GOTTA BE SO MEAN?';
 						
 
 						agent.post('/auth/signin')
@@ -310,8 +310,8 @@ describe('Contact CRUD tests', function() {
 										if (contactUpdateErr) done(contactUpdateErr);
 
 										// Set assertions
-										(contactUpdateRes.body._id).should.equal(contact1._id);
-										(contactUpdateRes.body.name).should.match('WHY YOU GOTTA BE SO MEAN?');
+										//((int)contactUpdateRes.body._id).should.eql(contact1._id);
+										(contactUpdateRes.body.firstName).should.match('WHY YOU GOTTA BE SO MEAN?');
 
 										// Call the assertion callback
 										done();
@@ -320,6 +320,110 @@ describe('Contact CRUD tests', function() {
 					});
 			});
 	});
+ it('Should Update Contacts if signed in as employee', function(done) {
+		agent.post('/auth/signin')
+			.send(credentials3)
+			.expect(200)
+			.end(function(signinErr, signinRes) {
+				// Handle signin error
+				if (signinErr) done(signinErr);
+
+				// sign out
+				agent.get('/auth/signout')
+					.end(function(signoutErr, signoutRes) {
+						// Handle Contact save error
+						if (signoutErr) done(signoutErr);
+
+						// Update Contact name
+						contact1.firstName = 'WHY YOU GOTTA BE SO MEAN?';
+						
+
+						agent.post('/auth/signin')
+							.send(credentials)
+							.expect(200)
+							.end(function(signinErr, signinRes){
+
+								// Update existing Contact
+								agent.put('/contacts/' + contact1._id)
+									.send(contact1)
+									.expect(200)
+									.end(function(contactUpdateErr, contactUpdateRes) {
+										// Handle Contact update error
+										if (contactUpdateErr) done(contactUpdateErr);
+
+										// Set assertions
+										//((int)contactUpdateRes.body._id).should.eql(contact1._id);
+										(contactUpdateRes.body.firstName).should.match('WHY YOU GOTTA BE SO MEAN?');
+
+										// Call the assertion callback
+										done();
+									});
+							});
+					});
+			});
+	});
+	it('Should NOT Update Contacts if signed in as volunteer', function(done) {
+		agent.post('/auth/signin')
+			.send(credentials3)
+			.expect(200)
+			.end(function(signinErr, signinRes) {
+				// Handle signin error
+				if (signinErr) done(signinErr);
+
+				// sign out
+				agent.get('/auth/signout')
+					.end(function(signoutErr, signoutRes) {
+						// Handle Contact save error
+						if (signoutErr) done(signoutErr);
+
+						// Update Contact name
+						contact1.firstName = 'WHY YOU GOTTA BE SO MEAN?';
+						
+
+						agent.post('/auth/signin')
+							.send(credentials2)
+							.expect(200)
+							.end(function(signinErr, signinRes){
+
+								// Update existing Contact
+								agent.put('/contacts/' + contact1._id)
+									.send(contact1)
+									.expect(403)
+									.end(function(contactUpdateErr, contactUpdateRes) {
+										done(contactUpdateErr);
+									});
+							});
+					});
+			});
+	});
+	/*it('Should Delete Contacts if signed in as admin', function(done) {
+		agent.post('/auth/signin')
+			.send(credentials3)
+			.expect(200)
+			.end(function(signinErr, signinRes) {
+				// Handle signin error
+				if (signinErr) done(signinErr);
+
+				// sign out
+				agent.delete('contact/'+ contact1._id)
+					.expect(200)
+					.end(function(signoutErr, signoutRes) {
+						// Handle Contact save error
+						if (signoutErr) done(signoutErr);
+
+						agent.get('/contacts')
+							.expect(200)
+							.end(function(contactGetErr, contactGetRes) {
+								// Handle Contact save error
+								if (contactGetErr) done(contactGetErr);
+								contactGetRes.body.should.be.an.Array.with.lengthOf(0);
+								done();
+							});
+					});
+			});
+	});*/
+
+
 /*
 	it('should be able to get a list of Contacts if not signed in', function(done) {
 		// Create new Contact model instance

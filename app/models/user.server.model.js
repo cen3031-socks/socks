@@ -45,7 +45,7 @@ var UserSchema = new Schema({
 	},
 	permissionLevel: {
 		type: Number,
-		default: 0,
+		default: 4,
 		validate: [checkValidPermissionLevel, 'permissionLevel must be >= 0']
 	},
 	updated: {
