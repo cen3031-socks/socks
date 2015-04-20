@@ -34,9 +34,25 @@ var cleanZipCode = function(zipCode) {
 };
 
 exports.findAdoptedCats = function(req, res) {
-    Adoption.find({adopter: req.contact._id, endDate: null}).exec(function(err, adoptions) {
+    Adoption.find({adopter: req.contact._id, endDate: null, adoptionType: 'adoption'}).exec(function(err, adoptions) {
         if (err) {
            return res.status(400);
+        }
+        Adoption.populate(adoptions, { path: 'catId', model: Cat},
+            function(err, adoptions) {
+                if (err) {
+                    return res.status(400);
+                }
+                else return res.jsonp(adoptions);
+            }
+        );
+    });
+};
+
+exports.findFosteredCats = function(req, res) {
+    Adoption.find({adopter: req.contact._id, endDate: null, adoptionType: 'foster'}).exec(function(err, adoptions) {
+        if (err) {
+            return res.status(400);
         }
         Adoption.populate(adoptions, { path: 'catId', model: Cat},
             function(err, adoptions) {
