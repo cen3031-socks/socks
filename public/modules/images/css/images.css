@@ -1,0 +1,27 @@
+ul.image-gallery {
+  list-style-type:none;
+}
+ul.image-gallery li {
+    display:inline-block;
+    margin:1em;
+    position:relative;
+}
+
+ul.image-gallery li a:link img, ul.image-gallery li a:visited img {
+    border:2px solid transparent;
+}
+
+ul.image-gallery li a:hover img, ul.image-gallery li a:active img {
+    border:2px solid blue;
+    position:relative;
+}
+
+div.main-image img {
+    max-height:80%;
+    max-width:80%;
+    margin:1em;
+}
+
+.image-view .row cats-selector {
+    margin:2em;
+}

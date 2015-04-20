@@ -1,3 +1,6 @@
+var q = require('q'),
+    _ = require('lodash');
+
 /**
  * Takes properties as in whatever form they're given and returns them as an array
  * of objects, where each object has two properties: columnName and getProperty
@@ -54,6 +57,8 @@ var normalizeProperties = function(properties) {
  * @param {Boolean}         [excludeHeaders]    true iff the headers should be excluded. Defaults to false
  */
 exports.convertToCsv = function(items, properties, separator, excludeHeaders) {
+    var deferred = q.defer();
+
     if (items.length === 0 || properties.length === 0) {
         return null;
     }
@@ -75,14 +80,32 @@ exports.convertToCsv = function(items, properties, separator, excludeHeaders) {
         csv += '\n';
     }
 
+    var itemsArray = [];
+
     for (var i = 0; i < items.length; ++i) {
+        var thisItemArray = [];
+
         for (var j = 0; j < props.length; ++j) {
-            csv += '"' + props[j].getProperty(items[i]) + '"';
+            thisItemArray.push(q.when(props[j].getProperty(items[i])));
+        }
+        itemsArray.push(thisItemArray);
+    }
+
+    q.all(_.flatten(itemsArray)).then(function(allValues) {
+        for (var i = 0; i < allValues.length; ++i) {
+            var j = i % props.length;
+            csv += '"' + allValues[i] + '"';
             if (j !== props.length - 1) {
                 csv += separator;
             }
+
+            if (j === props.length - 1) {
+                csv += '\n';
+            }
         }
-        csv += '\n';
-    }
-    return csv;
+
+        deferred.resolve(csv);
+    }, deferred.reject);
+
+    return deferred.promise;
 };
