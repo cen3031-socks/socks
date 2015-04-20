@@ -97,48 +97,68 @@ exports.findAdmins = function(req, res) {
 
 
  exports.determineIfAdopter = function(contact) {
- var deferred = q.defer();
- Adoption.find({adopter: contact._id}, function (err, adoptions) {
- if (err) {
- deferred.reject();
- }
- deferred.resolve(adoptions.length > 0);
- });
- return deferred.promise;
+     var deferred = q.defer();
+     Adoption.find({adopter: contact._id}, function (err, adoptions) {
+        if (err) {
+            deferred.reject();
+        }
+        deferred.resolve(adoptions.length > 0);
+     });
+     return deferred.promise;
  };
+
+/*
+exports.determineIfFosterer = function(contact) {
+    var deferred = q.defer();
+    Adoption.find({adopter: contact._id}, function (err, adoptions) {
+        if (err) {
+            deferred.reject();
+        }
+        deferred.resolve(adoptions.length > 0);
+    });
+    return deferred.promise;
+}; */
 
  /**
  * Generate CSV for Contacts
  */
-
  exports.generateCsv = function(req, res) {
- var csvFields = {
- 'ID' : '_id',
- 'FirstName': 'firstName',
- 'LastName': 'surname', //NOTE, it should display surnames as "LastName" for easy readability
- 'Email': 'email',
- 'PhoneNumber': 'phone', //NOTE, it should display phone as "PhoneNumber" for easy readability
- 'Address': 'address',
- 'City': 'city',
- 'State': 'state',
- 'ZipCode': 'zipCode',
- 'Adopter': function(contact) {
-     var deferred = q.defer();
-     exports.determineIfAdopter(contact)
-         .then(function(result) {
-            deferred.resolve(result ? 'T' : 'F');
-         }, deferred.reject);
-     return deferred.promise;
- }
- };
- Contact.find()
- .exec(errorHandler.wrap(res, function(contacts) {
- res.set('Content-Type', 'text/csv');
- var csv = require('./csv.js');
- csv.convertToCsv(contacts, csvFields).then(function(csvData) {
- res.send(csvData);
- })
- }));
+     var csvFields = {
+         'ID' : '_id',
+         'FirstName': 'firstName',
+         'LastName': 'surname', //NOTE, it should display surnames as "LastName" for easy readability
+         'Email': 'email',
+         'PhoneNumber': 'phone', //NOTE, it should display phone as "PhoneNumber" for easy readability
+         'Address': 'address',
+         'City': 'city',
+         'State': 'state',
+         'ZipCode': 'zipCode',
+         'Adopter': function(contact) {
+             var deferred = q.defer();
+             exports.determineIfAdopter(contact)
+                 .then(function(result) {
+                    deferred.resolve(result ? 'T' : 'F');
+                 }, deferred.reject);
+             return deferred.promise;
+         }
+        /* 'Fosterer': function(contact) {
+             var deferred = q.defer();
+             exports.determineIfAdopter(contact)
+                 .then(function(result) {
+                     deferred.resolve(result ? 'T' : 'F');
+                 }, deferred.reject);
+             return deferred.promise;
+         } */
+
+      };
+     Contact.find()
+     .exec(errorHandler.wrap(res, function(contacts) {
+         res.set('Content-Type', 'text/csv');
+         var csv = require('./csv.js');
+         csv.convertToCsv(contacts, csvFields).then(function(csvData) {
+         res.send(csvData);
+         })
+     }));
  };
 
  /**
