@@ -351,6 +351,33 @@ function ($scope, Contacts, $stateParams, $modal, Authentication, $location, Vol
                 $scope.cancel = function () {
                     $modalInstance.dismiss('cancel');
                 };
+                $scope.getMinutesWorked = function() {
+                    console.log('minutes worked');
+                    $scope.minutesWorked = Volunteers.minutesWorked({
+                        startDate: +$scope.startDate,
+                        endDate: +$scope.endDate,
+                        contactId: $scope.contact._id
+                    });
+                };
+
+                $scope.getHours = function(minutes) {
+                    var result = Math.round(Math.floor(minutes/60));
+                    if (isNaN(result)) {
+                        return '...';
+                    }
+                    else return result + '';
+                };
+                $scope.getMinutes = function(minutes) {
+                    var result = Math.round(minutes -(Math.floor(minutes/60))*60);
+                    if (isNaN(result)) {
+                        return '...';
+                    }
+                    else return result + '';
+                };
+
+                $scope.$watch('contact', $scope.getMinutesWorked);
+                $scope.$watch('startDate', $scope.getMinutesWorked);
+                $scope.$watch('endDate', $scope.getMinutesWorked);
             },
             size: size,
             resolve: {

@@ -1,0 +1,16 @@
+<ul class="cat-selector">
+	<li ng-repeat="cat in selectedCats"
+	    ng-class="{last: $index == maxCats - 1}">
+		<span>
+            <p>{{cat.name}}</p>
+        </span>
+		<div ng-click="unselect(cat, $index)">
+			<i class="glyphicon glyphicon-trash"></i> 
+		</div>
+    </li>
+    <li>
+        <span class="btn btn-default" ng-click="showModal()">
+            {{selectText}}
+        </span>
+    </li>
+</ul>
