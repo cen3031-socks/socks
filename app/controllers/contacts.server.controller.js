@@ -161,6 +161,18 @@ exports.findEmployees = function (req, res) {
     });
 };
 
+exports.determineIfEmployee = function (contact) {
+    var deferred = q.defer();
+    console.log(contact._id);
+    User.find({contact: contact._id, permissionLevel: users.EMPLOYEE}).exec(function (err, users) {
+        if (err) {
+            deferred.reject();
+        }
+        deferred.resolve(users.length > 0);
+    });
+    return deferred.promise;
+};
+
 exports.findAdmins = function (req, res) {
     User.find({contact: req.contact._id, permissionLevel: users.ADMIN}).exec(function (err, users) {
         if (err) {
@@ -168,6 +180,18 @@ exports.findAdmins = function (req, res) {
         }
         else return res.jsonp(users);
     });
+};
+
+exports.determineIfAdmin = function (contact) {
+    var deferred = q.defer();
+    console.log(contact._id);
+    User.find({contact: contact._id, permissionLevel: users.ADMIN}).exec(function (err, users) {
+        if (err) {
+            deferred.reject();
+        }
+        deferred.resolve(users.length > 0);
+    });
+    return deferred.promise;
 };
 
 var promisedBoolean = function(promise) {
@@ -204,7 +228,14 @@ exports.generateCsv = function (req, res) {
         },
         'Volunteer': function (contact) {
             return promisedBoolean(exports.determineIfVolunteer(contact));
+        },
+        'Employee': function (contact) {
+            return promisedBoolean(exports.determineIfEmployee(contact));
+        },
+        'Admin': function (contact) {
+            return promisedBoolean(exports.determineIfAdmin(contact));
         }
+
     };
     Contact.find()
         .exec(errorHandler.wrap(res, function (contacts) {
