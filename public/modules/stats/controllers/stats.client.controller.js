@@ -8,6 +8,7 @@ angular.module('stats').directive('adopterMap', function(Contacts, googleService
     // directive link function
     var link = function(scope, element, attrs) {
         googleService.google().then(function(google) {
+            console.log(google);
             var geocoder = new google.maps.Geocoder();
             var map, infoWindow;
             var markers = [];
