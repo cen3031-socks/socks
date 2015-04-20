@@ -1,6 +1,5 @@
 'use strict';
 
-
 //Setting up route
 angular.module('donations').config(['$stateProvider',
 	function($stateProvider) {
