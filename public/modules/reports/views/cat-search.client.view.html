@@ -140,6 +140,21 @@
                             <custom-datepicker ng-model="filter.endDate" unselected-text="'the end of time'" inline="true"></custom-datepicker>
                         </div>
                     </div>
+                    <div ng-switch-when="Deceased">
+                        <span class="inline-input-container">
+                            <select ng-model="filter.invert" class="form-control"
+                                    ng-options="o.value as o.text for o in invertValues">
+                            </select>
+                        </span>
+                        <span>cats whose death date is between</span>
+                        <div class="inline-input-container">
+                            <custom-datepicker ng-model="filter.startDate" unselected-text="'the beginning of time'" inline="true"></custom-datepicker>
+                        </div>
+                        <span>and</span>
+                        <div class="inline-input-container">
+                            <custom-datepicker ng-model="filter.endDate" unselected-text="'the end of time'" inline="true"></custom-datepicker>
+                        </div>
+                    </div>
                     <div ng-switch-when="Origin">
                         <span class="inline-input-container">
                             <select ng-model="filter.invert" class="form-control"

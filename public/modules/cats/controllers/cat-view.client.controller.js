@@ -102,6 +102,8 @@ angular.module('core').controller('CatViewController',
                             return 'glyphicon-pushpin';
                         };
                         $scope.createEvent = function() {
+
+
                             Cats.addEvent({catId: cat._id}, {
                                 eventType: $scope.eventType,
                                 detail: $scope.detail,
@@ -112,7 +114,7 @@ angular.module('core').controller('CatViewController',
                                     operations: this.operations
                                 }
                             }, function() {
-                                $modalInstance.close(true);
+                                    $modalInstance.close(true);
                             });
                         };
                     },

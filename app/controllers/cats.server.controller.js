@@ -345,6 +345,19 @@ exports.filters = {
             && (!filter.startDate || cat.dateOfArrival >= new Date(filter.startDate))
             && (!filter.endDate   || cat.dateOfArrival <= new Date(filter.endDate));
     },
+    'Deceased': function(filter, cat) {
+        if (cat.events) {
+            for (var i = 0; i < cat.events.length; ++i) {
+                if (cat.events[i].eventType === 'deceased') {
+                    var date = cat.events[i].date;
+                    return date
+                        && (!filter.startDate || date >= new Date(filter.startDate))
+                        && (!filter.endDate || date <= new Date(filter.endDate));
+                }
+            }
+        }
+        else return false;
+    },
     'Breed': function(filter, cat) {
         if (!filter.breeds) { return false; }
         for (var i = 0; i < filter.breeds.length; ++i) {
@@ -361,6 +374,7 @@ exports.filters = {
         var catAge = exports.getCatAge(cat);
         return (!filter.minAge || filter.minAge <= catAge) && (!filter.maxAge || filter.maxAge >= catAge);
     },
+
     /**
      * Checks if a cat has had a shot of a given type since a given date
      * @param filter
