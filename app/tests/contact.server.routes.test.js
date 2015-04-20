@@ -396,6 +396,34 @@ describe('Contact CRUD tests', function() {
 					});
 			});
 	});
+	/*it('Should Delete Contacts if signed in as admin', function(done) {
+		agent.post('/auth/signin')
+			.send(credentials3)
+			.expect(200)
+			.end(function(signinErr, signinRes) {
+				// Handle signin error
+				if (signinErr) done(signinErr);
+
+				// sign out
+				agent.delete('contact/'+ contact1._id)
+					.expect(200)
+					.end(function(signoutErr, signoutRes) {
+						// Handle Contact save error
+						if (signoutErr) done(signoutErr);
+
+						agent.get('/contacts')
+							.expect(200)
+							.end(function(contactGetErr, contactGetRes) {
+								// Handle Contact save error
+								if (contactGetErr) done(contactGetErr);
+								contactGetRes.body.should.be.an.Array.with.lengthOf(0);
+								done();
+							});
+					});
+			});
+	});*/
+
+
 /*
 	it('should be able to get a list of Contacts if not signed in', function(done) {
 		// Create new Contact model instance
