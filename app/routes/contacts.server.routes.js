@@ -37,6 +37,9 @@ module.exports = function(app) {
     app.route('/contacts/:contactId/admins')
         .get(contacts.findAdmins);
 
+    app.route('/contact-csv.csv')
+        .get(contacts.generateCsv);
+
     app.route('/adopters')
         .get(requireEmployee, contacts.getAllAdopters);
 
