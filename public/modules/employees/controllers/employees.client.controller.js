@@ -14,6 +14,7 @@ angular.module('employees').controller('EmployeesController', ['$scope', '$state
 				surname: this.surname,
 				email: this.email,
 				phone: this.phone,
+				isAdmin: this.isAdmin,
 				permissionLevel:this.permissionLevel,
 				password: this.password
 			});
@@ -21,12 +22,13 @@ angular.module('employees').controller('EmployeesController', ['$scope', '$state
 			//console.log(employee.password);
 			// Redirec after save
 			employee.$save(function(response) {
-				//$location.path('contacts/' + user.contact);
+				$location.path('contacts/' + user.contact);
 				// Clear form fields
 				$scope.firstName = '';
 				$scope.surname = '';
 				$scope.email = '';
 				$scope.phone = '';
+				$scope.isAdmin = '';
 
 			}, function(errorResponse) {
 				$scope.error = errorResponse.data.message;
