@@ -11,7 +11,8 @@ module.exports = function(app) {
 	// Donations Routes
 	app.route('/donations')
 		.get(requireEmployee, donations.list)
-		.post(requireEmployee, donations.create);
+		.post(requireEmployee, donations.create)
+        //.delete(requireEmployee, donations.delete);
 
 	app.route('/donations/:donationId')
 		.get(donations.read)

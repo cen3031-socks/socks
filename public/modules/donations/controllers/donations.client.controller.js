@@ -1,8 +1,8 @@
 'use strict';
 
 // Donations controller
-angular.module('donations').controller('DonationsController', ['$scope', '$stateParams', '$location', 'Authentication', 'Donations',
-	function($scope, $stateParams, $location, Authentication, Donations) {
+angular.module('donations').controller('DonationsController', ['$scope', '$stateParams', '$location', 'Authentication', 'Donations', 'Dialogs', 
+	function($scope, $stateParams, $location, Authentication, Donations, Dialogs) {
 		$scope.authentication = Authentication;
 		$scope.items=[{}];
         $scope.donations=[];
@@ -95,6 +95,21 @@ angular.module('donations').controller('DonationsController', ['$scope', '$state
         $event.stopPropagation();
         $scope.opened = true;
     	};
+        
+        $scope.deleteDonation = function(donation) {
+                Dialogs
+                        .confirm('Delete Donation?')
+                        .then(function(result) {
+                            if (donation && result) {
+
+                                donation.$remove(function() {
+                                    $location.path('/donations');
+                                    $scope.donations = Donations.query();
+                                });
+
+                            }
+                        });
+                };
         
         $scope.getIcon=function(item) {
             if(item.name === 'Monetary')
