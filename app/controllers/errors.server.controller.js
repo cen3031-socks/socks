@@ -69,7 +69,9 @@ exports.sendErrorResponse = function(res, err, statusCode) {
  */
 exports.wrap = function(res, callback) {
     return function(err) {
-        if (!exports.sendErrorResponse(res, err)) {
+        if (exports.sendErrorResponse(res, err)) {
+            console.error(err);
+        } else {
             callback.apply(this, [].slice.call(arguments, 1));
         }
     };

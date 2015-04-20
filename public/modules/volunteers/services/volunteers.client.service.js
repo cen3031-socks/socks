@@ -16,7 +16,7 @@ angular.module('volunteers').factory('Volunteers', ['$resource',
             },
             minutesWorked: {
                 method: 'GET',
-                url: '/volunteers/get-minutes/:contactId/:startDate_:endDate',
+                url: '/volunteers/get-minutes/:contactId/:startDate/:endDate',
                 isArray: false
             }
 		});

@@ -1,0 +1,82 @@
+.select-cat-list ul, .cat-selector {
+	list-style-type:none;
+	margin:0;
+	padding:0;
+	display:inline-block;
+}
+
+.cat-selector li {
+	position:relative;
+	display:table-row;
+}
+
+.cat-selector li span, .cat-selector li div {
+	box-sizing: border-box;
+	display:table-cell;
+	height:2em;
+	line-height:2em;
+}
+.cat-selector li span, .select-cat-list ul li {
+	border:1px solid #bbb;
+	background-color: #dedede;
+	padding-left:1em;
+	padding-right:1em;
+}
+.cat-selector li div {
+	padding:0.5em;
+	text-align:center;
+	color:#C03;
+}
+
+.cat-selector li div:hover {
+	cursor:pointer;
+	color:#F66;
+}
+
+.cat-selector .btn {
+	background-color:#ddd;
+	border-top-left-radius:0;
+	border-top-right-radius:0;
+	border:1px solid #bbb;
+}
+.cat-selector .btn:hover, .select-cat-list li:hover  {
+	cursor:pointer;
+	background-color:#ccc;
+}
+.cat-selector li:first-child .btn,
+.cat-selector li:first-child span,
+.select-cat-list li:first-child {
+	border-top-left-radius:6px;
+	border-top-right-radius:6px;
+}
+.cat-selector li:last-child .btn,
+.cat-selector li.last span,
+.select-cat-list li:last-child {
+	border-bottom-left-radius:6px;
+	border-bottom-right-radius:6px;
+}
+
+.cat-select li span img {
+    max-width:144px;
+    max-height:144px;
+}
+
+.cat-selector .btn {
+	font-size:100%; 
+	min-width:4.0em; 
+	height:2.0em;
+}
+
+.select-cat-list {
+	padding:2em;
+}
+
+.select-cat-list ul {
+	margin:1em;
+}
+.select-cat-list ul li {
+	display:block;
+}
+.select-cat-list ul li:last-child {
+	text-align:center;
+}

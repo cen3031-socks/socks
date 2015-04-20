@@ -296,7 +296,14 @@ exports.generateCsv = function(req, res) {
        .exec(errorHandler.wrap(res, function(cats) {
             res.set('Content-Type', 'text/csv');
             var csv = require('./csv.js');
-            res.send(csv.convertToCsv(cats, csvFields));
+            csv.convertToCsv(cats, csvFields).
+                then(function(csvData) {
+                    res.send(csvData);
+
+                }).
+                fail(function(err) {
+                    errorHandler.sendErrorResponse(res, err);
+                });
         }));
 };
 
@@ -398,6 +405,5 @@ exports.searchCats = function(req, res) {
 
 exports.update = function(req, res) {
     var cat = _.extend(req.cat, req.body);
-    console.log(cat);
     cat.save(errorHandler.wrap(res, function(cat) { res.json(cat) }));
 };

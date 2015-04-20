@@ -1,0 +1,9 @@
+<section class="image-view" ng-controller="EditImageController">
+    <div class="main-image row">
+        <img ng-src="{{image.originalSrc}}" />
+    </div>
+    <div class="row">
+        <cats-selector ng-model="image.tags" select-text="'Tag a Cat'" hide-until="0"></cats-selector>
+    </div>
+    <button type="button" ng-click="save()" class="btn btn-lg btn-default" >Save</button>
+</section>
