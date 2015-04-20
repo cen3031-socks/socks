@@ -32,9 +32,6 @@ module.exports = function(app) {
     app.route('/cat-csv.csv')
         .get(cats.generateCsv);
 
-    app.route('/search/cats').post(cats.searchCats);
-
-	// Finish by binding the cat middleware
 	app.param('catId', cats.catById);
 	app.param('adoptionId', cats.adoptionById);
 };

@@ -37,7 +37,8 @@ var adoptionController = function(cat, Cats, $scope, $modalInstance) {
     };
 };
 
-angular.module('core').controller('CatViewController', ['$scope', '$stateParams', 'Authentication', 'Cats', '$modal', '$location', '$rootScope', 'Contacts', 'Dialogs',
+angular.module('core').controller('CatViewController',
+    ['$scope', '$stateParams', 'Authentication', 'Cats', '$modal', '$location', '$rootScope', 'Contacts', 'Dialogs',
         function($scope, $stateParams, Authentication, Cats, $modal, $location, $rootScope, Contacts, Dialogs) {
             // This provides Authentication context.
             $scope.authentication = Authentication;
@@ -101,6 +102,8 @@ angular.module('core').controller('CatViewController', ['$scope', '$stateParams'
                             return 'glyphicon-pushpin';
                         };
                         $scope.createEvent = function() {
+
+
                             Cats.addEvent({catId: cat._id}, {
                                 eventType: $scope.eventType,
                                 detail: $scope.detail,
@@ -111,7 +114,7 @@ angular.module('core').controller('CatViewController', ['$scope', '$stateParams'
                                     operations: this.operations
                                 }
                             }, function() {
-                                $modalInstance.close(true);
+                                    $modalInstance.close(true);
                             });
                         };
                     },
@@ -183,14 +186,16 @@ angular.module('core').controller('CatViewController', ['$scope', '$stateParams'
 
             $scope.getProcedureDates = function(cat, type) {
                 var dates = [];
-                for (var i = 0; i < cat.events.length; ++i) {
-                    var thisEvent = cat.events[i];
-                    if (thisEvent && thisEvent.eventType === 'vet') {
-                        var operations = thisEvent.data.operations;
-                        for (var j = 0; j < operations.length; ++j) {
-                            if (operations[j].type === type) {
-                                dates.push(thisEvent.date);
-                                break;
+                if (cat.events) {
+                    for (var i = 0; i < cat.events.length; ++i) {
+                        var thisEvent = cat.events[i];
+                        if (thisEvent && thisEvent.eventType === 'vet') {
+                            var operations = thisEvent.data.operations;
+                            for (var j = 0; j < operations.length; ++j) {
+                                if (operations[j].type === type) {
+                                    dates.push(thisEvent.date);
+                                    break;
+                                }
                             }
                         }
                     }

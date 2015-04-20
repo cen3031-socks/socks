@@ -9,7 +9,9 @@ var mongoose = require('mongoose'),
 	Adoption = mongoose.model('Adoption'),
 	Donation = mongoose.model('Donation'),
 	Contact = mongoose.model('Contact'),
-	_ = require('lodash');
+    Report = mongoose.model('Report'),
+	_ = require('lodash'),
+    async = require('async');
 
 exports.list = function(req, res) {
 	Cat.find().sort('name').exec(function(err, cats) {
@@ -338,10 +340,27 @@ exports.filters = {
                     && (!filter.startDate || cat.currentAdoption.date >= new Date(filter.startDate))
                     && (!filter.endDate   || cat.currentAdoption.date <= new Date(filter.endDate));
     },
+    'ArrivalDate': function(filter, cat) {
+        return cat.dateOfArrival
+            && (!filter.startDate || cat.dateOfArrival >= new Date(filter.startDate))
+            && (!filter.endDate   || cat.dateOfArrival <= new Date(filter.endDate));
+    },
+    'Deceased': function(filter, cat) {
+        if (cat.events) {
+            for (var i = 0; i < cat.events.length; ++i) {
+                if (cat.events[i].eventType === 'deceased') {
+                    var date = cat.events[i].date;
+                    return date
+                        && (!filter.startDate || date >= new Date(filter.startDate))
+                        && (!filter.endDate || date <= new Date(filter.endDate));
+                }
+            }
+        }
+        else return false;
+    },
     'Breed': function(filter, cat) {
         if (!filter.breeds) { return false; }
         for (var i = 0; i < filter.breeds.length; ++i) {
-            console.log(filter.breeds[i]);
             if (filter.breeds[i] === cat.breed) {
                 return true;
             }
@@ -355,6 +374,7 @@ exports.filters = {
         var catAge = exports.getCatAge(cat);
         return (!filter.minAge || filter.minAge <= catAge) && (!filter.maxAge || filter.maxAge >= catAge);
     },
+
     /**
      * Checks if a cat has had a shot of a given type since a given date
      * @param filter
@@ -366,44 +386,59 @@ exports.filters = {
         var date = filter.date;
         var operation = exports.getMostRecentOperationOfType(cat, shotType);
         return (operation && (!date || shot.date >= new Date(date)));
+    },
+
+    'Origin': function(filter, cat) {
+        if (filter.originType === 'Organization') {
+            return cat.origin.organization === filter.originOrganization;
+        } else if (filter.originType === 'Person') {
+            return _.contains(_.map(filter.people, function(p) { return p._id; }), cat.origin.person);
+        }
     }
 };
 
 exports.searchCats = function(req, res) {
-    Cat.find().populate('currentAdoption').exec(errorHandler.wrap(res, function(cats) {
-        var matchType = req.body.matchType;
-        var filtered = [];
-        for (var i = 0; i < cats.length; ++i) {
-            var cat = cats[i];
-            var matchesFilter = true;
-            for (var j = 0; j < req.body.filters.length; ++j) {
-                var filter = req.body.filters[j];
-                var filterResult = exports.filters[filter.type](filter, cat);
-                if (matchType === 'all') {
-                    if (filter.invert) {
-                        matchesFilter = matchesFilter && !filterResult;
-                    } else {
-                        matchesFilter = matchesFilter && filterResult;
-                    }
-                } else if (matchType === 'any' || matchType === 'none') {
-                    if (filter.invert !== filterResult) {
-                        filtered.push(cat);
+    var report = req.report;
+    if (_.any(report.filters, function(f) { return !exports.filters[f.type]; })) {
+        return res.status(400).json({ message: 'Unknown filter type'});
+    }
+    Cat.find().populate('currentAdoption')
+        .exec(errorHandler.wrap(res, function(cats) {
+            var matchType = report.matchType;
+            var filtered = [];
+            for (var i = 0; i < cats.length; ++i) {
+                var cat = cats[i];
+                var matchesFilter = true;
+                for (var j = 0; j < report.filters.length; ++j) {
+                    var filter = report.filters[j];
+                    var filterResult = exports.filters[filter.type](filter, cat);
+                    if (matchType === 'all') {
+                        if (filter.invert) {
+                            matchesFilter = matchesFilter && !filterResult;
+                        } else {
+                            matchesFilter = matchesFilter && filterResult;
+                        }
+                    } else if (matchType === 'any' || matchType === 'none') {
+                        if (filter.invert !== filterResult) {
+                            filtered.push(cat);
+                        }
                     }
                 }
+                if (matchType === 'all' && matchesFilter) {
+                    filtered.push(cat);
+                }
             }
-            if (matchType === 'all' && matchesFilter) {
-                filtered.push(cat);
+            if (matchType === 'none') {
+                filtered = _.difference(cats, filtered);
             }
-        }
-        if (matchType === 'none') {
-            filtered = _.difference(cats, filtered);
-        }
-        filtered = _.uniq(filtered);
-        res.send(filtered);
-    }));
+            filtered = _.uniq(filtered);
+            res.send(filtered);
+        }));
+
 };
 
 exports.update = function(req, res) {
-    var cat = _.extend(req.cat, req.body);
+    var cat = _.assign(req.cat, req.body);
+    console.log(req.body);
     cat.save(errorHandler.wrap(res, function(cat) { res.json(cat) }));
 };
