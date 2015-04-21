@@ -1,21 +1,31 @@
 'use strict';
-angular.module('core').controller('CatEditController',
-    ['$scope', '$stateParams', 'Authentication', 'Cats', '$modal', '$location', '$rootScope', 'Contacts', 'Dialogs',
-        function($scope, $stateParams, Authentication, Cats, $modal, $location, $rootScope, Contacts, Dialogs) {
-            $scope.authentication = Authentication;
-            $scope.dateOfArrival = Date.now();
+angular.module('core', [
+    "ngSanitize",
+    "com.2fdevs.videogular"
+    ]
+)
+    .controller('CatVideoController',
+    ['$scope', '$stateParams', 'Authentication', 'Cats', '$modal', '$location', '$rootScope', 'Contacts', 'Dialogs', '$sce',
+        function($scope, $stateParams, Authentication, Cats, $modal, $location, $rootScope, Contacts, Dialogs, $sce) {
 
-            $scope.getAge = function(cat) {
-                if (cat.dateOfBirth === undefined) {
-                    return 'Unknown';
-                }
-                var dob = Date.parse(cat.dateOfBirth.toString());
-                var value = (new Date() - dob) / (1000 * 60 * 60 * 24);
-                if (value < 30) {
-                    return Math.round(value) + ' days';
-                } else if (value / 30 < 24) {
-                    return Math.round(value/30) + ' months';
-                } else return Math.round(value/365.25) + ' years';
+            $scope.config = {
+                preload: "none",
+                sources: [
+                    {src: $sce.trustAsResourceUrl("http://static.videogular.com/assets/videos/videogular.mp4"), type: "video/mp4"},
+                    {src: $sce.trustAsResourceUrl("http://static.videogular.com/assets/videos/videogular.webm"), type: "video/webm"},
+                    {src: $sce.trustAsResourceUrl("http://static.videogular.com/assets/videos/videogular.ogg"), type: "video/ogg"}
+                ],
+                tracks: [
+                    {
+                        src: "http://www.videogular.com/assets/subs/pale-blue-dot.vtt",
+                        kind: "subtitles",
+                        srclang: "en",
+                        label: "English",
+                        default: ""
+                    }
+                ],
+                theme: "bower_components/videogular-themes-default/videogular.css"
+
             };
 
             $scope.getCat = function() {
@@ -51,44 +61,6 @@ angular.module('core').controller('CatEditController',
 
             };
             $scope.getCat();
-
-            $scope.open = function($event) {
-                $event.preventDefault();
-                $event.stopPropagation();
-                $scope.opened = true;
-            };
-            $scope.openArrival = function($event) {
-                $event.preventDefault();
-                $event.stopPropagation();
-                $scope.arrivalDateOpened = true;
-            };
-
-            $scope.submit = function() {
-                console.log(this);
-                var cat = this.cat;
-                cat.dateOfBirth = this.dateOfBirth;
-                cat.dateOfBirthEstimated = this.dateOfBirthEstimated;
-                cat.name = this.name;
-                cat.sex = this.sex;
-                cat.vet = this.vet && this.vet.length === 1 ? this.vet[0]._id : undefined;
-                cat.dateOfArrival = this.dateOfArrival;
-                cat.breed = this.breed;
-                cat.color = this.color;
-                cat.description = this.description;
-                cat.temperament = this.temperament;
-                cat.origin = {
-                    address: this.originAddress,
-                    person: this.originPerson && this.originPerson.length === 1 ? this.originPerson[0]._id : undefined,
-                    organization: this.originOrg
-                },
-                cat.currentLocation = this.location;
-
-                return this.cat.$save(function(response) {
-                    $location.path('cats/' + response._id);
-                }, function(errorResponse) {
-                    $scope.error = errorResponse.data.message;
-                });
-            };
         }]
 );
 
