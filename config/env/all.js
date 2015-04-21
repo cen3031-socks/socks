@@ -54,13 +54,6 @@ module.exports = {
 				'public/lib/angular-ui-utils/ui-utils.js',
 				'public/lib/angular-bootstrap/ui-bootstrap-tpls.js',
                 'public/lib/ngInfiniteScroll/build/ng-infinite-scroll.min.js',
-                'public/lib/ngUpload/ng-upload.min.js',
-                'public/lib/angular-sanitize/angular-sanitize.min.js',
-                'public/lib/videogular/videogular.js',
-                'public/lib/videogular-controls/vg-controls.js',
-                'public/lib/videogular-overlay-play/vg-overlay-play.js',
-                'public/lib/videogular-poster/vg-poster.js',
-                'public/lib/videogular-buffering/vg-buffering.js'
                 'public/lib/ng-file-upload/angular-file-upload.shim.js',
                 'public/lib/ng-file-upload/angular-file-upload.js'
 			]

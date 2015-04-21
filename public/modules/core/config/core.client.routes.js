@@ -33,7 +33,7 @@ angular.module('core').config(['$stateProvider', '$urlRouterProvider',
             templateUrl: 'modules/cats/views/cat-edit.client.view.html'
         })
        .state('catVideos', {
-            url: '/cats/:catId/videos',
+            url: '/videos/:videoId',
             templateUrl: 'modules/cats/views/cat-videos.client.view.html'
         });
 

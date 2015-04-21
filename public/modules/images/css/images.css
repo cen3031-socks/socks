@@ -26,6 +26,10 @@ ul.image-gallery li img.selected {
     position:relative;
 }
 
+ul.video-gallery li.selected a:link, ul.video-gallery li.selected a:visited {
+    color:#0c9;
+}
+
 div.main-image img {
     max-height:80%;
     max-width:80%;

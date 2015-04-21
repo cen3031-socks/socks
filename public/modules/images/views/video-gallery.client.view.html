@@ -1,0 +1,21 @@
+<section ng-controller="VideoGalleryPageController">
+    <h1 class="page-header">Video Gallery</h1>
+    <div style="padding:1em;">
+        <a href="/#!/video-upload" class="btn btn-lg btn-primary">
+            <i class="glyphicon glyphicon-open-file"></i>
+            Upload Video
+        </a>
+        <button type="button" class="btn btn-lg btn-success" ng-class="{active: selectMode}" ng-click="toggleSelect()">Select Videos</button>
+        <span ng-show="selectMode">
+            <button type="button" class="btn btn-lg btn-warning">
+                <i class="glyphicon glyphicon-save-file"></i>
+                Download Selected
+            </button>
+            <button type="button" class="btn btn-lg btn-danger" ng-click="deleteSelected()">
+                <i class="glyphicon glyphicon-trash"></i>
+                Delete Selected
+            </button>
+        </span>
+    </div>
+    <video-gallery select-mode="selectMode" selected-videos="selectedVideos" show-all="true"></video-gallery>
+</section>

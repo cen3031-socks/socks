@@ -63,3 +63,4 @@ build/
 mongo-data
 images/*.png
 images/*.jpg
+images/*.mp4
