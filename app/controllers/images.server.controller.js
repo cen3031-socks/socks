@@ -7,6 +7,7 @@ var mongoose = require('mongoose'),
 
 var ImageManager = require('./ImageManager');
 var config = require('../../config/config');
+var q = require('q');
 
 var uploader = new ImageManager.Uploader(config.fileUploadPath);
 uploader.version({
@@ -45,6 +46,33 @@ exports.delete = function(req, res) {
 	var image = req.image;
     image.deleted = true;
     res.jsonp(image);
+};
+
+exports.deleteAll = function(req, res) {
+    if (!req.body.images) {
+        return res.status(400).json({messages: 'No images given to delete'});
+    }
+
+    var promises = _.map(req.body.images, function(image) {
+        var deferred = q.defer();
+        Image.findById(image._id).
+            remove().
+            exec(errorHandler.wrap(res, function() {
+                uploader.
+                    delete(image._id).
+                    then(function() { deferred.resolve(); },
+                    function(err) { deferred.reject(err); });
+            }));
+        return deferred.promise;
+    });
+
+    q.all(promises).
+        then(function() {
+            res.json({ message: 'Successfully deleted' });
+        }).
+        fail(function(err) {
+            errorHandler.sendErrorResponse(res, err);
+        });
 };
 
 exports.list = function(req, res) {
@@ -86,7 +114,7 @@ exports.getLarge = function(req, res) {
 exports.upload = function(req, res) {
     var image = new Image({});
     uploader.
-        process(image._id, req.files.image.path).
+        process(image._id, req.files.file.path).
         then(function(images) {
             image.thumbnail = images.thumbnail;
             image.large = images.large;
@@ -100,5 +128,8 @@ exports.upload = function(req, res) {
 };
 
 exports.forCat = function(req, res) {
-
+    Image.find({tags: req.cat._id}).
+        exec(errorHandler.wrap(res, function(images) {
+            res.json(images);
+        }));
 };

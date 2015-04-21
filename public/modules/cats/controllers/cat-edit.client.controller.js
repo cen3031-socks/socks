@@ -82,6 +82,9 @@ angular.module('core').controller('CatEditController',
                     organization: this.originOrg
                 },
                 cat.currentLocation = this.location;
+                if (this.profileImage) {
+                    cat.profileImage = this.profileImage._id;
+                }
 
                 return this.cat.$save(function(response) {
                     $location.path('cats/' + response._id);

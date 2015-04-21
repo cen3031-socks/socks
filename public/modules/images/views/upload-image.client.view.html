@@ -1,11 +1,44 @@
 <section ng-controller="ImageUploadController">
-    <form action="/upload-image" method="POST">
+    <h1 class="page-header">Upload Images</h1>
+    <form method="POST">
         <p>
-            <label>Select an image:</label>
-            <input type="file" name="image" onchange="angular.element(this).scope().setUploadFile(this.files)" />
-        </p>
-        <p>
-            <input type="button" class="btn" value="Submit" ng-disabled="$isUploading" ng-click="uploadFile($event)" />
+            <span class="button btn btn-lg btn-default"
+                  ng-file-select ng-model="files" ng-multiple="true"
+                  accept=".jpg,.png,.gif">
+                <i class="glyphicon glyphicon-open-file"></i>
+                Select Images
+            </span>
+
+            <div>
+            or drag and drop files:
+                <div ng-file-drop ng-model="files" class="drop-box"
+                     drag-over-class="dragover" ng-multiple="true" allow-dir="true"
+                     accept=".jpg,.png,.gif">Drop images here</div>
+                <div ng-no-file-drop>File Drag/Drop is not supported for this browser</div>
+            </div>
         </p>
     </form>
+    <div class="alert alert-danger" ng-show="failedUploads.length">
+        Upload failed for these files:
+        <ul>
+            <li ng-repeat="upload in failedUploads">{{upload.filename}}</li>
+        </ul>
+    </div>
+    Overall progress:
+    <progressbar value="(completedUploads * 100) / (uploads.length - failedUploads.length)" max="100" type="success">
+        {{completedUploads}} / {{uploads.length - failedUploads.length}}
+    </progressbar>
+    <button ng-hide="uploads.length < 10"
+            class="btn btn-lg btn-primary"
+            ng-click="showProgress = !showProgress">
+        {{showProgress ? 'Hide' : 'Show'}} detailed progress
+    </button>
+    <div class="detailed-progress" ng-show="uploads.length < 10 || showProgress">
+        <div ng-repeat="upload in uploads">
+            {{upload.filename}}
+            <progressbar value="upload.progress" max="100" type="{{upload.status}}">
+                {{ upload.status === 'danger' ? 'Failed' : (upload.progress === 100 ? 'Done!' : upload.progress + '%')}}
+            </progressbar>
+        </div>
+    </div>
 </section>

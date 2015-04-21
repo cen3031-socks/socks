@@ -90,7 +90,7 @@ var CatSchema = new Schema({
 	color: String,
 	description: String,
 	temperament: String,
-	imageUrl: String,
+	profileImage: { type: Schema.Types.ObjectId, ref: 'Image' },
 	origin: {
 		address: String,
 		person: { type: Schema.Types.ObjectId, ref: 'Contact' },

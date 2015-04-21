@@ -52,6 +52,13 @@
     width:25%;
 }
 
+.profile .full-width {
+    width:100%;
+}
+.profile .full-width .profile-group {
+    width:100%;
+}
+
 .profile .basic-info {
 	padding-left:14px;
 	width:75%;

@@ -1,7 +1,7 @@
 'use strict';
 
 //Setting up route
-angular.module('images', ['ui.router']).config(['$stateProvider',
+angular.module('images', ['ui.router', 'angularFileUpload']).config(['$stateProvider',
 	function($stateProvider) {
         // Contacts state routing
         $stateProvider.
