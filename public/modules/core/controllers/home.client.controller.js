@@ -32,27 +32,25 @@ angular.module('core').controller('HomeController', ['$scope', '$location', 'Aut
 			};
 
 			$scope.create = function() {
-                if (this.originPerson.length !== 1) {
-                    $scope.error = 'You must select an origin person';
+                var cat = new Cats({});
+                cat.dateOfBirth = $scope.dateOfBirth;
+                console.log(cat.dateOfBirthEstimated);
+                cat.name = $scope.name;
+                cat.vet = $scope.vet && $scope.vet.length === 1 ? $scope.vet[0]._id : undefined;
+                cat.dateOfArrival = $scope.dateOfArrival;
+                cat.breed = $scope.breed;
+                cat.color = $scope.color;
+                cat.description = $scope.description;
+                cat.temperament = $scope.temperament;
+                cat.origin = {
+                    address: $scope.originAddress,
+                    person: $scope.originPerson && $scope.originPerson.length === 1 ? $scope.originPerson[0]._id : undefined,
+                    organization: $scope.originOrg
+                },
+                    cat.currentLocation = $scope.location;
+                if ($scope.profileImage) {
+                    cat.profileImage = $scope.profileImage._id;
                 }
-				var cat = new Cats({
-					dateOfBirth: $scope.dateOfBirth,
-                    dateOfBirthEstimated: $scope.dateOfBirthEstimated,
-					name: $scope.name,
-					sex: $scope.sex,
-					vet: $scope.vet._id,
-					dateOfArrival: $scope.dateOfArrival,
-					breed: $scope.breed,
-					color: $scope.color,
-					description: $scope.description,
-					temperament: $scope.temperament,
-					origin: {
-						address: $scope.originAddress,
-						person: $scope.originPerson.length === 1 ? $scope.originPerson[0]._id : undefined,
-                        organization: $scope.originOrg
-					},
-					currentLocation: $scope.location
-				});
 				return cat.$save(function(response) {
 					$location.path('cats/' + response._id);
 				}, function(errorResponse) {

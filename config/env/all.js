@@ -24,7 +24,7 @@ module.exports = {
 		secure: false,
 		// Only set the maxAge to null if the cookie shouldn't be expired
 		// at all. The cookie will expunge when the browser is closed.
-		maxAge: null,
+		maxAge: null
 		// To set the cookie in a specific domain uncomment the following 
 		// setting:
 		// domain: 'yourdomain.com'
@@ -54,8 +54,8 @@ module.exports = {
 				'public/lib/angular-ui-utils/ui-utils.js',
 				'public/lib/angular-bootstrap/ui-bootstrap-tpls.js',
                 'public/lib/ngInfiniteScroll/build/ng-infinite-scroll.min.js',
-                'public/lib/ng-file-upload/angular-file-upload.shim.js',
-                'public/lib/ng-file-upload/angular-file-upload.js'
+                'public/lib/ng-file-upload/angular-file-upload.min.js',
+                'public/lib/ng-file-upload/angular-file-upload.shim.min.js'
 			]
 		},
 		css: [
