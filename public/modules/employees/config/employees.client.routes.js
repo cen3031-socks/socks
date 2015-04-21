@@ -5,10 +5,6 @@ angular.module('employees').config(['$stateProvider',
 	function($stateProvider) {
 		// Creates state routing
 		$stateProvider.
-		state('listEmployees', {
-			url: '/employees',
-			templateUrl: 'modules/employees/views/list-employees.client.view.html'
-		}).
 		state('createEmployee', {
 			url: '/employees/create',
 			templateUrl: 'modules/employees/views/create-employee.client.view.html'
