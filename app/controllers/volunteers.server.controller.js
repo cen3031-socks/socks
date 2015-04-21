@@ -129,7 +129,7 @@ exports.getVolunteerByName = function(req, res) {
  * List of Volunteers
  */
 exports.list = function(req, res) { 
-	Volunteer.find().sort('-created').populate('user', 'displayName').exec(function(err, volunteers) {
+	Volunteer.find().sort('-created').populate('contact').exec(function(err, volunteers) {
 		if (err) {
 			return res.status(400).send({
 				message: errorHandler.getErrorMessage(err)
@@ -144,7 +144,7 @@ exports.list = function(req, res) {
  * Volunteer middleware
  */
 exports.volunteerByID = function(req, res, next, id) { 
-	Volunteer.findById(id).populate('user', 'displayName').exec(function(err, volunteer) {
+	Volunteer.findById(id).populate('contact').exec(function(err, volunteer) {
 		if (err) return next(err);
 		if (! volunteer) return next(new Error('Failed to load Volunteer ' + id));
 		req.volunteer = volunteer ;
