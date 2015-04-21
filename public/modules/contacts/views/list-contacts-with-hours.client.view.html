@@ -2,13 +2,20 @@
     <div class="page-header">
         <h1>Volunteers</h1>
     </div>
+    <div class="input-group input-group-lg contact_input">
+                <input type="text" class="form-control" ng-model="searchText" placeholder="Search Volunteers...">
+
+    </div><!-- /input-group -->
+    <div>
+    </br>
+    </div>    
     <div class="list-group">
-        <div data-ng-repeat="contact in contacts | orderObjectBy:'name':'true'" data-ng-href="#!/contacts/{{contact._id}}" ng-show="contact.minutes_worked">
+        <div data-ng-repeat="contact in contacts | filter: searchText | orderObjectBy:'name':'true'" data-ng-href="#!/contacts/{{contact._id}}" ng-show="contact.minutes_worked">
                  <a class="list-group-item">
                     <h4 class="list-group-item-heading">{{makeName(contact.firstName, contact.surname)}}</h4>
                     <small class="list-group-item-text">
                 
-                    <span class = "volunteer-time">Total Minutes Worked: 
+                    <span class = "volunteer-time">Total Hours Worked: 
                         <span>{{contact.minutes_worked/60 | number:1}}</span>
                     </span>
 
