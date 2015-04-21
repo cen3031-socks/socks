@@ -368,7 +368,7 @@ exports.filters = {
         return false;
     },
     'Sex': function(filter, cat) {
-        return filter.sex === cat.sex;
+        return parseInt(filter.sex) === cat.sex;
     },
     'Age': function(filter, cat) {
         var catAge = exports.getCatAge(cat);

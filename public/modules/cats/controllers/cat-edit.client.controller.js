@@ -69,7 +69,6 @@ angular.module('core').controller('CatEditController',
                 cat.dateOfBirth = this.dateOfBirth;
                 console.log(cat.dateOfBirthEstimated);
                 cat.name = this.name;
-                cat.sex = this.sex;
                 cat.vet = this.vet && this.vet.length === 1 ? this.vet[0]._id : undefined;
                 cat.dateOfArrival = this.dateOfArrival;
                 cat.breed = this.breed;
