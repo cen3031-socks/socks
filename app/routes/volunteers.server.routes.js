@@ -15,7 +15,7 @@ module.exports = function(app) {
 	app.route('/allvolunteers')
         .get(volunteers.list)
 		.post(requireEmployee);
-
+		
     app.route('/volunteers/by-name/:contactId')
         .get(volunteers.getVolunteerByName);
 
