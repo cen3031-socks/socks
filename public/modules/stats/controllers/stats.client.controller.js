@@ -106,8 +106,8 @@ angular.module('stats').directive('originsMap', function(Cats, googleService) {
         var map, infoWindow;
         var markers = [];
 
-        googleService.then(function(google) {
-
+        googleService.google().then(function(google) {
+        var geocoder = new google.maps.Geocoder();
             // map config
             var mapOptions = {
                 center: new google.maps.LatLng(30, -78),
