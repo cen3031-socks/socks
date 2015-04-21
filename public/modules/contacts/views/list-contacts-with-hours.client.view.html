@@ -11,7 +11,7 @@
     </div>    
     <div class="list-group">
         <div data-ng-repeat="contact in contacts | filter: searchText | orderObjectBy:'name':'true'" data-ng-href="#!/contacts/{{contact._id}}" ng-show="contact.minutes_worked">
-                 <a class="list-group-item">
+                 <a class="list-group-item" data-ng-href="#!/contacts/{{contact._id}}">
                     <h4 class="list-group-item-heading">{{makeName(contact.firstName, contact.surname)}}</h4>
                     <small class="list-group-item-text">
                 
