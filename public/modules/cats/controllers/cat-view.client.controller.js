@@ -103,6 +103,8 @@ angular.module('core').controller('CatViewController',
                         };
                         $scope.createEvent = function() {
 
+                            console.log($scope);
+                            console.log($scope.operations);
 
                             Cats.addEvent({catId: cat._id}, {
                                 eventType: $scope.eventType,
@@ -111,7 +113,7 @@ angular.module('core').controller('CatViewController',
                                 date: $scope.date,
                                 icon: $scope.getIcon(),
                                 data: {
-                                    operations: this.operations
+                                    operations: $scope.operations
                                 }
                             }, function() {
                                     $modalInstance.close(true);
@@ -189,7 +191,7 @@ angular.module('core').controller('CatViewController',
                 if (cat.events) {
                     for (var i = 0; i < cat.events.length; ++i) {
                         var thisEvent = cat.events[i];
-                        if (thisEvent && thisEvent.eventType === 'vet') {
+                        if (thisEvent && thisEvent.data && thisEvent.eventType === 'vet') {
                             var operations = thisEvent.data.operations;
                             for (var j = 0; j < operations.length; ++j) {
                                 if (operations[j].type === type) {

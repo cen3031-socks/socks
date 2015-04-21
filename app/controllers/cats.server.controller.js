@@ -315,13 +315,14 @@ exports.getMostRecentOperationOfType = function(cat, shotType) {
     for (var i = 0; i < cat.events.length; ++i) {
         var thisEvent = cat.events[i];
         if (thisEvent && thisEvent.eventType === 'vet') {
-            var operations = thisEvent.data.operations;
-            console.log(operations);
-            for (var j = 0; j < operations.length; ++j) {
-                if (operations[j].type === shotType) {
-                    if (!date || thisEvent.date > date) {
-                        operation = operations[j];
-                        date = thisEvent.date;
+            if (thisEvent.data && thisEvent.data.operations) {
+                var operations = thisEvent.data.operations;
+                for (var j = 0; j < operations.length; ++j) {
+                    if (operations[j].type === shotType) {
+                        if (!date || thisEvent.date > date) {
+                            operation = operations[j];
+                            date = thisEvent.date;
+                        }
                     }
                 }
             }

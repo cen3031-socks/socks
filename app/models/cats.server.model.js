@@ -119,7 +119,8 @@ var CatSchema = new Schema({
 			icon: {
 				type: String,
 				enum: Icons.list
-			}
+			},
+            data: {}
 		}
 	],
 	adoptions: [{type: Schema.Types.ObjectId, ref: 'Adoption'}],
