@@ -13,9 +13,17 @@ angular.module('images', ['ui.router', 'angularFileUpload']).config(['$stateProv
                 url: '/image-upload',
                 templateUrl: 'modules/images/views/upload-image.client.view.html'
             }).
+            state('uploadVideo', {
+                url: '/video-upload',
+                templateUrl: 'modules/images/views/upload-video.client.view.html'
+            }).
             state('editImage', {
                 url: '/images/:imageId',
                 templateUrl: 'modules/images/views/edit-image.client.view.html'
+            }).
+            state('videoGallery', {
+                url: '/videos',
+                templateUrl: 'modules/images/views/video-gallery.client.view.html'
             });
 	}
 ]);

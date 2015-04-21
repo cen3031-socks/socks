@@ -77,9 +77,9 @@ exports.Uploader = function(basePath, useImageMagick) {
         return deferred.promise;
     };
 
-    this.deleteOne = function(filename) {
+    this.deleteOne = function(filename, extension) {
         return function(version) {
-            var relativeFilePath = filename + '-' + version.name + '.png';
+            var relativeFilePath = filename + '-' + version.name + extension;
             var newFilePath = path.normalize(uploader.path + '/' + relativeFilePath);
 
             var deferred = q.defer();
@@ -98,8 +98,9 @@ exports.Uploader = function(basePath, useImageMagick) {
         };
     };
 
-    this.delete = function(filename) {
-        var promise = q.all(_.map(uploader.getVersionsArray(), uploader.deleteOne(filename)));
+    this.delete = function(filename, extension) {
+        extension = extension || '.png';
+        var promise = q.all(_.map(uploader.getVersionsArray(), uploader.deleteOne(filename, extension)));
         promise.then(function() {
             console.log('delete resolved');
         });
