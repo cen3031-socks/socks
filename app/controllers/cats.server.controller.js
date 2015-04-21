@@ -199,7 +199,7 @@ exports.catById = function(req, res, next, id) {
             message: 'Cat is invalid'
         });
     }
-    Cat.findById(id).populate('adoptions currentAdoption vet origin.person')
+    Cat.findById(id).populate('adoptions currentAdoption vet origin.person profileImage')
 		.exec(errorHandler.wrap(res, function(cat) {
 		// this is ugly....
 			Cat.populate(cat, { 

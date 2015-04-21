@@ -22,5 +22,7 @@ module.exports = function(app) {
 
     app.route('/cats/:catId/images').get(images.forCat);
 
+    app.route('/delete-images').post(images.deleteAll);
+
 	app.param('imageId', images.imageByID);
 };

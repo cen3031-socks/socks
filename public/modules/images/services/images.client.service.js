@@ -18,6 +18,9 @@ angular.module('images')
             },
             forCat: function(catId) {
                 return $http.get('/cats/' + catId + '/images');
+            },
+            deleteAll: function(images) {
+                return $http.post('/delete-images', { images: images });
             }
         };
     }

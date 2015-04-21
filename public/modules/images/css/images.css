@@ -7,12 +7,22 @@ ul.image-gallery li {
     position:relative;
 }
 
-ul.image-gallery li a:link img, ul.image-gallery li a:visited img {
-    border:2px solid transparent;
+ul.image-gallery li img {
+    border:4px solid transparent;
+    cursor:pointer;
 }
 
-ul.image-gallery li a:hover img, ul.image-gallery li a:active img {
-    border:2px solid blue;
+ul.image-gallery li img:hover, ul.image-gallery li img:active  {
+    border:4px solid blue;
+    position:relative;
+}
+
+ul.image-gallery li img.selected:hover, ul.image-gallery li img.selected:active  {
+    border:4px solid green;
+    position:relative;
+}
+ul.image-gallery li img.selected {
+    border:4px solid #0c9;
     position:relative;
 }
 
@@ -25,3 +35,10 @@ div.main-image img {
 .image-view .row cats-selector {
     margin:2em;
 }
+
+.drop-box {
+    color:#89b;
+    border:3px dashed;
+    padding:2em;
+}
+
