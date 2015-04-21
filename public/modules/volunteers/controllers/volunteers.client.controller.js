@@ -82,6 +82,9 @@ angular.module('volunteers').controller('VolunteersController', ['$scope', '$sta
         $scope.find = function() {
             $scope.volunteers = Volunteers.query();
         };
+        $scope.makeName = function(firstname, surname) {
+            return firstname + ' ' + surname;
+        };
         this.modalConfirm = function (size, volunteerName) {
             var modalInstance = $modal.open({
                 templateUrl: 'modules/volunteers/views/edit-volunteer.client.view.html',
