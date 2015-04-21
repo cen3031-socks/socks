@@ -40,9 +40,10 @@
 
                 <td class="col-md-2">{{contact.firstName}}</td>
                 <td class="col-md-2">{{contact.surname}}</td>
-                <td class="col-md-2">{{contact.phone}}</td>
+                <td class="col-md-2">{{ formatPhoneNumber(contact.phone) }}</td>
                 <td class="col-md-3">{{contact.email}}</td>
-                <td class="col-md-3">{{contact.address}}, {{contact.city}}, {{contact.state}}, {{contact.zipCode}}</td>
+                <td class="col-md-3">{{contact.address}}<span ng-show="contact.city">,</span> {{contact.city}}<span ng-show="contact.state">,</span> {{contact.state}}<span ng-show="contact.zipCode">,</span> {{contact.zipCode}}
+                </td>
 
                 <!--<td>-->
                     <!--<span data-ng-bind="contact.created | date:'medium'" ></span>-->
