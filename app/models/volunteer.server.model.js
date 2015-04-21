@@ -12,7 +12,7 @@ var mongoose = require('mongoose'),
 var VolunteerSchema = new Schema({
     contact: {
         type: Schema.ObjectId,
-        ref: 'User'
+        ref: 'Contact'
     },
 	timeIn: {
 		type: Date,
