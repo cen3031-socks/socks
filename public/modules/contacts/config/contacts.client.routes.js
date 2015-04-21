@@ -28,6 +28,10 @@ angular.module('contacts', ['ui.router']).config(['$stateProvider',
             state('adoptedCats', {
                 url: '/contacts/:contactID/adoptedCats',
                 templateUrl: 'modules/contacts/views/adopted-cats.client.view.html'
-            });
+            }).
+            state('listContactsWithHours', {
+			url: '/contactsHours',
+			templateUrl: 'modules/contacts/views/list-contacts-with-hours.client.view.html'
+		});
 	}
 ]);

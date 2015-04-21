@@ -12,6 +12,10 @@ module.exports = function(app) {
         .get(requireVolunteer, contacts.list)
         .post(requireVolunteer, contacts.create);
 
+    app.route('/contactsHours')
+        .get(contacts.list)
+        .post(requireEmployee);
+
     app.route('/contacts/:contactId')
         .get(requireEmployee, contacts.read)
         .put(requireEmployee, contacts.update)

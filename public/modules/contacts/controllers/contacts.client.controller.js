@@ -229,7 +229,6 @@ function ($scope, Contacts, $stateParams, $modal, Authentication, $location, Vol
                                     $modalInstance.dismiss('deleted');
                                     $location.path('/contacts');
                                 });
-
                             }
                         });
                 };
