@@ -1,0 +1,11 @@
+<section>
+    <ul class="video-gallery">
+        <li ng-repeat="video in videos" ng-class="{selected: video.selected && selectMode}">
+            <a href="javascript:void(0)" ng-click="videoClicked(video)">{{video.created | date:'medium'}}</a>
+        </li>
+    </ul>
+    <div class="alert alert-info" ng-show="!videos">Loading gallery...</div>
+    <div class="alert alert-warning" ng-hide="!videos || videos.length">
+        No videos found. If you want, you can <a href="/#!/video-upload">upload some.</a>
+    </div>
+</section>

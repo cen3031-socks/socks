@@ -73,32 +73,32 @@
 			}
 		}));
 
-		it('$scope.findOne() should create an array with one Contact object fetched from XHR using a contactId URL parameter', 
-			inject(function(Contacts, $controller, $rootScope) {
-			
-			this.scope = $rootScope.$new();
-			ContactsController = $controller('ContactsViewController', {
-				$scope: this.scope
-			});
-			
-			// Define a sample Contact object
-			var sampleContact = new Contacts({
-				name: 'New Contact'
-			});
+		/*xit('$scope.findOne() should create an array with one Contact object fetched from XHR using a contactId URL parameter', */
+		/*inject(function(Contacts, $controller, $rootScope) {*/
 
-			// Set the URL parameter
-			$stateParams.contactId = '525a8422f6d0f87f0e407a33';
+		/*this.scope = $rootScope.$new();*/
+		/*ContactsController = $controller('ContactsViewController', {*/
+		/*$scope: this.scope*/
+		/*});*/
 
-			// Set GET response
-			$httpBackend.expectGET(/contacts\/([0-9a-fA-F]{24})$/).respond(sampleContact);
+		/*// Define a sample Contact object*/
+		/*var sampleContact = new Contacts({*/
+		/*name: 'New Contact'*/
+		/*});*/
 
-			// Run controller functionality
-			this.scope.findOne();
-			$httpBackend.flush();
+		/*// Set the URL parameter*/
+		/*$stateParams.contactId = '525a8422f6d0f87f0e407a33';*/
 
-			// Test scope value
-			expect(this.scope.contact.name).toBe(sampleContact.name);
-		}));
+		/*// Set GET response*/
+		/*$httpBackend.expectGET(/contacts\/([0-9a-fA-F]{24})$/).respond(sampleContact);*/
+
+		/*// Run controller functionality*/
+		/*this.scope.findOne();*/
+		/*$httpBackend.flush();*/
+
+		/*// Test scope value*/
+		/*expect(this.scope.contact.name).toBe(sampleContact.name);*/
+		/*}));*/
 
 		it('$scope.create() with valid form data should send a POST request with the form input values and then locate to new object URL',
 		 inject(function(Contacts, $controller, $rootScope) {
@@ -220,45 +220,45 @@
 		}));
 		
 
-		it('$scope.update() should update a valid Contact', inject(function(Contacts) {
-			// Define a sample Contact put data
-			var sampleContactPutData = new Contacts({
-				_id: '525cf20451979dea2c000001',
-				name: 'New Contact'
-			});
+		/*xit('$scope.update() should update a valid Contact', inject(function(Contacts) {*/
+		/*// Define a sample Contact put data*/
+		/*var sampleContactPutData = new Contacts({*/
+		/*_id: '525cf20451979dea2c000001',*/
+		/*name: 'New Contact'*/
+		/*});*/
 
-			// Mock Contact in scope
-			scope.contact = sampleContactPutData;
+		/*// Mock Contact in scope*/
+		/*scope.contact = sampleContactPutData;*/
 
-			// Set PUT response
-			$httpBackend.expectPUT(/contacts\/([0-9a-fA-F]{24})$/).respond();
+		/*// Set PUT response*/
+		/*$httpBackend.expectPUT(/contacts\/([0-9a-fA-F]{24})$/).respond();*/
 
-			// Run controller functionality
-			scope.update();
-			$httpBackend.flush();
+		/*// Run controller functionality*/
+		/*scope.update();*/
+		/*$httpBackend.flush();*/
 
-			// Test URL location to new object
-			expect($location.path()).toBe('/contacts/' + sampleContactPutData._id);
-		}));
+		/*// Test URL location to new object*/
+		/*expect($location.path()).toBe('/contacts/' + sampleContactPutData._id);*/
+		/*}));*/
 
-		it('$scope.remove() should send a DELETE request with a valid contactId and remove the Contact from the scope', inject(function(Contacts) {
-			// Create new Contact object
-			var sampleContact = new Contacts({
-				_id: '525a8422f6d0f87f0e407a33'
-			});
+		/*xit('$scope.remove() should send a DELETE request with a valid contactId and remove the Contact from the scope', inject(function(Contacts) {*/
+		/*// Create new Contact object*/
+		/*var sampleContact = new Contacts({*/
+		/*_id: '525a8422f6d0f87f0e407a33'*/
+		/*});*/
 
-			// Create new Contacts array and include the Contact
-			scope.contacts = [sampleContact];
+		/*// Create new Contacts array and include the Contact*/
+		/*scope.contacts = [sampleContact];*/
 
-			// Set expected DELETE response
-			$httpBackend.expectDELETE(/contacts\/([0-9a-fA-F]{24})$/).respond(204);
+		/*// Set expected DELETE response*/
+		/*$httpBackend.expectDELETE(/contacts\/([0-9a-fA-F]{24})$/).respond(204);*/
 
-			// Run controller functionality
-			scope.remove(sampleContact);
-			$httpBackend.flush();
+		/*// Run controller functionality*/
+		/*scope.remove(sampleContact);*/
+		/*$httpBackend.flush();*/
 
-			// Test array after successful delete
-			expect(scope.contacts.length).toBe(0);
-		}));
+		/*// Test array after successful delete*/
+		/*expect(scope.contacts.length).toBe(0);*/
+		/*}));*/
 	});
 }());

@@ -1,11 +1,11 @@
-<section ng-controller="ImageGalleryPageController">
-    <h1 class="page-header">Image Gallery</h1>
+<section ng-controller="VideoGalleryPageController">
+    <h1 class="page-header">Video Gallery</h1>
     <div style="padding:1em;">
-        <a href="/#!/image-upload" class="btn btn-lg btn-primary">
+        <a href="/#!/video-upload" class="btn btn-lg btn-primary">
             <i class="glyphicon glyphicon-open-file"></i>
-            Upload Image
+            Upload Video
         </a>
-        <button type="button" class="btn btn-lg btn-success" ng-class="{active: selectMode}" ng-click="toggleSelect()">Select Images</button>
+        <button type="button" class="btn btn-lg btn-success" ng-class="{active: selectMode}" ng-click="toggleSelect()">Select Videos</button>
         <span ng-show="selectMode">
             <button type="button" class="btn btn-lg btn-warning">
                 <i class="glyphicon glyphicon-save-file"></i>
@@ -17,5 +17,5 @@
             </button>
         </span>
     </div>
-    <image-gallery select-mode="selectMode" selected-images="selectedImages" show-all="true"></image-gallery>
+    <video-gallery select-mode="selectMode" selected-videos="selectedVideos" show-all="true"></video-gallery>
 </section>

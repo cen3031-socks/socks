@@ -1,2 +1,2 @@
 'use strict';
-ApplicationConfiguration.registerModule('images', ['ngUpload']);
+ApplicationConfiguration.registerModule('images', ['ui.router', 'angularFileUpload']);

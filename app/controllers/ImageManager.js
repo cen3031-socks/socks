@@ -3,16 +3,16 @@ var gm = require('gm');
 var q = require('q');
 var fs = require('fs');
 var _ = require('lodash');
+var path = require('path');
 
-
-exports.Uploader = function(path, useImageMagick) {
+exports.Uploader = function(basePath, useImageMagick) {
 
     var ImageMagick = gm;
     if (useImageMagick) {
         ImageMagick = ImageMagick.subClass({imageMagick: true});
     }
 
-    this.path = path || './images/uploads';
+    this.path = basePath || './images/uploads';
     this.versions = {};
 
     var uploader = this;
@@ -41,16 +41,14 @@ exports.Uploader = function(path, useImageMagick) {
     this.resizeOne = function(newFilename, existingFilePath) {
         return function(version) {
             var relativeFilePath = newFilename + '-' + version.name + '.png';
-            var newFilePath = uploader.path + '/' + relativeFilePath;
+            var newFilePath = path.join(uploader.path, relativeFilePath);
             var deferred = q.defer();
-            console.log('resizing image ' + newFilePath);
             var image = ImageMagick(existingFilePath);
 
             if (version.name !== 'original') {
                 image = image.resize(version.width, version.height);
             }
             image.write(newFilePath, function(err) {
-                console.log('wrote image ' + newFilePath);
                 if (err) {
                     console.log(err);
                     deferred.reject(err);
@@ -77,6 +75,36 @@ exports.Uploader = function(path, useImageMagick) {
             }).
             fail(deferred.reject);
         return deferred.promise;
+    };
+
+    this.deleteOne = function(filename, extension) {
+        return function(version) {
+            var relativeFilePath = filename + '-' + version.name + extension;
+            var newFilePath = path.normalize(uploader.path + '/' + relativeFilePath);
+
+            var deferred = q.defer();
+            console.log('unlinking');
+            fs.unlink(newFilePath, function(err) {
+                console.log('unlink callback');
+                if (err) {
+                    console.log(err);
+                    deferred.reject(err);
+                } else {
+                    console.log('resolved');
+                    deferred.resolve(true);
+                }
+            });
+            return deferred.promise;
+        };
+    };
+
+    this.delete = function(filename, extension) {
+        extension = extension || '.png';
+        var promise = q.all(_.map(uploader.getVersionsArray(), uploader.deleteOne(filename, extension)));
+        promise.then(function() {
+            console.log('delete resolved');
+        });
+        return promise;
     };
 };
 
