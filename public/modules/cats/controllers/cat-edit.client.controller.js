@@ -67,7 +67,7 @@ angular.module('core').controller('CatEditController',
                 console.log(this);
                 var cat = this.cat;
                 cat.dateOfBirth = this.dateOfBirth;
-                cat.dateOfBirthEstimated = this.dateOfBirthEstimated;
+                console.log(cat.dateOfBirthEstimated);
                 cat.name = this.name;
                 cat.sex = this.sex;
                 cat.vet = this.vet && this.vet.length === 1 ? this.vet[0]._id : undefined;
@@ -82,6 +82,9 @@ angular.module('core').controller('CatEditController',
                     organization: this.originOrg
                 },
                 cat.currentLocation = this.location;
+                if (this.profileImage) {
+                    cat.profileImage = this.profileImage._id;
+                }
 
                 return this.cat.$save(function(response) {
                     $location.path('cats/' + response._id);

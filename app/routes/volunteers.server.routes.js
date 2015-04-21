@@ -12,7 +12,10 @@ module.exports = function(app) {
         .get(volunteers.list)
 		.post(requireEmployee, volunteers.create);
 
-
+	app.route('/allvolunteers')
+        .get(volunteers.list)
+		.post(requireEmployee);
+		
     app.route('/volunteers/by-name/:contactId')
         .get(volunteers.getVolunteerByName);
 

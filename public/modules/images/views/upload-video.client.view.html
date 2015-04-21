@@ -1,19 +1,19 @@
-<section ng-controller="ImageUploadController">
-    <h1 class="page-header">Upload Images</h1>
+<section ng-controller="VideoUploadController">
+    <h1 class="page-header">Upload Videos</h1>
     <form method="POST">
         <p>
             <span class="button btn btn-lg btn-default"
                   ng-file-select ng-model="files" ng-multiple="true"
-                  accept=".jpg,.png,.gif">
+                  accept=".mp4,.mov">
                 <i class="glyphicon glyphicon-open-file"></i>
-                Select Images
+                Select Videos
             </span>
 
             <div>
             or drag and drop files:
                 <div ng-file-drop ng-model="files" class="drop-box"
                      drag-over-class="dragover" ng-multiple="true" allow-dir="true"
-                     accept=".jpg,.png,.gif">Drop images here</div>
+                     accept=".mp4,.mov">Drop videos here</div>
                 <div ng-no-file-drop>File Drag/Drop is not supported for this browser</div>
             </div>
         </p>
@@ -42,3 +42,4 @@
         </div>
     </div>
 </section>
+

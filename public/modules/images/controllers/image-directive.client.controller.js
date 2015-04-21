@@ -1,27 +1,73 @@
 var images = angular.module('images');
 
 images.controller('ImageGalleryController', [
-    '$scope', 'Images',
-    function($scope, Images) {
-        if ($scope.imageId) {
-            Images.find($scope.imageId).then(function(response) {
-                // if given a single image id then just show that id
-                $scope.images = [response.data];
-                $scope.addSources();
-            });
-        } else if ($scope.catId) {
-            Images.forCat($scope.catId).then(function(response) {
-                // if given a cat ID only show images for that cat
-                $scope.images = response.data;
-                $scope.addSources();
-            });
-        } else {
-            // if no parameters, show all images
-            Images.list().then(function(response) {
-                $scope.images = response.data;
-                $scope.addSources();
-            });
-        }
+    '$scope', 'Images', '$location',
+    function($scope, Images, $location) {
+        $scope.selectedImages = $scope.selectedImages || [];
+        $scope.selectedImage = $scope.selectedImage || undefined;
+
+        $scope.$watch('imageId', function() {
+            if ($scope.imageId) {
+                Images.find($scope.imageId).then(function (response) {
+                    // if given a single image id then just show that id
+                    $scope.images = [response.data];
+                    $scope.addSources();
+                });
+            }
+        });
+
+        $scope.$watch('catId', function() {
+            if ($scope.catId) {
+                Images.forCat($scope.catId).then(function (response) {
+                    // if given a cat ID only show images for that cat
+                    $scope.images = response.data;
+                    $scope.addSources();
+                });
+            }
+        });
+
+        $scope.$watch('showAll', function() {
+            if ($scope.showAll) {
+                Images.list().then(function (response) {
+                    $scope.images = response.data;
+                    $scope.addSources();
+                });
+            }
+        });
+
+        $scope.imageClicked = function(image) {
+            if ($scope.selectMode === 'single') {
+                if ($scope.selectedImage || image.selected) {
+                    $scope.selectedImage.selected = false;
+                }
+                $scope.selectedImage = image;
+                image.selected = true;
+            } else if ($scope.selectMode) {
+                var index = $scope.selectedImages.indexOf(image);
+                if (index === -1) {
+                    $scope.selectedImages.push(image);
+                    image.selected = true;
+                } else {
+                    $scope.selectedImages.splice(index, 1);
+                    image.selected = false;
+                }
+            } else {
+                $location.path('/images/' + image._id);
+            }
+        };
+
+        $scope.$watch('selectMode', function() {
+            if (!$scope.selectMode) {
+                for (var i = 0; i < $scope.selectedImages.length; ++i) {
+                    $scope.selectedImages[i].selected = false;
+                }
+                $scope.selectedImages = [];
+                if ($scope.selectedImage) {
+                    $scope.selectedImage.selected = false;
+                    $scope.selectedImage = undefined;
+                }
+            }
+        })
 
         $scope.addSources = function() {
             var images = $scope.images;
@@ -40,9 +86,16 @@ images.directive('imageGallery', [
         return {
             restrict: 'E',
             controller: 'ImageGalleryController',
-            scope: { imageId: '=?id', catId: '=?forCat', max: '=?max' },
+            scope: {
+                imageId: '=?id',
+                catId: '=?forCat',
+                max: '=?max',
+                selectMode: '=?selectMode',
+                selectedImages: '=?selectedImages',
+                selectedImage: '=?selectedImage',
+                showAll: '=?showAll'
+            },
             templateUrl: '/modules/images/views/image-gallery.client.directive.html',
             link: function(scope, element, attrs, ctrl) { }
         };
     }]);
-

@@ -1,8 +1,8 @@
-var images = angular.module('images');
+var videos = angular.module('images');
 
-images.controller('ImageUploadController',
-    ['$scope', 'Images', '$http', '$location', '$upload',
-        function($scope, Images, $http, $location, $upload) {
+videos.controller('VideoUploadController',
+    ['$scope', '$http', '$location', '$upload',
+        function($scope, $http, $location, $upload) {
 
             $scope.$watch('files', function () {
                 $scope.upload($scope.files);
@@ -24,7 +24,7 @@ images.controller('ImageUploadController',
                             $scope.completedUploads = 0;
                             $scope.completedUploads = oldCompleted;
                             $upload.upload({
-                                url: '/upload-image',
+                                url: '/upload-video',
                                 fields: {},
                                 file: file
                             }).progress(function (evt) {

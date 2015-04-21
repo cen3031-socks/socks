@@ -31,8 +31,8 @@
 	</div>
     <div class="profile">
 		<div class="cat-profile-image-container">
-			<i class="glyphicon glyphicon-camera" ng-hide="cat.imageUrl"></i>
-			<img ng-src="{{cat.imageUrl}}" class="cat-profile-image" />
+			<i class="glyphicon glyphicon-camera" ng-hide="cat.profileImage"></i>
+			<img ng-src="/images/{{cat.profileImage._id}}/original" class="cat-profile-image" />
 		</div>
 		<div class="attribute-group basic-info">
 			<h2>Basic Info</h2>
@@ -58,7 +58,8 @@
 			</div>
 			<div class="profile-group">
 				<span class="profile-attribute">Date of Birth</span>
-				<span class="profile-value" id="dateOfBirth">{{cat.dateOfBirth | date}}</span>
+				<span class="profile-value" id="dateOfBirth">
+                {{cat.dateOfBirth | date}} <small ng-show="cat.dateOfBirthEstimated">(Estimated)</small></span>
 			</div>
 			<div class="profile-group">
 				<span class="profile-attribute">Vet</span>
@@ -189,6 +190,12 @@
             <div class="profile-attribute">Notes</div>
             <div class="profile-value">
                 <notes about="cat._id"></notes>
+            </div>
+        </div>
+        <div class="profile-group full-width">
+            <div class="profile-attribute">Gallery</div>
+            <div class="profile-value">
+                <image-gallery for-cat="cat._id"></image-gallery>
             </div>
         </div>
     </div>

@@ -24,7 +24,7 @@
                     <div class="form-group col-md-4">
                         <label class="control-label" for="dob">Date of Birth</label>
                         <small style="float:right;position:relative;top:1em;">
-                            <input type="checkbox" ng-model="dateOfBirthEstimated" id="dob-est">
+                            <input type="checkbox" ng-model="cat.dateOfBirthEstimated" id="dob-est">
                             <label for="dob-est">Estimated</label>
                         </small>
                         <custom-datepicker ng-model="dateOfBirth"></custom-datepicker>
@@ -98,9 +98,6 @@
                             <textarea name="description" data-ng-model="description" id="description" class="form-control" cols="30" rows="10" placeholder="Description"></textarea>
                         </div>
                     </div>
-                </div>
-                <div class="form-group">
-                    <input id="submit" type="submit" class="btn btn-default" />
                 </div>
                 <div data-ng-show="error" class="text-danger">
                     <strong data-ng-bind="error"></strong>

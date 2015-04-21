@@ -32,12 +32,14 @@
 			</li>
 
             <li class = "list-element"><a href="/#!/" class = 'list-link'>Cats</a></li>
-            <li data-ng-show="authentication.user" class="list-element"><a href="/#!/contacts" class = 'list-link'>Contacts</a></li>
-            <li data-ng-show="authentication.user" class="list-element"><a href="/#!/donations" class = 'list-link'>Donations</a></li>
-            <li data-ng-show="authentication.user" class="list-element"><a href="/#!/export" class="list-link">Reports</a></li>
-            <li data-ng-show="authentication.user" class="list-element"><a href="/#!/images" class="list-link">Images</a></li>
-            <li data-ng-show="authentication.user.permissionLevel == 0" class = "list-element"><a href="/#!/employees" class = 'list-link'>Create User</a></li>
-        </ul>
+			<li data-ng-show="authentication.user" class="list-element"><a href="/#!/contacts" class = 'list-link'>Contacts</a></li>
+			<li data-ng-show="authentication.user" class="list-element"><a href="/#!/donations" class = 'list-link'>Donations</a></li>
+			<li data-ng-show="authentication.user" class="list-element"><a href="/#!/export" class="list-link">Reports</a></li>
+			<li data-ng-show="authentication.user" class="list-element"><a href="/#!/images" class="list-link">Images</a></li>
+			<li data-ng-show="authentication.user" class="list-element"><a href="/#!/videos" class="list-link">Videos</a></li>
+			<li data-ng-show="authentication.user" class="list-element"><a href="/#!/allvolunteers" class="list-link">Volunteers</a></li>
+			<li data-ng-show="authentication.user.permissionLevel == 0" class = "list-element"><a href="/#!/employees" class = 'list-link'>Create User</a></li>
+		</ul>
     </div>
 	<!-- <nav class="collapse navbar-collapse" collapse="!isCollapsed" role="navigation">
 		<ul class="nav navbar-nav" data-ng-if="menu.shouldRender(authentication.user);">

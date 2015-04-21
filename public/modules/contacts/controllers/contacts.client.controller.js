@@ -243,23 +243,60 @@ contactsApp.controller('ContactsViewController', ['$scope', 'Contacts', '$stateP
                 controller: function ($scope, $modalInstance, contact, Dialogs, $location) {
                     $scope.contact = contact;
 
-                    $scope.ok = function () {
-                        if (document.updateContactForm.$valid) {
-                            $modalInstance.close($scope.contact);
-                        }
-                        $modalInstance.dismiss('cancel');
-                    };
+                $scope.ok = function () {
+                    if (document.updateContactForm.$valid){
+                        $modalInstance.close($scope.contact);
+                    }
+                    $modalInstance.dismiss('cancel');
+                };
 
-                    $scope.cancel = function () {
-                        $modalInstance.dismiss('cancel');
-                    };
-                    $scope.update = function (updatedContact) {
-                        var contact = updatedContact;
+                $scope.cancel = function () {
+                    $modalInstance.dismiss('cancel');
+                };
+                $scope.update = function(updatedContact) {
+                    var contact = updatedContact;
 
-                        contact.$update(function () {
-                            $modalInstance.close(contact);
-                        }, function (errorResponse) {
-                            $scope.error = errorResponse.data.message;
+                    contact.$update(function() {
+                    }, function(errorResponse) {
+                        $scope.error = errorResponse.data.message;
+                    });
+                };
+
+                $scope.deleteContact = function(contact) {
+                    Dialogs
+                        .confirm('Delete Contact?')
+                        .then(function(result) {
+                            if (contact && result) {
+
+                                contact.$remove(function() {
+                                    $modalInstance.dismiss('deleted');
+                                    $location.path('/contacts');
+                                });
+                            }
+                        });
+                };
+                //$scope.deleteContact = function(contact, index) {
+                //    Dialogs
+                //        .confirm('Delete Contact?')
+                //        .then(function(result) {
+                //            if (result) {
+                //                contact.deleted_contact = true;
+                //                $scope.update(contact);
+                //                $modalInstance.dismiss('deleted');
+                //                $location.path('/contacts');
+                //            }
+                //        });
+                //};
+                $scope.addToDoNotAdoptList = function(contact, index) {
+                    Dialogs
+                        .confirm('Add contact to the "Do not adopt" list?')
+                        .then(function(result) {
+                            if (result) {
+                                contact.do_not_adopt = true;
+                                $scope.update(contact);
+                                $modalInstance.dismiss('Added to "Do not adopt" list');
+                                // $location.path('/contacts');
+                            }
                         });
                     };
 

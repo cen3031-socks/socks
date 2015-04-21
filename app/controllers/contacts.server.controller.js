@@ -312,7 +312,10 @@ exports.delete = function (req, res) {
                 message: errorHandler.getErrorMessage(err)
             });
         } else {
-            res.jsonp(contact);
+            User.find({contact: contact._id}).remove().exec(errorHandler.wrap(res,
+                function() { 
+                    res.json({message: 'Successfully deleted.'});
+                }));
         }
     });
 };
