@@ -12,7 +12,15 @@
     "angular-ui-utils": "~0.1.1",
     "angular-ui-router": "~0.2.11",
     "ngInfiniteScroll": "~1.2.0",
-    "ngUpload": "~0.5.14"
+    "ngUpload": "~0.5.14",
+    "videogular": "~1.2.0",
+    "videogular-themes-default": "~1.2.0",
+    "videogular-controls": "~1.2.0",
+    "videogular-buffering": "~1.2.0",
+    "videogular-overlay-play": "~1.2.0",
+    "videogular-poster": "~1.2.0",
+    "videogular-ima-ads": "~1.2.0",
+    "videogular-angulartics": "~1.2.0"
   },
   "devDependencies": {
     "ngInfiniteScroll": "~1.2.0"
