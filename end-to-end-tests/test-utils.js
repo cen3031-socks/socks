@@ -24,7 +24,23 @@ exports.throwIfPresent = function(err) {
     if (err) {
         throw err;
     }
-}
+};
+
+exports.createUserAndSignIn = function(browser, element) {
+    var flow = protractor.promise.controlFlow();
+    flow.execute(exports.dropDb);
+    browser.get('/activate');
+    element(by.model('username')).sendKeys('email@email.com');
+    element(by.model('password')).sendKeys('password');
+    element(by.model('firstName')).sendKeys('John');
+    element(by.model('lastName')).sendKeys('Smith');
+    element(by.buttonText('Submit')).click();
+
+    browser.get('/#!/signin');
+    element(by.model('credentials.username')).sendKeys('email@email.com');
+    element(by.model('credentials.password')).sendKeys('password');
+    element(by.buttonText('Sign in')).click();
+};
 
 /**
  * Drop all the data from the database
