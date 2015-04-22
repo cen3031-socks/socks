@@ -22,7 +22,7 @@ describe('contacts listing', function() {
 			city: "Cupertino",
 			state: "California",
 			zipCode: "12345",
-			phone: "(850) 555 - 1234",
+			phone: "(850) 555-3234",
 			email: "john.appleseed@example.com"
 		};
 
@@ -42,7 +42,11 @@ describe('contacts listing', function() {
 					);
 			}
 			else {
-				expect(element(by.binding(i)).getText()).toBe(contact[i]);
+				if(i === 'state') {
+					expect(element(by.binding(i)).getText()).toBe('CA');
+				} else {
+					expect(element(by.binding(i)).getText()).toBe(contact[i]);
+				}
 			}
 		}
 	});
@@ -91,7 +95,7 @@ describe('contacts listing', function() {
             this.rows = element.all(by.css('tr[data-ng-repeat*=contact]'));
 			this.searchBar.sendKeys('ZZZZZZ');
 			this.searchBar.clear();
-			expect(this.rows.count()).toBe(this.contacts.length);
+			expect(this.rows.count()).toBe(this.contacts.length + 1);
 		});
 	});
 });
