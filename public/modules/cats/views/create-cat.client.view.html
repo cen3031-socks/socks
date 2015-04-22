@@ -17,7 +17,7 @@
                             <div class="form-group col-md-4">
                                 <label class="control-label" for="sex">Sex</label>
                                 <div class="controls">
-                                    <select name="sex" class="form-control" ng-model="cat.sex">
+                                    <select name="sex" class="form-control" ng-model="sex">
                                         <option value="0">Unknown</option>
                                         <option value="1">Male</option>
                                         <option value="2">Female</option>
@@ -29,7 +29,7 @@
                             <div class="form-group col-md-4">
                                 <label class="control-label" for="dob">Date of Birth</label>
                                 <small style="float:right;position:relative;top:1em;">
-                                    <input type="checkbox" ng-model="cat.dateOfBirthEstimated" id="dob-est">
+                                    <input type="checkbox" ng-model="dateOfBirthEstimated" id="dob-est">
                                     <label for="dob-est">Estimated</label>
                                 </small>
                                 <custom-datepicker ng-model="dateOfBirth"></custom-datepicker>

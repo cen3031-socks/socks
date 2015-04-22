@@ -34,12 +34,13 @@ angular.module('core').controller('HomeController', ['$scope', '$location', 'Aut
 			$scope.create = function() {
                 var cat = new Cats({});
                 cat.dateOfBirth = $scope.dateOfBirth;
-                console.log(cat.dateOfBirthEstimated);
                 cat.name = $scope.name;
                 cat.vet = $scope.vet && $scope.vet.length === 1 ? $scope.vet[0]._id : undefined;
                 cat.dateOfArrival = $scope.dateOfArrival;
                 cat.breed = $scope.breed;
                 cat.color = $scope.color;
+                cat.sex = $scope.sex;
+                cat.dateOfBirthEstimated = $scope.dateOfBirthEstimated;
                 cat.description = $scope.description;
                 cat.temperament = $scope.temperament;
                 cat.origin = {
