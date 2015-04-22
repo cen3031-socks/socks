@@ -113,9 +113,16 @@ exports.deleteAllVideos = function(req, res) {
 };
 
 exports.list = function(req, res) {
-    Image.find().exec(errorHandler.wrap(res, function(images) {
-        res.json(images);
-    }));
+    var limit = req.query.limit;
+    var startIndex = req.query.startIndex || 0;
+    var query = Image.find().sort('created');
+    if (limit && !isNaN(+limit)) {
+        query = query.limit(+limit);
+    }
+    query.skip(startIndex).
+        exec(errorHandler.wrap(res, function(images) {
+            res.json(images);
+        }));
 };
 exports.listVideos = function(req, res) {
     Video.find().exec(errorHandler.wrap(res, function(images) {
@@ -124,8 +131,9 @@ exports.listVideos = function(req, res) {
 };
 
 exports.imageByID = function(req, res, next, id) {
-    Image.findById(id).populate('tags')
-        .exec(function(err, image) {
+    Image.findById(id).
+        populate('tags').
+        exec(function(err, image) {
             if (err) return next(err);
             if (!image) return next(new Error('Failed to load Image ' + id));
             req.image = image;
@@ -133,8 +141,9 @@ exports.imageByID = function(req, res, next, id) {
         });
 };
 exports.videoByID = function(req, res, next, id) {
-    Video.findById(id).populate('tags')
-        .exec(function(err, video) {
+    Video.findById(id).
+        populate('tags').
+        exec(function(err, video) {
             if (err) return next(err);
             if (!video) return next(new Error('Failed to load Video ' + id));
             req.video = video;

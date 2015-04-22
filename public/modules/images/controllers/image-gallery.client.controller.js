@@ -4,6 +4,7 @@ images.controller('ImageGalleryPageController',
     ['$scope', 'Images', 'Dialogs', function($scope, Images, Dialogs) {
         $scope.selectMode = false;
         $scope.selectedImages = [];
+        $scope.showAll = true;
 
         $scope.toggleSelect = function() {
             $scope.selectMode = !$scope.selectMode;
@@ -15,8 +16,8 @@ images.controller('ImageGalleryPageController',
                     if (response) {
                         Images.deleteAll($scope.selectedImages).
                             then(function(response) {
-                                console.log('got response from server');
-                                window.location.reload();
+                                $scope.selectedImages = [];
+                                $scope.showAll++;
                             });
                     }
                 }, function(response) {
