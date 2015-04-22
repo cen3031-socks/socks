@@ -1,18 +1,13 @@
 var request = require('request'),
 	MongoClient = require('mongodb').MongoClient;
+var utils = require('../test-utils.js');
 
 describe('employees listing', function() {
+	beforeEach(function() {
+        utils.createUserAndSignIn(browser, element);
+    });
+
 	it('should have a title', function() {
-		browser.get('/activate');
-		element(by.model('username')).sendKeys('email@email.com');
-		element(by.model('password')).sendKeys('password');
-		element(by.model('firstName')).sendKeys('John');
-		element(by.model('lastName')).sendKeys('Smith');
-		element(by.buttonText('Submit')).click();
-		browser.get('/#!/signin');
-		element(by.model('credentials.username')).sendKeys('email@email.com');
-		element(by.model('credentials.password')).sendKeys('password');
-		element(by.buttonText('Sign in')).click();
 		expect(browser.getTitle()).toEqual('SOCKS (Save Our Cats and Kittens)');
 	});
 
