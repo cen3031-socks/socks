@@ -5,6 +5,8 @@ images.controller('ImageGalleryController', [
     function($scope, Images, $location) {
         $scope.selectedImages = $scope.selectedImages || [];
         $scope.selectedImage = $scope.selectedImage || undefined;
+        $scope.pageSize = 20;
+        $scope.hasMore = true;
 
         $scope.$watch('imageId', function() {
             if ($scope.imageId) {
@@ -13,6 +15,7 @@ images.controller('ImageGalleryController', [
                     $scope.images = [response.data];
                     $scope.addSources();
                 });
+                $scope.hasMore = false;
             }
         });
 
@@ -23,17 +26,32 @@ images.controller('ImageGalleryController', [
                     $scope.images = response.data;
                     $scope.addSources();
                 });
+                $scope.hasMore = false;
             }
         });
 
-        $scope.$watch('showAll', function() {
-            if ($scope.showAll) {
-                Images.list().then(function (response) {
+        $scope.$watch('showAll', function(newValue, oldValue) {
+            if (oldValue) {
+                $scope.images = [];
+            }
+            if (newValue) {
+                Images.list($scope.pageSize, 0).then(function (response) {
                     $scope.images = response.data;
                     $scope.addSources();
                 });
             }
         });
+
+        $scope.loadMore = function() {
+            Images.list($scope.pageSize, $scope.images.length).
+                then(function(response) {
+                    if (response.data.length < $scope.pageSize) {
+                        $scope.hasMore = false;
+                    }
+                    $scope.images = $scope.images.concat(response.data);
+                    $scope.addSources();
+                });
+        };
 
         $scope.imageClicked = function(image) {
             if ($scope.selectMode === 'single') {
