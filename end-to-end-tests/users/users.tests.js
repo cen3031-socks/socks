@@ -17,8 +17,7 @@ describe('employees listing', function() {
 	});
 
 	it('should be able to create new employee and contact with it', function() {
-		browser.get('/#!/employees');
-		element(by.css('.myButton')).click();
+		browser.get('/#!/employees/create');
 		var user = {
 			firstName: "TestUnique",
 			surname:"Test",
