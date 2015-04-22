@@ -88,7 +88,11 @@ var CatSchema = new Schema({
 		enum: breeds.list
 	},
 	color: String,
-	description: String,
+	description: {
+        type: String,
+        required: true,
+        default: ''
+    },
 	temperament: String,
 	profileImage: { type: Schema.Types.ObjectId, ref: 'Image' },
 	origin: {

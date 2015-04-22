@@ -4,8 +4,12 @@
 angular.module('images')
     .factory('Images', ['$http', function($http) {
         return {
-            list: function() {
-                return $http.get('/images');
+            list: function(limit, startIndex) {
+                if (!isNaN(+limit) && !isNaN(+startIndex)) {
+                    return $http.get('/images?limit=' + (+limit) + '&startIndex=' + (+startIndex));
+                } else {
+                    return $http.get('/images');
+                }
             },
             create: function(image) {
                 return $http.post('/images', image);

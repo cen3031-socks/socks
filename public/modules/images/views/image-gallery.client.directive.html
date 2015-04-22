@@ -3,6 +3,9 @@
         <li ng-repeat="image in images">
             <img ng-src="{{image.thumbnailSrc}}" ng-class="{selected: image.selected && selectMode}" ng-click="imageClicked(image)" />
         </li>
+        <li class="loadMore" ng-show="hasMore && images.length">
+            <a href="javascript:void(0)" ng-click="loadMore()">Load More...</a>
+        </li>
     </ul>
     <div class="alert alert-info" ng-show="!images">Loading gallery...</div>
     <div class="alert alert-warning" ng-hide="!images || images.length">
