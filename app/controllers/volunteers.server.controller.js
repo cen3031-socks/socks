@@ -87,26 +87,42 @@ exports.getVolunteerByName = function(req, res) {
  */
 
  exports.minutesWorked = function(req, res) {
+ 	console.log('HERE');
+	 var startEntered = true;
+	 var endEntered = true;
+	 if (isNaN(req.params.startDate)) {
+		 req.params.startDate = new Date();
+		 req.params.startDate.setYear(2000);
+		 startEntered = false;
+	 }
+	 if (isNaN(req.params.endDate)) {
+		 req.params.endDate = new Date();
+		 req.params.endDate.setYear(2500);
+		 endEntered = false;
+	 }
      var minutes = 0;
-     var vols = Volunteer.find({contact:req.params.contactId});
-     for (var i = 0; i < vols.length; ++i) {
-         //if session is from before desired range
-         if ((vols[i].timeIn - req.params.startDate < 0) || (vols[i].timeOut - req.params.endDate > 0)) {
-             //this session is not in the requested range
-         }
-         else {
-             //this volunteer session is in the range
-             minutes += ((vols[i].timeOut - vols[i].timeIn)/60000)
-         }
-     }
-     if (err) {
-         return res.status(400).send({
-             message: errorHandler.getErrorMessage(err)
-         });
-     }
-     else {
-         res.jsonp(minutes);
-     }
+     console.log({contact:req.params.contactId});
+     Volunteer.find({contact:req.params.contactId})
+		 .exec(errorHandler.wrap(res, function(vols) {
+		 for (var i = 0; i < vols.length; ++i) {
+
+			 var timeOut = vols[i].timeOut || Date.now();
+			 //if session is from before desired range
+			 if ((vols[i].timeIn - req.params.startDate < 0) || (timeOut - req.params.endDate > 0)) {
+				 //this session is not in the requested ranpge
+			 }
+			 else {
+				 //this volunteer session is in the range
+				 minutes += ((timeOut - vols[i].timeIn)/60000);
+			 }
+		 }
+
+		var isVolunteeringNow = false;
+		if (vols.length != 0 && vols[vols.length-1].timeOut == null) {
+			isVolunteeringNow = true;
+		}
+		 res.jsonp({minutes: minutes, startEntered:startEntered, endEntered:endEntered, isVolunteeringNow:isVolunteeringNow});
+	 }));
  }
 
 
@@ -115,7 +131,7 @@ exports.getVolunteerByName = function(req, res) {
  * List of Volunteers
  */
 exports.list = function(req, res) { 
-	Volunteer.find().sort('-created').populate('user', 'displayName').exec(function(err, volunteers) {
+	Volunteer.find().sort('-created').populate('contact').exec(function(err, volunteers) {
 		if (err) {
 			return res.status(400).send({
 				message: errorHandler.getErrorMessage(err)
@@ -130,7 +146,7 @@ exports.list = function(req, res) {
  * Volunteer middleware
  */
 exports.volunteerByID = function(req, res, next, id) { 
-	Volunteer.findById(id).populate('user', 'displayName').exec(function(err, volunteer) {
+	Volunteer.findById(id).populate('contact').exec(function(err, volunteer) {
 		if (err) return next(err);
 		if (! volunteer) return next(new Error('Failed to load Volunteer ' + id));
 		req.volunteer = volunteer ;

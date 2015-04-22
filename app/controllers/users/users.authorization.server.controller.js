@@ -7,6 +7,10 @@ var _ = require('lodash'),
 	mongoose = require('mongoose'),
 	User = mongoose.model('User');
 
+exports.ADMIN = 0;
+exports.EMPLOYEE = 1;
+exports.VOLUNTEER = 2;
+
 /**
  * User middleware
  */

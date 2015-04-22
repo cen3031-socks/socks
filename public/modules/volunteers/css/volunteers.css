@@ -38,4 +38,15 @@
     /*width: 300px;*/
 }
 
+.vol-mod-head{
+    margin-top: 20px;
+}
+.light-green-text{
+    color: lightgreen;
+}
+
 html,body { height:100%; }
+
+.volunteer-time {
+    margin-right: 2em;
+}

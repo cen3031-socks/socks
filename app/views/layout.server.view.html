@@ -44,9 +44,9 @@
 	<![endif]-->
 </head>
 
-<body class="ng-cloak container no-padding no-damn-padding main-layout">
+<body class="ng-cloak no-padding no-damn-padding main-layout">
 	<header data-ng-include="'/modules/core/views/header.client.view.html'" class="head"></header><section class="content">
-			<section class="">
+			<section class="container">
 				{% block content %}{% endblock %}
 			</section>
 		</section>
@@ -57,7 +57,6 @@
 	</script>
 
 
-    <script src ="https://maps.googleapis.com/maps/api/js?sensor=false"> </script>
 	<!--Application JavaScript Files-->
 	{% for jsFile in jsFiles %}
 		<script type="text/javascript" src="{{jsFile}}"></script>{% endfor %} 

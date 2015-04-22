@@ -1,4 +1,4 @@
-<table style="width:100%" ng-init="$scope.init">
+<table style="width:100%" ng-init="$scope.init" ng-show="authentication.user">
     <tr ng-repeat="note in notes" class="note">
         <td class="note-message">{{note.message}}</td>
         <td class="note-date">{{note.date|date}}</td>

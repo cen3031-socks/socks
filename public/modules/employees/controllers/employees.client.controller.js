@@ -22,8 +22,7 @@ angular.module('employees').controller('EmployeesController', ['$scope', '$state
 			//console.log(employee.password);
 			// Redirec after save
 			employee.$save(function(response) {
-				$location.path('/');
-
+				$location.path('contacts/' + user.contact);
 				// Clear form fields
 				$scope.firstName = '';
 				$scope.surname = '';

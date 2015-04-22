@@ -52,7 +52,7 @@ exports.getErrorMessage = function(err) {
 exports.sendErrorResponse = function(res, err, statusCode) {
     if (err) {
         var status = statusCode || 400;
-        res.status(status).send({message: exports.getErrorMessage(err)});
+        res.status(status).json({message: exports.getErrorMessage(err)});
         return true;
     }
     return false;
@@ -69,7 +69,9 @@ exports.sendErrorResponse = function(res, err, statusCode) {
  */
 exports.wrap = function(res, callback) {
     return function(err) {
-        if (!exports.sendErrorResponse(res, err)) {
+        if (exports.sendErrorResponse(res, err)) {
+            console.error(err);
+        } else {
             callback.apply(this, [].slice.call(arguments, 1));
         }
     };

@@ -1,4 +1,6 @@
 'use strict';
+var breeds = require('../../petfinder-breed-list.js');
+var Icons = require('../../glyphicon-list.js');
 /**
  * Module dependencies.
  */
@@ -15,9 +17,30 @@ var AdoptionSchema = new Schema({
 	},
 	endDate: Date, 
 	catId: { type: Schema.Types.ObjectId, ref: 'Cat', required: 'must adopt a cat' },
-	returnReason: String
+	returnReason: String,
+    adoptionType: {
+        type: String,
+        enum: ['adoption', 'foster']
+    }
 });
 
+var validateSex = function(sex){
+	if(sex == 1 || sex == 2 || sex == 9 || sex == 0){
+		return true;
+	}
+	return false;
+}
+/*
+
+legacy validate
+var validateBreed = function(breed){
+	for(int i = 0; i < breeds.list.length; i++){
+		if(breed == breeds.list[i]){
+			return true;
+		}
+	} 
+	return false;
+}*/
 /**
  * Cat Schema
  */
@@ -26,6 +49,10 @@ var CatSchema = new Schema({
 		type: Date,
 		default: Date.now
 	},
+    dateOfBirthEstimated: {
+        type: Boolean,
+        default: true
+    },
 	name: {
 		type: String,
 		default: '',
@@ -41,19 +68,24 @@ var CatSchema = new Schema({
 	 */
 	sex: {
 		type: Number,
-		default: 0
+		default: 0,
+		validate: [validateSex, 'Must have a valid sex']
 	},
 	hairLength: String,
 	vet: { type: Schema.Types.ObjectId, ref: 'Contact' },
 	dateOfArrival: {
 		type: Date,
-		default: Date.now 
+		default: Date.now,
+		required: 'must have an arrival date' 
 	},
+    dateOfDeceased: {
+        type: Date
+    },
 	breed: {
 		type: String,
-		default: 'Unknown',
 		trim: true,
-		required: 'Cats must have a breed.'
+		required: 'Cats must have a breed.',
+		enum: breeds.list
 	},
 	color: String,
 	description: {
@@ -62,10 +94,11 @@ var CatSchema = new Schema({
         default: ''
     },
 	temperament: String,
-	imageUrl: String,
+	profileImage: { type: Schema.Types.ObjectId, ref: 'Image' },
 	origin: {
 		address: String,
 		person: { type: Schema.Types.ObjectId, ref: 'Contact' },
+        organization: String,
         notes: String
 	},
 	currentLocation: String,
@@ -75,19 +108,23 @@ var CatSchema = new Schema({
 			detail: String,
 			label: {
 				type: String,
-				required: 'must have a label'
+				required: 'Event must have a label'
 			},
 			date: {
 				type: Date,
-				required: 'must have a date'
+				required: 'Event must have a date'
 			},
 			/* for events that have a duration, like trips to vet */
 			endDate: Date,
 			eventType: {
 				type: String,
-				required: 'must have a event type'
+				required: 'Event must have a event type'
 			},
-			icon: String
+			icon: {
+				type: String,
+				enum: Icons.list
+			},
+            data: {}
 		}
 	],
 	adoptions: [{type: Schema.Types.ObjectId, ref: 'Adoption'}],
@@ -98,7 +135,6 @@ mongoose.model('Adoption', AdoptionSchema);
 mongoose.model('Cat', CatSchema);
 
 CatSchema.pre('save', function(next) {
-	console.log(this);
 	var i = 0;
 	this.currentAdoption = undefined;
 	for (i = 0; i < this.adoptions.length; ++i) {

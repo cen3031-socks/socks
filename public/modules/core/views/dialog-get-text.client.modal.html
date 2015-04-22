@@ -1,0 +1,9 @@
+<section>
+    <h1>{{title}}</h1>
+    <div class="message">
+        {{message}}
+    </div>
+    <input type="text" class="form-control" ng-model="text" placeholder="{{placeholder}}"/>
+    <button type="button" class="btn btn-lg text-right" ng-class="trueButtonType" ng-click="$close(text)">{{trueText}}</button>
+    <button type="button" class="btn btn-lg text-right" ng-class="falseButtonType" ng-click="$dismiss('canceled')">{{falseText}}</button>
+</section>

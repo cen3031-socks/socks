@@ -28,38 +28,58 @@
                 </a>
             </div>
         </div>
-        <div class="row">
-            <div ng-show="contact.isAdopter" class = "col-xs-12 col-sm-6 col-md-2">
+        <div class="col-xs-12 col-sm-10 col-md-9 text-left">
+            <span ng-show="contact.isAdopter">
                 <a ng-click="contactViewCtrl.modalAdoptedCatsView('lg', contact)">
                     <button type="button" class="btn btn-default btn-md btn-danger">
                         <span class="glyphicon glyphicon-heart" aria-hidden="true"></span> Adopter
                     </button>
                 </a>
-            </div>
-            <div ng-show="contact.isVet" class = "col-xs-12 col-sm-6 col-md-2">
-                <a ng-click="contactViewCtrl.modalAdoptedCatsView('lg', contact)">
-                    <button type="button" class="btn btn-default btn-md background-pink">
-                        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Veterinarian
+            </span>
+            <span ng-show="contact.isVet">
+                <a ng-click="contactViewCtrl.modalVetCatsView('lg', contact)">
+                    <button type="button" class="btn btn-default btn-md background-danger">
+                        <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span> Veterinarian
                     </button>
                 </a>
-            </div>
-            <div ng-show="contact.isDonator" class = "col-xs-12 col-sm-6 col-md-2">
+            </span>
+            <span ng-show="contact.isFosterer">
+                <a ng-click="contactViewCtrl.modalFosteredCatsView('lg', contact)">
+                    <button type="button" class="btn btn-default btn-md btn-primary">
+                        <span class="glyphicon glyphicon-home" aria-hidden="true"></span> Fosterer
+                    </button>
+                 </a>
+            </span>
+            <span ng-show="contact.isDonator">
                 <a ng-click="contactViewCtrl.modalDonationsView('lg', contact)">
                     <button type="button" class="btn btn-default btn-md btn-success">
                         <span class="glyphicon glyphicon-usd" aria-hidden="true"></span> Donator
                     </button>
                 </a>
-            </div>
-            <div ng-show="contact.isVolunteer" class = "col-xs-12 col-sm-6 col-md-2">
+            </span>
+            <span ng-show="contact.isVolunteer2">
                 <a ng-click="contactViewCtrl.modalVolunteerHoursView('lg', contact)">
-                    <button type="button" class="btn btn-default btn-md btn-warning">
+                    <button type="button" class="btn btn-default btn-md btn-info">
                         <span class="glyphicon glyphicon-user" aria-hidden="true"></span> Volunteer
                     </button>
                 </a>
-            </div>
-
+            </span>
+            <span ng-show="contact.isEmployee">
+                <a>
+                    <button type="button" class="btn btn-default btn-md btn-warning">
+                        <span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span> Employee
+                    </button>
+                </a>
+            </span>
+            <span ng-show="contact.isAdministrator">
+                <a>
+                    <button type="button" class="btn btn-default btn-md btn-warning">
+                        <span class="glyphicon glyphicon-star" aria-hidden="true"></span> Admin
+                    </button>
+                </a>
+            </span>
         </div>
-        <div class="profile">
+        <div class="profile col-xs-12 col-sm-12 col-md-12">
             <div class="attribute-group">
                 <h2>Basic Info</h2>
                 <div class="profile-group">
@@ -87,14 +107,15 @@
                     <span class="profile-value" id="dateOfBirth">{{ formatZipCode(contact.zipCode) }}</span>
                 </div>
             </div>
-        </div>
-
-        <div class="profile-group notes">
-            <div class="profile-attribute">Notes</div>
-            <div class="profile-value">
-                <notes about="contact._id"></notes>
+            <div class="profile-group notes col-xs-12 col-sm-12 col-md-12">
+                <div class="profile-attribute">Notes</div>
+                <div class="profile-value">
+                    <notes about="contact._id"></notes>
+                </div>
             </div>
         </div>
+
+
 
         <div class="profile-group" ng-show="contact.hasVolunteer">
             <span class="profile-attribute">Hours Volunteered</span>

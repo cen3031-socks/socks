@@ -17,6 +17,11 @@ angular.module('contacts').factory('Contacts', ['$resource',
                 url: 'adopters',
                 isArray: true
             },
+            findFosteredCats: {
+                method: 'GET',
+                url: 'contacts/:contactId/fosters',
+                isArray: true
+            },
             findCatsWithVets: {
                 method: 'GET',
                 url: '/contacts/:contactId/vets',
@@ -30,6 +35,16 @@ angular.module('contacts').factory('Contacts', ['$resource',
             findVolunteerHours: {
                 method: 'GET',
                 url: 'contacts/:contactId/volunteers',
+                isArray: true
+            },
+            findEmployees: {
+                method: 'GET',
+                url: 'contacts/:contactId/employees',
+                isArray: true
+            },
+            findAdmins: {
+                method: 'GET',
+                url: 'contacts/:contactId/admins',
                 isArray: true
             },
             addNote: {

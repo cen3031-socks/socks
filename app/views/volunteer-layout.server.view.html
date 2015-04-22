@@ -35,7 +35,8 @@
 
     <!--Application CSS Files-->
     {% for cssFile in cssFiles %}
-    <link rel="stylesheet" href="{{cssFile}}">{% endfor %}
+    <link rel="stylesheet" href="{{cssFile}}">
+    {% endfor %}
 
     <!-- HTML5 Shim -->
     <!--[if lt IE 9]>
@@ -51,11 +52,11 @@
             <div class="page-header text-center">
                 <h1 class="white-text">Volunteer Timesheet</h1>
             </div>
-                <div class="text-center white-text h3">If you are here to volunteer:</div>
-                <div class="volinstlist white-text h4">
+            <div class="text-center white-text h3">If you are here to volunteer:</div>
+            <div class="volinstlist white-text h4">
                 <li>Click on the <span class="glyphicon glyphicon-user"></span> below.</li>
                 <li>Start typing your name into the box.</li>
-                    <li>If your name is already in our system, it will come up. Otherwise, press the + button to add it.</li>
+                <li>If your name is already in our system, it will come up. Otherwise, add yourself to it.</li>
                 <li>Click on submit to sign in.</li>
                 <li>Before you leave make sure to do the same to sign out.</li>
                 </div>
@@ -69,14 +70,13 @@
                     -->
 
                     <div class = "volunteerSelector">
-                        <contacts-selector max="1" ng-model="contact" ></contacts-selector>
+                        <contacts-selector max="1" ng-model="contact" title="'Enter your name:'"  ></contacts-selector>
                     </div>
                 </div>
                 <div class="form-group centButton">
-                    <button type="submit" class="btn btn-default">Submit</button>
+                    <button type="submit" class="btn btn-default btn-lg">Submit</button>
                 </div>
             </form>
-
 
         </section>
 
@@ -86,12 +86,13 @@
 
 <!--Embedding The User Object-->
 <script type="text/javascript">
-    var user = {{ user | json | safe }};
+    var user = {{ user | json | safe}};
 </script>
 
 <!--Application JavaScript Files-->
 {% for jsFile in jsFiles %}
-<script type="text/javascript" src="{{jsFile}}"></script>{% endfor %}
+<script type="text/javascript" src="{{jsFile}}"></script>
+{% endfor %}
 
 {% if process.env.NODE_ENV === 'development' %}
 <!--Livereload script rendered -->
@@ -101,8 +102,11 @@
 <!--[if lt IE 9]>
 <section class="browsehappy jumbotron hide">
     <h1>Hello there!</h1>
+
     <p>You are using an old browser which we unfortunately do not support.</p>
+
     <p>Please <a href="http://browsehappy.com/">click here</a> to update your browser before using the website.</p>
+
     <p><a href="http://browsehappy.com" class="btn btn-primary btn-lg" role="button">Yes, upgrade my browser!</a></p>
 </section>
 <![endif]-->

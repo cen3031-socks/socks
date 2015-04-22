@@ -17,8 +17,9 @@ module.exports = {
 			//stream: 'access.log'
 		}
 	},
+    fileUploadPath: './images/',
 	app: {
-		title: 'MEAN.JS - Development Environment'
+		title: 'SOCKS'
 	},
 	facebook: {
 		clientID: process.env.FACEBOOK_ID || 'APP_ID',
@@ -46,12 +47,12 @@ module.exports = {
 		callbackURL: '/auth/github/callback'
 	},
 	mailer: {
-		from: process.env.MAILER_FROM || 'MAILER_FROM',
+		from: '<saveourcatsandkittens@gmail.com>',
 		options: {
-			service: process.env.MAILER_SERVICE_PROVIDER || 'MAILER_SERVICE_PROVIDER',
+			service:'Gmail',
 			auth: {
-				user: process.env.MAILER_EMAIL_ID || 'MAILER_EMAIL_ID',
-				pass: process.env.MAILER_PASSWORD || 'MAILER_PASSWORD'
+				user:'saveourcatsandkittens@gmail.com',
+				pass:'kittens0'
 			}
 		}
 	}

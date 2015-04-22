@@ -5,12 +5,14 @@
 		</span>
     </a>
 	<a ng-repeat="cat in cats" class="cat-grid-item" href="#!/cats/{{cat._id}}">
-		<img ng-src="{{cat.imageUrl}}" />
-		<span class="details">
-			<span class="name">{{cat.name}}</span>
-			<span class="breed">
-				{{cat.breed}}
-			</span>
-		</span>
+        <div>
+            <img ng-src="/images/{{cat.profileImage}}/thumbnail" />
+            <span class="details">
+                <span class="name">{{cat.name}}</span>
+                <span class="breed">
+                    {{cat.breed}}
+                </span>
+            </span>
+        </div>
 	</a>
 </section>

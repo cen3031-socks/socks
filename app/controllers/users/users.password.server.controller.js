@@ -15,9 +15,6 @@ var _ = require('lodash'),
 	
 var smtpTransport = nodemailer.createTransport(config.mailer.options);
 
-/**
- * Forgot for reset password (forgot POST)
- */
 exports.forgot = function(req, res, next) {
 	async.waterfall([
 		// Generate random token
@@ -36,10 +33,6 @@ exports.forgot = function(req, res, next) {
 					if (!user) {
 						return res.status(400).send({
 							message: 'No account with that username has been found'
-						});
-					} else if (user.provider !== 'local') {
-						return res.status(400).send({
-							message: 'It seems like you signed up using your ' + user.provider + ' account'
 						});
 					} else {
 						user.resetPasswordToken = token;
@@ -68,7 +61,7 @@ exports.forgot = function(req, res, next) {
 		// If valid email, send reset email using service
 		function(emailHTML, user, done) {
 			var mailOptions = {
-				to: user.email,
+				to: user.username,
 				from: config.mailer.from,
 				subject: 'Password Reset',
 				html: emailHTML
@@ -76,7 +69,7 @@ exports.forgot = function(req, res, next) {
 			smtpTransport.sendMail(mailOptions, function(err) {
 				if (!err) {
 					res.send({
-						message: 'An email has been sent to ' + user.email + ' with further instructions.'
+						message: 'An email has been sent to ' + user.username + ' with further instructions.'
 					});
 				} else {
 					return res.status(400).send({
@@ -173,7 +166,7 @@ exports.reset = function(req, res, next) {
 		// If valid email, send reset email using service
 		function(emailHTML, user, done) {
 			var mailOptions = {
-				to: user.email,
+				to: user.username,
 				from: config.mailer.from,
 				subject: 'Your password has been changed',
 				html: emailHTML

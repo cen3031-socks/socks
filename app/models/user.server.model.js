@@ -1,5 +1,4 @@
 'use strict';
-
 /**
  * Module dependencies.
  */
@@ -46,7 +45,7 @@ var UserSchema = new Schema({
 	},
 	permissionLevel: {
 		type: Number,
-		default: 0,
+		default: 4,
 		validate: [checkValidPermissionLevel, 'permissionLevel must be >= 0']
 	},
 	updated: {
@@ -73,8 +72,7 @@ UserSchema.pre('save', function(next) {
 		this.salt = new Buffer(crypto.randomBytes(16).toString('base64'), 'base64');
 		this.password = this.hashPassword(this.password);
 	}
-
-	next();
+     next();
 });
 
 /**
@@ -94,6 +92,7 @@ UserSchema.methods.hashPassword = function(password) {
 UserSchema.methods.authenticate = function(password) {
 	return this.password === this.hashPassword(password);
 };
+
 
 /**
  * Find possible not used username
