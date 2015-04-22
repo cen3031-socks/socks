@@ -7,10 +7,11 @@ angular.module('employees').controller('EmployeesController', ['$scope', '$state
 
 		// Create new Create
 		$scope.create = function() {
-			// Create new Create object
+			// Create new employee object
+			//console.log(this.password);
 			var employee = new Employees ({
 				firstName: this.firstName,
-				lastName: this.lastName,
+				surname: this.surname,
 				email: this.email,
 				phone: this.phone,
 				isAdmin: this.isAdmin,
@@ -18,13 +19,13 @@ angular.module('employees').controller('EmployeesController', ['$scope', '$state
 				password: this.password
 			});
 
+			//console.log(employee.password);
 			// Redirec after save
 			employee.$save(function(response) {
-				$location.path('employees/' + response._id);
-
+				$location.path('contacts/' + user.contact);
 				// Clear form fields
 				$scope.firstName = '';
-				$scope.lastName = '';
+				$scope.surname = '';
 				$scope.email = '';
 				$scope.phone = '';
 				$scope.isAdmin = '';

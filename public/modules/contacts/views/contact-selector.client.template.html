@@ -1,4 +1,4 @@
-<ul class="contact-selector">
+<ul class="contact-selector" style="display:inline-block;">
 	<li ng-repeat="contact in selectedContacts" 
 	    ng-class="{last: $index == maxContacts - 1}">
 		<span>
@@ -9,8 +9,9 @@
 		</div>
     </li>
     <li>
-        <span ng-click="showModal()" ng-show="selectedContacts.length < maxContacts">
+        <span class="btn btn-default" ng-click="showModal()" ng-show="selectedContacts.length < maxContacts">
 			<i class="glyphicon glyphicon-user"></i>
+            Click to select
         </span>
     </li>
 </ul>

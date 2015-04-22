@@ -1,28 +1,5 @@
 <section data-ng-controller="DonationsController" data-ng-init="find()">
-    <style type="text/css">
-        .myButton {
-            background-color: black;
-            border-radius:20px;
-            border:1px solid black;
-            display:inline-block;
-            cursor:pointer;
-            color: #D4D4D4;
-            font-family:arial;
-            font-size:17px;
-            padding:16px 31px;
-            text-decoration:none;
-            text-shadow:0px 1px 0px #2f6627;
-        }
-        .myButton:hover {
-            color:#ffffff;
-            text-decoration: none;
-        }
-        .myButton:active {
-            position:relative;
-            top:1px;
-        }
-
-    </style>
+    
     <div class="page-header">
         <h1>Donations</h1>
     </div>
@@ -37,9 +14,7 @@
         </div>
         <div class="col-xs-12 col-sm-4 text-center">
             <a href="/#!/donations/create">
-                <button class="myButton" href="/#!/donations/create">
-
-                    <!--<i class="glyphicon glyphicon-user"></i> <br>-->
+                <button class="btn btn-default" href="/#!/donations/create">
                     New Donation
                 </button>
             </a>
@@ -48,18 +23,38 @@
 
 
    <div class="list-group" infinite-scroll='loadMore()'>
-        <a data-ng-repeat="donation in donations | filter:searchText" data-ng-href="#!/donations/{{donation._id}}" class="list-group-item">
-			<small class="list-group-item-text">
-                <!--donor name-->
-				<span data-ng-bind="donation.donor.firstName" style='font-size:2.0em;'></span>
-                <span data-ng-bind="donation.donor.surname" style='font-size:2.0em;'></span>
-                <br>
-                <span data-ng-bind="donation.created | date:'medium'"></span>
+        <a data-ng-repeat="donation in donations | filter:searchText" ng-click="expandItems(donation)" class="list-group-item">
+            <span>
+    			<small class="list-group-item-text">
+                    <!--donor name-->
+    				<span data-ng-bind="donation.donor.firstName" style='font-size:2.0em;'></span>
+                    <span data-ng-bind="donation.donor.surname" style='font-size:2.0em;'></span>
+                    <br>
+                    <span data-ng-bind="donation.created | date:'medium'"></span>
+                  <!--  <span style='float:right; font-size:2.0em;' data-ng-bind="donation.dollarAmount"></span><span style='float:right; font-size:2.0em;'>$</span> -->
+                </small>
 
-                <span style='float:right; font-size:2.0em;' data-ng-bind="donation.dollarAmount"></span><span style='float:right; font-size:2.0em;'>$</span>
-            </small>
-			<h4 class="list-group-item-heading" data-ng-bind="donation.name"></h4>
+                <ul class="itemsIcons" style='float:right; list-style-type: none;'>
+                    <li style="float:right; margin:0.2em;" data-ng-repeat="item in donation.items | unique:'icon'">
+                        <i style='font-size:1.5em;' class="{{item.icon}}"></i>
+                    </li>
+                </ul>
+
+    			<h4 class="list-group-item-heading" data-ng-bind="donation.name"></h4>
+            </span>
+        
+            <ul ng-show="donation.isExpanded" class="itemsSublist" style='list-style-type: none;'>
+                <li  data-ng-repeat="item in donation.items">
+                    <span data-ng-bind="item.name" style='font-size:1.5em;'></span>
+                    <span data-ng-bind="item.value.amount" style='font-size:1.5em;'></span>
+                    <span data-ng-bind="item.value.units" style='font-size:1.5em;'></span>
+                    <i style='font-size:1.5em;' class="{{item.icon}}"></i>
+                </li>
+                <button ng-click="deleteDonation(donation)" class="btn btn-danger">Delete Donation</button>
+            </ul>
+
         </a>
+
     </div>
 
 

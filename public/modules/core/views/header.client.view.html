@@ -16,12 +16,12 @@
 				</a>
 				<ul class="dropdown-menu">
 					<li class="display-bold">
-						<a data-ng-bind="authentication.user.displayName"></a>
+						<a data-ng-bind="authentication.user.username"></a>
 					</li>
 					<li>
-						<a href="/#!/contacts/{{authentication.user.contact}}/edit">Edit Profile</a>
+						<a href="/#!/contacts/{{authentication.user.contact}}">View/Edit Profile</a>
 					</li>
-					<li data-ng-show="authentication.user.provider === 'local'">
+					<li>
 						<a href="/#!/settings/password">Change Password</a>
 					</li>
 					<li class="divider"></li>
@@ -32,11 +32,14 @@
 			</li>
 
             <li class = "list-element"><a href="/#!/" class = 'list-link'>Cats</a></li>
-            <li data-ng-show="authentication.user" class = "list-element"><a href="/#!/contacts" class = 'list-link'>Contacts</a></li>
-            <li data-ng-show="authentication.user" class = "list-element"><a href="/#!/donations" class = 'list-link'>Donations</a></li>
-            <li data-ng-show="authentication.user" class = "list-element"><a href="/#!/stats" class = 'list-link'>Stats</a></li>
-            <li data-ng-show="authentication.user.permissionLevel > 0" class = "list-element"><a href="/#!/employees" class = 'list-link'>Create User</a></li>
-        </ul>
+			<li data-ng-show="authentication.user" class="list-element"><a href="/#!/contacts" class = 'list-link'>Contacts</a></li>
+			<li data-ng-show="authentication.user" class="list-element"><a href="/#!/donations" class = 'list-link'>Donations</a></li>
+			<li data-ng-show="authentication.user" class="list-element"><a href="/#!/export" class="list-link">Reports</a></li>
+			<li data-ng-show="authentication.user" class="list-element"><a href="/#!/images" class="list-link">Images</a></li>
+			<li data-ng-show="authentication.user" class="list-element"><a href="/#!/videos" class="list-link">Videos</a></li>
+			<li data-ng-show="authentication.user" class="list-element"><a href="/#!/allvolunteers" class="list-link">Volunteers</a></li>
+			<li data-ng-show="authentication.user.permissionLevel == 0" class = "list-element"><a href="/#!/employees/create" class = 'list-link'>Create User</a></li>
+		</ul>
     </div>
 	<!-- <nav class="collapse navbar-collapse" collapse="!isCollapsed" role="navigation">
 		<ul class="nav navbar-nav" data-ng-if="menu.shouldRender(authentication.user);">

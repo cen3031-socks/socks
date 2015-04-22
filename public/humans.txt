@@ -3,11 +3,18 @@
 
 # TEAM
 
-    <name> -- <role> -- <twitter>
+    Alexander Russ -- primary fixer of things
+    Aaron Silcott  -- primary tester of things
+    Reid Gill  --  primary stoked guy
+    Eric Pogash -- primary keyboard supplier
+    Nick Munarriz  --  primary marathon runner guy
+    Ben Grider -- that "Whoa dude" guy from spongebob
+    
 
 # THANKS
 
-    <name>
+    Dr. Alin Dobra
+    Nancy Schimmer
 
 # TECHNOLOGY COLOPHON
 

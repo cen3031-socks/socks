@@ -1,0 +1,48 @@
+ul.image-gallery {
+  list-style-type:none;
+}
+ul.image-gallery li {
+    display:inline-block;
+    margin:1em;
+    position:relative;
+}
+
+ul.image-gallery li img {
+    border:4px solid transparent;
+    cursor:pointer;
+}
+
+ul.image-gallery li img:hover, ul.image-gallery li img:active  {
+    border:4px solid blue;
+    position:relative;
+}
+
+ul.image-gallery li img.selected:hover, ul.image-gallery li img.selected:active  {
+    border:4px solid green;
+    position:relative;
+}
+ul.image-gallery li img.selected {
+    border:4px solid #0c9;
+    position:relative;
+}
+
+ul.video-gallery li.selected a:link, ul.video-gallery li.selected a:visited {
+    color:#0c9;
+}
+
+div.main-image img {
+    max-height:80%;
+    max-width:80%;
+    margin:1em;
+}
+
+.image-view .row cats-selector {
+    margin:2em;
+}
+
+.drop-box {
+    color:#89b;
+    border:3px dashed;
+    padding:2em;
+}
+

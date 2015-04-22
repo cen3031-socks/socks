@@ -1,0 +1,11 @@
+<section>
+    <ul class="image-gallery">
+        <li ng-repeat="image in images">
+            <img ng-src="{{image.thumbnailSrc}}" ng-class="{selected: image.selected && selectMode}" ng-click="imageClicked(image)" />
+        </li>
+    </ul>
+    <div class="alert alert-info" ng-show="!images">Loading gallery...</div>
+    <div class="alert alert-warning" ng-hide="!images || images.length">
+        No images found. If you want, you can <a href="/#!/image-upload">upload some.</a>
+    </div>
+</section>

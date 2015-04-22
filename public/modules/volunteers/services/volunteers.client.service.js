@@ -13,6 +13,11 @@ angular.module('volunteers').factory('Volunteers', ['$resource',
                 method: 'GET',
                 url: '/volunteers/by-name/:contactId',
                 isArray: true
+            },
+            minutesWorked: {
+                method: 'GET',
+                url: '/volunteers/get-minutes/:contactId/:startDate/:endDate',
+                isArray: false
             }
 		});
 	}

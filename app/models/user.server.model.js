@@ -1,5 +1,4 @@
 'use strict';
-
 /**
  * Module dependencies.
  */
@@ -11,94 +10,52 @@ var mongoose = require('mongoose'),
  * A Validation function for local strategy properties
  */
 var validateLocalStrategyProperty = function(property) {
-	return ((this.provider !== 'local' && !this.updated) || property.length);
+	return ( property.length);
 };
 
 /**
  * A Validation function for local strategy password
  */
-var validateLocalStrategyPassword = function(password) {
-	return (this.provider !== 'local' || (password && password.length > 6));
+var checkValidPermissionLevel = function(permissionLevel){
+	return (permissionLevel >= 0);
 };
 
 /**
  * User Schema
  */
 var UserSchema = new Schema({
-	firstName: {
-		type: String,
-		trim: true,
-		default: '',
-		validate: [validateLocalStrategyProperty, 'Please fill in your first name']
-	},
-	lastName: {
-		type: String,
-		trim: true,
-		default: '',
-		validate: [validateLocalStrategyProperty, 'Please fill in your last name']
-	},
-	displayName: {
-		type: String,
-		trim: true
-	},
-	email: {
-		type: String,
-		trim: true,
-		default: '',
-		validate: [validateLocalStrategyProperty, 'Please fill in your email'],
-		match: [/.+\@.+\..+/, 'Please fill a valid email address']
-	},
 	username: {
 		type: String,
-		unique: 'Username already exists',
-		required: 'Please fill in a username',
+		unique: 'Email already exists',
+		required: 'Please fill in an email',
 		trim: true
 	},
 	password: {
 		type: String,
 		default: '',
-		validate: [validateLocalStrategyPassword, 'Password should be longer']
-	},
-	parent: {
-		type: Schema.ObjectId,
-		ref: 'Employee'
+		required: true
 	},
 	contact: {
 		type: Schema.ObjectId,
-		ref: 'Contact'
-	},
-	phone: {
-		type: String,
-		default: ''
+		ref: 'Contact',
+		required: 'contact is required for user account'
 	},
 	salt: {
 		type: String
 	},
-	provider: {
-		type: String,
-		required: 'Provider is required'
-	},
 	permissionLevel: {
 		type: Number,
-		default: 0
-	},
-	providerData: {},
-	additionalProvidersData: {},
-	roles: {
-		type: [{
-			type: String,
-			enum: ['user', 'admin']
-		}],
-		default: ['user']
+		default: 4,
+		validate: [checkValidPermissionLevel, 'permissionLevel must be >= 0']
 	},
 	updated: {
-		type: Date
+		type: Date,
+		default: Date.now
 	},
 	created: {
 		type: Date,
 		default: Date.now
 	},
-	/* For reset password */
 	resetPasswordToken: {
 		type: String
 	},
@@ -111,12 +68,11 @@ var UserSchema = new Schema({
  * Hook a pre save method to hash the password
  */
 UserSchema.pre('save', function(next) {
-	if (this.password && this.password.length > 6) {
+	if (this.password) {
 		this.salt = new Buffer(crypto.randomBytes(16).toString('base64'), 'base64');
 		this.password = this.hashPassword(this.password);
 	}
-
-	next();
+     next();
 });
 
 /**
@@ -136,6 +92,7 @@ UserSchema.methods.hashPassword = function(password) {
 UserSchema.methods.authenticate = function(password) {
 	return this.password === this.hashPassword(password);
 };
+
 
 /**
  * Find possible not used username

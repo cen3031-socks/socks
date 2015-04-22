@@ -2,7 +2,6 @@
 
 angular.module('core').controller('HomeController', ['$scope', '$location', 'Authentication', 'Cats',
 		function($scope, $location, Authentication, Cats) {
-			// This provides Authentication context.
 			$scope.authentication = Authentication;
 			$scope.dateOfArrival = Date.now();
 
@@ -33,27 +32,25 @@ angular.module('core').controller('HomeController', ['$scope', '$location', 'Aut
 			};
 
 			$scope.create = function() {
-                if (this.originPerson.length !== 1) {
-                    $scope.error = "You must select an origin person";
+                var cat = new Cats({});
+                cat.dateOfBirth = $scope.dateOfBirth;
+                console.log(cat.dateOfBirthEstimated);
+                cat.name = $scope.name;
+                cat.vet = $scope.vet && $scope.vet.length === 1 ? $scope.vet[0]._id : undefined;
+                cat.dateOfArrival = $scope.dateOfArrival;
+                cat.breed = $scope.breed;
+                cat.color = $scope.color;
+                cat.description = $scope.description;
+                cat.temperament = $scope.temperament;
+                cat.origin = {
+                    address: $scope.originAddress,
+                    person: $scope.originPerson && $scope.originPerson.length === 1 ? $scope.originPerson[0]._id : undefined,
+                    organization: $scope.originOrg
+                },
+                    cat.currentLocation = $scope.location;
+                if ($scope.profileImage) {
+                    cat.profileImage = $scope.profileImage._id;
                 }
-				var cat = new Cats({
-					dateOfBirth: this.dateOfBirth,
-					name: this.name,	
-					sex: this.sex,
-					vet: this.vet._id,
-					dateOfArrival: this.dateOfArrival,
-					breed: this.breed,
-					color: this.color,
-					description: this.description,
-					temperament: this.temperament,
-					origin: {
-						address: this.originAddress,
-						person: this.originPerson[0]._id
-					},
-					currentLocation: this.location,
-					owner: this.owner,
-					notes: [this.notes]
-				});
 				return cat.$save(function(response) {
 					$location.path('cats/' + response._id);
 				}, function(errorResponse) {

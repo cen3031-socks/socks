@@ -3,7 +3,7 @@
 var contacts = angular.module('contacts');
 contacts.controller('ContactsSelectorController', ['$stateParams', 'Contacts', '$modal', '$scope', '$rootScope',
     function($stateParams, Contacts, $modal, $scope, $rootScope) {
-        $scope.selectedContacts = [];
+        $scope.selectedContacts = $scope.selectedContacts || [];
 
         $scope.showModal = function() {
             if ($scope.max === undefined) {
@@ -11,7 +11,7 @@ contacts.controller('ContactsSelectorController', ['$stateParams', 'Contacts', '
             }
 
             // if we've already got enough contacts selected, don't show the modal.
-            if ($scope.selectedContacts.length >= $scope.max && $scope.max != -1) {
+            if ($scope.selectedContacts.length >= $scope.max && $scope.max !== -1) {
                 return;
             }
 
@@ -30,7 +30,7 @@ contacts.controller('ContactsSelectorController', ['$stateParams', 'Contacts', '
                     };
                     $scope.select = function(contact) {
                         $modalInstance.close(contact);
-                    }
+                    };
                     $scope.createContact = function() {
                         var createModal = $modal.open({
                             templateUrl: '/modules/contacts/views/create-contacts.client.view.html',

@@ -1,0 +1,121 @@
+<section data-ng-controller="CatEditController">
+    <div class="page-header">
+        <h1>Edit Cat</h1>
+    </div>
+    <section>
+        <section >
+            <div class="col-md-12">
+                <form name="catForm" class="form-horizontal" data-ng-submit="submit()" novalidate>
+                    <fieldset>
+                        <div class="row">
+                            <div class="form-group col-md-8" ng-class="{ 'has-error': catForm.title.$dirty && catForm.title.$invalid }">
+                                <label class="control-label" for="name">Name</label>
+                                <div class="controls">
+                                    <input name="name" type="text" data-ng-model="name" id="name" class="form-control" placeholder="Name" required>
+                                </div>
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label class="control-label" for="sex">Sex</label>
+                                <div class="controls">
+                                    <select name="sex" class="form-control" ng-model="cat.sex">
+                                        <option value="0">Unknown</option>
+                                        <option value="1">Male</option>
+                                        <option value="2">Female</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-md-4">
+                                <label class="control-label" for="dob">Date of Birth</label>
+                                <small style="float:right;position:relative;top:1em;">
+                                    <input type="checkbox" ng-model="cat.dateOfBirthEstimated" id="dob-est">
+                                    <label for="dob-est">Estimated</label>
+                                </small>
+                                <custom-datepicker ng-model="dateOfBirth"></custom-datepicker>
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label class="control-label" for="color">Color</label>
+                                <div class="controls">
+                                    <input color="color" type="text" data-ng-model="color" id="color" class="form-control" placeholder="Color" required>
+                                </div>
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label class="control-label" for="breed">Breed</label>
+                                <div class="controls">
+                                    <input breed="breed" type="text" data-ng-model="breed" id="breed" class="form-control" placeholder="Breed" required>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-md-4">
+                                <label class="control-label" for="location">Current Location</label>
+                                <div class="controls">
+                                    <input location="location" type="text" data-ng-model="location" id="location" class="form-control" placeholder="Current Location" required>
+                                </div>
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label class="control-label" for="temperament">Temperament</label>
+                                <div class="controls">
+                                    <input temperament="temperament" type="text" data-ng-model="temperament" id="temperament" class="form-control" placeholder="Temperament" required>
+                                </div>
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label class="control-label">Vet</label>
+                                <div class="controls">
+                                    <contacts-selector max="1" ng-model="vet"></contacts-selector>
+                                </div>
+                            </div>
+                        </div>
+                        <h3>Arrival</h3>
+                        <div class="row">
+                            <div class="form-group col-md-6">
+                                <label class="control-label">Date of Arrival</label>
+                                <custom-datepicker ng-model="dateOfArrival"></custom-datepicker>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label class="control-label" for="Address">Found At</label>
+                                <div class="controls">
+                                    <input name="address" type="text"
+                                           data-ng-model="originAddress" id="address"
+                                           class="form-control" placeholder="1 Main St." />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-md-6">
+                                <label class="control-label" for="originPerson">Person</label>
+                                <div class="controls">
+                                    <contacts-selector max="1" id="originPerson" ng-model="originPerson"></contacts-selector>
+                                </div>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label class="control-label" for="originOrg">Organization</label>
+                                <div class="controls">
+                                    <input type="text" id="originOrg" ng-model="originOrg" placeholder="" class="form-control" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-md-12">
+                                <label class="control-label" for="description">Description</label>
+                                <div class="controls">
+                                    <textarea name="description" data-ng-model="description" id="description" class="form-control" cols="30" rows="10" placeholder="Description"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                        <div data-ng-show="error" class="text-danger">
+                            <strong data-ng-bind="error"></strong>
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+        </section>
+    </section>
+    <h2>Select a Profile Image</h2>
+    <image-gallery for-cat="cat._id" select-mode="'single'" selected-image="profileImage"></image-gallery>
+    <div class="form-group">
+        <input id="submit" type="submit" class="btn btn-default" ng-click="submit()" />
+    </div>
+</section>
+

@@ -20,14 +20,14 @@
         </div>
     </div>
     <div class="table-responsive">
-        <table class="table table-bordered">
+        <table class="table table-bordered" data-sort-order="desc">
             <thread>
                 <tr>
-                    <th style="width: 10%">First Name</th>
-                    <th style="width: 10%">Last Name</th>
-                    <th style="width: 15%">Phone</th>
-                    <th style="width: 20%">Email</th>
-                    <th style="width: 30%">Location</th>
+                    <th data-field="{{contact.firstName}}" data-sortable="true" style="width: 10%" >First Name</th>
+                    <th data-field="{{contact.surname}}" data-sortable="true" style="width: 10%" >Last Name</th>
+                    <th data-field="{{contact.phone}}" data-sortable="true" style="width: 15%" >Phone</th>
+                    <th data-field="{{contact.email}}" data-sortable="true" style="width: 20%" >Email</th>
+                    <th data-field="{{contact.city}}" data-sortable="true" style="width: 30%" >Location</th>
 
                     <!--<th style="width: 15%">Creation Date</th>-->
                     <!--<th class="numeric">Open</th>-->
@@ -38,11 +38,12 @@
                ng-click="getDetails(contact)" ng-hide="contact.deleted_contact"
                     >
 
-                <td>{{contact.firstName}}</td>
-                <td>{{contact.surname}}</td>
-                <td>{{contact.phone}}</td>
-                <td>{{contact.email}}</td>
-                <td>{{contact.address}}, {{contact.city}}, {{contact.state}}, {{contact.zipCode}}</td>
+                <td class="col-md-2">{{contact.firstName}}</td>
+                <td class="col-md-2">{{contact.surname}}</td>
+                <td class="col-md-2">{{ formatPhoneNumber(contact.phone) }}</td>
+                <td class="col-md-3">{{contact.email}}</td>
+                <td class="col-md-3">{{contact.address}}<span ng-show="contact.city">,</span> {{contact.city}}<span ng-show="contact.state">,</span> {{contact.state}}<span ng-show="contact.zipCode">,</span> {{contact.zipCode}}
+                </td>
 
                 <!--<td>-->
                     <!--<span data-ng-bind="contact.created | date:'medium'" ></span>-->

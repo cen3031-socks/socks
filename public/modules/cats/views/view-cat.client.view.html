@@ -26,13 +26,13 @@
 			</button>
 		</li>
     </ul>
-	<div class="page-header ">
+	<div class="page-header">
 		<h1 id="name">{{cat.name}}</h1>
 	</div>
     <div class="profile">
 		<div class="cat-profile-image-container">
-			<i class="glyphicon glyphicon-camera" ng-hide="cat.imageUrl"></i>
-			<img ng-src="{{cat.imageUrl}}" class="cat-profile-image" />
+			<i class="glyphicon glyphicon-camera" ng-hide="cat.profileImage"></i>
+			<img ng-src="/images/{{cat.profileImage._id}}/original" class="cat-profile-image" />
 		</div>
 		<div class="attribute-group basic-info">
 			<h2>Basic Info</h2>
@@ -58,7 +58,8 @@
 			</div>
 			<div class="profile-group">
 				<span class="profile-attribute">Date of Birth</span>
-				<span class="profile-value" id="dateOfBirth">{{cat.dateOfBirth | date}}</span>
+				<span class="profile-value" id="dateOfBirth">
+                {{cat.dateOfBirth | date}} <small ng-show="cat.dateOfBirthEstimated">(Estimated)</small></span>
 			</div>
 			<div class="profile-group">
 				<span class="profile-attribute">Vet</span>
@@ -78,7 +79,7 @@
 				</a>
 				<div class="timeline-event" ng-show="cat.currentAdoption !== undefined">
 					<i class="glyphicon glyphicon-briefcase"></i>
-					<span class="timeline-label">Adopted</span>
+					<span class="timeline-label">{{cat.currentAdoption.adoptionType === 'adoption' ? 'Adopted' : 'Fostered'}}</span>
 					<span class="timeline-detail" id="owner">
 						Adopted by 
 						<contact-link contact-id="cat.currentAdoption.adopter._id"></contact-link>
@@ -90,7 +91,7 @@
 					 ng-switch="event.eventType">
 					<div class="timeline-event" ng-switch-when="adoption" ng-show="event.endDate !== undefined">
 						<i class="glyphicon glyphicon-briefcase"></i>
-						<span class="timeline-label">Adopted and Returned</span>
+						<span class="timeline-label">{{event.adoptionType === 'adoption' ? 'Adopted' : 'Fostered'}} and Returned</span>
 						<span class="timeline-detail">
 							Adopted by 
 								<contact-link contact-id="event.adopter._id"></contact-link>
@@ -98,6 +99,28 @@
 						</span>
 						<span class="timeline-date">{{event.date|date}}</span>
 					</div>
+                    <div class="timeline-event" ng-switch-when="vet">
+                        <i class="glyphicon glyphicon-heart"></i>
+                        <span class="timeline-label">Went to vet</span>
+						<span class="timeline-detail">
+                            Went to vet <contact-link contact-id="event.data.vetId"></contact-link>
+                            and had these procedures:
+                            <ul>
+                                <li ng-repeat="operation in event.data.operations">
+                                    {{operation.type}}
+                                    <div style="margin-left:1em;" ng-switch="operation.type">
+                                        <div ng-switch-when="Microchip">{{operation.microchipId}}</div>
+                                        <div ng-switch-when="Other">{{operation.otherDetails}}</div>
+                                    </div>
+                                </li>
+                            </ul>
+
+						</span>
+                        <span class="timeline-date">{{event.date|date}}</span>
+                        <button class="btn" ng-click="deleteEvent(event)">
+                            <i class="glyphicon glyphicon-remove"></i>
+                        </button>
+                    </div>
 					<div class="timeline-event" ng-switch-default>
 						<i class="glyphicon" ng-class="event.icon"></i>
 						<span class="timeline-label">{{event.label}}</span>
@@ -144,29 +167,35 @@
                 <span class="profile-value" id="originOrg">{{cat.origin.organization}}</span>
             </div>
         </div>
+        <div class="attribute-group medical quarter-width">
+            <h2>Medical</h2>
+            <div class="profile-group">
+                <span class="profile-attribute">Spayed/Neutered</span>
+                <span class="profile-value">
+                    {{getSpayDate(cat)|date:'longDate' || ''}}
+				</span>
+            </div>
+            <div class="profile-group" ng-repeat="procedureType in possibleShots">
+                <span class="profile-attribute">{{procedureType}}</span>
+                <span class="profile-value">
+                    <ul>
+                        <li ng-repeat="date in getProcedureDates(cat, procedureType)|unique|orderBy">
+                            {{date|date:'longDate'}}
+                        </li>
+                    </ul>
+                </span>
+            </div>
+        </div>
         <div class="profile-group notes">
             <div class="profile-attribute">Notes</div>
             <div class="profile-value">
-                <table style="width:100%">
-                    <tr ng-repeat="note in cat.notes" class="note">
-                        <td class="note-message">{{note.message}}</td>
-						<td class="note-date">{{note.date|date}}</td>
-                        <td class="note-person"><contact-link contact-id="note.sender"></contact-link></td>
-                        <td class="note-delete">
-                            <button class="btn btn-danger" ng-click="deleteNote(note, $index)">
-                                <i class="glyphicon glyphicon-remove"></i>
-                            </button>
-                        </td>
-                    </tr>
-                    <tr>
-						<form>
-							<td><input name="note-message" ng-model="newNote" class="new-note" id="new-note" placeholder="Leave a new note..." /></td>
-							<td></td>
-							<td class="note-person"><button class="btn btn-default" ng-click="addNote()" type="submit" id="add-note">+</button></td>
-                            <td></td>
-						</form>
-                    </tr>
-                </table>
+                <notes about="cat._id"></notes>
+            </div>
+        </div>
+        <div class="profile-group full-width">
+            <div class="profile-attribute">Gallery</div>
+            <div class="profile-value">
+                <image-gallery for-cat="cat._id"></image-gallery>
             </div>
         </div>
     </div>

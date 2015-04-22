@@ -22,7 +22,7 @@
                                         <div class="form-group">
                                             <label class="control-label" for="firstName">First Name</label>
                                             <div class="controls">
-                                                <input type="text" data-ng-model="contact.firstName" id="firstName" class="form-control">
+                                                <input type="text" data-ng-model="contact.firstName" id="firstName" class="form-control" required>
                                             </div>
                                         </div>
                                     </div>
@@ -173,15 +173,27 @@
         <div class="modal-footer" ng-hide="contact.deleted_contact">
             <div class="pull-left">
                 <!--<a ng-click="contactUpdCtrl.modalDelete('lg', contact)">-->
-                    <button type="button" class="btn btn-danger text-center btn-sm" ng-click="deleteContact(contact, $index)">
+                    <button type="button" class="btn btn-danger text-center btn-sm" ng-click="deleteContact(contact)">
                         <!--<button type="button" class="btn btn-primary text-center" href="/#!/contacts/create">-->
                         <i class="glyphicon glyphicon-trash"></i> <br>
                         Delete Contact?
                     </button>
+                    <button type="button" class="btn btn-info text-center btn-sm"
+                            ng-hide="contact.do_not_adopt" ng-click="addToDoNotAdoptList(contact, $index)">
+                        <!--<button type="button" class="btn btn-primary text-center" href="/#!/contacts/create">-->
+                        <i class="glyphicon glyphicon-ban-circle"></i> <br>
+                        Add to "Do not adopt" list?
+                    </button>
+                    <button type="button" class="btn btn-info text-center btn-sm"
+                            ng-hide="!contact.do_not_adopt" ng-click="removeFromDoNotAdoptList(contact, $index)">
+                        <!--<button type="button" class="btn btn-primary text-center" href="/#!/contacts/create">-->
+                        <i class="glyphicon glyphicon-ban-circle"></i> <br>
+                        Remove from "Do not adopt" list?
+                    </button>
                 <!--</a>-->
             </div>
-            <button class="btn btn-success btn-lg" ng-click="update(contact); ok()" ng-disabled="updateContactForm.$invalid">Update & Close</button>
-            <button class="btn btn-warning btn-lg" ng-click="cancel()">Cancel</button>
+            <button class="btn btn-success btn-lg" ng-click="update(contact);" ng-disabled="updateContactForm.$invalid">Update & Close</button>
+            <button class="btn btn-warning btn-lg" ng-click="$dismiss()">Cancel</button>
         </div>
     </div>
 

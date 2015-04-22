@@ -1,0 +1,21 @@
+<section ng-controller="ImageGalleryPageController">
+    <h1 class="page-header">Image Gallery</h1>
+    <div style="padding:1em;">
+        <a href="/#!/image-upload" class="btn btn-lg btn-primary">
+            <i class="glyphicon glyphicon-open-file"></i>
+            Upload Image
+        </a>
+        <button type="button" class="btn btn-lg btn-success" ng-class="{active: selectMode}" ng-click="toggleSelect()">Select Images</button>
+        <span ng-show="selectMode">
+            <button type="button" class="btn btn-lg btn-warning">
+                <i class="glyphicon glyphicon-save-file"></i>
+                Download Selected
+            </button>
+            <button type="button" class="btn btn-lg btn-danger" ng-click="deleteSelected()">
+                <i class="glyphicon glyphicon-trash"></i>
+                Delete Selected
+            </button>
+        </span>
+    </div>
+    <image-gallery select-mode="selectMode" selected-images="selectedImages" show-all="true"></image-gallery>
+</section>
