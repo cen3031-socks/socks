@@ -11,8 +11,15 @@ module.exports = function(grunt) {
 		mochaTests: ['app/tests/**/*.js']
 	};
 
+	grunt.loadNpmTasks('grunt-githooks');
+
 	// Project Configuration
 	grunt.initConfig({
+	    githooks: {
+	        all: {
+	            'pre-commit': 'jshint test:client test:server',
+	        }
+	    },
 		pkg: grunt.file.readJSON('package.json'),
 		watch: {
 			serverViews: {
@@ -210,7 +217,7 @@ module.exports = function(grunt) {
 	require('load-grunt-tasks')(grunt);
 
 	// Making grunt default to force in order not to break the project.
-	grunt.option('force', true);
+	grunt.option('force', false);
 
 	// A Task for loading the configuration object
 	grunt.task.registerTask('loadConfig', 'Task that loads the config into a grunt option.', function() {
@@ -222,7 +229,7 @@ module.exports = function(grunt) {
 	});
 
 	// Default task(s).
-	grunt.registerTask('default', ['lint', 'concurrent:default']);
+	grunt.registerTask('default', ['githooks', 'lint', 'concurrent:default']);
 
 	// Debug task.
 	grunt.registerTask('debug', ['lint', 'concurrent:debug']);

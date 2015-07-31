@@ -70,12 +70,7 @@ contactsApp.controller('ContactsController', ['$scope', '$stateParams', 'Authent
                 $log.info('Modal dismissed at: ' + new Date());
             });
         };
-        $scope.getMinutes = function (date1, date2) {
-            minutesWorked()
-        }
     }
-
-
 ]);
 
 contactsApp.controller('ContactsCreateController', ['$scope', 'Contacts', '$location',
@@ -256,7 +251,8 @@ contactsApp.controller('ContactsViewController', ['$scope', 'Contacts', '$stateP
                 $scope.update = function(updatedContact) {
                     var contact = updatedContact;
 
-                    contact.$update(function() {
+                    contact.$update(function(result) {
+						$modalInstance.close(result);
                     }, function(errorResponse) {
                         $scope.error = errorResponse.data.message;
                     });
@@ -495,7 +491,6 @@ contactsApp.controller('ContactsViewController', ['$scope', 'Contacts', '$stateP
                         $modalInstance.dismiss('cancel');
                     };
                     $scope.getMinutesWorked = function () {
-                        console.log('minutes worked');
                         $scope.minutesWorked = Volunteers.minutesWorked({
                             startDate: +$scope.startDate,
                             endDate: +$scope.endDate,

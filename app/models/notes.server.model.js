@@ -1,6 +1,7 @@
 'use strict';
 
-var mongoose = require('mongoose'),
+var idValidator = require('mongoose-id-validator'),
+    mongoose = require('mongoose'),
 	Schema = mongoose.Schema;
 var NoteSchema = new Schema({
     about:  {
@@ -22,6 +23,6 @@ var NoteSchema = new Schema({
         required: 'needs user'
     }
 });
-
+NoteSchema.plugin(idValidator);
 mongoose.model('Note', NoteSchema);
 

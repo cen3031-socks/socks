@@ -26,7 +26,7 @@ describe('Donation Model Unit Tests:', function() {
 			donation = new Donation({
 				donor: contact
 			});
-			donation.items.push({name: 'Food'})
+			donation.items.push({name: 'Food'});
 			done();
 		});
 
@@ -44,7 +44,7 @@ describe('Donation Model Unit Tests:', function() {
 			while(donation.items.length >0){
 				donation.items.pop();
 			}
-			donation.items.push({name: "not food"});
+			donation.items.push({name: 'not food'});
 			return donation.save(function(err) {
 				should.exist(err);
 				done();
@@ -54,9 +54,9 @@ describe('Donation Model Unit Tests:', function() {
 			while(donation.items.length >0){
 				donation.items.pop();
 			}
-			donation.items.push({name: "Food"});
-			donation.items.push({name: "Food"});
-			donation.items.push({name: "not food"});
+			donation.items.push({name: 'Food'});
+			donation.items.push({name: 'Food'});
+			donation.items.push({name: 'not food'});
 			return donation.save(function(err) {
 				should.exist(err);
 				done();
@@ -66,7 +66,7 @@ describe('Donation Model Unit Tests:', function() {
 			while(donation.items.length >0){
 				donation.items.pop();
 			}
-			donation.items.push({description: "not food"});
+			donation.items.push({description: 'not food'});
 			return donation.save(function(err) {
 				should.exist(err);
 				done();
@@ -76,9 +76,9 @@ describe('Donation Model Unit Tests:', function() {
 			while(donation.items.length >0){
 				donation.items.pop();
 			}
-			donation.items.push({name: "Food"});
-			donation.items.push({name: "Food"});
-			donation.items.push({description: "not food"});
+			donation.items.push({name: 'Food'});
+			donation.items.push({name: 'Food'});
+			donation.items.push({description: 'not food'});
 			return donation.save(function(err) {
 				should.exist(err);
 				done();
@@ -88,7 +88,7 @@ describe('Donation Model Unit Tests:', function() {
 			while(donation.items.length >0){
 				donation.items.pop();
 			}
-			donation.items.push({name: "Food", value: {amount: 50, units: 'units'}});
+			donation.items.push({name: 'Food', value: {amount: 50, units: 'units'}});
 			return donation.save(function(err) {
 				should.not.exist(err);
 				done();
@@ -99,7 +99,7 @@ describe('Donation Model Unit Tests:', function() {
 			while(donation.items.length >0){
 				donation.items.pop();
 			}
-			donation.items.push({name: "not food", value: {amount: 50, units: 'units'}});
+			donation.items.push({name: 'not food', value: {amount: 50, units: 'units'}});
 			return donation.save(function(err) {
 				should.exist(err);
 				done();
@@ -109,7 +109,7 @@ describe('Donation Model Unit Tests:', function() {
 			while(donation.items.length >0){
 				donation.items.pop();
 			}
-			donation.items.push({description: "not food", value: {amount: 50, units: 'units'}});
+			donation.items.push({description: 'not food', value: {amount: 50, units: 'units'}});
 			return donation.save(function(err) {
 				should.exist(err);
 				done();
@@ -119,7 +119,7 @@ describe('Donation Model Unit Tests:', function() {
 			while(donation.items.length >0){
 				donation.items.pop();
 			}
-			donation.items.push({name: "Food", value: {}});
+			donation.items.push({name: 'Food', value: {}});
 			return donation.save(function(err) {
 				should.not.exist(err);
 				done();
@@ -129,7 +129,7 @@ describe('Donation Model Unit Tests:', function() {
 			while(donation.items.length >0){
 				donation.items.pop();
 			}
-			donation.items.push({name: "Food", value: {amount: 50, units:null}});
+			donation.items.push({name: 'Food', value: {amount: 50, units:null}});
 			return donation.save(function(err) {
 				should.exist(err);
 				done();
@@ -139,7 +139,7 @@ describe('Donation Model Unit Tests:', function() {
 			while(donation.items.length >0){
 				donation.items.pop();
 			}
-			donation.items.push({name: "Food", value: {units: 'units'}});
+			donation.items.push({name: 'Food', value: {units: 'units'}});
 			return donation.save(function(err) {
 				should.exist(err);
 				done();
@@ -149,8 +149,8 @@ describe('Donation Model Unit Tests:', function() {
 			while(donation.items.length >0){
 				donation.items.pop();
 			}
-			donation.items.push({name: "Food", value: {amount: 50, units: 'units'}});
-			donation.items.push({name: "Food", value: {amount: 50, units: 'units'}});
+			donation.items.push({name: 'Food', value: {amount: 50, units: 'units'}});
+			donation.items.push({name: 'Food', value: {amount: 50, units: 'units'}});
 			return donation.save(function(err) {
 				should.not.exist(err);
 				done();
@@ -160,9 +160,9 @@ describe('Donation Model Unit Tests:', function() {
 			while(donation.items.length >0){
 				donation.items.pop();
 			}
-			donation.items.push({name: "Food", value: {amount: 50, units: 'units'}});
-			donation.items.push({name: "Food", value: {}});
-			donation.items.push({name: "Food", value: {amount: 50, units: 'units'}});
+			donation.items.push({name: 'Food', value: {amount: 50, units: 'units'}});
+			donation.items.push({name: 'Food', value: {}});
+			donation.items.push({name: 'Food', value: {amount: 50, units: 'units'}});
 
 			return donation.save(function(err) {
 				should.not.exist(err);
@@ -173,9 +173,9 @@ describe('Donation Model Unit Tests:', function() {
 			while(donation.items.length >0){
 				donation.items.pop();
 			}
-			donation.items.push({name: "Food", value: {amount: 50, units: 'units'}});
-			donation.items.push({name: "Food", value: {amount: 50, units: 'units'}});
-			donation.items.push({name: "Food", value: {amount: 50}});
+			donation.items.push({name: 'Food', value: {amount: 50, units: 'units'}});
+			donation.items.push({name: 'Food', value: {amount: 50, units: 'units'}});
+			donation.items.push({name: 'Food', value: {amount: 50}});
 			return donation.save(function(err) {
 				should.exist(err);
 				done();
@@ -185,9 +185,9 @@ describe('Donation Model Unit Tests:', function() {
 			while(donation.items.length >0){
 				donation.items.pop();
 			}
-			donation.items.push({name: "Food", value: {amount: 50, units: 'units'}});
-			donation.items.push({name: "Food", value: {amount: 50, units: 'units'}});
-			donation.items.push({name: "Food", value: {units: 'units'}});
+			donation.items.push({name: 'Food', value: {amount: 50, units: 'units'}});
+			donation.items.push({name: 'Food', value: {amount: 50, units: 'units'}});
+			donation.items.push({name: 'Food', value: {units: 'units'}});
 			return donation.save(function(err) {
 				should.exist(err);
 				done();

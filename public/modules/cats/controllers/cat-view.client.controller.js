@@ -203,7 +203,7 @@ angular.module('core').controller('CatViewController',
                     }
                 }
                 return dates;
-            }
+            };
 
             $scope.edit = function() {
                 $location.path('/cats/' + $scope.cat._id + '/edit');

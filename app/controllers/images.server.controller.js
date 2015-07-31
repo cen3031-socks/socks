@@ -2,7 +2,7 @@
 
 var mongoose = require('mongoose'),
 	errorHandler = require('./errors.server.controller'),
-	Image = mongoose.model('Image'),
+	ImageModel = mongoose.model('Image'),
     Video = mongoose.model('Video'),
 	_ = require('lodash'),
     fs = require('fs'),
@@ -26,8 +26,7 @@ uploader.version({
 });
 
 exports.create = function(req, res) {
-    console.log('Images.create');
-	var image = new Image(req.body);
+	var image = new ImageModel(req.body);
 	image.user = req.user;
 	image.save(errorHandler.wrap(res, function(image) {
 			return res.json(image);
@@ -58,7 +57,7 @@ exports.deleteAll = function(req, res) {
 
     var promises = _.map(req.body.images, function(image) {
         var deferred = q.defer();
-        Image.findById(image._id).
+        ImageModel.findById(image._id).
             remove().
             exec(errorHandler.wrap(res, function() {
                 uploader.
@@ -88,14 +87,12 @@ exports.deleteAllVideos = function(req, res) {
             remove().
             exec(errorHandler.wrap(res, function() {
                 console.log(image);
-                var newFilePath = path.normalize(uploader.path + '/' + image._id + ".mp4");
+                var newFilePath = path.normalize(uploader.path + '/' + image._id + '.mp4');
                 fs.unlink(newFilePath, function(err) {
-                    console.log('unlink callback');
                     if (err) {
                         console.log(err);
                         deferred.reject(err);
                     } else {
-                        console.log('resolved');
                         deferred.resolve(true);
                     }
                 });
@@ -115,7 +112,7 @@ exports.deleteAllVideos = function(req, res) {
 exports.list = function(req, res) {
     var limit = req.query.limit;
     var startIndex = req.query.startIndex || 0;
-    var query = Image.find().sort('created');
+    var query = ImageModel.find().sort('created');
     if (limit && !isNaN(+limit)) {
         query = query.limit(+limit);
     }
@@ -131,7 +128,7 @@ exports.listVideos = function(req, res) {
 };
 
 exports.imageByID = function(req, res, next, id) {
-    Image.findById(id).
+    ImageModel.findById(id).
         populate('tags').
         exec(function(err, image) {
             if (err) return next(err);
@@ -172,7 +169,7 @@ exports.getLarge = function(req, res) {
 };
 
 exports.upload = function(req, res) {
-    var image = new Image({});
+    var image = new ImageModel({});
     uploader.
         process(image._id, req.files.file.path).
         then(function(images) {
@@ -184,7 +181,9 @@ exports.upload = function(req, res) {
                 res.json(image);
             }));
         }).
-        fail(function(err) { console.log(err); errorHandler.sendErrorResponse(res, err) });
+        fail(function(err) {
+			errorHandler.sendErrorResponse(res, err);
+		});
 };
 exports.uploadVideo = function(req, res) {
     var video = new Video({});
@@ -201,14 +200,14 @@ exports.uploadVideo = function(req, res) {
 
 exports.getVideo = function(req, res) {
     if (!req.video.path) {
-        return res.status(400).json({message: 'Video version ' + version + ' does not exist.'});
+        return res.status(400).json({message: 'Video version ' + res.version + ' does not exist.'});
     } else {
         return res.sendFile('../' + req.video.path, { root: uploader.path });
     }
 };
 
 exports.forCat = function(req, res) {
-    Image.find({tags: req.cat._id}).
+    ImageModel.find({tags: req.cat._id}).
         exec(errorHandler.wrap(res, function(images) {
             res.json(images);
         }));

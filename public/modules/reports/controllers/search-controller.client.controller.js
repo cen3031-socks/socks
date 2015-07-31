@@ -1,8 +1,9 @@
+'use strict';
 var app = angular.module('reports');
 
-app.controller('CatSearchController', ['$scope', 'Cats', 'Reports', 'Dialogs', '$stateParams',
-    function($scope, Cats, Reports, Dialogs, $stateParams) {
-        $scope.possibleShots = possibleShots;
+app.controller('CatSearchController', ['$scope', 'Cats', 'Reports', 'Dialogs', '$stateParams', '$window',
+    function($scope, Cats, Reports, Dialogs, $stateParams, $window) {
+        $scope.possibleShots = $window.possibleShots;
         $scope.searchResults = [];
         $scope.search = {
             filters: [],
@@ -53,8 +54,6 @@ app.controller('CatSearchController', ['$scope', 'Cats', 'Reports', 'Dialogs', '
         $scope.export = function() {
             if ($scope.search._id) {
                 window.location.href = '/reports/' + $scope.search._id + '/result.csv';
-            } else {
-
             }
         };
     }]);

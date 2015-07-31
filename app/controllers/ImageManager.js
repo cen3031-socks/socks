@@ -1,3 +1,5 @@
+'use strict';
+
 var async = require('async');
 var gm = require('gm');
 var q = require('q');
@@ -7,9 +9,9 @@ var path = require('path');
 
 exports.Uploader = function(basePath, useImageMagick) {
 
-    var ImageMagick = gm;
+    var imageMagick = gm;
     if (useImageMagick) {
-        ImageMagick = ImageMagick.subClass({imageMagick: true});
+        imageMagick = imageMagick.subClass({imageMagick: true});
     }
 
     this.path = basePath || './images/uploads';
@@ -23,7 +25,7 @@ exports.Uploader = function(basePath, useImageMagick) {
                 name: settings.name,
                 width: settings.width,
                 height: settings.height
-            }
+            };
         } else {
             throw new Error('Image version needs a name, width, and height');
         }
@@ -43,7 +45,7 @@ exports.Uploader = function(basePath, useImageMagick) {
             var relativeFilePath = newFilename + '-' + version.name + '.png';
             var newFilePath = path.join(uploader.path, relativeFilePath);
             var deferred = q.defer();
-            var image = ImageMagick(existingFilePath);
+            var image = imageMagick(existingFilePath);
 
             if (version.name !== 'original') {
                 image = image.resize(version.width, version.height);
@@ -57,7 +59,7 @@ exports.Uploader = function(basePath, useImageMagick) {
                 }
             });
             return deferred.promise;
-        }
+        };
     };
 
     this.process = function(newFilename, existingFile) {

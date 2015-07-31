@@ -8,40 +8,36 @@
     background: linear-gradient(#0071bc, darkgray);*/
 }
 
-.white-text{
+.white-text {
     color: #FFFFFF;
 }
-.volunteer-pad{
+.volunteer-pad {
     width: 716px;
     padding-left: 15px;
     margin-left: auto;
     margin-right: auto;
 }
 
-.vertPad{
+.vertPad {
     padding-top: -10px;
 }
 
-.centButton{
+.centButton {
     margin-right: auto;
     margin-left: auto;
     width: 716px;
 }
 
-.volinstlist{
+.volinstlist {
     width: 716px;
     margin-left: auto;
     margin-right: auto;
 }
 
-.volunteerSelector {
-    /*width: 300px;*/
-}
-
-.vol-mod-head{
+.vol-mod-head {
     margin-top: 20px;
 }
-.light-green-text{
+.light-green-text {
     color: lightgreen;
 }
 

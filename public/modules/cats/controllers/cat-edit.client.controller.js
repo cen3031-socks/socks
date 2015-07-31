@@ -79,7 +79,7 @@ angular.module('core').controller('CatEditController',
                     address: this.originAddress,
                     person: this.originPerson && this.originPerson.length === 1 ? this.originPerson[0]._id : undefined,
                     organization: this.originOrg
-                },
+                };
                 cat.currentLocation = this.location;
                 if (this.profileImage) {
                     cat.profileImage = this.profileImage._id;

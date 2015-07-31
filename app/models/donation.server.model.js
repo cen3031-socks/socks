@@ -6,7 +6,6 @@
 var mongoose = require('mongoose'),
 	Schema = mongoose.Schema;
 
-
 var validateItemName = function(name) {
     var possible = ['Food', 'Monetary', 'Supplies', 'Other'];
     var inList = false;
@@ -19,25 +18,28 @@ var validateItemName = function(name) {
 };
 
 var amountAndUnitsChecker = function(items) {
-    if (items == null) {
+    if (items === null) {
         return true;
     }
-    if ((items.amount == null && items.units == null) || (items.amount != null && items.units != null)) {
+	// an item must have either both an amount and a unit, or neither.
+	var hasAmount = !!items.amount;
+	var hasUnits = !!items.units;
+    if (hasAmount === hasUnits) {
         return true;
     }
     else {
         return false;
     }
 };
-var oneItemPresent = function(items){
+var oneItemPresent = function(items) {
     if (items.length >= 1) {
         return true;
     } else {
         return false;
     }
 };
-var validateIconText = function(icon){
-    if(icon == null){
+var validateIconText = function(icon) {
+    if (icon === null) {
         return true;
     }
     var array = ['glyphicon glyphicon-asterisk', 'glyphicon glyphicon-plus', 'glyphicon glyphicon-euro', 'glyphicon glyphicon-eur', 'glyphicon glyphicon-minus', 'glyphicon glyphicon-cloud', 
@@ -91,8 +93,8 @@ var validateIconText = function(icon){
     'glyphicon glyphicon-triangle-left', 'glyphicon glyphicon-triangle-bottom', 'glyphicon glyphicon-triangle-top', 'glyphicon glyphicon-console', 'glyphicon glyphicon-superscript', 
     'glyphicon glyphicon-subscript', 'glyphicon glyphicon-menu-left', 'glyphicon glyphicon-menu-right', 'glyphicon glyphicon-menu-down', 'glyphicon glyphicon-menu-up'];
     var inList = false;
-    for (var i = 0; i < array.length; i++){
-        if(icon == array[i]){
+    for (var i = 0; i < array.length; i++) {
+        if(icon === array[i]) {
             inList = true; 
         }
     }
@@ -114,14 +116,6 @@ var DonationSchema = new Schema({
 		default: Date.now,
         required: 'must have a date'
 	},
-
- /*   totalAmount: {                //an automatic statistic that gets calculated and appears
-        type: Number,               //at the bottom of the receipt-like donation view
-        default: null,
-        trim: true,
-        units: String
-    },*/
-
     items:{
         type: [{
             name: {
@@ -137,7 +131,7 @@ var DonationSchema = new Schema({
             description: String,
             value: {
                 type: {amount: Number, units: String},
-                validate: [amountAndUnitsChecker, 'if amount is present units must be present']
+                validate: [amountAndUnitsChecker, 'Every item must have both an amount and a unit.']
             }
         }],
         validate: [oneItemPresent, 'must have one item present in list']

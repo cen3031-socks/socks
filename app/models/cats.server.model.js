@@ -25,22 +25,12 @@ var AdoptionSchema = new Schema({
 });
 
 var validateSex = function(sex){
-	if(sex == 1 || sex == 2 || sex == 9 || sex == 0){
+	if(sex === 1 || sex === 2 || sex === 9 || sex === 0){
 		return true;
 	}
 	return false;
-}
-/*
+};
 
-legacy validate
-var validateBreed = function(breed){
-	for(int i = 0; i < breeds.list.length; i++){
-		if(breed == breeds.list[i]){
-			return true;
-		}
-	} 
-	return false;
-}*/
 /**
  * Cat Schema
  */
@@ -69,14 +59,14 @@ var CatSchema = new Schema({
 	sex: {
 		type: Number,
 		default: 0,
-		validate: [validateSex, 'Must have a valid sex']
+		validate: [validateSex, 'Must have a valid sex.']
 	},
 	hairLength: String,
 	vet: { type: Schema.Types.ObjectId, ref: 'Contact' },
 	dateOfArrival: {
 		type: Date,
 		default: Date.now,
-		required: 'must have an arrival date' 
+		required: 'Must have an arrival date.' 
 	},
     dateOfDeceased: {
         type: Date
@@ -84,13 +74,12 @@ var CatSchema = new Schema({
 	breed: {
 		type: String,
 		trim: true,
-		required: 'Cats must have a breed.',
+		required: 'Cats must have a breed, and it must match one of the Petfinder-approved breeds.',
 		enum: breeds.list
 	},
 	color: String,
 	description: {
         type: String,
-        required: true,
         default: ''
     },
 	temperament: String,
@@ -108,17 +97,17 @@ var CatSchema = new Schema({
 			detail: String,
 			label: {
 				type: String,
-				required: 'Event must have a label'
+				required: 'Event must have a label.'
 			},
 			date: {
 				type: Date,
-				required: 'Event must have a date'
+				required: 'Event must have a date.'
 			},
 			/* for events that have a duration, like trips to vet */
 			endDate: Date,
 			eventType: {
 				type: String,
-				required: 'Event must have a event type'
+				required: 'Event must have a event type.'
 			},
 			icon: {
 				type: String,

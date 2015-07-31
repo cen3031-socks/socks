@@ -1,3 +1,4 @@
+/* global spyOn */
 'use strict';
 
 (function() {

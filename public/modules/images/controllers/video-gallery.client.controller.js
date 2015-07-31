@@ -1,3 +1,4 @@
+'use strict';
 var images = angular.module('images');
 
 images.controller('VideoGalleryPageController',

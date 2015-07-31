@@ -18,10 +18,10 @@ describe('Cats Model Unit Tests:', function(){
 		});
 		contact.save(function(){ 
 			cat = new Cat({
-				name: "kiddy",
+				name: 'kiddy',
 				sex: 9,
 				breed: 'Abyssinian'				
-			})
+			});
 			done();
 		});
 	});
@@ -29,6 +29,7 @@ describe('Cats Model Unit Tests:', function(){
 	describe('Method Save', function(){
 		it('Should save, valid name, sex, and breed', function(done) {
 			return cat.save(function(err) {
+				console.log(err);
 				should.not.exist(err);
 				done();
 			});

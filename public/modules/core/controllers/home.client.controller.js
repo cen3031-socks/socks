@@ -47,8 +47,8 @@ angular.module('core').controller('HomeController', ['$scope', '$location', 'Aut
                     address: $scope.originAddress,
                     person: $scope.originPerson && $scope.originPerson.length === 1 ? $scope.originPerson[0]._id : undefined,
                     organization: $scope.originOrg
-                },
-                    cat.currentLocation = $scope.location;
+                };
+                cat.currentLocation = $scope.location;
                 if ($scope.profileImage) {
                     cat.profileImage = $scope.profileImage._id;
                 }

@@ -1,4 +1,6 @@
-#gmaps {
-    width: 450px;
-    height: 450px;
+.map {
+	position: absolute;
+	left: 15em;
+    width: calc(100% - 15em);
+	height: calc(100% - 69px);
 }

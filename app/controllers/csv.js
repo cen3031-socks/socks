@@ -1,5 +1,25 @@
+'use strict';
+
 var q = require('q'),
     _ = require('lodash');
+
+var noOpItem = function(item) {};
+var itemFunctionType = typeof(noOpItem);
+var objectType = typeof({ k: 'v' });
+
+/**
+ * Makes a function which takes an object and
+ * returns the value associated with the key
+ * in property for that object.
+ *
+ * i.e., makeGetter(foo)(bar) is equivalent 
+ * to bar[foo]
+ */
+var makeGetter = function(property) {
+	return function(item) {
+		return item[property];
+	};
+};
 
 /**
  * Takes properties as in whatever form they're given and returns them as an array
@@ -8,32 +28,29 @@ var q = require('q'),
  * @param properties
  * @returns {Array}
  */
-var normalizeProperties = function(properties) {
+var normalizeProperties = function(properties, items) {
     var props = [];
+	var i;
     if (!properties) {
-        for (var i in items[0]) {
+        for (i in items[0]) {
             if (items[0].hasOwnProperty(i)) {
                 props.push({ columnName: i, propertyName: i });
             }
         }
     } else if (Object.prototype.toString.call(properties) === '[object Array]') {
-        for (var i = 0; i < properties.length; ++i) {
+        for (i = 0; i < properties.length; ++i) {
             props.push({ columnName: properties[i], propertyName: properties[i] });
         }
-    } else if (typeof(properties) === typeof({k:'v'})) {
-        for (var i in properties) {
+    } else if (typeof(properties) === objectType) {
+        for (i in properties) {
             if (properties.hasOwnProperty(i)) {
-                if (typeof(properties[i]) == typeof(function(item){})) {
+                if (typeof(properties[i]) === itemFunctionType) {
                     props.push({ columnName: i, getProperty: properties[i] });
                 } else {
                     props.push(
                         {
                             columnName: i,
-                            getProperty: (function(property) {
-                                return function (item) {
-                                    return item[property];
-                                }
-                            }(properties[i]))
+                            getProperty: makeGetter(properties[i])
                         });
                 }
             }
@@ -58,11 +75,12 @@ var normalizeProperties = function(properties) {
  */
 exports.convertToCsv = function(items, properties, separator, excludeHeaders) {
     var deferred = q.defer();
+	var i;
 
     if (items.length === 0 || properties.length === 0) {
         return null;
     }
-    var props = normalizeProperties(properties);
+    var props = normalizeProperties(properties, items);
 
     // if separator is omitted set it
     separator = separator || ',';
@@ -71,9 +89,9 @@ exports.convertToCsv = function(items, properties, separator, excludeHeaders) {
 
     // print the header
     if (!excludeHeaders) {
-        for (var i = 0; i < props.length; ++i) {
+        for (i = 0; i < props.length; ++i) {
             csv += '"' + props[i].columnName + '"';
-            if (i != props.length - 1) {
+            if (i !== props.length - 1) {
                 csv += separator;
             }
         }
@@ -82,7 +100,7 @@ exports.convertToCsv = function(items, properties, separator, excludeHeaders) {
 
     var itemsArray = [];
 
-    for (var i = 0; i < items.length; ++i) {
+    for (i = 0; i < items.length; ++i) {
         var thisItemArray = [];
 
         for (var j = 0; j < props.length; ++j) {

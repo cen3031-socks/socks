@@ -38,14 +38,14 @@ describe('Contact CRUD tests', function() {
 			employee = new User({
 				username: credentials.username,
 				password: credentials.password,
-				contact: contact1,
+				contact: contact1._id,
 				permissionLevel: 1
 			});
 			employee.save(function(){
 				volunteer = new User({
 					username: credentials2.username,
 					password: credentials2.password,
-					contact: contact1,
+					contact: contact1._id,
 					permissionLevel: 2
 				});
 				volunteer.save(function(){
@@ -59,7 +59,7 @@ describe('Contact CRUD tests', function() {
 						contact2 = new Contact({
 							firstName: 'tom',
 							surname: 'sawyer'
-						})
+						});
 						done();
 					});
 				});
@@ -138,6 +138,7 @@ describe('Contact CRUD tests', function() {
 					});
 			});
 	});
+
 	it('Should save Contact if signed in as volunteer', function(done) {
 		agent.post('/auth/signin')
 			.send(credentials2)

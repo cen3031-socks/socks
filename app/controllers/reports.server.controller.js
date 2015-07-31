@@ -8,7 +8,7 @@ var mongoose = require('mongoose'),
 
 exports.get = function(req, res) {
     res.json(req.report);
-}
+};
 
 exports.list = function(req, res) {
     Report.find().exec(errorHandler.wrap(res, function(reports) {
@@ -28,7 +28,7 @@ exports.update = function(req, res) {
     report.save(errorHandler.wrap(res, function(report) {
         res.json(report);
     }));
-}
+};
 
 exports.getResult = function(req, res) {
     switch (req.report.resultType) {

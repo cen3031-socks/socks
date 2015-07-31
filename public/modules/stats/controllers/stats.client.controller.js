@@ -183,7 +183,7 @@ angular.module('stats').directive('originsMap', function(Cats, googleService) {
 
     return {
         restrict: 'A',
-        template: '<div id="gmaps"></div>',
+        template: '<div id="gmaps" class="map"></div>',
         replace: true,
         link: link
     };

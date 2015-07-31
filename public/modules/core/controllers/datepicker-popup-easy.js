@@ -1,3 +1,4 @@
+'use strict';
 angular.module('core').directive('customDatepicker', function() {
     return {
         restrict: 'E',
@@ -7,7 +8,7 @@ angular.module('core').directive('customDatepicker', function() {
                 $event.preventDefault();
                 $event.stopPropagation();
                 $scope.isOpen = !$scope.isOpen;
-            }
+            };
         },
         templateUrl: '/modules/core/views/datepicker-popup-easy.html',
         scope: {
@@ -16,4 +17,4 @@ angular.module('core').directive('customDatepicker', function() {
             inline: '=?inline'
         }
     };
-})
+});

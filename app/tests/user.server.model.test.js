@@ -23,17 +23,18 @@ describe('User Model Unit Tests:', function() {
 			surname: 'lastName'
 		});
 		contact.save(function(){
-			user = new User({
+			var rawUser = {
 				username: 'aaroniey',
 				password: 'password',
 				contact: contact
-			});
+			};
+			user = new User(rawUser);
 			user2 = new User({
 				username: 'asilcott',
 				password: 'password2',
 				contact: contact
 			});
-			user3 = user;
+			user3 = new User(rawUser);
 			user.save(function(err){
 				done();
 			});
@@ -101,7 +102,7 @@ describe('User Model Unit Tests:', function() {
 			});
 		});
 		it('Should reject, invalid contact', function(done) {
-			user2.contact = "abcd";
+			user2.contact = 'abcd';
 			user2.save(function(err) {
 				should.exist(err);
 				done();

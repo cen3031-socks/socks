@@ -1,3 +1,4 @@
+'use strict';
 var videos = angular.module('images');
 
 videos.controller('VideoGalleryController', [
@@ -41,7 +42,7 @@ videos.controller('VideoGalleryController', [
                     $scope.selectedVideo = undefined;
                 }
             }
-        })
+        });
     }
 ]);
 

@@ -56,7 +56,7 @@ exports.sendErrorResponse = function(res, err, statusCode) {
         return true;
     }
     return false;
-}
+};
 
 /**
  * Wraps up a callback function whose first parameter is the error;

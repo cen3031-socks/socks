@@ -8,11 +8,9 @@ module.exports = function(app) {
 
     var requireEmployee = employees.permissionLevel(users.EMPLOYEE);
 
-	// Donations Routes
 	app.route('/donations')
 		.get(requireEmployee, donations.list)
-		.post(requireEmployee, donations.create)
-        //.delete(requireEmployee, donations.delete);
+		.post(requireEmployee, donations.create);
 
 	app.route('/donations/:donationId')
 		.get(donations.read)
@@ -25,6 +23,5 @@ module.exports = function(app) {
 	app.route('/donations/:donationId/items/:itemId')
 		.delete(requireEmployee, donations.deleteItem);
 
-	// Finish by binding the Donation middleware
 	app.param('donationId', donations.donationByID);
 };

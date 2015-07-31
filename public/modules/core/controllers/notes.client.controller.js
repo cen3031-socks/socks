@@ -1,3 +1,4 @@
+'use strict';
 var core = angular.module('core');
 
 core.directive('notes', function() {
@@ -30,7 +31,7 @@ core.controller('NotesController', ['$scope', 'Notes', 'Dialogs', 'Authenticatio
         };
 
         $scope.canAddNote = function() {
-            return $scope.authentication && $scope.authentication.user && $scope.authentication.user.contact && $scope.newNote != '';
+            return $scope.authentication && $scope.authentication.user && $scope.authentication.user.contact && $scope.newNote !== '';
         };
 
         $scope.addNote = function() {

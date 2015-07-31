@@ -1,3 +1,4 @@
+'use strict';
 var images = angular.module('images');
 
 images.controller('ImageGalleryController', [
@@ -85,7 +86,7 @@ images.controller('ImageGalleryController', [
                     $scope.selectedImage = undefined;
                 }
             }
-        })
+        });
 
         $scope.addSources = function() {
             var images = $scope.images;

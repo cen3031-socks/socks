@@ -1,8 +1,9 @@
+'use strict';
 var images = angular.module('images');
 
 images.controller('EditImageController', [
-    '$scope', 'Images', '$stateParams',
-    function($scope, Images, $stateParams) {
+    '$scope', 'Images', '$stateParams', 'Dialogs',
+    function($scope, Images, $stateParams, Dialogs) {
         $scope.$watch(
             function() { return $stateParams.imageId; },
             function() {

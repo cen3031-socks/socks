@@ -310,8 +310,8 @@ exports.generateCsv = function(req, res) {
 };
 
 exports.getMostRecentOperationOfType = function(cat, shotType) {
-    var operation = undefined;
-    var date = undefined;
+    var operation;
+    var date;
     for (var i = 0; i < cat.events.length; ++i) {
         var thisEvent = cat.events[i];
         if (thisEvent && thisEvent.eventType === 'vet') {
@@ -335,25 +335,25 @@ exports.getMostRecentOperationOfType = function(cat, shotType) {
 exports.filters = {
     'Adopted': function(filter, cat) {
         if (cat.currentAdoption) console.log(cat.currentAdoption.date);
-        return cat.currentAdoption
-                    && !cat.currentAdoption.endDate
-                    && cat.currentAdoption.adoptionType === 'adoption'
-                    && (!filter.startDate || cat.currentAdoption.date >= new Date(filter.startDate))
-                    && (!filter.endDate   || cat.currentAdoption.date <= new Date(filter.endDate));
+        return cat.currentAdoption &&
+		        	!cat.currentAdoption.endDate &&
+				   	cat.currentAdoption.adoptionType === 'adoption' &&
+				   	(!filter.startDate || cat.currentAdoption.date >= new Date(filter.startDate)) && 
+					(!filter.endDate   || cat.currentAdoption.date <= new Date(filter.endDate));
     },
     'ArrivalDate': function(filter, cat) {
-        return cat.dateOfArrival
-            && (!filter.startDate || cat.dateOfArrival >= new Date(filter.startDate))
-            && (!filter.endDate   || cat.dateOfArrival <= new Date(filter.endDate));
+        return cat.dateOfArrival &&
+		   	(!filter.startDate || cat.dateOfArrival >= new Date(filter.startDate)) &&
+		   	(!filter.endDate   || cat.dateOfArrival <= new Date(filter.endDate));
     },
     'Deceased': function(filter, cat) {
         if (cat.events) {
             for (var i = 0; i < cat.events.length; ++i) {
                 if (cat.events[i].eventType === 'deceased') {
                     var date = cat.events[i].date;
-                    return date
-                        && (!filter.startDate || date >= new Date(filter.startDate))
-                        && (!filter.endDate || date <= new Date(filter.endDate));
+                    return date &&
+					   	(!filter.startDate || date >= new Date(filter.startDate)) &&
+					   	(!filter.endDate || date <= new Date(filter.endDate));
                 }
             }
         }
@@ -386,7 +386,7 @@ exports.filters = {
         var shotType = filter.operation;
         var date = filter.date;
         var operation = exports.getMostRecentOperationOfType(cat, shotType);
-        return (operation && (!date || shot.date >= new Date(date)));
+        return (operation && (!date || operation.date >= new Date(date)));
     },
 
     'Origin': function(filter, cat) {
@@ -441,5 +441,7 @@ exports.searchCats = function(req, res) {
 exports.update = function(req, res) {
     var cat = _.assign(req.cat, req.body);
     console.log(req.body);
-    cat.save(errorHandler.wrap(res, function(cat) { res.json(cat) }));
+    cat.save(errorHandler.wrap(res, function(cat) {
+		res.json(cat);
+	}));
 };

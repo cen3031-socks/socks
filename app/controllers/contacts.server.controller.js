@@ -245,7 +245,7 @@ exports.generateCsv = function (req, res) {
             console.log(csvFields);
             csv.convertToCsv(contacts, csvFields).then(function (csvData) {
                 res.send(csvData);
-            })
+            });
         }));
 };
 
