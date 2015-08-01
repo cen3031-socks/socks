@@ -15,7 +15,7 @@ describe('Contact Model Unit Tests:', function() {
 			lastName: 'Name',
 			displayName: 'Full Name',
 			email: 'test@test.com',
-			username: 'username',
+			username: 'username@usr.com',
 			password: 'password'
 		});
 

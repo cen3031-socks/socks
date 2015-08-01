@@ -23,7 +23,7 @@ describe('Volunteer Model Unit Tests:', function() {
 			lastName: 'Name',
 			displayName: 'Full Name',
 			email: 'test@test.com',
-			username: 'username',
+			username: 'username@example.com',
 			password: 'password'
 		});
 

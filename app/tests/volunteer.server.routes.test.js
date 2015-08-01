@@ -16,7 +16,7 @@
   beforeEach(function(done) {
 // Create user credentials
 credentials = {
-username: 'username',
+username: 'username@example.com',
 password: 'password'
 };
 

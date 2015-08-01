@@ -15,16 +15,21 @@ var validateLocalStrategyProperty = function(property) {
 /**
  * A Validation function for local strategy password
  */
-var checkValidPermissionLevel = function(permissionLevel){
+var checkValidPermissionLevel = function(permissionLevel) {
 	return (permissionLevel >= 0);
+};
+
+var validateEmail = function(email) {
+	return email !== null && email.indexOf('@') !== -1 && email.indexOf('.') !== -1;
 };
 
 var UserSchema = new Schema({
 	username: {
 		type: String,
 		unique: 'Email already exists',
-		required: 'Please fill in an email',
-		trim: true
+		required: 'Please fill in an email.',
+		trim: true,
+		validate: validateEmail
 	},
 	password: {
 		type: String,

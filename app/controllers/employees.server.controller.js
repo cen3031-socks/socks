@@ -39,7 +39,7 @@ exports.create = function(req, res) {
 	user.contact  = contact._id;
 
 	contact.save(errorHandler.wrap(res, function(contact) {
-		user.save(errorHandler.wrap(function(err, user) {
+		user.save(errorHandler.wrap(res, function(user) {
 			res.jsonp(user);
 			var nodemailer = require('nodemailer');
 			// create reusable transporter object using SMTP transport

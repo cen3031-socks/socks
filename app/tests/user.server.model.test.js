@@ -24,13 +24,13 @@ describe('User Model Unit Tests:', function() {
 		});
 		contact.save(function(){
 			var rawUser = {
-				username: 'aaroniey',
+				username: 'aaroniey@asdf.com',
 				password: 'password',
 				contact: contact
 			};
 			user = new User(rawUser);
 			user2 = new User({
-				username: 'asilcott',
+				username: 'asilcott@asdf.com',
 				password: 'password2',
 				contact: contact
 			});
@@ -139,12 +139,12 @@ describe('User Model Unit Tests:', function() {
 		});
 		contact.save(function(){
 			user = new User({
-				username: 'aaroniey',
+				username: 'aaroniey@asdf.com',
 				password: 'password',
 				contact: contact
 			});
 			user2 = new User({
-				username: 'asilcott',
+				username: 'asilcott@asdf.com',
 				password: 'password2',
 				contact: contact
 			});

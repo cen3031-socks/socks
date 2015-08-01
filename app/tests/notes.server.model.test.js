@@ -25,7 +25,7 @@ describe('Note Model Unit Tests:', function() {
 		});
 		contact.save(function(){ 
 			user = new User({
-				username: 'aaron',
+				username: 'aaron@example.com',
 				password: 'pass',
 				contact: contact,
 				permissionLevel: 0

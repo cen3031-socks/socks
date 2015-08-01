@@ -15,15 +15,15 @@ describe('Contact CRUD tests', function() {
 	beforeEach(function(done) {
 		// Create user credentials
 		credentials = {
-			username: 'username',
+			username: 'username@usr.com',
 			password: 'password'
 		};
 		credentials2 = {
-			username: 'testing',
+			username: 'testing@usr.com',
 			password: 'testing'
 		};
 		credentials3 = {
-			username: 'admin',
+			username: 'admin@usr.com',
 			password: 'pass'
 		};
 		// Save a user to the test db and create new Contact
