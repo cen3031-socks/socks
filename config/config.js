@@ -1,9 +1,8 @@
 'use strict';
-//test
 /**
  * Module dependencies.
  */
-var _ = require('lodash'),
+var _    = require('lodash'),
 	glob = require('glob');
 
 /**
@@ -58,9 +57,9 @@ module.exports.getGlobbedFiles = function(globPatterns, removeRoot) {
  */
 module.exports.getJavaScriptAssets = function(includeTests) {
 	var output = this.getGlobbedFiles(this.assets.lib.js.concat(this.assets.js), 'public/');
-    //output.push('lib/ngInfiniteScroll/build/ng-infinite-scroll.min.js');
-    //output.push('lib/ng-file-upload/angular-file-upload.min.js');
-    //output.push('lib/ng-file-upload/angular-file-upload-shim.min.js');
+	//output.push('lib/ngInfiniteScroll/build/ng-infinite-scroll.min.js');
+	//output.push('lib/ng-file-upload/angular-file-upload.min.js');
+	//output.push('lib/ng-file-upload/angular-file-upload-shim.min.js');
 
 	// To include tests
 	if (includeTests) {

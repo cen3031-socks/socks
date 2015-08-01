@@ -3,23 +3,23 @@
 /**
  * Module dependencies.
  */
-var fs = require('fs'),
-	http = require('http'),
-	https = require('https'),
-	express = require('express'),
-	morgan = require('morgan'),
-	logger = require('./logger'),
-	bodyParser = require('body-parser'),
-	session = require('express-session'),
-	compression = require('compression'),
+var fs             = require('fs'),
+	http           = require('http'),
+	https          = require('https'),
+	express        = require('express'),
+	morgan         = require('morgan'),
+	logger         = require('./logger'),
+	bodyParser     = require('body-parser'),
+	session        = require('express-session'),
+	compression    = require('compression'),
 	methodOverride = require('method-override'),
-	cookieParser = require('cookie-parser'),
-	helmet = require('helmet'),
-	passport = require('passport'),
-	mongoStore = require('connect-mongo')({
-		session: session
-	}),
-	flash = require('connect-flash'),
+	cookieParser   = require('cookie-parser'),
+	helmet         = require('helmet'),
+	passport       = require('passport'),
+	mongoStore     = require('connect-mongo')({
+	session: session
+}),
+flash = require('connect-flash'),
 	config = require('./config'),
 	consolidate = require('consolidate'),
 	path = require('path');

@@ -3,11 +3,11 @@
 /**
  * Module dependencies.
  */
-var should = require('should'),
+var should   = require('should'),
 	mongoose = require('mongoose'),
-	Contact = mongoose.model('Contact'),
-	User = mongoose.model('User'),
-	Note = mongoose.model('Note');
+	Contact  = mongoose.model('Contact'),
+	User     = mongoose.model('User'),
+	Note     = mongoose.model('Note');
 
 /**
  * Globals

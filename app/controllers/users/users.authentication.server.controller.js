@@ -1,19 +1,13 @@
 'use strict';
 
-/**
- * Module dependencies.
- */
-var _ = require('lodash'),
+var _            = require('lodash'),
 	errorHandler = require('../errors.server.controller'),
-	mongoose = require('mongoose'),
-	passport = require('passport'),
-	User = mongoose.model('User');
+	mongoose     = require('mongoose'),
+	passport     = require('passport'),
+	User         = mongoose.model('User');
 
-/**
- * Signup
- */
 exports.signup = function(req, res) {
-	// For security measurement we remove the roles from the req.body object
+	// For security we remove the roles from the req.body object
 	delete req.body.roles;
 
 	// Init Variables
@@ -46,9 +40,6 @@ exports.signup = function(req, res) {
 	});
 };
 
-/**
- * Signin after passport authentication
- */
 exports.signin = function(req, res, next) {
 	passport.authenticate('local', function(err, user, info) {
 		if (err || !user) {
@@ -69,17 +60,11 @@ exports.signin = function(req, res, next) {
 	})(req, res, next);
 };
 
-/**
- * Signout
- */
 exports.signout = function(req, res) {
 	req.logout();
 	res.redirect('/');
 };
 
-/**
- * OAuth callback
- */
 exports.oauthCallback = function(strategy) {
 	return function(req, res, next) {
 		passport.authenticate(strategy, function(err, user, redirectURL) {

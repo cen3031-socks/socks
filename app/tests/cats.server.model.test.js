@@ -1,12 +1,9 @@
 'use strict';
 
-/**
- * Module dependencies.
- */
-var should = require('should'),
-	mongoose = require('mongoose'),
-	Cat = mongoose.model('Cat'),
-	Contact = mongoose.model('Contact');
+var should   = require('should'),
+    mongoose = require('mongoose'),
+    Cat      = mongoose.model('Cat'),
+    Contact  = mongoose.model('Contact');
 
 var cat, contact;
 
@@ -137,7 +134,6 @@ describe('Cats Model Unit Tests:', function(){
 				done();
 			});
 		});
-		
 	});
 
 	afterEach(function(done) {

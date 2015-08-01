@@ -1,19 +1,13 @@
 'use strict';
 
-/**
- * Module dependencies.
- */
-var _ = require('lodash'),
-	mongoose = require('mongoose'),
-	User = mongoose.model('User');
+var _        = require('lodash'),
+    mongoose = require('mongoose'),
+    User     = mongoose.model('User');
 
 exports.ADMIN = 0;
 exports.EMPLOYEE = 1;
 exports.VOLUNTEER = 2;
 
-/**
- * User middleware
- */
 exports.userByID = function(req, res, next, id) {
 	User.findById(id).exec(function(err, user) {
 		if (err) return next(err);
@@ -23,9 +17,6 @@ exports.userByID = function(req, res, next, id) {
 	});
 };
 
-/**
- * Require login routing middleware
- */
 exports.requiresLogin = function(req, res, next) {
 	if (!req.isAuthenticated()) {
 		return res.status(401).send({
@@ -36,9 +27,6 @@ exports.requiresLogin = function(req, res, next) {
 	next();
 };
 
-/**
- * User authorizations routing middleware
- */
 exports.hasAuthorization = function(roles) {
 	var _this = this;
 

@@ -1,7 +1,8 @@
 'use strict';
 
 // Configuring the Articles module
-angular.module('volunteers').run(['Menus',
+angular.module('volunteers').run([
+	'Menus',
 	function(Menus) {
 		// Set top bar menu items
 		Menus.addMenuItem('topbar', 'Volunteers', 'volunteers', 'dropdown', '/volunteers(/create)?');

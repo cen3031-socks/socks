@@ -1,6 +1,7 @@
 'use strict';
 
-angular.module('users').controller('SettingsController', ['$scope', '$http', '$location', 'Users', 'Authentication',
+angular.module('users').controller('SettingsController', [
+	'$scope', '$http', '$location', 'Users', 'Authentication',
 	function($scope, $http, $location, Users, Authentication) {
 		$scope.user = Authentication.user;
 
@@ -9,23 +10,23 @@ angular.module('users').controller('SettingsController', ['$scope', '$http', '$l
 
 		// Update a user profile
 		/*
-		possible extra code, should be deletable, commented out for saftey.
+		   possible extra code, should be deletable, commented out for saftey.
 
-		$scope.updateUserProfile = function(isValid) {
-			if (isValid) {
-				$scope.success = $scope.error = null;
-				var user = new Users($scope.user);
+		   $scope.updateUserProfile = function(isValid) {
+		   if (isValid) {
+		   $scope.success = $scope.error = null;
+		   var user = new Users($scope.user);
 
-				user.$update(function(response) {
-					$scope.success = true;
-					Authentication.user = response;
-				}, function(response) {
-					$scope.error = response.data.message;
-				});
-			} else {
-				$scope.submitted = true;
-			}
-		};*/
+		   user.$update(function(response) {
+		   $scope.success = true;
+		   Authentication.user = response;
+		   }, function(response) {
+		   $scope.error = response.data.message;
+		   });
+		   } else {
+		   $scope.submitted = true;
+		   }
+		   };*/
 
 		// Change user password
 		$scope.changeUserPassword = function() {

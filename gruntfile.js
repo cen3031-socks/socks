@@ -1,5 +1,5 @@
 'use strict';
-var mongoose = require('mongoose');
+var mongoose   = require('mongoose');
 module.exports = function(grunt) {
 	// Unified Watch Object
 	var watchFiles = {
@@ -12,14 +12,19 @@ module.exports = function(grunt) {
 	};
 
 	grunt.loadNpmTasks('grunt-githooks');
+	grunt.loadNpmTasks('grunt-auto-install');
 
 	// Project Configuration
 	grunt.initConfig({
-	    githooks: {
-	        all: {
-	            'pre-commit': 'jshint test:client test:server',
-	        }
-	    },
+		auto_install: { local: {} },
+		githooks: {
+			all: {
+				'pre-commit': 'jshint test:client test:server',
+				// any time we check out a new branch, make sure we've got the right dependencies
+				'post-checkout': 'auto_install',
+				'post-merge': 'auto_install'
+			}
+		},
 		pkg: grunt.file.readJSON('package.json'),
 		watch: {
 			serverViews: {
@@ -151,21 +156,21 @@ module.exports = function(grunt) {
 				configFile: 'karma.conf.js'
 			}
 		},
-        protractor: {
-            options: {
-                configFile: 'end-to-end-tests/config.js', // Default config file
-                keepAlive: true, // If false, the grunt process stops when the test fails.
-                noColor: false, // If true, protractor will not use colors in its output.
-                args: {
-                    // Arguments passed to the command
-                }
-            },
-            all: {   // Grunt requires at least one target to run so you can simply put 'all: {}' here too.
-                options: {
-                    configFile: 'end-to-end-tests/config.js', // Target-specific config file
-                    args: {} // Target-specific arguments
-                }
-            },
+		protractor: {
+			options: {
+				configFile: 'end-to-end-tests/config.js', // Default config file
+				keepAlive: true, // If false, the grunt process stops when the test fails.
+				noColor: false, // If true, protractor will not use colors in its output.
+				args: {
+					// Arguments passed to the command
+				}
+			},
+			all: {   // Grunt requires at least one target to run so you can simply put 'all: {}' here too.
+				options: {
+					configFile: 'end-to-end-tests/config.js', // Target-specific config file
+					args: {} // Target-specific arguments
+				}
+			},
 			cats: {
 				options: {
 					configFile: 'end-to-end-tests/cats/config.js',
@@ -178,12 +183,12 @@ module.exports = function(grunt) {
 					args: {}
 				}
 			},
-            volunteers: {
-                options: {
-                    configFile: 'end-to-end-tests/volunteers/config.js',
-                    args: {}
-                }
-            }
+			volunteers: {
+				options: {
+					configFile: 'end-to-end-tests/volunteers/config.js',
+					args: {}
+				}
+			}
 		},
 		shell: {
 			mongodb: {
@@ -247,31 +252,31 @@ module.exports = function(grunt) {
 	grunt.registerTask('test', ['test:client', 'test:e2e']);
 	grunt.registerTask('test:server', ['env:test', 'mochaTest']);
 	grunt.registerTask('test:client', ['env:test', 'karma:unit']);
-    grunt.registerTask('test:e2e', ['clean-db', 'protractor:all']);
+	grunt.registerTask('test:e2e', ['clean-db', 'protractor:all']);
 	grunt.registerTask('test:headless', ['force-off', 'test:server', 'test:client']);
 	grunt.registerTask('force-off', function() { grunt.option('force', false); });
 
 	grunt.registerTask('generate-data', ['clean-db', 'shell:generate-data']);
 
-    grunt.registerTask('clean-db', 'drop the database', function() {
-        var done = this.async();
+	grunt.registerTask('clean-db', 'drop the database', function() {
+		var done = this.async();
 
-        mongoose.connection.on('open', function () {
-            mongoose.connection.db.executeDbCommand({dropDatabase:1},function(err) {
-                if(err) {
-                    console.log(err);
-                } else {
-                    console.log('Successfully dropped db');
-                }
-                mongoose.connection.close(done);
-            });
-        });
+		mongoose.connection.on('open', function () {
+			mongoose.connection.db.executeDbCommand({dropDatabase:1},function(err) {
+				if(err) {
+					console.log(err);
+				} else {
+					console.log('Successfully dropped db');
+				}
+				mongoose.connection.close(done);
+			});
+		});
 		if (mongoose.connection.readyState !== 0) {
 			mongoose.connection.close(function() {
 				mongoose.connect('mongodb://localhost/mean-dev');
 			});
-		} else { 
+		} else {
 			mongoose.connect('mongodb://localhost/mean-dev');
 		}
-    });
+	});
 };

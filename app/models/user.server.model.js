@@ -1,10 +1,9 @@
 'use strict';
-/**
- * Module dependencies.
- */
+
+
 var mongoose = require('mongoose'),
-	Schema = mongoose.Schema,
-	crypto = require('crypto');
+    Schema   = mongoose.Schema,
+    crypto   = require('crypto');
 
 /**
  * A Validation function for local strategy properties
@@ -20,9 +19,6 @@ var checkValidPermissionLevel = function(permissionLevel){
 	return (permissionLevel >= 0);
 };
 
-/**
- * User Schema
- */
 var UserSchema = new Schema({
 	username: {
 		type: String,
@@ -72,7 +68,7 @@ UserSchema.pre('save', function(next) {
 		this.salt = new Buffer(crypto.randomBytes(16).toString('base64'), 'base64');
 		this.password = this.hashPassword(this.password);
 	}
-     next();
+	next();
 });
 
 /**
@@ -92,7 +88,6 @@ UserSchema.methods.hashPassword = function(password) {
 UserSchema.methods.authenticate = function(password) {
 	return this.password === this.hashPassword(password);
 };
-
 
 /**
  * Find possible not used username

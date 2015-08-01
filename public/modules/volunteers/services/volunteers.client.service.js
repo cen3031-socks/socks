@@ -1,24 +1,26 @@
 'use strict';
 
 //Volunteers service used to communicate Volunteers REST endpoints
-angular.module('volunteers').factory('Volunteers', ['$resource',
+angular.module('volunteers').factory('Volunteers', [
+	'$resource',
 	function($resource) {
-		return $resource('volunteers/:volunteerId', { volunteerId: '@_id'
+		return $resource('volunteers/:volunteerId', {
+			volunteerId: '@_id'
 		}, {
 			update: {
 				method: 'PUT'
 			},
 
-            getByName: {
-                method: 'GET',
-                url: '/volunteers/by-name/:contactId',
-                isArray: true
-            },
-            minutesWorked: {
-                method: 'GET',
-                url: '/volunteers/get-minutes/:contactId/:startDate/:endDate',
-                isArray: false
-            }
+			getByName: {
+				method: 'GET',
+				url: '/volunteers/by-name/:contactId',
+				isArray: true
+			},
+			minutesWorked: {
+				method: 'GET',
+				url: '/volunteers/get-minutes/:contactId/:startDate/:endDate',
+				isArray: false
+			}
 		});
 	}
 ]);

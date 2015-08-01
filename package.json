@@ -51,6 +51,7 @@
     "swig": "~1.4.1"
   },
   "devDependencies": {
+    "grunt-auto-install": "^0.2.4",
     "grunt-concurrent": "~1.0.0",
     "grunt-contrib-csslint": "^0.3.1",
     "grunt-contrib-cssmin": "~0.10.0",

@@ -5,10 +5,10 @@
 	describe('AuthenticationController', function() {
 		// Initialize global variables
 		var AuthenticationController,
-			scope,
-			$httpBackend,
-			$stateParams,
-			$location;
+		scope,
+		$httpBackend,
+		$stateParams,
+		$location;
 
 		beforeEach(function() {
 			jasmine.addMatchers({

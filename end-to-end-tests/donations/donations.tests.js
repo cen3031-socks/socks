@@ -1,30 +1,30 @@
-var request = require('request'),
-	MongoClient = require('mongodb').MongoClient;
-	utils = require('../test-utils');
+var request     = require('request');
+var MongoClient = require('mongodb').MongoClient;
+var utils       = require('../test-utils');
 
 describe('donations page', function() {
-	
-    beforeEach(function() {
-			/* create a bunch of contacts */
-			var flow = protractor.promise.controlFlow();
-            var self = this;
-            utils.createUserAndSignIn(browser, element);
-            flow.execute(function() {
-                self.contacts = [];
-                for (var i = 0; i < 10; ++i) {
-                    var name = 'TestName'+String.fromCharCode('A'.charCodeAt(0) + i);
-                    var contact = {
-                        firstName: name,
-                        surname: name
-                    };
-                    self.contacts.push(contact);
-                }
-                return utils.db(function(db) {
-                    db.collection('contacts').insert(self.contacts, utils.throwIfPresent);
-                });
-            });
 
+	beforeEach(function() {
+		/* create a bunch of contacts */
+		var flow = protractor.promise.controlFlow();
+		var self = this;
+		utils.createUserAndSignIn(browser, element);
+		flow.execute(function() {
+			self.contacts = [];
+			for (var i = 0; i < 10; ++i) {
+				var name = 'TestName'+String.fromCharCode('A'.charCodeAt(0) + i);
+				var contact = {
+					firstName: name,
+					surname: name
+				};
+				self.contacts.push(contact);
+			}
+			return utils.db(function(db) {
+				db.collection('contacts').insert(self.contacts, utils.throwIfPresent);
+			});
 		});
+
+	});
 
 	it('should be able to add a donation', function() {
 		browser.get('/#!/donations');
@@ -32,8 +32,8 @@ describe('donations page', function() {
 		element.all(by.css('[href="/#!/donations/create"]')).first().click();
 
 		// var donation = {
-		// 	name: this.contacts[0].id,
-		// 	items: []
+		//  name: this.contacts[0].id,
+		//  items: []
 		// };
 
 		element(by.partialButtonText('Click')).click();
@@ -46,7 +46,7 @@ describe('donations page', function() {
 		// element(by.css('[type=submit]')).click();
 
 		browser.get('/#!/donations');
-		expect(true).toBeTruthy();		
+		expect(true).toBeTruthy();
 	});
 });
 

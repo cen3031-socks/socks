@@ -14,7 +14,7 @@ module.exports = {
 	// The name of the MongoDB collection to store sessions in
 	sessionCollection: 'sessions',
 	// The session cookie settings
-	sessionCookie: { 
+	sessionCookie: {
 		path: '/',
 		httpOnly: true,
 		// If secure is set to true then it will cause the cookie to be set
@@ -53,9 +53,9 @@ module.exports = {
 				'public/lib/angular-ui-router/release/angular-ui-router.js',
 				'public/lib/angular-ui-utils/ui-utils.js',
 				'public/lib/angular-bootstrap/ui-bootstrap-tpls.js',
-                'public/lib/ngInfiniteScroll/build/ng-infinite-scroll.min.js',
-                'public/lib/ng-file-upload/angular-file-upload.min.js',
-                'public/lib/ng-file-upload/angular-file-upload.shim.min.js'
+				'public/lib/ngInfiniteScroll/build/ng-infinite-scroll.min.js',
+				'public/lib/ng-file-upload/angular-file-upload.min.js',
+				'public/lib/ng-file-upload/angular-file-upload.shim.min.js'
 			]
 		},
 		css: [

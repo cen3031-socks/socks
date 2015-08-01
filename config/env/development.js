@@ -17,7 +17,7 @@ module.exports = {
 			//stream: 'access.log'
 		}
 	},
-    fileUploadPath: './images/',
+	fileUploadPath: './images/',
 	app: {
 		title: 'SOCKS'
 	},

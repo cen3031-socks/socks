@@ -3,10 +3,10 @@
 /**
  * Module dependencies.
  */
-var should = require('should'),
+var should   = require('should'),
 	mongoose = require('mongoose'),
 	Donation = mongoose.model('Donation'),
-	Contact = mongoose.model('Contact');
+	Contact  = mongoose.model('Contact');
 
 /**
  * Globals
@@ -212,7 +212,6 @@ describe('Donation Model Unit Tests:', function() {
 				done();
 			});
 		});
-
 	});
 
 	afterEach(function(done) { 

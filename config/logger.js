@@ -6,7 +6,7 @@
 
 var morgan = require('morgan');
 var config = require('./config');
-var fs = require('fs');
+var fs     = require('fs');
 
 /**
  * Module init function.

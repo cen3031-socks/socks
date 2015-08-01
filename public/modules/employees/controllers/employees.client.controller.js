@@ -1,7 +1,8 @@
 'use strict';
 
 // Creates controller
-angular.module('employees').controller('EmployeesController', ['$scope', '$stateParams', '$location', 'Authentication', 'Employees',
+angular.module('employees').controller('EmployeesController', [
+	'$scope', '$stateParams', '$location', 'Authentication', 'Employees',
 	function($scope, $stateParams, $location, Authentication, Employees) {
 		$scope.authentication = Authentication;
 
@@ -74,5 +75,4 @@ angular.module('employees').controller('EmployeesController', ['$scope', '$state
 				employeeId: $stateParams.employeeId
 			});
 		};
-	}
-]);
+	}]);

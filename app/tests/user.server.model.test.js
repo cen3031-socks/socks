@@ -3,10 +3,10 @@
 /**
  * Module dependencies.
  */
-var should = require('should'),
+var should   = require('should'),
 	mongoose = require('mongoose'),
-	Contact = mongoose.model('Contact'),
-	User = mongoose.model('User');
+	Contact  = mongoose.model('Contact'),
+	User     = mongoose.model('User');
 
 /**
  * Globals
@@ -55,7 +55,7 @@ describe('User Model Unit Tests:', function() {
 					done();
 				});
 			});
-			
+
 		});
 		it('Should reject, resave, have one user after resave attempt', function(done) {
 			user.save(function(err){
@@ -156,7 +156,7 @@ describe('User Model Unit Tests:', function() {
 	});
 
 	describe('Method Authenticate', function() {
-	
+
 
 	});
 

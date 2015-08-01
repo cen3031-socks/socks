@@ -1,11 +1,11 @@
-var request = require('request'),
-	MongoClient = require('mongodb').MongoClient;
-var utils = require('../test-utils.js');
+var request     = require('request');
+var MongoClient = require('mongodb').MongoClient;
+var utils       = require('../test-utils.js');
 
 describe('employees listing', function() {
 	beforeEach(function() {
-        utils.createUserAndSignIn(browser, element);
-    });
+		utils.createUserAndSignIn(browser, element);
+	});
 
 	it('should have a title', function() {
 		expect(browser.getTitle()).toEqual('SOCKS (Save Our Cats and Kittens)');
@@ -19,19 +19,18 @@ describe('employees listing', function() {
 			email: "email2@email.com",
 		};
 
-        for (var i in user) {
-            element(by.model(i)).sendKeys(user[i]);
-        }
+		for (var i in user) {
+			element(by.model(i)).sendKeys(user[i]);
+		}
 
-        var select = element(by.model('permissionLevel'));
-        select.$('[value="1"]').click();
+		var select = element(by.model('permissionLevel'));
+		select.$('[value="1"]').click();
 
-        element(by.buttonText('Create')).click();
+		element(by.buttonText('Create')).click();
 
 		/* Home page */
 		expect(browser.getCurrentUrl()).toMatch();
 
-		
 		browser.get('/#!/contacts');
 		this.searchBar = element(by.model('searchText'));
 		this.rows = element.all(by.css('tr[data-ng-repeat*=contact]'));
@@ -40,5 +39,5 @@ describe('employees listing', function() {
 		var rowElems = this.rows.$$('td');
 		expect(rowElems.get(0).getText()).toMatch('TestUnique');
 		expect(rowElems.get(1).getText()).toMatch('Test');
-	});	
+	});
 });

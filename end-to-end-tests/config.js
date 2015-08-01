@@ -6,9 +6,9 @@ exports.config = {
 		var SpecReporter = require('jasmine-spec-reporter');
 		// add jasmine spec reporter
 		jasmine.getEnv().addReporter(new
-		SpecReporter({displayFailuresSummary: false}));
+									 SpecReporter({displayFailuresSummary: false}));
 	},
 	jasmineNodeOpts: {
 		print: function() {}
 	}
-}
+};

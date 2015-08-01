@@ -1,11 +1,8 @@
 'use strict';
-var breeds = require('../../petfinder-breed-list.js');
-var Icons = require('../../glyphicon-list.js');
-/**
- * Module dependencies.
- */
-var mongoose = require('mongoose'),
-	Schema = mongoose.Schema;
+var breeds   = require('../../petfinder-breed-list.js');
+var Icons    = require('../../glyphicon-list.js');
+var mongoose = require('mongoose');
+var Schema   = mongoose.Schema;
 
 var AdoptionSchema = new Schema({
 	adopter: { type: Schema.Types.ObjectId, ref: 'Contact', required: true },
@@ -18,10 +15,10 @@ var AdoptionSchema = new Schema({
 	endDate: Date, 
 	catId: { type: Schema.Types.ObjectId, ref: 'Cat', required: 'must adopt a cat' },
 	returnReason: String,
-    adoptionType: {
-        type: String,
-        enum: ['adoption', 'foster']
-    }
+	adoptionType: {
+		type: String,
+		enum: ['adoption', 'foster']
+	}
 });
 
 var validateSex = function(sex){
@@ -39,10 +36,10 @@ var CatSchema = new Schema({
 		type: Date,
 		default: Date.now
 	},
-    dateOfBirthEstimated: {
-        type: Boolean,
-        default: true
-    },
+	dateOfBirthEstimated: {
+		type: Boolean,
+		default: true
+	},
 	name: {
 		type: String,
 		default: '',
@@ -68,9 +65,9 @@ var CatSchema = new Schema({
 		default: Date.now,
 		required: 'Must have an arrival date.' 
 	},
-    dateOfDeceased: {
-        type: Date
-    },
+	dateOfDeceased: {
+		type: Date
+	},
 	breed: {
 		type: String,
 		trim: true,
@@ -79,16 +76,16 @@ var CatSchema = new Schema({
 	},
 	color: String,
 	description: {
-        type: String,
-        default: ''
-    },
+		type: String,
+		default: ''
+	},
 	temperament: String,
 	profileImage: { type: Schema.Types.ObjectId, ref: 'Image' },
 	origin: {
 		address: String,
 		person: { type: Schema.Types.ObjectId, ref: 'Contact' },
-        organization: String,
-        notes: String
+		organization: String,
+		notes: String
 	},
 	currentLocation: String,
 	events: [
@@ -113,7 +110,7 @@ var CatSchema = new Schema({
 				type: String,
 				enum: Icons.list
 			},
-            data: {}
+			data: {}
 		}
 	],
 	adoptions: [{type: Schema.Types.ObjectId, ref: 'Adoption'}],

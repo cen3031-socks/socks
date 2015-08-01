@@ -1,43 +1,43 @@
 'use strict';
 
 // Donations controller
-angular.module('donations').controller('DonationsController', ['$scope', '$stateParams', '$location', 'Authentication', 'Donations', 'Dialogs', 
+angular.module('donations').controller('DonationsController', [
+	'$scope', '$stateParams', '$location', 'Authentication', 'Donations', 'Dialogs', 
 	function($scope, $stateParams, $location, Authentication, Donations, Dialogs) {
 		$scope.authentication = Authentication;
 		$scope.items=[{}];
-        $scope.donations=[];
+		$scope.donations=[];
 
 		// Create new Donation
 		$scope.create = function() {
 			// Create new Donation object
 			var donation = new Donations ({
 				//donor: this.contacts[0]._id,
-                donor: $scope.donors[0]._id,                //this.donor?
-                created: this.created,
-                icon: $scope.icon,
-                items: this.items
+				donor: $scope.donors[0]._id,
+				created: this.created,
+				icon: $scope.icon,
+				items: this.items
 			});
 
-            console.log('inside create');
+			console.log('inside create');
 			// Redirect after save
 			donation.$save(function(response) {
 				$location.path('donations/' + response._id);
 
 				// Clear form fields
 				$scope.name = '';
-                $scope.dollarAmount = '';
-                $scope.donationType = '';
+				$scope.dollarAmount = '';
+				$scope.donationType = '';
 			}, function(errorResponse) {
 				$scope.error = errorResponse.data.message;
-                console.log($scope.error);
+				console.log($scope.error);
 			});
 		};
 
 		//load more elements in donations infinte scroll
 		$scope.loadMore = function() {
 			var nextEnd = $scope.donations.length+10;
-			for(var i=$scope.donations.length; i<nextEnd; i++)
-			{
+			for(var i=$scope.donations.length; i<nextEnd; i++) {
 				$scope.donations.push($scope.allDonations[i]);
 			}
 		};
@@ -72,7 +72,7 @@ angular.module('donations').controller('DonationsController', ['$scope', '$state
 
 		// Find a list of Donations
 		$scope.find = function() {
-			
+
 			$scope.allDonations = Donations.query(function(){
 				$scope.donations=[];
 				$scope.loadMore();
@@ -91,48 +91,41 @@ angular.module('donations').controller('DonationsController', ['$scope', '$state
 		};
 
 		$scope.open = function($event) {
-        $event.preventDefault();
-        $event.stopPropagation();
-        $scope.opened = true;
-    	};
-        
-        $scope.deleteDonation = function(donation) {
-                Dialogs
-                        .confirm('Delete Donation?')
-                        .then(function(result) {
-                            if (donation && result) {
+			$event.preventDefault();
+			$event.stopPropagation();
+			$scope.opened = true;
+		};
 
-                                donation.$remove(function() {
-                                    $location.path('/donations');
-                                    $scope.donations = Donations.query();
-                                });
+		$scope.deleteDonation = function(donation) {
+			Dialogs.
+				confirm('Delete Donation?').
+				then(function(result) {
+					if (donation && result) {
 
-                            }
-                        });
-                };
-        
-        $scope.getIcon=function(item) {
-            if(item.name === 'Monetary')
-            {
-                item.icon='glyphicon glyphicon-usd';
-                return 'glyphicon-usd';
-            }
-            else if(item.name === 'Food')
-            {
-                item.icon='glyphicon glyphicon-heart';
-                return 'glyphicon-heart';
-            }
-            else if(item.name === 'Supplies')
-            {
-                item.icon='glyphicon glyphicon-wrench';
-                return 'glyphicon-wrench';
-            }
-            else
-            {
-                item.icon='glyphicon glyphicon-briefcase';
-                return 'glyphicon-briefcase';
-            }
-                
-	   };
-    }
+						donation.$remove(function() {
+							$location.path('/donations');
+							$scope.donations = Donations.query();
+						});
+
+					}
+				});
+		};
+
+		$scope.getIcon=function(item) {
+			if(item.name === 'Monetary') {
+				item.icon='glyphicon glyphicon-usd';
+				return 'glyphicon-usd';
+			} else if(item.name === 'Food') {
+				item.icon='glyphicon glyphicon-heart';
+				return 'glyphicon-heart';
+			} else if(item.name === 'Supplies') {
+				item.icon='glyphicon glyphicon-wrench';
+				return 'glyphicon-wrench';
+			} else {
+				item.icon='glyphicon glyphicon-briefcase';
+				return 'glyphicon-briefcase';
+			}
+
+	   	};
+	}
 ]);

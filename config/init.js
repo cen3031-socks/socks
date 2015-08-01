@@ -3,7 +3,7 @@
 /**
  * Module dependencies.
  */
-var glob = require('glob'),
+var glob  = require('glob'),
 	chalk = require('chalk');
 
 /**

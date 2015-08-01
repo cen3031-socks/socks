@@ -1,85 +1,67 @@
 'use strict';
 
-/**
- * Module dependencies.
- */
-var mongoose = require('mongoose'),
-	errorHandler = require('./errors.server.controller'),
-	Contact = mongoose.model('Contact'),
-	User = mongoose.model('User'),
-	_ = require('lodash'),
-    crypto = require('crypto'),
-    async = require('async');
+var mongoose     = require('mongoose'),
+    errorHandler = require('./errors.server.controller'),
+    Contact      = mongoose.model('Contact'),
+    User         = mongoose.model('User'),
+    _            = require('lodash'),
+    crypto       = require('crypto'),
+    async        = require('async');
 
 var generatePassword = function(length) {
-    return crypto.randomBytes(length).toString('hex');
+	return crypto.randomBytes(length).toString('hex');
 };
 
 exports.permissionLevel = function(level) {
-    return function(req, res, next) {
-        if (!req.isAuthenticated()) {
-            return res.status(401).send({
-                message: 'User is not logged in'
-            });
-        }
+	return function(req, res, next) {
+		if (!req.isAuthenticated()) {
+			return res.status(401).send({
+				message: 'User is not logged in'
+			});
+		}
 
-        if (!req.user || req.user.permissionLevel > level) {
-            return res.status(403).send({ message: 'You do not have permission to view this page.' });
-        } else {
-            next();
-        }
-    };
+		if (!req.user || req.user.permissionLevel > level) {
+			return res.status(403).send({ message: 'You do not have permission to view this page.' });
+		} else {
+			next();
+		}
+	};
 };
 
-/**
- * Create an employee
- */
 exports.create = function(req, res) {
-    var contact = new Contact(req.body);
-    var password = generatePassword(24); //hardcodePassword() use this function for editing purposes
-	var user = new User(req.body);
-    user.username = contact.email;
-    user.password = password;
-    user.provider = 'local';
-    user.contact = contact._id;
+	var contact  = new Contact(req.body);
+	var password = generatePassword(24);
+	var user     = new User(req.body);
 
-    contact.save(function(err) {
-        if (err) {
-            return res.status(400).send({
-                message: errorHandler.getErrorMessage(err)
-            });
-        } else {
-            user.save(function(err, user) {
-                if (err) {
-                    return res.status(400).send({
-                        message: errorHandler.getErrorMessage(err)
-                    });
-                } else {
-                    res.jsonp(user);
+	user.username = contact.email;
+	user.password = password;
+	user.provider = 'local';
+	user.contact  = contact._id;
 
-                    var nodemailer = require('nodemailer');
-                    // create reusable transporter object using SMTP transport
-                    var transporter = nodemailer.createTransport({
-                        service: 'Gmail',
-                        auth: { user: 'saveourcatsandkittens@gmail.com', pass: 'kittens0' }
-                    });
-                    var mailOptions = {
-                        from: '<saveourcatsandkittens@gmail.com>',
-                        to: contact.email,
-                        subject: 'Welcome to SOCKS! ',
-                        text: 'Login by using the following password to reset it:\n Password: ' + password,
-                        html: ''
-                    };
-                    transporter.sendMail(mailOptions, function(error, info){
-                        if(error){
-                            console.log(error);
-                        } else{
-                            console.log('Message sent: ' + info.response);
-                        }
-                    });
-                }
-            });
-        }
-    });
+	contact.save(errorHandler.wrap(res, function(contact) {
+		user.save(errorHandler.wrap(function(err, user) {
+			res.jsonp(user);
+			var nodemailer = require('nodemailer');
+			// create reusable transporter object using SMTP transport
+			var transporter = nodemailer.createTransport({
+				service: 'Gmail',
+				auth: { user: 'saveourcatsandkittens@gmail.com', pass: 'kittens0' }
+			});
+			var mailOptions = {
+				from: '<saveourcatsandkittens@gmail.com>',
+				to: contact.email,
+				subject: 'Welcome to SOCKS! ',
+				text: 'Login by using the following password to reset it:\n Password: ' + password,
+				html: ''
+			};
+			transporter.sendMail(mailOptions, function(error, info){
+				if(error){
+					console.log(error);
+				} else{
+					console.log('Message sent: ' + info.response);
+				}
+			});
+		}));
+	}));
 };
 

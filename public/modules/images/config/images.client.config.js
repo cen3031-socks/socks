@@ -1,6 +1,2 @@
 'use strict';
-
-// Configuring the Articles module
-angular.module('images').run(['Menus',
-    function(Menus) { }
-]);
+angular.module('images').run(['Menus', function(Menus) { } ]);

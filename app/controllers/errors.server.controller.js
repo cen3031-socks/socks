@@ -1,15 +1,11 @@
 'use strict';
 
-/**
- * Get unique error field name
- */
 var getUniqueErrorMessage = function(err) {
 	var output;
 
 	try {
 		var fieldName = err.err.substring(err.err.lastIndexOf('.$') + 2, err.err.lastIndexOf('_1'));
 		output = fieldName.charAt(0).toUpperCase() + fieldName.slice(1) + ' already exists';
-
 	} catch (ex) {
 		output = 'Unique field already exists';
 	}
@@ -17,9 +13,6 @@ var getUniqueErrorMessage = function(err) {
 	return output;
 };
 
-/**
- * Get the error message from error object
- */
 exports.getErrorMessage = function(err) {
 	var message = '';
 

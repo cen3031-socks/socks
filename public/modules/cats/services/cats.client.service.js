@@ -1,6 +1,7 @@
 'use strict';
 
-angular.module('core').factory('Cats', ['$resource',
+angular.module('core').factory('Cats', [
+	'$resource',
 	function($resource) {
 		return $resource('cats/:catId', {
 			catId: '@_id'
@@ -28,14 +29,14 @@ angular.module('core').factory('Cats', ['$resource',
 				method: 'PUT',
 				url: 'cats/:catId/adoptions/:adoptionId'
 			},
-            addNote: {
-                method: 'PUT',
-                url: 'cats/:catId/notes'
-            },
-            deleteNote: {
-                method: 'DELETE',
-                url: 'cats/:catId/notes/:noteId'
-            }
+			addNote: {
+				method: 'PUT',
+				url: 'cats/:catId/notes'
+			},
+			deleteNote: {
+				method: 'DELETE',
+				url: 'cats/:catId/notes/:noteId'
+			}
 		});
 	}
 ]);

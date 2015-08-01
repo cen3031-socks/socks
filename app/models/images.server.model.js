@@ -1,32 +1,32 @@
 'use strict';
 
 var mongoose = require('mongoose'),
-	Schema = mongoose.Schema;
+	Schema   = mongoose.Schema;
 
 var ImageSchema = new Schema({
-    deleted: {
-        type: Boolean,  
-        default: false
-    },
+	deleted: {
+		type: Boolean,
+		default: false
+	},
 	thumbnail: {
-        type: String
+		type: String
 	},
-    large: {
-        type: String
-    },
-    original: {
-        type: String
-    },
-    created: {
+	large: {
+		type: String
+	},
+	original: {
+		type: String
+	},
+	created: {
 		type: Date,
-        default: Date.now
+		default: Date.now
 	},
-    tags: {
-        type: [{
-            type: Schema.Types.ObjectId,
-            ref: 'Cat'
-        }]
-    }
+	tags: {
+		type: [{
+			type: Schema.Types.ObjectId,
+			ref: 'Cat'
+		}]
+	}
 });
 
 mongoose.model('Image', ImageSchema);

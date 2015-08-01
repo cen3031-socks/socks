@@ -1,27 +1,24 @@
 'use strict';
 
-/**
- * Module dependencies.
- */
 var mongoose = require('mongoose'),
-	Schema = mongoose.Schema;
+	Schema   = mongoose.Schema;
 
 /**
  * Volunteer Schema
  */
 var VolunteerSchema = new Schema({
-    contact: {
-        type: Schema.ObjectId,
-        ref: 'Contact'
-    },
+	contact: {
+		type: Schema.ObjectId,
+		ref: 'Contact'
+	},
 	timeIn: {
 		type: Date,
 		default: Date.now
 	},
-    timeOut: {
-        type: Date,
-        default: null
-    }
+	timeOut: {
+		type: Date,
+		default: null
+	}
 });
 
 mongoose.model('Volunteer', VolunteerSchema);

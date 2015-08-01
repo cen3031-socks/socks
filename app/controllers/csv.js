@@ -29,34 +29,33 @@ var makeGetter = function(property) {
  * @returns {Array}
  */
 var normalizeProperties = function(properties, items) {
-    var props = [];
+	var props = [];
 	var i;
-    if (!properties) {
-        for (i in items[0]) {
-            if (items[0].hasOwnProperty(i)) {
-                props.push({ columnName: i, propertyName: i });
-            }
-        }
-    } else if (Object.prototype.toString.call(properties) === '[object Array]') {
-        for (i = 0; i < properties.length; ++i) {
-            props.push({ columnName: properties[i], propertyName: properties[i] });
-        }
-    } else if (typeof(properties) === objectType) {
-        for (i in properties) {
-            if (properties.hasOwnProperty(i)) {
-                if (typeof(properties[i]) === itemFunctionType) {
-                    props.push({ columnName: i, getProperty: properties[i] });
-                } else {
-                    props.push(
-                        {
-                            columnName: i,
-                            getProperty: makeGetter(properties[i])
-                        });
-                }
-            }
-        }
-    }
-    return props;
+	if (!properties) {
+		for (i in items[0]) {
+			if (items[0].hasOwnProperty(i)) {
+				props.push({ columnName: i, propertyName: i });
+			}
+		}
+	} else if (Object.prototype.toString.call(properties) === '[object Array]') {
+		for (i = 0; i < properties.length; ++i) {
+			props.push({ columnName: properties[i], propertyName: properties[i] });
+		}
+	} else if (typeof(properties) === objectType) {
+		for (i in properties) {
+			if (properties.hasOwnProperty(i)) {
+				if (typeof(properties[i]) === itemFunctionType) {
+					props.push({ columnName: i, getProperty: properties[i] });
+				} else {
+					props.push({
+						columnName: i,
+						getProperty: makeGetter(properties[i])
+					});
+				}
+			}
+		}
+	}
+	return props;
 };
 
 /**
@@ -74,56 +73,55 @@ var normalizeProperties = function(properties, items) {
  * @param {Boolean}         [excludeHeaders]    true iff the headers should be excluded. Defaults to false
  */
 exports.convertToCsv = function(items, properties, separator, excludeHeaders) {
-    var deferred = q.defer();
+	var deferred = q.defer();
 	var i;
 
-    if (items.length === 0 || properties.length === 0) {
-        return null;
-    }
-    var props = normalizeProperties(properties, items);
+	if (items.length === 0 || properties.length === 0) {
+		return null;
+	}
+	var props = normalizeProperties(properties, items);
 
-    // if separator is omitted set it
-    separator = separator || ',';
+	separator = separator || ',';
 
-    var csv = '';
+	var csv = '';
 
-    // print the header
-    if (!excludeHeaders) {
-        for (i = 0; i < props.length; ++i) {
-            csv += '"' + props[i].columnName + '"';
-            if (i !== props.length - 1) {
-                csv += separator;
-            }
-        }
-        csv += '\n';
-    }
+	// print the header
+	if (!excludeHeaders) {
+		for (i = 0; i < props.length; ++i) {
+			csv += '"' + props[i].columnName + '"';
+			if (i !== props.length - 1) {
+				csv += separator;
+			}
+		}
+		csv += '\n';
+	}
 
-    var itemsArray = [];
+	var itemsArray = [];
 
-    for (i = 0; i < items.length; ++i) {
-        var thisItemArray = [];
+	for (i = 0; i < items.length; ++i) {
+		var thisItemArray = [];
 
-        for (var j = 0; j < props.length; ++j) {
-            thisItemArray.push(q.when(props[j].getProperty(items[i])));
-        }
-        itemsArray.push(thisItemArray);
-    }
+		for (var j = 0; j < props.length; ++j) {
+			thisItemArray.push(q.when(props[j].getProperty(items[i])));
+		}
+		itemsArray.push(thisItemArray);
+	}
 
-    q.all(_.flatten(itemsArray)).then(function(allValues) {
-        for (var i = 0; i < allValues.length; ++i) {
-            var j = i % props.length;
-            csv += '"' + allValues[i] + '"';
-            if (j !== props.length - 1) {
-                csv += separator;
-            }
+	q.all(_.flatten(itemsArray)).then(function(allValues) {
+		for (var i = 0; i < allValues.length; ++i) {
+			var j = i % props.length;
+			csv += '"' + allValues[i] + '"';
+			if (j !== props.length - 1) {
+				csv += separator;
+			}
 
-            if (j === props.length - 1) {
-                csv += '\n';
-            }
-        }
+			if (j === props.length - 1) {
+				csv += '\n';
+			}
+		}
 
-        deferred.resolve(csv);
-    }, deferred.reject);
+		deferred.resolve(csv);
+	}, deferred.reject);
 
-    return deferred.promise;
+	return deferred.promise;
 };

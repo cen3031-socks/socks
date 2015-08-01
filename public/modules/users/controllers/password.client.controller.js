@@ -1,6 +1,7 @@
 'use strict';
 
-angular.module('users').controller('PasswordController', ['$scope', '$stateParams', '$http', '$location', 'Authentication',
+angular.module('users').controller('PasswordController', [
+	'$scope', '$stateParams', '$http', '$location', 'Authentication',
 	function($scope, $stateParams, $http, $location, Authentication) {
 		$scope.authentication = Authentication;
 
@@ -15,7 +16,6 @@ angular.module('users').controller('PasswordController', ['$scope', '$stateParam
 				// Show user success message and clear form
 				$scope.credentials = null;
 				$scope.success = response.message;
-
 			}).error(function(response) {
 				// Show user error message and clear form
 				$scope.credentials = null;
